@@ -1,0 +1,19 @@
+{
+  "id": "post_birth_events",
+  "label": "Events Following Jesus' Birth",
+  "participants": ["jesus"],
+  "accounts": [
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 2:13-23",
+      "summary": "After the magi depart, an angel warns Joseph in a dream to flee to Egypt because Herod will search for the child to kill him. The family flees by night and remains in Egypt until Herod dies. Herod massacres all children in Bethlehem two years old and under. After Herod's death, an angel tells Joseph to return, but hearing Herod's son Archelaus rules Judea, Joseph goes to Galilee and settles in Nazareth.",
+      "notes": "Flight to Egypt is central. Massacre of innocents occurs. Family stays in Egypt for extended period (until Herod's death, likely 1-2 years). Fear of Archelaus determines return route. Settlement in Nazareth presented as new, not a return home."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 2:21-40",
+      "summary": "On the eighth day Jesus is circumcised and named. After the days of purification (40 days), Mary and Joseph bring Jesus to the temple in Jerusalem to present him to the Lord and offer sacrifice. Simeon and Anna, righteous figures who recognize Jesus' significance, encounter them. After completing everything required by the law, the family returns to their own town of Nazareth in Galilee.",
+      "notes": "No flight to Egypt - family goes to Jerusalem temple 40 days after birth. Peaceful presentation with prophetic recognition by Simeon and Anna. Direct return to Nazareth after temple duties. No mention of danger, Herod's threat, or Egypt. Incompatible timeline with Matthew's account."
+    }
+  ]
+}

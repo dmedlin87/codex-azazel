@@ -1,0 +1,37 @@
+{
+  "id": "ascension",
+  "label": "Ascension of Jesus",
+  "participants": ["jesus", "peter"],
+  "accounts": [
+    {
+      "source_id": "luke",
+      "reference": "Luke 24:50-53",
+      "summary": "Jesus leads the disciples out to Bethany, blesses them, and while blessing them is carried up into heaven. The disciples worship him and return to Jerusalem with great joy, continually in the temple blessing God.",
+      "notes": "Occurs on the same day as the resurrection (Luke 24 is a single day narrative from empty tomb discovery to ascension). Location is Bethany, outside Jerusalem. Brief description with no mention of waiting period or cloud."
+    },
+    {
+      "source_id": "acts",
+      "reference": "Acts 1:3-12",
+      "summary": "After his suffering, Jesus presents himself alive to the apostles over forty days, speaking about the kingdom of God. He orders them to wait in Jerusalem for the Holy Spirit. While they are watching, he is lifted up and a cloud takes him out of sight. Two men in white robes tell them Jesus will return. They return to Jerusalem from the Mount of Olives, a sabbath day's journey away.",
+      "notes": "Occurs forty days after resurrection, not the same day. Location is Mount of Olives, not Bethany. Detailed account with cloud and angelic interpreters. Instructions about waiting for Spirit. Same author as Luke's gospel but contradictory timeline and details."
+    },
+    {
+      "source_id": "mark",
+      "reference": "Mark 16:19-20",
+      "summary": "The Lord Jesus is taken up into heaven and sits at the right hand of God. The disciples go out and proclaim the message everywhere.",
+      "notes": "Brief mention in the longer ending of Mark (not in earliest manuscripts). No specific timeline, location, or details. Most scholars consider this a later addition, not original to Mark."
+    },
+    {
+      "source_id": "matthew",
+      "reference": "N/A",
+      "summary": "No ascension narrative. Gospel ends with Jesus' final words on the mountain in Galilee: 'I am with you always, to the end of the age.'",
+      "notes": "Matthew includes no ascension. The risen Jesus promises perpetual presence with disciples, implying no departure. Ends with Great Commission in Galilee, not Jerusalem."
+    },
+    {
+      "source_id": "john",
+      "reference": "N/A",
+      "summary": "No ascension narrative. Gospel ends with Jesus' appearances to disciples and cryptic dialogue about Peter and the beloved disciple.",
+      "notes": "John mentions Jesus will ascend to the Father (20:17) but never narrates an ascension event. Gospel ends with resurrection appearances and no departure scene."
+    }
+  ]
+}
