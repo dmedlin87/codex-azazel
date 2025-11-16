@@ -8,5 +8,20 @@
   "roles": [
     "encounter"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "john",
+      "traits": {
+        "cross_boundary_encounter": "Meets Jesus at Jacob’s well in Samaria, where Jesus crosses ethnic and gender boundaries by asking her for a drink.",
+        "living_water_discourse": "Engages in a dialogue about living water, moving from literal misunderstanding to a deeper discussion of eternal life and worship.",
+        "life_revelation": "Jesus reveals knowledge of her complex marital history, leading her to perceive him as a prophet.",
+        "worship_in_spirit_and_truth": "Receives teaching about worshiping the Father in spirit and truth that transcends Jerusalem–Gerizim debates.",
+        "witness_to_town": "Leaves her jar, goes to the town, and invites others to come see a man who told her everything she ever did, leading many Samaritans to believe.",
+        "narrative_profile": "Functions as a paradigmatic figure whose honest questioning and testimony model the movement from outsider status to authentic witness." 
+      },
+      "references": [
+        "John 4:4-42"
+      ]
+    }
+  ]
 }

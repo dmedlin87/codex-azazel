@@ -8,5 +8,23 @@
     "deacon",
     "evangelist"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "appointment_among_seven": "Chosen as one of the seven reputable men full of the Spirit and wisdom appointed to oversee the daily distribution to widows in Jerusalem.",
+        "mission_in_samaria": "After persecution in Jerusalem, preaches Christ in a city of Samaria, performs signs, and leads many to faith and baptism, including attention from Simon the magician.",
+        "encounter_with_ethiopian": "Led by an angel and the Spirit to meet an Ethiopian court official on the road, explains Isaiah, proclaims Jesus, and baptizes him before being carried away by the Spirit.",
+        "continued_evangelistic_activity": "Appears traveling through towns proclaiming the good news until he comes to Caesarea.",
+        "host_in_caesarea": "Later found in Caesarea, called 'the evangelist,' hosting Paul and his companions; has four unmarried daughters who prophesy.",
+        "narrative_profile": "Embodies Spirit-led outreach beyond Jerusalem, bridging Jerusalem, Samaria, and the wider Gentile world through word and sacrament."
+      },
+      "references": [
+        "Acts 6:1-6",
+        "Acts 8:4-25",
+        "Acts 8:26-40",
+        "Acts 21:8-9"
+      ]
+    }
+  ]
 }

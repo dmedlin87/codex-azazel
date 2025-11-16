@@ -8,5 +8,47 @@
     "teacher",
     "missionary"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "origin_and_education": "Described as a Jew from Alexandria, eloquent and well-versed in the Scriptures.",
+        "knowledge_of_johns_baptism": "Knows only the baptism of John yet teaches accurately the things concerning Jesus up to that point.",
+        "instruction_by_priscilla_and_aquila": "Priscilla and Aquila take him aside and explain the way of God more accurately, further equipping him for ministry.",
+        "ministry_in_achaia": "Ministers in Achaia, greatly helping believers through grace and vigorously refuting opponents in public debate.",
+        "scriptural_argumentation": "Demonstrates from the Scriptures that the Messiah is Jesus, showing both rhetorical skill and exegetical competence."
+      },
+      "references": [
+        "Acts 18:24-28",
+        "Acts 19:1"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "co_worker_status": "Appears in 1 Corinthians as a fellow worker whose ministry complements Paul’s planting work among the Corinthians.",
+        "factional_loyalties": "Becomes a focal name in community factions where some claim allegiance to Paul, Apollos, or Cephas, prompting Paul to reject personality cults.",
+        "servant_identity": "Paul presents both himself and Apollos as servants through whom the Corinthians came to faith, emphasizing God as the one who gives growth.",
+        "relationship_with_paul": "Paul urges the community not to pit him against Apollos and notes Apollos’s own judgment about when to visit, implying mutual respect and independence."
+      },
+      "references": [
+        "1 Corinthians 1:12",
+        "1 Corinthians 3:4-9",
+        "1 Corinthians 3:22",
+        "1 Corinthians 4:6",
+        "1 Corinthians 16:12"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "later_travel_notice": "Mentioned with Zenas the lawyer as someone to be sent on their way with all they need, indicating ongoing itinerant ministry.",
+        "role_in_church_networks": "Appears within a network of coworkers and emissaries who help organize and strengthen emerging communities.",
+        "critical_note": "This reference occurs in a letter often regarded by critical scholarship as post-Pauline, reflecting later tradition about Apollos’s movements."
+      },
+      "references": [
+        "Titus 3:13"
+      ]
+    }
+  ]
 }

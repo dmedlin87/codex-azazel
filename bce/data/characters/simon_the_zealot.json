@@ -8,5 +8,21 @@
     "disciple",
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics_acts",
+      "traits": {
+        "listing_among_twelve": "Named in the lists of the Twelve as Simon the Cananaean or Simon who was called the Zealot, distinguishing him from Simon Peter.",
+        "epithet_meaning": "His designation likely points to prior association with a zealous or nationalist movement, or to personal zeal, though the texts do not narrate any such activity.",
+        "lack_of_individual_episodes": "Receives no individual stories or sayings; his significance lies in being part of the diverse band of apostles that includes former tax collectors and possibly former revolutionaries.",
+        "presence_in_post_easter_community": "Included in the list of apostles gathered in Jerusalem awaiting the Spirit after the ascension."
+      },
+      "references": [
+        "Matthew 10:4",
+        "Mark 3:18",
+        "Luke 6:15",
+        "Acts 1:13"
+      ]
+    }
+  ]
 }

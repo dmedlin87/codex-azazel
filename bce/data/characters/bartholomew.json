@@ -8,5 +8,39 @@
     "disciple",
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "role_among_twelve": "Appears in the list of the Twelve as one of Jesus’s appointed apostles.",
+        "narrative_profile": "Receives no individual stories or dialogue in Mark, functioning primarily as a name in the authoritative roster of witnesses."
+      },
+      "references": [
+        "Mark 3:16-19"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "listing_in_mission_discourse": "Named among the Twelve whom Jesus commissions and sends out with authority over unclean spirits and disease.",
+        "lack_of_individualization": "Like several other apostles, is not given distinct episodes or sayings in Matthew beyond the list itself."
+      },
+      "references": [
+        "Matthew 10:2-4"
+      ]
+    },
+    {
+      "source_id": "luke_acts",
+      "traits": {
+        "selection_as_apostle": "Named in Luke’s list of those whom Jesus designates apostles after a night of prayer.",
+        "presence_in_post_easter_community": "Appears in the list of those gathered in the upper room in Jerusalem after the ascension, waiting for the promised Spirit.",
+        "narrative_silence": "Receives no further individual characterization, remaining part of the collective apostolic foundation.",
+        "identification_with_nathanael_tradition": "Later Christian interpretation often associates Bartholomew with Nathanael in John’s Gospel, though the texts themselves do not make this identification explicit."
+      },
+      "references": [
+        "Luke 6:13-16",
+        "Acts 1:13"
+      ]
+    }
+  ]
 }

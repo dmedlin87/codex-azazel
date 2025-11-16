@@ -8,5 +8,45 @@
     "client_king",
     "ruler"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "tetrarchal_role": "Presented simply as Herod, ruler under whom John the Baptist’s ministry and death take place.",
+        "relationship_to_john_the_baptist": "Has John arrested and imprisoned because of John’s criticism of his marriage to Herodias, his brother’s wife.",
+        "execution_of_john": "Reluctantly orders John’s beheading after Herodias’s daughter’s dance and rash oath, becoming complicit in the prophet’s death.",
+        "reaction_to_jesus": "Hears of Jesus’s activity and supposes that John whom he beheaded has been raised, indicating a guilty conscience and confusion about Jesus’s identity."
+      },
+      "references": [
+        "Mark 6:14-29"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "political_status": "Identified as Herod the tetrarch, ruling Galilee during the events surrounding John and Jesus.",
+        "fear_of_john": "Initially wants to put John to death but fears the crowd because they regard him as a prophet.",
+        "beheading_of_john": "Ultimately orders John’s execution at Herodias’s instigation and because of an oath sworn at his birthday banquet.",
+        "interpretation_of_jesus": "When he hears about Jesus, declares that John has been raised from the dead, framing Jesus’s miracles as the work of a resurrected John."
+      },
+      "references": [
+        "Matthew 14:1-12"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "tetrarch_of_galilee": "Named as tetrarch of Galilee in Luke’s chronological introduction to John the Baptist’s ministry.",
+        "opinion_about_jesus": "Perplexed by reports about Jesus, wondering whether he is John raised from the dead, Elijah, or another prophet.",
+        "mockery_of_jesus": "During the passion, questions Jesus at some length, hopes to see a sign, and when Jesus remains silent, mocks him with his soldiers and sends him back to Pilate in a gorgeous robe.",
+        "political_function": "Luke notes that on that day Herod and Pilate became friends, suggesting that their shared handling of Jesus had political consequences."
+      },
+      "references": [
+        "Luke 3:1",
+        "Luke 9:7-9",
+        "Luke 13:31-33",
+        "Luke 23:6-12"
+      ]
+    }
+  ]
 }

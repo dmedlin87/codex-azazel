@@ -7,5 +7,54 @@
   "roles": [
     "family_group"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark_matthew",
+      "traits": {
+        "family_identification": "Named in lists as James, Joses/Joseph, Judas, and Simon, with unnamed sisters also mentioned as part of Jesus’s family circle.",
+        "initial_misunderstanding": "Appear in contexts where Jesus’s family fails to understand his mission; in Mark some relatives think he is 'out of his mind' and seek to restrain him.",
+        "redefinition_of_kinship": "Their arrival outside while Jesus is teaching becomes the setting for Jesus’s saying that whoever does God’s will is his brother, sister, and mother, relativizing biological ties.",
+        "hometown_rejection": "References to his brothers and sisters occur in the scene where the people of Nazareth take offense at Jesus, emphasizing familiarity and skepticism.",
+        "narrative_function": "Serve as representatives of Jesus’s natural family whose relationship to his mission is initially ambiguous or resistant." 
+      },
+      "references": [
+        "Mark 3:20-21",
+        "Mark 3:31-35",
+        "Mark 6:3-4",
+        "Matthew 12:46-50",
+        "Matthew 13:55-57"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "unbelief_and_advice": "His brothers urge him to go up to Judea so that his works may be seen, accompanied by the comment that even his brothers do not believe in him.",
+        "public_vs_private_presence": "Their interaction highlights tensions between public display and Jesus’s preferred hiddenness prior to 'his hour.'"
+      },
+      "references": [
+        "John 7:3-5",
+        "John 7:10"
+      ]
+    },
+    {
+      "source_id": "luke_acts",
+      "traits": {
+        "post_easter_presence": "After the ascension, Jesus’s brothers are listed among those gathered with the apostles, the women, and Mary his mother in prayer in Jerusalem.",
+        "shift_in_stance": "Their presence in the praying community suggests a transition from earlier misunderstanding to participation in the fledgling church." 
+      },
+      "references": [
+        "Acts 1:13-14"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "traveling_missionaries": "Paul refers to 'the brothers of the Lord' among those who, like the apostles and Cephas, take believing wives along on their travels.",
+        "status_in_early_church": "The reference implies recognized authority and mobility for Jesus’s brothers within the wider mission network, even if their individual names are not given here."
+      },
+      "references": [
+        "1 Corinthians 9:5"
+      ]
+    }
+  ]
 }

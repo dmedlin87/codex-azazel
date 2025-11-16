@@ -8,5 +8,20 @@
     "teacher",
     "pharisee"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "identity_and_status": "Described as a Pharisee named Gamaliel, a teacher of the law held in honor by all the people, and a member of the council.",
+        "counsel_regarding_apostles": "Advises the Sanhedrin to exercise caution in dealing with the apostles, recalling past movements that failed and suggesting that if this movement is of God they will not be able to overthrow it.",
+        "moderating_influence": "His intervention tempers the council’s response, leading to flogging and warning rather than execution of the apostles.",
+        "connection_to_paul": "Later identified as the teacher under whom Paul (Saul) was educated in Jerusalem, indicating his prominence in Pharisaic scholarship.",
+        "narrative_function": "Serves as a nuanced Pharisaic voice who, while not portrayed as a follower of Jesus, represents a more cautious and reflective approach to the new movement."
+      },
+      "references": [
+        "Acts 5:34-40",
+        "Acts 22:3"
+      ]
+    }
+  ]
 }

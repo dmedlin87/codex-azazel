@@ -8,5 +8,38 @@
     "council",
     "religious_leaders"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics",
+      "traits": {
+        "identity_and_composition": "Portrayed as the high council of chief priests, elders, and scribes in Jerusalem, exercising judicial and religious authority.",
+        "role_in_jesus_trial": "Convenes to question Jesus about his identity, hears testimony, and delivers a verdict of blasphemy or deserving death before handing him to Pilate.",
+        "political_and_religious_function": "Embodies the institutional leadership that perceives Jesus as a threat to both religious order and relations with Rome." 
+      },
+      "references": [
+        "Mark 14:53-65",
+        "Mark 15:1",
+        "Matthew 26:57-68",
+        "Matthew 27:1-2",
+        "Luke 22:66-71"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "hearing_of_apostles": "Summons Peter, John, and later the apostles to question them about their preaching and miracles, commanding them not to speak in the name of Jesus.",
+        "internal_divisions": "Includes both Pharisees and Sadducees, whose theological differences over resurrection become evident during Paul’s appearances.",
+        "trial_of_stephen": "Serves as the setting for Stephen’s speech and condemnation, illustrating continuity between opposition to Jesus and to his witnesses.",
+        "narrative_role": "Acts as the primary institutional opponent to the early church, yet also contains moderating voices like Gamaliel and those moved by Paul’s defense." 
+      },
+      "references": [
+        "Acts 4:5-22",
+        "Acts 5:21-40",
+        "Acts 6:12-15",
+        "Acts 7:1-60",
+        "Acts 22:30",
+        "Acts 23:1-10"
+      ]
+    }
+  ]
 }

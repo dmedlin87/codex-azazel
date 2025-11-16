@@ -2,11 +2,67 @@
   "id": "timothy",
   "canonical_name": "Timothy",
   "aliases": [
-    "Timothy"
+    "Timothy",
+    "Timotheus"
   ],
   "roles": [
     "coworker",
-    "missionary"
+    "missionary",
+    "delegate"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "relationship_to_paul": "close coworker and co-sender of several letters; addressed as 'our brother' and trusted representative.",
+        "roles_and_tasks": "sent as emissary to congregations to strengthen and report on their faith, especially in Thessalonica and Corinth.",
+        "character_evaluation": "depicted as genuinely concerned for the churches' welfare and exemplary in service, held up as a model of selfless ministry.",
+        "social_location": "moves within Paul's itinerant mission team alongside figures like Silvanus and other collaborators."
+      },
+      "references": [
+        "Romans 16:21",
+        "1 Corinthians 4:17",
+        "1 Corinthians 16:10-11",
+        "2 Corinthians 1:1",
+        "Philippians 1:1",
+        "Philippians 2:19-23",
+        "1 Thessalonians 1:1",
+        "1 Thessalonians 3:2-6",
+        "Philemon 1"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "origin_background": "son of a Jewish woman who is a believer and a Greek father, from Lystra; already well spoken of by local believers when Paul meets him.",
+        "relationship_to_paul": "joins Paul's mission as a junior coworker and trusted traveling companion.",
+        "ritual_practice": "is circumcised by Paul 'because of the Jews' in those places, illustrating a pragmatic adaptation to Jewish sensibilities.",
+        "mission_activity": "accompanies Paul through regions such as Macedonia and Achaia and later appears among those traveling with him toward Jerusalem."
+      },
+      "references": [
+        "Acts 16:1-3",
+        "Acts 17:14-15",
+        "Acts 18:5",
+        "Acts 19:22",
+        "Acts 20:4"
+      ]
+    },
+    {
+      "source_id": "paul_pastoral",
+      "traits": {
+        "relationship_to_paul": "addressed as Paul's 'true child' in the faith, with a pronounced mentor–disciple tone.",
+        "ecclesial_role": "portrayed as a delegate left in charge of communities (notably in Ephesus) to oppose false teaching and appoint leaders.",
+        "character_exhortation": "urged to guard the entrusted teaching, to model sound doctrine and moral integrity, and to endure suffering in ministry.",
+        "church_order_focus": "functions within a setting of developed church structures and household norms, reflecting a more institutionalized community than in the undisputed letters."
+      },
+      "references": [
+        "1 Timothy 1:2",
+        "1 Timothy 1:18",
+        "1 Timothy 4:12",
+        "2 Timothy 1:2",
+        "2 Timothy 1:5-7",
+        "2 Timothy 4:9-13"
+      ]
+    }
+  ]
 }

@@ -5,7 +5,22 @@
     "Salome"
   ],
   "roles": [
-    "follower"
+    "follower",
+    "witness"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "presence_at_crucifixion": "Named with Mary Magdalene and Mary the mother of James the younger and of Joses as watching from a distance when Jesus is crucified.",
+        "support_in_galilee": "Identified as one of the women who had followed Jesus and provided for him when he was in Galilee.",
+        "role_at_tomb": "Appears among the women who go to the tomb early on the first day of the week to anoint Jesus’s body and who hear the message of his resurrection.",
+        "narrative_profile": "Functions as part of Mark’s group of faithful women disciples who witness the passion and are entrusted with the initial resurrection announcement." 
+      },
+      "references": [
+        "Mark 15:40-41",
+        "Mark 16:1-8"
+      ]
+    }
+  ]
 }

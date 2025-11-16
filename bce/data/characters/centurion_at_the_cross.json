@@ -7,5 +7,39 @@
   "roles": [
     "centurion"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "witness_to_jesus_death": "As the centurion standing facing Jesus, observes how he breathes his last.",
+        "confession_of_identity": "Exclaims, 'Truly this man was the Son of God,' offering a striking Gentile confession at the moment of Jesus’s death.",
+        "narrative_function": "Serves as a climactic human witness in Mark’s passion narrative, recognizing Jesus’s identity at the cross where others mock or abandon him."
+      },
+      "references": [
+        "Mark 15:39"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "shared_witness_with_soldiers": "Appears with those keeping watch over Jesus, collectively reacting to the earthquake and other phenomena accompanying his death.",
+        "expanded_confession": "Proclaims, 'Truly this was the Son of God,' integrating cosmic signs with recognition of Jesus’s status.",
+        "role_in_matthean_theology": "Functions as part of Matthew’s emphasis on the extraordinary events surrounding the crucifixion and the recognition of Jesus by Gentiles."
+      },
+      "references": [
+        "Matthew 27:54"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "response_of_praise": "Seeing what has taken place, glorifies God rather than simply expressing awe.",
+        "confession_of_innocence": "Declares, 'Certainly this man was innocent' (or 'righteous'), underscoring Luke’s concern with Jesus’s innocence.",
+        "narrative_role": "Provides a Gentile voice acknowledging the injustice of Jesus’s death and contributes to Luke’s portrait of varied responses to the crucifixion."
+      },
+      "references": [
+        "Luke 23:47"
+      ]
+    }
+  ]
 }

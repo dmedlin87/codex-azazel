@@ -9,5 +9,26 @@
     "group",
     "followers"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics",
+      "traits": {
+        "following_and_support": "Described as women who had followed Jesus from Galilee, ministering to him and providing for him out of their resources.",
+        "presence_at_crucifixion": "Stand at a distance watching the crucifixion when many male disciples have fled.",
+        "witnesses_of_burial": "Observe the place where Jesus is laid and how his body is placed in the tomb.",
+        "first_at_tomb": "Return at dawn after the Sabbath with spices, discover the empty tomb, and receive the angelic announcement of the resurrection.",
+        "narrative_role": "Function collectively as crucial witnesses who link Jesus’s death, burial, and resurrection and who carry the Easter message to the apostles." 
+      },
+      "references": [
+        "Mark 15:40-41",
+        "Mark 15:47",
+        "Mark 16:1-8",
+        "Matthew 27:55-61",
+        "Matthew 28:1-10",
+        "Luke 23:49",
+        "Luke 23:55-56",
+        "Luke 24:1-11"
+      ]
+    }
+  ]
 }

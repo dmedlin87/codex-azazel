@@ -7,5 +7,21 @@
   "roles": [
     "disciple"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "john",
+      "traits": {
+        "initial_skepticism": "Responds to Philip’s announcement about Jesus of Nazareth with the question, 'Can anything good come out of Nazareth?', expressing regional skepticism.",
+        "encounter_with_jesus": "Jesus greets him as an Israelite in whom there is no deceit and reveals knowledge of him under the fig tree, leading to surprise and confession.",
+        "confession_of_jesus": "Confesses Jesus as the Son of God and the King of Israel, marking one of the earliest and highest christological acclamations in the Gospel.",
+        "promise_of_greater_vision": "Hears Jesus’s promise that he will see heaven opened and angels ascending and descending on the Son of Man, evoking Jacob’s ladder and suggesting deeper revelation.",
+        "post_resurrection_presence": "Listed among the disciples present by the Sea of Tiberias when the risen Jesus appears and shares breakfast with them.",
+        "critical_note": "Later Christian tradition often identifies Nathanael with Bartholomew of the Synoptic lists, but the Gospel itself does not explicitly equate them."
+      },
+      "references": [
+        "John 1:43-51",
+        "John 21:2"
+      ]
+    }
+  ]
 }

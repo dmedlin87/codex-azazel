@@ -8,5 +8,28 @@
     "client_king",
     "ruler"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "matthew",
+      "traits": {
+        "kingship_and_status": "Introduced as King Herod ruling in Judea when Jesus is born, functioning as Rome’s client king over the region.",
+        "interaction_with_magi": "Disturbed by the arrival of magi seeking the newborn king of the Jews, secretly inquires about the star and sends them to Bethlehem under the pretense of worship.",
+        "threat_and_violence": "On realizing he has been tricked by the magi, orders the massacre of the boys in and around Bethlehem, embodying tyrannical opposition to the promised ruler.",
+        "narrative_function": "Serves as the political antagonist in Matthew’s infancy narrative, whose actions drive the holy family’s flight to Egypt and fulfill scriptural patterns of threatened deliverers."
+      },
+      "references": [
+        "Matthew 2:1-23"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "chronological_marker": "Mentioned as King of Judea in the days when the priest Zechariah receives the announcement of John the Baptist’s birth, anchoring Luke’s infancy story in a specific historical reign.",
+        "background_presence": "Does not appear as an acting character in Luke’s narrative but serves as part of the political backdrop to the births of John and Jesus."
+      },
+      "references": [
+        "Luke 1:5"
+      ]
+    }
+  ]
 }

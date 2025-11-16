@@ -8,5 +8,25 @@
   "roles": [
     "disciple"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "john",
+      "traits": {
+        "relationship_to_jesus": "Designated repeatedly as the disciple whom Jesus loved, occupying a position of special intimacy and favor among the followers.",
+        "presence_at_last_supper": "Reclines next to Jesus at the last supper, close enough for Peter to signal him to inquire about the identity of the betrayer.",
+        "witness_at_cross": "Stands by the cross with Jesus’s mother and receives her into his care when Jesus entrusts her to him, marking a new familial bond grounded in discipleship.",
+        "witness_to_empty_tomb": "Runs with Peter to the empty tomb, arrives first, and is said to see and believe upon entering and observing the grave clothes.",
+        "role_in_resurrection_appearances": "Recognizes the risen Jesus on the shore of the Sea of Tiberias and informs Peter, continuing the pattern of insight and testimony.",
+        "authorial_and_traditional_role": "Identified near the close of the Gospel as the disciple who testifies to these things and as the source of the written account, with the community affirming that his testimony is true; later Christian tradition often associates him with the evangelist John."
+      },
+      "references": [
+        "John 13:23-25",
+        "John 19:26-27",
+        "John 19:35",
+        "John 20:2-9",
+        "John 21:7",
+        "John 21:20-24"
+      ]
+    }
+  ]
 }

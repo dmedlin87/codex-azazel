@@ -6,7 +6,46 @@
   ],
   "roles": [
     "coworker",
-    "missionary"
+    "delegate",
+    "church_leader",
+    "letter_recipient"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "ethnic_status": "Presented as a Greek Gentile whose uncircumcised status becomes a test case for the question of circumcision and Torah observance for Gentile believers.",
+        "relationship_to_paul": "Described as a trusted coworker, 'partner and fellow worker,' and close associate whom Paul takes on sensitive missions.",
+        "mission_role": "Acts as Paul's envoy in negotiations with the Corinthian church and plays a key role in advancing the collection for the Jerusalem believers.",
+        "character_portrayal": "Depicted as earnest, reliable, and sharing Paul's deep concern and affection for the congregations.",
+        "later_tradition_note": "Later Christian tradition and the Pastorals expand his role as an archetypal church leader and delegate, but this development goes beyond the undisputed letters."
+      },
+      "references": [
+        "Galatians 2:1-3",
+        "2 Corinthians 2:12-13",
+        "2 Corinthians 7:5-7",
+        "2 Corinthians 7:13-15",
+        "2 Corinthians 8:6",
+        "2 Corinthians 8:16-24",
+        "2 Corinthians 12:18"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "relationship_to_paul": "Addressed as Paul's genuine child in a common faith, indicating an intimate mentor-disciple relationship within a more developed ecclesial framework.",
+        "role_in_church_order": "Left in Crete to appoint elders, correct false teaching, and model 'sound doctrine,' functioning as a key agent of emerging church structures.",
+        "geographic_activity": "Located primarily in Crete, with a later notice of travel to Dalmatia, suggesting a wider missionary or oversight role.",
+        "portrayal_of_authority": "Portrayed as having delegated authority to organize communities, enforce discipline, and embody the ideal of a reliable church overseer.",
+        "critical_note": "These portraits occur in letters widely regarded by critical scholarship as post-Pauline, reflecting later concerns about church order and leadership."
+      },
+      "references": [
+        "Titus 1:4-5",
+        "Titus 1:10-16",
+        "Titus 2:1-15",
+        "Titus 3:12-15",
+        "2 Timothy 4:10"
+      ]
+    }
+  ]
 }

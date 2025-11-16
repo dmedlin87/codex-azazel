@@ -9,5 +9,39 @@
     "follower",
     "witness"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics",
+      "traits": {
+        "healed_follower": "Listed among the women who followed Jesus and supported him from their resources, noted as one from whom seven demons had gone out.",
+        "presence_at_crucifixion": "Named among the women watching from a distance at the crucifixion, in contrast to most male disciples who have fled.",
+        "witness_to_burial": "Observes where Jesus is laid in the tomb, providing continuity between death and resurrection accounts.",
+        "first_at_tomb": "Goes to the tomb early on the first day of the week, encounters the empty tomb and angelic message, and is commissioned to tell the disciples.",
+        "narrative_role": "Serves as a key female disciple and early witness whose testimony the male disciples initially meet with fear or incredulity."
+      },
+      "references": [
+        "Mark 15:40-41",
+        "Mark 15:47",
+        "Mark 16:1-8",
+        "Matthew 27:55-61",
+        "Matthew 28:1-10",
+        "Luke 8:1-3",
+        "Luke 24:1-11"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "mourning_at_tomb": "Comes early to the tomb while it is still dark, finds the stone removed, and informs Peter and the beloved disciple.",
+        "encounter_with_risen_jesus": "Weeps outside the tomb, encounters the risen Jesus whom she at first mistakes for the gardener, and recognizes him when he speaks her name.",
+        "commission_as_messenger": "Receives the commission to announce to the disciples that Jesus is ascending to his Father and their Father, becoming 'apostle to the apostles' in later Christian language.",
+        "critical_note": "Later Western tradition often conflated Mary Magdalene with other unnamed sinful or anointing women, but the canonical Gospels present her distinctly as a healed and faithful witness."
+      },
+      "references": [
+        "John 19:25",
+        "John 20:1-2",
+        "John 20:11-18"
+      ]
+    }
+  ]
 }

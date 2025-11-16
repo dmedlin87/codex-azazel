@@ -8,5 +8,46 @@
   "roles": [
     "high_priest"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "matthew",
+      "traits": {
+        "role_as_high_priest": "Named as the high priest in whose palace the chief priests and elders gather to plot Jesus’s arrest and death.",
+        "presiding_over_trial": "Presides over the nighttime hearing in which false witnesses are brought against Jesus and questions him about his identity as the Messiah, the Son of God.",
+        "charge_of_blasphemy": "Tears his robes when Jesus affirms the Son of Man language and declares that Jesus has spoken blasphemy, prompting the council to vote that he deserves death.",
+        "narrative_significance": "Functions as a central representative of the Jerusalem leadership that condemns Jesus, embodying institutional opposition to him."
+      },
+      "references": [
+        "Matthew 26:3-5",
+        "Matthew 26:57-68"
+      ]
+    },
+    {
+      "source_id": "luke_acts",
+      "traits": {
+        "chronological_marker": "Named along with Annas as part of the high-priestly setting in which the word of God comes to John the Baptist, anchoring the narrative in a specific historical context.",
+        "member_of_high_priestly_family": "Appears among the high priestly family and rulers assembled in Jerusalem when Peter and John are brought before the council after healing the lame man.",
+        "symbol_of_priestly_power": "Represents the continuity of priestly authority that first confronts Jesus and then the early apostolic movement."
+      },
+      "references": [
+        "Luke 3:2",
+        "Acts 4:6"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "high_priest_that_year": "Identified as high priest that year, tied closely to the plot against Jesus in the wake of the raising of Lazarus.",
+        "prophetic_saying": "Declares that it is better for one man to die for the people than for the whole nation to perish, which the narrator interprets as an unwitting prophecy about Jesus’s death for the nation.",
+        "involvement_in_trial": "Connected with the proceedings in which Jesus is questioned and sent between Annas and the high priest, and associated with the courtyard where Peter denies Jesus.",
+        "narrative_role": "Embodies the high-priestly leadership that seeks Jesus’s death while ironically articulating the theological significance of his sacrificial death."
+      },
+      "references": [
+        "John 11:49-53",
+        "John 18:13-14",
+        "John 18:24",
+        "John 18:28"
+      ]
+    }
+  ]
 }

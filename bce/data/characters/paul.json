@@ -1,28 +1,66 @@
 {
-  "id": "luke",
-  "canonical_name": "Luke",
+  "id": "paul",
+  "canonical_name": "Paul the Apostle",
   "aliases": [
-  "Luke",
-  "Luke the beloved physician",
-  "Luke the evangelist"
+  "Paul",
+  "Saul of Tarsus",
+  "Apostle Paul"
   ],
   "roles": [
-  "coworker",
+  "apostle",
   "missionary",
-  "evangelist",
-  "author_tradition"
+  "letter_writer",
+  "theologian"
   ],
   "source_profiles": [
   {
   "source_id": "paul_undisputed",
   "traits": {
-  "relationship_to_paul": "Listed among Paul's coworkers in the closing greetings, indicating that he belongs to Paul's missionary circle.",
-  "status_in_network": "Appears in a cluster of named collaborators, suggesting he is a recognized and trusted member of Paul's team.",
-  "absence_of_detail": "The letter gives no information about his origin, occupation, or ethnicity, leaving his concrete profile minimal in the undisputed corpus.",
-  "later_identifications": "Later Christian tradition, drawing on a 'beloved physician' reference in a disputed Pauline letter and on the prefaces to the third gospel and Acts, identifies Luke as a physician and as the author of Luke–Acts, but this goes beyond what the undisputed letter itself claims."
+  "self_identification_and_call": "Presents himself as a called apostle of Jesus Christ, commissioned by God to proclaim the gospel, often stressing that his apostleship is not from humans but through a revelation of the risen Christ.",
+  "relationship_to_jesus": "Knows Jesus as the exalted, risen Lord rather than as a teacher from Galilee; recounts visionary encounters and treats the crucifixion and resurrection as the central saving events.",
+  "mission_and_audience": "Frames his primary vocation as apostle to the Gentiles, while also engaging Jews, founding and nurturing communities across Asia Minor and Greece through itinerant missions and letters.",
+  "theological_emphases": "Develops themes of justification, participation in Christ, Spirit versus flesh, and the inclusion of Gentiles apart from the works of the Mosaic law, using Abraham and Adam as key figures in his argumentation.",
+  "conflicts_and_authority": "Frequently defends his apostolic authority against rival missionaries, negotiates tensions with Judean leaders, and addresses internal disputes within his communities.",
+  "suffering_and_ministry_style": "Portrays his ministry as marked by weakness, hardship, and persecution, yet interprets these as signs of participation in Christ’s sufferings and as a paradoxical display of divine power.",
+  "co_workers_and_networks": "Names a wide network of co-workers, patrons, and house-church leaders, indicating collaborative mission structures and diverse local assemblies."
   },
   "references": [
-  "Philemon 1:24"
+  "Romans 1:1-17",
+  "Romans 11:13",
+  "1 Corinthians 1:1-2",
+  "1 Corinthians 9:1-23",
+  "2 Corinthians 11:16-33",
+  "2 Corinthians 12:1-10",
+  "Galatians 1:11-24",
+  "Galatians 2:1-21",
+  "Philippians 3:4-14",
+  "1 Thessalonians 1:1-10",
+  "Philemon 1:1-25"
+  ]
+  },
+  {
+  "source_id": "acts",
+  "traits": {
+  "pre_christian_persecutor": "Introduced as Saul, a zealous persecutor of the Jesus movement who approves the stoning of Stephen and ravages the early community.",
+  "conversion_and_call": "Experiences a dramatic visionary encounter with the risen Jesus on the road to Damascus that blinds him and reorients him from persecutor to chosen instrument.",
+  "commission_and_relationship_to_church": "Is commissioned to carry the name of Jesus before Gentiles, kings, and Israelites, while remaining connected to Jerusalem and Antioch leaders through visits, endorsements, and councils.",
+  "missionary_journeys": "Portrayed undertaking multiple structured missionary journeys across Asia Minor and Greece, typically beginning in synagogues and then turning to Gentile audiences.",
+  "signs_speeches_and_theology": "Performs healings and exorcisms, delivers major speeches that summarize the gospel in ways suited to Jewish and Gentile audiences, and emphasizes continuity with Israel’s scriptures.",
+  "suffering_trials_and_status": "Endures imprisonments, beatings, plots, and shipwrecks, yet also benefits from Roman citizenship, invoking legal rights and making formal defenses before governors and kings.",
+  "journey_to_rome_and_fate": "Appeals to Caesar and is transported to Rome, where he preaches the kingdom of God and teaches about the Lord Jesus with boldness; his ultimate fate is left unstated."
+  },
+  "references": [
+  "Acts 7:58-8:3",
+  "Acts 9:1-30",
+  "Acts 11:25-30",
+  "Acts 13:1-3",
+  "Acts 13:4-14:28",
+  "Acts 15:1-35",
+  "Acts 16:6-40",
+  "Acts 18:1-23",
+  "Acts 19:1-41",
+  "Acts 20:17-38",
+  "Acts 21:27-28:31"
   ]
   }
   ]

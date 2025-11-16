@@ -2,45 +2,44 @@
   "id": "mark",
   "canonical_name": "John Mark (Mark the Evangelist)",
   "aliases": [
-  "John Mark",
-  "Mark",
-  "Mark the Evangelist"
+    "John Mark",
+    "Mark",
+    "Mark the Evangelist"
   ],
   "roles": [
-  "coworker",
-  "missionary",
-  "assistant",
-  "evangelist"
+    "coworker",
+    "missionary",
+    "assistant",
+    "evangelist"
   ],
   "source_profiles": [
-  {
-  "source_id": "acts",
-  "traits": {
-  "family_and_background": "Introduced as John whose other name is Mark, associated with the house of his mother Mary in Jerusalem, which serves as a gathering place for believers.",
-  "association_with_barnabas_and_paul": "Travels with Barnabas and Saul as an assistant on mission, indicating an early role within the Jerusalem-anchored mission network.",
-  "missionary_activity": "Accompanies the missionaries to Cyprus and beyond, participating in the early Gentile mission before departing from them.",
-  "conflict_and_separation": "His earlier withdrawal from the mission field becomes the cause of sharp disagreement between Paul and Barnabas, leading Barnabas to take him to Cyprus while Paul chooses Silas.",
-  "narrative_function": "Serves as a minor but recurrent figure linking Jerusalem, Barnabas, and the Gentile mission, with later tradition connecting him to the authorship of the Gospel of Mark."
-  },
-  "references": [
-  "Acts 12:12",
-  "Acts 12:25",
-  "Acts 13:5",
-  "Acts 13:13",
-  "Acts 15:37-39"
+    {
+      "source_id": "acts",
+      "traits": {
+        "family_and_background": "Introduced as John whose other name is Mark, associated with the house of his mother Mary in Jerusalem, which serves as a gathering place for believers.",
+        "association_with_barnabas_and_paul": "Travels with Barnabas and Saul as an assistant on mission, indicating an early role within the Jerusalem-anchored mission network.",
+        "missionary_activity": "Accompanies the missionaries to Cyprus and beyond, participating in the early Gentile mission before departing from them.",
+        "conflict_and_separation": "His earlier withdrawal from the mission field becomes the cause of sharp disagreement between Paul and Barnabas, leading Barnabas to take him to Cyprus while Paul chooses Silas.",
+        "narrative_function": "Serves as a minor but recurrent figure linking Jerusalem, Barnabas, and the Gentile mission, with later tradition connecting him to the authorship of the Gospel of Mark."
+      },
+      "references": [
+        "Acts 12:12",
+        "Acts 12:25",
+        "Acts 13:5",
+        "Acts 13:13",
+        "Acts 15:37-39"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "coworker_status": "Listed among Paul’s coworkers and fellow laborers, suggesting restored or continued cooperation after earlier tensions reported in Acts.",
+        "network_connections": "Appears in a cluster of names associated with Paul’s mission team, indicating his participation in Pauline circles.",
+        "reputation": "Mentioned without criticism, implying that whatever earlier conflict existed in Acts is not foregrounded in Paul’s own surviving correspondence."
+      },
+      "references": [
+        "Philemon 1:24"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "paul_undisputed",
-  "traits": {
-  "coworker_status": "Listed among Paul’s coworkers and fellow laborers, suggesting restored or continued cooperation after earlier tensions reported in Acts.",
-  "network_connections": "Appears in a cluster of names associated with Paul’s mission team, indicating his participation in Pauline circles.",
-  "reputation": "Mentioned without criticism, implying that whatever earlier conflict existed in Acts is not foregrounded in Paul’s own surviving correspondence."
-  },
-  "references": [
-  "Philemon 1:24"
-  ]
-  }
-  ]
-  }
-  
+}

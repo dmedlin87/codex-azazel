@@ -7,5 +7,29 @@
   "roles": [
     "follower"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "luke",
+      "traits": {
+        "posture_of_listening": "Sits at the Lord’s feet listening to his word while Martha is distracted with much serving.",
+        "commendation": "Praised by Jesus for choosing the 'better part,' which will not be taken away from her, often interpreted as symbolizing contemplative discipleship."
+      },
+      "references": [
+        "Luke 10:38-42"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "sister_of_lazarus": "Appears as Lazarus’s sister who stays seated at home until Jesus calls for her, then falls at his feet weeping and repeating Martha’s lament that he had not been there.",
+        "anointing_of_jesus": "At a dinner in Bethany, anoints Jesus’s feet with costly perfume and wipes them with her hair, an act Jesus interprets in light of his burial.",
+        "witness_to_sign": "Participates in the family context of Lazarus’s raising, responding with deep emotion that leads Jesus himself to weep.",
+        "narrative_profile": "Embodies intense devotion, sorrow, and prophetic action, intimately associated with Jesus’s impending death and the revelation of his glory." 
+      },
+      "references": [
+        "John 11:28-36",
+        "John 12:1-8"
+      ]
+    }
+  ]
 }

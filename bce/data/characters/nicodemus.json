@@ -7,5 +7,22 @@
   "roles": [
     "religious_leader"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "john",
+      "traits": {
+        "identity_and_status": "Introduced as a Pharisee and a ruler of the Jews, a teacher of Israel who comes to Jesus.",
+        "nighttime_visit": "Visits Jesus by night to discuss his signs and teaching, prompting Jesus’s discourse about being born from above and the work of the Spirit.",
+        "misunderstanding_and_instruction": "Misunderstands Jesus’s metaphor of new birth in literal terms, allowing the Gospel to unfold themes of spiritual rebirth and heavenly origin.",
+        "cautious_defense": "Later speaks up in the Sanhedrin, arguing that their law does not judge a person without first hearing from them, signaling a partial, cautious defense of Jesus.",
+        "participation_in_burial": "Joins Joseph of Arimathea in preparing and burying Jesus’s body, bringing a large mixture of myrrh and aloes, an act of costly honor and devotion.",
+        "narrative_profile": "Moves across the Gospel from cautious nighttime inquirer to public participant in Jesus’s burial, embodying a trajectory of emerging but ambivalent faith."
+      },
+      "references": [
+        "John 3:1-21",
+        "John 7:50-52",
+        "John 19:38-42"
+      ]
+    }
+  ]
 }

@@ -9,5 +9,45 @@
     "apostle",
     "missionary"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "name_and_background": "Introduced as Joseph, a Levite from Cyprus, to whom the apostles give the name Barnabas, meaning 'son of encouragement.'",
+        "generosity_and_communal_life": "Sells a field that belongs to him and lays the proceeds at the apostles’ feet, exemplifying early community sharing.",
+        "sponsor_of_paul": "After Paul’s conversion, brings him to the apostles and recounts his encounter with the Lord, helping integrate him into the Jerusalem community.",
+        "role_in_antioch": "Sent by the Jerusalem church to Antioch, where he rejoices in the grace of God, exhorts believers to remain faithful, and later fetches Saul from Tarsus to help teach the growing church.",
+        "missionary_activity_and_apostolic_status": "Serves with Paul in mission from Antioch, is named among the 'apostles' in Lystra, and participates in the Jerusalem council deliberations.",
+        "conflict_and_separation": "Parts company with Paul after a sharp disagreement over John Mark, sailing with Mark to Cyprus while Paul chooses Silas."
+      },
+      "references": [
+        "Acts 4:36-37",
+        "Acts 9:26-27",
+        "Acts 11:22-26",
+        "Acts 11:29-30",
+        "Acts 12:25",
+        "Acts 13:1-3",
+        "Acts 13:43-52",
+        "Acts 14:12-14",
+        "Acts 15:2",
+        "Acts 15:12",
+        "Acts 15:36-41"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "co_worker_status": "Appears as a fellow worker alongside Paul, mentioned in the context of apostolic rights and financial support.",
+        "example_in_apostolic_rights_argument": "In 1 Corinthians, Paul notes that he and Barnabas work with their hands rather than making material demands, using them as examples in his discussion of freedom and support.",
+        "relationship_to_paul_and_jerusalem": "In Galatians, travels with Paul to Jerusalem and is associated with the leaders there, later becoming caught up in the controversy over table fellowship at Antioch.",
+        "tension_at_antioch": "Paul laments that even Barnabas was carried away by the hypocrisy of withdrawing from Gentile believers under pressure, highlighting the intensity of the conflict."
+      },
+      "references": [
+        "1 Corinthians 9:6",
+        "Galatians 2:1",
+        "Galatians 2:9",
+        "Galatians 2:13"
+      ]
+    }
+  ]
 }

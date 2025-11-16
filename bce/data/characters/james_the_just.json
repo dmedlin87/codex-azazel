@@ -11,5 +11,48 @@
     "apostle",
     "family_member"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark_matthew",
+      "traits": {
+        "family_relation": "Appears in lists of Jesus’s brothers as James, alongside Joses/Joseph, Judas, and Simon.",
+        "initial_unbelief": "Located within a family context that, in the Gospels, often misunderstands or opposes Jesus’s mission, including scenes where relatives think he is out of his mind or where a prophet is without honor in his hometown.",
+        "transition_in_tradition": "While the Gospels do not narrate his later leadership, they provide the familial background for the figure who emerges in Acts and Paul."
+      },
+      "references": [
+        "Mark 3:21",
+        "Mark 6:3-4",
+        "Matthew 13:55-57"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "brother_of_the_lord": "Paul refers to James explicitly as the brother of the Lord, distinguishing him from the Twelve while acknowledging his special relation to Jesus.",
+        "resurrection_appearance": "Listed in the tradition Paul received as one to whom the risen Christ appeared, prior to the appearance to all the apostles.",
+        "pillar_status": "Described, along with Cephas and John, as a 'pillar' of the Jerusalem church who recognizes Paul’s mission to the Gentiles.",
+        "role_in_antioch_incident": "Men 'from James' are mentioned in connection with the controversy at Antioch over table fellowship between Jewish and Gentile believers, indicating his authority and influence in boundary questions."
+      },
+      "references": [
+        "1 Corinthians 15:7",
+        "Galatians 1:18-19",
+        "Galatians 2:9",
+        "Galatians 2:12"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "leadership_in_jerusalem": "Emerges as a leading figure in the Jerusalem church, to whom Peter sends a report after his escape from prison and who presides over key deliberations.",
+        "role_in_jerusalem_council": "Speaks decisively at the council concerning Gentile believers, citing scripture and proposing guidelines that are then adopted by the assembly.",
+        "mediating_authority": "Functions as a mediator between different strands of the movement, balancing fidelity to the law with the recognition of God’s work among Gentiles.",
+        "presence_in_later_visits": "Receives Paul and his companions on Paul’s final visit to Jerusalem, where many elders are present and concerns about law-observant believers are raised."
+      },
+      "references": [
+        "Acts 12:17",
+        "Acts 15:13-21",
+        "Acts 21:17-26"
+      ]
+    }
+  ]
 }

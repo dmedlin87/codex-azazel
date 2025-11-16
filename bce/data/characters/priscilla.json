@@ -9,5 +9,42 @@
     "coworker",
     "teacher"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "part_of_missionary_couple": "Appears together with her husband Aquila as part of a married ministry team associated with Paul.",
+        "mobility_in_mission": "Travels with Aquila from Italy to Corinth and then to Ephesus, reflecting the movement of diaspora Jewish believers in the early mission.",
+        "instruction_of_apollos": "Alongside Aquila, takes Apollos aside and explains the way of God more accurately, indicating theological competence and teaching authority.",
+        "name_order_observation": "In some passages, her name precedes Aquila’s, a detail often noted by interpreters as suggesting particular prominence."
+      },
+      "references": [
+        "Acts 18:2",
+        "Acts 18:18-19",
+        "Acts 18:26"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "coworker_and_risk_taker": "Praised with Aquila as coworker of Paul who risked their necks for his life, eliciting thanks from Paul and all the churches of the Gentiles.",
+        "house_church_leader": "Hosts a church in their house, signaling a role in organizing and sustaining local gatherings.",
+        "greeting_priority": "Sometimes named before her husband in greeting lists, which some see as highlighting her notable status in the movement."
+      },
+      "references": [
+        "Romans 16:3-5",
+        "1 Corinthians 16:19"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "continued_presence": "Mentioned again, together with Aquila, in a later letter, implying ongoing involvement in Christian ministry.",
+        "critical_note": "This greeting appears in a letter widely regarded by critical scholarship as post-Pauline, preserving the memory of the couple’s significance."
+      },
+      "references": [
+        "2 Timothy 4:19"
+      ]
+    }
+  ]
 }

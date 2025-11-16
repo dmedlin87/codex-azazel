@@ -9,5 +9,47 @@
     "coworker",
     "missionary"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "jerusalem_leader": "Introduced as a leading man among the brothers in Jerusalem, chosen to accompany Paul and Barnabas with the council’s letter to Antioch.",
+        "prophetic_and_pastoral_role": "Described as a prophet who encourages and strengthens the believers with many words.",
+        "companion_of_paul": "Becomes Paul’s chief companion on the second missionary journey after the split with Barnabas, traveling through Syria, Cilicia, and into Macedonia and Achaia.",
+        "imprisonment_and_witness": "Imprisoned with Paul in Philippi, prays and sings hymns at midnight before the earthquake that leads to the jailer’s conversion.",
+        "missionary_activity": "Participates in founding and strengthening communities in cities such as Philippi, Thessalonica, and Berea, later remaining behind while Paul moves on.",
+        "narrative_profile": "Embodies a Spirit-led coworker whose suffering, encouragement, and mobility support Paul’s wider Gentile mission." 
+      },
+      "references": [
+        "Acts 15:22-35",
+        "Acts 15:40-41",
+        "Acts 16:16-40",
+        "Acts 17:1-15",
+        "Acts 18:5"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "co_sender_and_coworker": "Named as Silvanus alongside Paul in the opening of letters, indicating a co-sender and coworker known to the communities.",
+        "preacher_of_christ": "Recalled as one of those who proclaimed Christ to the Corinthians together with Paul and Timothy, emphasizing a unified message rather than competing ministries.",
+        "network_presence": "Appears within the circle of collaborators whose shared labor undergirds Paul’s Gentile mission."
+      },
+      "references": [
+        "1 Thessalonians 1:1",
+        "1 Thessalonians 2:2",
+        "2 Corinthians 1:19"
+      ]
+    },
+    {
+      "source_id": "other_nt",
+      "traits": {
+        "association_in_1_peter": "Mentioned as Silvanus in 1 Peter as a faithful brother through whom the letter is written or delivered, reflecting his broader reputation beyond Paul’s circle.",
+        "critical_note": "This reference occurs outside the Pauline letters and in a text whose authorship is debated, but it contributes to the wider New Testament portrait of Silvanus as a trusted emissary."
+      },
+      "references": [
+        "1 Peter 5:12"
+      ]
+    }
+  ]
 }

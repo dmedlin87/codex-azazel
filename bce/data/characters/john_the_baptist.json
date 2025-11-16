@@ -8,5 +8,51 @@
     "prophet",
     "forerunner"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark_matthew_luke",
+      "traits": {
+        "prophetic_identity": "Portrayed as a wilderness prophet clothed in camel’s hair with a leather belt, eating locusts and wild honey, evoking Elijah imagery.",
+        "baptism_and_call_to_repentance": "Preaches a baptism of repentance for the forgiveness of sins, calling Israel to prepare for the coming one stronger than he.",
+        "relationship_to_jesus": "Baptizes Jesus in the Jordan and bears witness to him, yet insists on his own lesser status (not worthy to untie his sandals).",
+        "ethical_preaching": "Exhorts crowds, tax collectors, and soldiers to practices of justice, generosity, and contentment.",
+        "imprisonment_and_death": "Imprisoned by Herod Antipas over criticism of his marriage and eventually beheaded at Herod’s banquet, becoming a martyr figure.",
+        "questioning_andconfirmation": "From prison sends messengers to inquire if Jesus is the coming one, prompting Jesus to point to deeds of healing and good news for the poor."
+      },
+      "references": [
+        "Mark 1:2-11",
+        "Mark 6:14-29",
+        "Matthew 3:1-17",
+        "Matthew 11:2-19",
+        "Luke 3:1-22",
+        "Luke 7:18-35"
+      ]
+    },
+    {
+      "source_id": "luke_birth_traditions",
+      "traits": {
+        "birth_and_family": "Luke narrates his birth to Zechariah and Elizabeth, both righteous before God, with strong parallels to Old Testament birth stories.",
+        "prenatal_significance": "Identified by angelic announcement as one who will be great before the Lord, filled with the Holy Spirit even from his mother’s womb.",
+        "forerunner_role": "Destined to go before the Lord in the spirit and power of Elijah, to turn many of the people of Israel to the Lord their God."
+      },
+      "references": [
+        "Luke 1:5-25",
+        "Luke 1:57-80"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "witness_not_the_light": "Presented as a man sent from God to bear witness to the light, explicitly distinguished from the light itself.",
+        "testimony_about_jesus": "Testifies that he is not the Christ, Elijah, or the prophet, and identifies Jesus as the Lamb of God who takes away the sin of the world and as the one on whom the Spirit descends and remains.",
+        "role_in_discipleship_chain": "Two of his disciples follow Jesus after his testimony, mediating initial followers to Jesus.",
+        "decreasing_in_relation_to_jesus": "Declares that he must decrease while Jesus must increase, framing his ministry as preparatory and subordinate."
+      },
+      "references": [
+        "John 1:6-8",
+        "John 1:19-37",
+        "John 3:22-30"
+      ]
+    }
+  ]
 }
