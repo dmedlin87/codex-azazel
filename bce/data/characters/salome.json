@@ -1,0 +1,11 @@
+{
+  "id": "salome",
+  "canonical_name": "Salome",
+  "aliases": [
+    "Salome"
+  ],
+  "roles": [
+    "follower"
+  ],
+  "source_profiles": []
+}

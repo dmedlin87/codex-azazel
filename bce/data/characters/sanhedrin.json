@@ -1,0 +1,12 @@
+{
+  "id": "sanhedrin",
+  "canonical_name": "Sanhedrin",
+  "aliases": [
+    "Sanhedrin"
+  ],
+  "roles": [
+    "council",
+    "religious_leaders"
+  ],
+  "source_profiles": []
+}

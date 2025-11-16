@@ -1,0 +1,12 @@
+{
+  "id": "aquila",
+  "canonical_name": "Aquila",
+  "aliases": [
+    "Aquila"
+  ],
+  "roles": [
+    "coworker",
+    "teacher"
+  ],
+  "source_profiles": []
+}

@@ -1,0 +1,23 @@
+{
+  "id": "luke",
+  "canonical_name": "Luke",
+  "aliases": [
+    "Luke"
+  ],
+  "roles": [
+    "coworker"
+  ],
+  "source_profiles": [
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "relationship_to_paul": "listed among Paul's fellow workers in the closing greetings.",
+        "status": "appears in a network of collaborators alongside Mark and others.",
+        "later_tradition_note": "later Christian tradition identifies Luke as a physician and author of a Gospel and Acts, but this is not stated in the undisputed letters."
+      },
+      "references": [
+        "Philemon 24"
+      ]
+    }
+  ]
+}

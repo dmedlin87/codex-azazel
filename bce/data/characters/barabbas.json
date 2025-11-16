@@ -1,0 +1,11 @@
+{
+  "id": "barabbas",
+  "canonical_name": "Barabbas",
+  "aliases": [
+    "Barabbas"
+  ],
+  "roles": [
+    "prisoner"
+  ],
+  "source_profiles": []
+}

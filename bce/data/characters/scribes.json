@@ -1,0 +1,12 @@
+{
+  "id": "scribes",
+  "canonical_name": "Scribes",
+  "aliases": [
+    "Scribes"
+  ],
+  "roles": [
+    "group",
+    "religious_leaders"
+  ],
+  "source_profiles": []
+}
