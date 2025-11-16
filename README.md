@@ -36,7 +36,7 @@ A simplified view of the repository:
 codex-azazel/
   pyproject.toml
   README.md
-  cli.py
+  dev_cli.py
   examples/
     basic_usage.py
   bce/
@@ -68,13 +68,13 @@ codex-azazel/
 From the repository root:
 
 ```bash
-python cli.py list-chars
-python cli.py show-char jesus
-python cli.py list-events
-python cli.py show-event crucifixion
+python dev_cli.py list-chars
+python dev_cli.py show-char jesus
+python dev_cli.py list-events
+python dev_cli.py show-event crucifixion
 
-python cli.py export-chars exports/all_characters.json
-python cli.py export-events exports/all_events.json
+python dev_cli.py export-chars exports/all_characters.json
+python dev_cli.py export-events exports/all_events.json
 ```
 
 These commands read from the JSON data under `bce/data` and print or export structured representations.

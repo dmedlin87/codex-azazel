@@ -6,7 +6,7 @@ to test CLI behavior in a controlled way.
 
 import json
 import pytest
-from cli import main
+from dev_cli import main
 
 
 class TestListCommands:
