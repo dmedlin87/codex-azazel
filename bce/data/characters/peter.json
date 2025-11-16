@@ -1,0 +1,81 @@
+{
+  "id": "peter",
+  "canonical_name": "Simon Peter",
+  "aliases": ["Simon", "Simon Peter", "Cephas"],
+  "roles": ["disciple", "apostle", "leader of the Twelve"],
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "role_among_twelve": "prominent disciple and spokesperson; confesses Jesus as Christ but rebuked for misunderstanding suffering.",
+        "portrayal": "impulsive and bold, both exemplary and failing disciple.",
+        "fate_or_ending": "restoration implied but not narrated in detail; mentioned as recipient of resurrection message."
+      },
+      "references": [
+        "Mark 1:16-18",
+        "Mark 8:27-33",
+        "Mark 14:66-72",
+        "Mark 16:7"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "role_among_twelve": "chief disciple given special revelations and responsibilities.",
+        "portrayal": "confesses Jesus as Messiah and Son of God; given keys of the kingdom yet still capable of failure.",
+        "fate_or_ending": "commissioned with the others after resurrection; future role implied rather than narrated."
+      },
+      "references": [
+        "Matthew 4:18-20",
+        "Matthew 14:28-31",
+        "Matthew 16:13-23",
+        "Matthew 26:69-75",
+        "Matthew 28:16-20"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "role_among_twelve": "leading apostle who strengthens others.",
+        "portrayal": "denies Jesus but is prayed for and later confirms the brothers.",
+        "fate_or_ending": "restoration hinted and leadership anticipated; detailed ministry continues in Acts."
+      },
+      "references": [
+        "Luke 5:1-11",
+        "Luke 22:31-34",
+        "Luke 22:54-62",
+        "Luke 24:34"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "role_among_twelve": "prominent disciple who runs to the tomb and is reinstated by the risen Jesus.",
+        "portrayal": "both impulsive and devoted; questioned about love and tasked to shepherd the flock.",
+        "fate_or_ending": "future martyrdom hinted in symbolic language; leadership role affirmed."
+      },
+      "references": [
+        "John 1:40-42",
+        "John 6:66-69",
+        "John 18:15-27",
+        "John 20:3-10",
+        "John 21:15-19"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "role_among_twelve": "primary spokesperson for the Jerusalem church and mission to Jews.",
+        "portrayal": "bold preacher and miracle worker, interpreter of events at Pentecost and key figure in early mission.",
+        "fate_or_ending": "leadership gradually gives way to Paul; Peter exits narrative after key missions."
+      },
+      "references": [
+        "Acts 1:15-26",
+        "Acts 2:14-41",
+        "Acts 3:1-10",
+        "Acts 10:1-48",
+        "Acts 12:1-17"
+      ]
+    }
+  ]
+}

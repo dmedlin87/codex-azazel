@@ -1,0 +1,19 @@
+{
+  "id": "damascus_road",
+  "label": "Paul's Damascus Road Experience",
+  "participants": ["paul", "jesus"],
+  "accounts": [
+    {
+      "source_id": "acts",
+      "reference": "Acts 9:1-19",
+      "summary": "Saul sees a heavenly light and hears Jesus' voice, is blinded, and later commissioned through Ananias.",
+      "notes": "One of several Acts accounts of Paul's calling with differing details in later retellings."
+    },
+    {
+      "source_id": "paul_undisputed",
+      "reference": "Galatians 1:11-17",
+      "summary": "Paul describes receiving the gospel through a revelation of Jesus Christ, not from human sources.",
+      "notes": "Less narrative detail; emphasizes independence from Jerusalem and divine initiative."
+    }
+  ]
+}

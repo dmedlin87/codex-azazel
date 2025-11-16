@@ -1,0 +1,31 @@
+{
+  "id": "betrayal",
+  "label": "Betrayal of Jesus by Judas",
+  "participants": ["jesus", "judas", "peter"],
+  "accounts": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 14:10-11, 43-50",
+      "summary": "Judas arranges with chief priests to hand Jesus over and later leads a crowd with swords and clubs to arrest him in Gethsemane with a kiss.",
+      "notes": "Emphasis on secrecy, armed arrest, and the disciples' flight; motive for Judas is not fully explained."
+    },
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 26:14-16, 47-56",
+      "summary": "Judas agrees to betray Jesus for thirty pieces of silver and later greets him with a kiss as the crowd seizes him.",
+      "notes": "Highlights monetary arrangement and fulfillment of Scripture; Jesus' response underscores the inevitability of the Scriptures."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 22:3-6, 47-53",
+      "summary": "Satan enters Judas, who confers with chief priests and officers and then leads them to Jesus at the Mount of Olives, identifying him with a kiss.",
+      "notes": "Stresses satanic influence and the role of temple authorities; Jesus notes the 'hour' of darkness."
+    },
+    {
+      "source_id": "john",
+      "reference": "John 18:1-11",
+      "summary": "Judas leads soldiers and officials to Jesus in the garden; Jesus steps forward, identifies himself, and is arrested while protecting his disciples.",
+      "notes": "Focus on Jesus' initiative and 'I am' declaration; no kiss described, and Peter's sword use is highlighted."
+    }
+  ]
+}

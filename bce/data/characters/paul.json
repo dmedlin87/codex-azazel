@@ -1,0 +1,33 @@
+{
+  "id": "paul",
+  "canonical_name": "Paul the Apostle",
+  "aliases": ["Saul of Tarsus", "Paul"],
+  "roles": ["apostle", "missionary", "letter writer"],
+  "source_profiles": [
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "background": "Jewish Pharisee, persecutor of church, called as apostle to Gentiles",
+        "self_understanding": "apostle called by revelation of Jesus Christ, not from humans",
+        "relationship_to_jerusalem": "both independent from and coordinated with Jerusalem leaders"
+      },
+      "references": [
+        "Galatians 1-2",
+        "Philippians 3:4-11"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "background": "Zealous persecutor consenting to Stephen's death",
+        "calling": "dramatic vision of risen Jesus on road to Damascus",
+        "relationship_to_jerusalem": "mission authorized and narrated in harmony with Jerusalem apostles"
+      },
+      "references": [
+        "Acts 7:54-60",
+        "Acts 9:1-30",
+        "Acts 15"
+      ]
+    }
+  ]
+}

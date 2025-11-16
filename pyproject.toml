@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "codex-azazel"
+version = "0.1.0"
+description = "Codex Azazel - BCE (Biblical Character / Before Canon Engine)"
+authors = [{ name = "Codex Azazel" }]
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+bce = "bce.cli:main"
+
+[tool.hatch.build]
+packages = ["bce"]

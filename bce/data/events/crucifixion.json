@@ -1,0 +1,19 @@
+{
+  "id": "crucifixion",
+  "label": "Crucifixion of Jesus",
+  "participants": ["jesus"],
+  "accounts": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 15:21-41",
+      "summary": "Jesus is crucified under Pilate, mocked, and dies with a loud cry as the temple curtain is torn.",
+      "notes": "Strong emphasis on suffering and abandonment; centurion confesses Jesus as Son of God."
+    },
+    {
+      "source_id": "john",
+      "reference": "John 19:16-37",
+      "summary": "Jesus is crucified as 'King of the Jews,' cares for his mother, and dies after declaring 'It is finished.'",
+      "notes": "Portrays Jesus as sovereign and in control; details of piercing and fulfillment of Scripture."
+    }
+  ]
+}

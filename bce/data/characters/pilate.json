@@ -1,0 +1,66 @@
+{
+  "id": "pilate",
+  "canonical_name": "Pontius Pilate",
+  "aliases": ["Pilate", "Pontius Pilate"],
+  "roles": ["Roman governor", "judge in Jesus' trial"],
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "office": "Roman prefect governing Judea under the emperor.",
+        "portrayal": "reluctant but pressured judge who yields to the crowd and orders crucifixion.",
+        "responsibility_for_jesus": "authorizes execution while attempting to distance himself from blame."
+      },
+      "references": [
+        "Mark 15:1-15"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "office": "Roman governor stationed in Jerusalem.",
+        "portrayal": "hesitant judge who receives a warning dream through his wife and symbolically washes his hands.",
+        "responsibility_for_jesus": "declares innocence but releases Barabbas and hands Jesus over to be crucified."
+      },
+      "references": [
+        "Matthew 27:11-26"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "office": "Roman governor hearing charges against Jesus.",
+        "portrayal": "repeatedly declares Jesus innocent and tries to release him, sending him to Herod as well.",
+        "responsibility_for_jesus": "ultimately concedes to the crowd's demand for crucifixion."
+      },
+      "references": [
+        "Luke 23:1-25"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "office": "Roman governor engaged in a political and theological dialogue with Jesus.",
+        "portrayal": "vacillating ruler who questions Jesus about kingship and truth but fears the crowd and the charge of disloyalty to Caesar.",
+        "responsibility_for_jesus": "has authority to release or crucify and ultimately delivers Jesus to be executed."
+      },
+      "references": [
+        "John 18:28-40",
+        "John 19:1-16"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "office": "Roman ruler mentioned in apostolic preaching as participant in Jesus' condemnation.",
+        "portrayal": "figure in salvation history aligned with other rulers opposing God's holy servant.",
+        "responsibility_for_jesus": "named among those who condemned and killed Jesus, though details are not narrated again."
+      },
+      "references": [
+        "Acts 3:13",
+        "Acts 4:27",
+        "Acts 13:28"
+      ]
+    }
+  ]
+}

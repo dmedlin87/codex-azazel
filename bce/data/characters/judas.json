@@ -1,0 +1,74 @@
+{
+  "id": "judas",
+  "canonical_name": "Judas Iscariot",
+  "aliases": ["Judas Iscariot"],
+  "roles": ["disciple", "betrayer"],
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "role_among_twelve": "one of the Twelve who hands Jesus over to the authorities.",
+        "betrayal_motive": "approaches chief priests to betray Jesus; motive not fully explained.",
+        "death_account": "not described."
+      },
+      "references": [
+        "Mark 3:19",
+        "Mark 14:10-11",
+        "Mark 14:43-46"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "role_among_twelve": "one of the Twelve who betrays Jesus for money.",
+        "betrayal_motive": "accepts thirty pieces of silver from chief priests.",
+        "death_account": "returns the money in remorse and hangs himself; field of blood story linked to priests' use of money."
+      },
+      "references": [
+        "Matthew 10:2-4",
+        "Matthew 26:14-16",
+        "Matthew 26:47-50",
+        "Matthew 27:3-10"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "role_among_twelve": "one of the Twelve who leads authorities to Jesus.",
+        "betrayal_motive": "Satan enters Judas; he discusses terms with chief priests and officers.",
+        "death_account": "not described in the Gospel; Acts provides a different version."
+      },
+      "references": [
+        "Luke 6:16",
+        "Luke 22:3-6",
+        "Luke 22:47-48"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "role_among_twelve": "one of the disciples, identified as the betrayer at the meal.",
+        "betrayal_motive": "depicted as keeper of the money box and called a thief; Satan enters him at the meal.",
+        "death_account": "not narrated; focus is on his departure into the night."
+      },
+      "references": [
+        "John 6:70-71",
+        "John 12:4-6",
+        "John 13:21-30",
+        "John 18:2-5"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "role_among_twelve": "former member of the apostolic circle whose place must be filled.",
+        "betrayal_motive": "described in relation to wickedness and acquisition of the field.",
+        "death_account": "falls headlong and bursts open in the field, with the place called Akeldama (Field of Blood)."
+      },
+      "references": [
+        "Acts 1:16-20",
+        "Acts 1:24-26"
+      ]
+    }
+  ]
+}

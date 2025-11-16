@@ -1,0 +1,43 @@
+{
+  "id": "resurrection_appearance",
+  "label": "Post-Resurrection Appearances of Jesus",
+  "participants": ["jesus", "peter"],
+  "accounts": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 16:1-8",
+      "summary": "Women find the empty tomb and are told Jesus has been raised and will be seen in Galilee, but they flee in fear and say nothing to anyone in the earliest ending.",
+      "notes": "Earliest manuscripts end without narrated appearances; message anticipates future meetings in Galilee."
+    },
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 28:1-20",
+      "summary": "Women meet the risen Jesus and later the disciples see him on a mountain in Galilee where he commissions them to make disciples of all nations.",
+      "notes": "Emphasizes worship of the risen Jesus and the Great Commission with baptismal formula."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 24:13-53",
+      "summary": "The risen Jesus appears to two disciples on the road to Emmaus and later to the gathered group in Jerusalem, opening the Scriptures and commissioning them as witnesses.",
+      "notes": "Focus on recognition through breaking of bread and scriptural interpretation; setting is Jerusalem and its vicinity."
+    },
+    {
+      "source_id": "john",
+      "reference": "John 20:11-29; 21:1-14",
+      "summary": "Jesus appears to Mary Magdalene, to the disciples behind locked doors, to Thomas, and later by the Sea of Tiberias with a miraculous catch of fish.",
+      "notes": "Highlights personal encounters, the blessing of those who believe without seeing, and Peter's restoration."
+    },
+    {
+      "source_id": "paul_undisputed",
+      "reference": "1 Corinthians 15:3-8",
+      "summary": "Paul recounts a tradition that the risen Christ appeared to Cephas, the Twelve, many others, James, all the apostles, and last of all to himself.",
+      "notes": "Lists witnesses in a confessional summary rather than narrating individual scenes."
+    },
+    {
+      "source_id": "acts",
+      "reference": "Acts 1:1-11",
+      "summary": "The risen Jesus appears to the apostles over forty days, speaks about the kingdom of God, and is taken up as they watch.",
+      "notes": "Connects appearances with the coming of the Spirit and mission to the ends of the earth."
+    }
+  ]
+}

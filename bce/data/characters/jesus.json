@@ -1,0 +1,48 @@
+{
+  "id": "jesus",
+  "canonical_name": "Jesus of Nazareth",
+  "aliases": ["Jesus", "Jesus Christ", "Christ"],
+  "roles": ["teacher", "prophet", "messiah"],
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "birth_narrative": "none",
+        "christology": "veiled suffering messiah; divine son revealed at baptism and cross",
+        "resurrection": "empty tomb with angelic message; earliest manuscripts end without appearances"
+      },
+      "references": [
+        "Mark 1:9-11",
+        "Mark 8:27-30",
+        "Mark 15:33-39",
+        "Mark 16:1-8"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "birth_narrative": "birth in Bethlehem, visit of magi, Herod's persecution and flight to Egypt",
+        "christology": "Davidic messiah and Emmanuel fulfilling Scripture",
+        "resurrection": "empty tomb with angel and commissioned appearances in Galilee"
+      },
+      "references": [
+        "Matthew 1-2",
+        "Matthew 5-7",
+        "Matthew 28:1-20"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "birth_narrative": "not described",
+        "christology": "crucified and risen Lord; sometimes preexistent and cosmic",
+        "resurrection": "appearances to witnesses including Paul; foundation of salvation"
+      },
+      "references": [
+        "1 Corinthians 1:18-25",
+        "1 Corinthians 15:3-8",
+        "Philippians 2:5-11"
+      ]
+    }
+  ]
+}

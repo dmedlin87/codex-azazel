@@ -1,0 +1,31 @@
+{
+  "id": "trial_before_pilate",
+  "label": "Trial of Jesus before Pontius Pilate",
+  "participants": ["jesus", "pilate"],
+  "accounts": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 15:1-15",
+      "summary": "Jesus is brought to Pilate, questioned about being king of the Jews, largely silent, and ultimately handed over to be crucified after the crowd chooses Barabbas.",
+      "notes": "Portrays Pilate as surprised at Jesus' silence yet willing to satisfy the crowd."
+    },
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 27:11-26",
+      "summary": "Pilate questions Jesus, receives a warning dream through his wife, offers to release Barabbas or Jesus, and symbolically washes his hands before ordering crucifixion.",
+      "notes": "Emphasizes Pilate's reluctance and transfer of responsibility to the crowd who accept bloodguilt."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 23:1-25",
+      "summary": "Pilate examines the charges, sends Jesus to Herod, and three times declares he finds no basis for death, yet finally grants the crowd's demand to crucify Jesus.",
+      "notes": "Highlights repeated declarations of innocence and political dynamics of the trial."
+    },
+    {
+      "source_id": "john",
+      "reference": "John 18:28-40; 19:1-16",
+      "summary": "Pilate interrogates Jesus about kingship and truth, has him flogged, and repeatedly tries to release him but yields under pressure when the leaders invoke Caesar.",
+      "notes": "Presents an extended dialogue exploring Jesus' kingdom and Pilate's fear of political repercussions."
+    }
+  ]
+}
