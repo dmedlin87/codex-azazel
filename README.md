@@ -1,8 +1,8 @@
-# Codex Azazel 3 BCE (Before Canon / Biblical Character Engine)
+# Codex Azazel: BCE (Biblical Character Engine)
 
 ## Overview
 
-Codex Azazel 3 BCE is a small Python library for modeling New Testament characters and events as structured data. It represents per-source profiles (Mark, Matthew, Luke, John, undisputed Paul, Acts, etc.) so that you can compare portrayals, trace contradictions, and support historical-critical analysis.
+Codex Azazel's BCE (Biblical Character Engine) is a small Python library for modeling New Testament characters and events as structured data, currently focused on biblical characters; "Before Canon Engine" is a possible future specialization for broader pre-canonical corpora. It represents per-source profiles (Mark, Matthew, Luke, John, undisputed Paul, Acts, etc.) so that you can compare portrayals, trace contradictions, and support historical-critical analysis.
 
 All core data lives in JSON (`bce/data/characters`, `bce/data/events`), and the Python API is designed to be simple, pure, and AI-friendly.
 
@@ -63,7 +63,7 @@ codex-azazel/
         ...
 ```
 
-## Quickstart 3 CLI
+## Quickstart: CLI
 
 From the repository root:
 
@@ -79,7 +79,7 @@ python cli.py export-events exports/all_events.json
 
 These commands read from the JSON data under `bce/data` and print or export structured representations.
 
-## Quickstart 3 Python
+## Quickstart: Python
 
 Basic usage from a Python shell or script:
 
