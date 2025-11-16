@@ -1,0 +1,31 @@
+{
+  "id": "nativity",
+  "label": "Birth of Jesus",
+  "participants": ["jesus"],
+  "accounts": [
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 2:1-12",
+      "summary": "Jesus is born in Bethlehem during the time of King Herod. Wise men from the east follow a star to Jerusalem, inquire about the newborn king, and Herod directs them to Bethlehem. They find the child in a house, worship him, and offer gifts of gold, frankincense, and myrrh. Warned in a dream, they return home without telling Herod.",
+      "notes": "No mention of census, inn, manger, or shepherds. Jesus is found in a house, not a stable. Visitors are magi (Gentile astrologers), not shepherds. Herod's plot and threat of violence is central. No indication Mary and Joseph traveled from Nazareth - implies Bethlehem was their home."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 2:1-20",
+      "summary": "Mary and Joseph travel from Nazareth to Bethlehem due to a census ordered by Caesar Augustus. Jesus is born there, wrapped in swaddling cloths, and laid in a manger because there is no room in the inn. An angel announces the birth to shepherds watching their flocks, and a multitude of the heavenly host appears. The shepherds visit and find Mary, Joseph, and the baby in the manger.",
+      "notes": "Census (historically problematic) is the reason for being in Bethlehem. Born in a manger/stable, not a house. Visitors are shepherds (Jewish peasants), not magi. Angelic announcement to shepherds with heavenly host. No mention of Herod, wise men, star, or threat. Implies Nazareth was their home."
+    },
+    {
+      "source_id": "mark",
+      "reference": "N/A",
+      "summary": "No birth narrative. Mark begins with Jesus' adult baptism by John.",
+      "notes": "Mark shows no interest in Jesus' birth or childhood. Gospel starts with 'The beginning of the good news of Jesus Christ, the Son of God' followed immediately by John the Baptist."
+    },
+    {
+      "source_id": "john",
+      "reference": "N/A",
+      "summary": "No birth narrative. John begins with a theological prologue about the pre-existent Word becoming flesh.",
+      "notes": "John has no birth story. Opens with 'In the beginning was the Word' - a theological rather than biographical beginning. Jesus' earthly origin in Nazareth is mentioned later (1:45-46) but no birth account."
+    }
+  ]
+}
