@@ -8,21 +8,26 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from bce.dossiers import build_character_dossier, build_event_dossier
+from bce.dossiers import build_character_dossier
 from bce.export import dossier_to_markdown
 
 
-def main() -> int:
-    # Build a sample character dossier.
-    char_dossier = build_character_dossier("jesus")
-    # Build a sample event dossier.
-    event_dossier = build_event_dossier("crucifixion")
+EXAMPLE_CHARACTER_ID = "jesus"
 
-    print("# Character dossier: jesus")
-    print(dossier_to_markdown(char_dossier))
-    print("\n---\n")
-    print("# Event dossier: crucifixion")
-    print(dossier_to_markdown(event_dossier))
+
+def main() -> int:
+    char_id = EXAMPLE_CHARACTER_ID
+    try:
+        dossier = build_character_dossier(char_id)
+    except Exception as exc:
+        print(
+            f"Error: could not build character dossier for '{char_id}': {exc}",
+            file=sys.stderr,
+        )
+        return 1
+
+    print(f"=== Character dossier: {char_id} ===")
+    print(dossier_to_markdown(dossier))
 
     return 0
 
