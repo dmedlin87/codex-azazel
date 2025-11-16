@@ -1,0 +1,31 @@
+{
+  "id": "empty_tomb",
+  "label": "Discovery of the Empty Tomb",
+  "participants": ["jesus", "mary_magdalene", "peter"],
+  "accounts": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 16:1-8",
+      "summary": "Mary Magdalene, Mary the mother of James, and Salome go to the tomb at sunrise. They find the stone rolled away and a young man in a white robe who tells them Jesus has risen and to tell the disciples and Peter he is going to Galilee. The women flee in fear and say nothing to anyone.",
+      "notes": "Three women visit. One young man in white robe inside the tomb. Women flee in terror and silence (earliest ending). This contradicts the Great Commission appearance that follows in later manuscripts."
+    },
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 28:1-10",
+      "summary": "Mary Magdalene and 'the other Mary' go to the tomb at dawn. An angel descends, rolls away the stone, and sits on it. Guards are terrified. The angel tells the women Jesus has risen and to tell the disciples he is going to Galilee. The women leave with fear and great joy and Jesus meets them on the way.",
+      "notes": "Two women visit. One angel who descends and sits on the stone outside. Earthquake occurs. Guards present. Women do tell others and meet Jesus immediately. Contradicts Mark's three women, inside location, and silence."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 24:1-12",
+      "summary": "The women (Mary Magdalene, Joanna, Mary the mother of James, and others) go to the tomb at early dawn. They find the stone rolled away and the tomb empty. Two men in dazzling clothes appear and remind them Jesus said he would rise. The women tell the apostles, who dismiss it as an idle tale, but Peter runs to check and finds only linen cloths.",
+      "notes": "Multiple women including Joanna. Two men in dazzling clothes inside the tomb. Women do tell the apostles. Peter visits tomb. No immediate Jesus appearance at tomb. Contradicts Mark's one messenger and Matthew's angel outside."
+    },
+    {
+      "source_id": "john",
+      "reference": "John 20:1-18",
+      "summary": "Mary Magdalene goes alone to the tomb while it is still dark and finds the stone removed. She runs to tell Peter and the beloved disciple, who race to the tomb and find only linen wrappings. After they leave, Mary sees two angels in white inside the tomb, then turns and sees Jesus (whom she mistakes for the gardener) before he reveals himself.",
+      "notes": "Mary Magdalene goes alone initially. Two angels appear only after Peter and beloved disciple leave. Jesus appears to Mary alone at the tomb. Completely different sequence and participants than the synoptic accounts."
+    }
+  ]
+}

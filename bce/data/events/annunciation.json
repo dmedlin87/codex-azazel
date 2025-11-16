@@ -1,0 +1,19 @@
+{
+  "id": "annunciation",
+  "label": "Angelic Announcement of Jesus' Birth",
+  "participants": ["jesus"],
+  "accounts": [
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 1:18-25",
+      "summary": "Joseph discovers Mary is pregnant before they come together. He plans to divorce her quietly, but an angel of the Lord appears to him in a dream, tells him not to fear taking Mary as his wife, explains the child is from the Holy Spirit, and instructs him to name the child Jesus who will save his people from their sins.",
+      "notes": "Angel appears to Joseph, not Mary. Happens in a dream. Takes place after Mary is already pregnant. Focus is on Joseph's decision and reassurance. No mention of Mary's response or consent."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 1:26-38",
+      "summary": "The angel Gabriel is sent to Mary, a virgin betrothed to Joseph, in Nazareth. Gabriel greets her as 'favored one,' tells her she will conceive and bear a son to be called Jesus who will be great and called Son of the Most High. Mary questions how this can be since she is a virgin, and Gabriel explains the Holy Spirit will come upon her. Mary consents saying 'let it be with me according to your word.'",
+      "notes": "Angel Gabriel appears to Mary directly, not in a dream. Happens before conception. Mary is an active participant who asks questions and gives consent. Detailed prophecy about Jesus' identity and kingdom. Completely different recipient and narrative than Matthew."
+    }
+  ]
+}
