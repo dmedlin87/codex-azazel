@@ -13,7 +13,7 @@ def _print_json(obj) -> None:
     print(json.dumps(asdict(obj), ensure_ascii=False, indent=2))
 
 
-def main(argv=None) -> None:
+def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="bce",
         description="Biblical Character / Before Canon Engine CLI",
@@ -47,33 +47,43 @@ def main(argv=None) -> None:
     )
     export_events.add_argument("output_path")
 
-    args = parser.parse_args(argv)
+    try:
+        args = parser.parse_args(argv)
+    except SystemExit as e:
+        # argparse calls sys.exit() on errors, convert to return code
+        return e.code if e.code is not None else 2
 
-    if args.command == "list-chars":
-        for cid in queries.list_character_ids():
-            print(cid)
-    elif args.command == "show-char":
-        char = queries.get_character(args.char_id)
-        _print_json(char)
-    elif args.command == "show-char-dossier":
-        d = dossiers.build_character_dossier(args.char_id)
-        print(json.dumps(d, indent=2, sort_keys=True))
-    elif args.command == "list-events":
-        for eid in queries.list_event_ids():
-            print(eid)
-    elif args.command == "show-event":
-        event = queries.get_event(args.event_id)
-        _print_json(event)
-    elif args.command == "show-event-dossier":
-        d = dossiers.build_event_dossier(args.event_id)
-        print(json.dumps(d, indent=2, sort_keys=True))
-    elif args.command == "export-chars":
-        export_mod.export_all_characters(args.output_path)
-        print(f"Exported characters to {args.output_path}")
-    elif args.command == "export-events":
-        export_mod.export_all_events(args.output_path)
-        print(f"Exported events to {args.output_path}")
+    try:
+        if args.command == "list-chars":
+            for cid in queries.list_character_ids():
+                print(cid)
+        elif args.command == "show-char":
+            char = queries.get_character(args.char_id)
+            _print_json(char)
+        elif args.command == "show-char-dossier":
+            d = dossiers.build_character_dossier(args.char_id)
+            print(json.dumps(d, indent=2, sort_keys=True))
+        elif args.command == "list-events":
+            for eid in queries.list_event_ids():
+                print(eid)
+        elif args.command == "show-event":
+            event = queries.get_event(args.event_id)
+            _print_json(event)
+        elif args.command == "show-event-dossier":
+            d = dossiers.build_event_dossier(args.event_id)
+            print(json.dumps(d, indent=2, sort_keys=True))
+        elif args.command == "export-chars":
+            export_mod.export_all_characters(args.output_path)
+            print(f"Exported characters to {args.output_path}")
+        elif args.command == "export-events":
+            export_mod.export_all_events(args.output_path)
+            print(f"Exported events to {args.output_path}")
+    except Exception as e:
+        print(f"Error: {e}", file=__import__("sys").stderr)
+        return 1
+
+    return 0
 
 
 if __name__ == "__main__":  # pragma: no cover
-    main()
+    raise SystemExit(main())
