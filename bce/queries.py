@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from functools import lru_cache
 from typing import List, Optional
 
 from .models import Character, Event, SourceProfile
@@ -8,6 +9,7 @@ from . import storage
 
 # Character API
 
+@lru_cache(maxsize=None)
 def get_character(char_id: str) -> Character:
     return storage.load_character(char_id)
 
@@ -29,8 +31,15 @@ def get_source_profile(char: Character, source_id: str) -> Optional[SourceProfil
 
 # Event API
 
+@lru_cache(maxsize=None)
 def get_event(event_id: str) -> Event:
     return storage.load_event(event_id)
+
+
+def clear_cache() -> None:
+    """Clear the cached character/event loads."""
+    get_character.cache_clear()
+    get_event.cache_clear()
 
 
 def list_event_ids() -> List[str]:
