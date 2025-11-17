@@ -9,6 +9,29 @@
     "disciple",
     "apostle"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "teacher_and_commissioner",
+      "sources": ["mark", "luke_acts"],
+      "references": ["Mark 3:16-19", "Luke 6:13-16"],
+      "notes": "Chosen by Jesus as part of the Twelve after the night of prayer and entrusted with the apostolic commission."
+    },
+    {
+      "character_id": "matthew",
+      "type": "possible_family_and_mission_link",
+      "sources": ["mark"],
+      "references": ["Mark 2:14", "Mark 3:18"],
+      "notes": "Shares the patronymic 'son of Alphaeus' with Matthew/Levi, suggesting a kinship or household bond among the commissioned missionaries."
+    },
+    {
+      "character_id": "peter",
+      "type": "jerusalem_leadership_colleague",
+      "sources": ["luke_acts"],
+      "references": ["Acts 1:13-14"],
+      "notes": "Remains in prayer with Peter and the rest of the apostles in Jerusalem after the ascension, participating in the leadership core that oversees the community."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",
