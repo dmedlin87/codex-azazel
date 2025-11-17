@@ -9,6 +9,29 @@
     "follower",
     "witness"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "healed_disciple_and_witness",
+      "sources": ["synoptics", "john"],
+      "references": ["Luke 8:1-3", "Mark 15:40-41", "Matthew 28:1-10", "John 19:25", "John 20:11-18"],
+      "notes": "Mary Magdalene is portrayed as a woman delivered from demonic oppression who accompanies Jesus, remains near his cross, and becomes the first witness commissioned to proclaim his resurrection."
+    },
+    {
+      "character_id": "peter",
+      "type": "reports_resurrection_to",
+      "sources": ["synoptics", "john"],
+      "references": ["Luke 24:9-12", "John 20:2-10", "John 20:18"],
+      "notes": "After finding the empty tomb she informs Peter (and the other apostles), leading him to investigate and later to hear her testimony about seeing the risen Lord."
+    },
+    {
+      "character_id": "beloved_disciple",
+      "type": "summons_to_empty_tomb",
+      "sources": ["john"],
+      "references": ["John 20:2-10"],
+      "notes": "John highlights that Mary’s report sends the beloved disciple racing with Peter to the tomb, where her witness sets the stage for their belief."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics",

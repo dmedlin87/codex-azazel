@@ -7,6 +7,29 @@
   "roles": [
     "follower"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "host_disciple",
+      "sources": ["luke", "john"],
+      "references": ["Luke 10:38-42", "John 11:1-5", "John 12:1-2"],
+      "notes": "Martha welcomes Jesus into the Bethany home, dialogues with him about discipleship and resurrection, and serves at the banquet celebrating Lazarus’s raising."
+    },
+    {
+      "character_id": "lazarus_of_bethany",
+      "type": "sister_and_advocate",
+      "sources": ["john"],
+      "references": ["John 11:1-5", "John 11:20-44"],
+      "notes": "John portrays Martha and Mary sending for Jesus on Lazarus’s behalf, lamenting his death, and witnessing his restoration, underscoring Martha’s familial advocacy."
+    },
+    {
+      "character_id": "mary_of_bethany",
+      "type": "sister_in_shared_discipleship",
+      "sources": ["luke", "john"],
+      "references": ["Luke 10:38-42", "John 11:19-32"],
+      "notes": "The two Bethany sisters embody complementary expressions of discipleship—Martha’s active service and confession alongside Mary’s contemplative devotion—within the same household scenes."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "luke",
