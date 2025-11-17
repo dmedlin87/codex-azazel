@@ -85,8 +85,9 @@ class TestExportCommands:
         assert exit_code == 0
         assert target.exists()
         
-        # Should contain exported data
-        data = json.load(target.open())
+        # Should contain exported data (exporter writes UTF-8)
+        with target.open("r", encoding="utf-8") as f:
+            data = json.load(f)
         assert isinstance(data, list)
         assert len(data) > 0
         
@@ -106,8 +107,9 @@ class TestExportCommands:
         assert exit_code == 0
         assert target.exists()
         
-        # Should contain exported data
-        data = json.load(target.open())
+        # Should contain exported data (exporter writes UTF-8)
+        with target.open("r", encoding="utf-8") as f:
+            data = json.load(f)
         assert isinstance(data, list)
         assert len(data) > 0
         

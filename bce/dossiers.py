@@ -6,6 +6,23 @@ from typing import Dict, List
 from . import queries
 from . import contradictions
 from .models import Character, Event
+from .dossier_types import (
+    CharacterDossier,
+    EventDossier,
+    DOSSIER_KEY_ACCOUNTS,
+    DOSSIER_KEY_ACCOUNT_CONFLICTS,
+    DOSSIER_KEY_ALIASES,
+    DOSSIER_KEY_CANONICAL_NAME,
+    DOSSIER_KEY_ID,
+    DOSSIER_KEY_LABEL,
+    DOSSIER_KEY_PARTICIPANTS,
+    DOSSIER_KEY_REFERENCES_BY_SOURCE,
+    DOSSIER_KEY_ROLES,
+    DOSSIER_KEY_SOURCE_IDS,
+    DOSSIER_KEY_TRAIT_COMPARISON,
+    DOSSIER_KEY_TRAIT_CONFLICTS,
+    DOSSIER_KEY_TRAITS_BY_SOURCE,
+)
 
 
 def _build_source_ids(character: Character) -> List[str]:
@@ -16,7 +33,7 @@ def _build_source_ids(character: Character) -> List[str]:
     return list(seen.keys())
 
 
-def build_character_dossier(char_id: str) -> dict:
+def build_character_dossier(char_id: str) -> CharacterDossier:
     """Build a JSON-friendly dossier for a character.
 
     The returned dict includes core identity fields, per-source traits,
@@ -32,21 +49,21 @@ def build_character_dossier(char_id: str) -> dict:
         traits_by_source[profile.source_id] = dict(profile.traits)
         references_by_source[profile.source_id] = list(profile.references)
 
-    dossier = {
-        "id": character.id,
-        "canonical_name": character.canonical_name,
-        "aliases": list(character.aliases),
-        "roles": list(character.roles),
-        "source_ids": _build_source_ids(character),
-        "traits_by_source": traits_by_source,
-        "references_by_source": references_by_source,
-        "trait_comparison": trait_comparison,
-        "trait_conflicts": trait_conflicts,
+    dossier: CharacterDossier = {
+        DOSSIER_KEY_ID: character.id,
+        DOSSIER_KEY_CANONICAL_NAME: character.canonical_name,
+        DOSSIER_KEY_ALIASES: list(character.aliases),
+        DOSSIER_KEY_ROLES: list(character.roles),
+        DOSSIER_KEY_SOURCE_IDS: _build_source_ids(character),
+        DOSSIER_KEY_TRAITS_BY_SOURCE: traits_by_source,
+        DOSSIER_KEY_REFERENCES_BY_SOURCE: references_by_source,
+        DOSSIER_KEY_TRAIT_COMPARISON: trait_comparison,
+        DOSSIER_KEY_TRAIT_CONFLICTS: trait_conflicts,
     }
     return dossier
 
 
-def build_event_dossier(event_id: str) -> dict:
+def build_event_dossier(event_id: str) -> EventDossier:
     """Build a JSON-friendly dossier for an event.
 
     The returned dict includes core identity fields, per-source accounts,
@@ -65,29 +82,29 @@ def build_event_dossier(event_id: str) -> dict:
         for acc in event.accounts
     ]
 
-    dossier = {
-        "id": event.id,
-        "label": event.label,
-        "participants": list(event.participants),
-        "accounts": accounts,
-        "account_conflicts": account_conflicts,
+    dossier: EventDossier = {
+        DOSSIER_KEY_ID: event.id,
+        DOSSIER_KEY_LABEL: event.label,
+        DOSSIER_KEY_PARTICIPANTS: list(event.participants),
+        DOSSIER_KEY_ACCOUNTS: accounts,
+        DOSSIER_KEY_ACCOUNT_CONFLICTS: account_conflicts,
     }
     return dossier
 
 
-def build_all_character_dossiers() -> list[dict]:
+def build_all_character_dossiers() -> list[CharacterDossier]:
     """Build dossiers for all characters defined in the data directory.
 
     Returns a list of JSON-serializable dicts, one per character, in the
     order returned by queries.list_character_ids().
     """
-    dossiers = []
+    dossiers: list[CharacterDossier] = []
     for char_id in queries.list_character_ids():
         dossiers.append(build_character_dossier(char_id))
     return dossiers
 
 
-def build_all_event_dossiers() -> list[dict]:
+def build_all_event_dossiers() -> list[EventDossier]:
     """Build dossiers for all events defined in the data directory.
 
     Returns a list of JSON-serializable dicts, one per event, in the

@@ -4,13 +4,37 @@ from __future__ import annotations
 
 from typing import Iterable
 
+from .dossier_types import (
+    DOSSIER_KEY_ID,
+    DOSSIER_KEY_CANONICAL_NAME,
+    DOSSIER_KEY_LABEL,
+    DOSSIER_KEY_ALIASES,
+    DOSSIER_KEY_ROLES,
+    DOSSIER_KEY_SOURCE_IDS,
+    DOSSIER_KEY_TRAITS_BY_SOURCE,
+    DOSSIER_KEY_REFERENCES_BY_SOURCE,
+    DOSSIER_KEY_TRAIT_COMPARISON,
+    DOSSIER_KEY_TRAIT_CONFLICTS,
+    DOSSIER_KEY_PARTICIPANTS,
+    DOSSIER_KEY_ACCOUNTS,
+    DOSSIER_KEY_ACCOUNT_CONFLICTS,
+    DOSSIER_KEY_SUMMARY,
+    DOSSIER_KEY_DESCRIPTION,
+)
+
 
 def dossier_to_markdown(dossier: dict) -> str:
     """Render a single dossier dictionary as a Markdown string."""
 
     lines: list[str] = []
 
-    title_key_candidates = ["canonical_name", "label", "title", "name", "id"]
+    title_key_candidates = [
+        DOSSIER_KEY_CANONICAL_NAME,
+        DOSSIER_KEY_LABEL,
+        "title",
+        "name",
+        DOSSIER_KEY_ID,
+    ]
     title_value = None
     for key in title_key_candidates:
         if key in dossier and isinstance(dossier[key], str) and dossier[key]:
@@ -22,11 +46,11 @@ def dossier_to_markdown(dossier: dict) -> str:
 
     lines.append(f"# {title_value}")
 
-    dossier_id = dossier.get("id")
+    dossier_id = dossier.get(DOSSIER_KEY_ID)
     if isinstance(dossier_id, str) and dossier_id:
         lines.append(f"ID: {dossier_id}")
 
-    for summary_key in ("summary", "description"):
+    for summary_key in (DOSSIER_KEY_SUMMARY, DOSSIER_KEY_DESCRIPTION):
         summary = dossier.get(summary_key)
         if isinstance(summary, str) and summary.strip():
             lines.append("")
@@ -73,19 +97,19 @@ def dossier_to_markdown(dossier: dict) -> str:
             else:
                 lines.append(f"- {key}: {value}")
 
-    aliases = dossier.get("aliases")
+    aliases = dossier.get(DOSSIER_KEY_ALIASES)
     if isinstance(aliases, list):
         _add_list_section("Aliases", aliases)
 
-    roles = dossier.get("roles")
+    roles = dossier.get(DOSSIER_KEY_ROLES)
     if isinstance(roles, list):
         _add_list_section("Roles", roles)
 
-    source_ids = dossier.get("source_ids")
+    source_ids = dossier.get(DOSSIER_KEY_SOURCE_IDS)
     if isinstance(source_ids, list):
         _add_list_section("Source IDs", source_ids)
 
-    traits_by_source = dossier.get("traits_by_source")
+    traits_by_source = dossier.get(DOSSIER_KEY_TRAITS_BY_SOURCE)
     if isinstance(traits_by_source, dict):
         lines.append("")
         lines.append("## Traits by source")
@@ -98,7 +122,7 @@ def dossier_to_markdown(dossier: dict) -> str:
             summary = ", ".join(parts)
             lines.append(f"- {source_id}: {summary}")
 
-    references_by_source = dossier.get("references_by_source")
+    references_by_source = dossier.get(DOSSIER_KEY_REFERENCES_BY_SOURCE)
     if isinstance(references_by_source, dict):
         lines.append("")
         lines.append("## References by source")
@@ -112,19 +136,19 @@ def dossier_to_markdown(dossier: dict) -> str:
             for ref in cleaned_refs:
                 lines.append(f"  - {ref.strip()}")
 
-    trait_comparison = dossier.get("trait_comparison")
+    trait_comparison = dossier.get(DOSSIER_KEY_TRAIT_COMPARISON)
     if isinstance(trait_comparison, dict):
         _add_nested_mapping_section("Trait comparison", trait_comparison)
 
-    trait_conflicts = dossier.get("trait_conflicts")
+    trait_conflicts = dossier.get(DOSSIER_KEY_TRAIT_CONFLICTS)
     if isinstance(trait_conflicts, dict):
         _add_nested_mapping_section("Trait conflicts", trait_conflicts)
 
-    participants = dossier.get("participants")
+    participants = dossier.get(DOSSIER_KEY_PARTICIPANTS)
     if isinstance(participants, list):
         _add_list_section("Participants", participants)
 
-    accounts = dossier.get("accounts")
+    accounts = dossier.get(DOSSIER_KEY_ACCOUNTS)
     if isinstance(accounts, list) and accounts:
         lines.append("")
         lines.append("## Accounts")
@@ -145,7 +169,7 @@ def dossier_to_markdown(dossier: dict) -> str:
                 bullet_parts = [f"{k}={v}" for k, v in acc.items()]
             lines.append(f"- {'; '.join(bullet_parts)}")
 
-    account_conflicts = dossier.get("account_conflicts")
+    account_conflicts = dossier.get(DOSSIER_KEY_ACCOUNT_CONFLICTS)
     if isinstance(account_conflicts, dict):
         _add_nested_mapping_section("Account conflicts", account_conflicts)
 

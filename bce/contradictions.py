@@ -5,6 +5,15 @@ from typing import Dict
 from . import queries
 
 
+def _find_conflicts(field_map: Dict[str, Dict[str, str]]) -> Dict[str, Dict[str, str]]:
+    conflicts: Dict[str, Dict[str, str]] = {}
+    for field_name, per_source in field_map.items():
+        values = {v for v in per_source.values() if v}
+        if len(values) > 1:
+            conflicts[field_name] = per_source
+    return conflicts
+
+
 def compare_character_sources(char_id: str) -> Dict[str, Dict[str, str]]:
     """Compare a character's traits across sources.
 
@@ -26,12 +35,7 @@ def find_trait_conflicts(char_id: str) -> Dict[str, Dict[str, str]]:
     only those traits whose values are not the same across sources.
     """
     comparison = compare_character_sources(char_id)
-    conflicts: Dict[str, Dict[str, str]] = {}
-    for trait, per_source in comparison.items():
-        values = {v for v in per_source.values() if v}
-        if len(values) > 1:
-            conflicts[trait] = per_source
-    return conflicts
+    return _find_conflicts(comparison)
 
 
 def find_events_with_conflicting_accounts(event_id: str) -> Dict[str, Dict[str, str]]:
@@ -51,10 +55,4 @@ def find_events_with_conflicting_accounts(event_id: str) -> Dict[str, Dict[str, 
                 continue
             field_map.setdefault(field_name, {})[account.source_id] = value
 
-    conflicts: Dict[str, Dict[str, str]] = {}
-    for field_name, per_source in field_map.items():
-        values = set(per_source.values())
-        if len(values) > 1:
-            conflicts[field_name] = per_source
-
-    return conflicts
+    return _find_conflicts(field_map)
