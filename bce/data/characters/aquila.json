@@ -8,6 +8,42 @@
     "coworker",
     "teacher"
   ],
+  "relationships": [
+    {
+      "character_id": "priscilla",
+      "type": "spouse_and_coworker",
+      "sources": ["acts", "paul_undisputed", "paul_disputed"],
+      "references": [
+        "Acts 18:2-3",
+        "Acts 18:18-19",
+        "Acts 18:26",
+        "Romans 16:3-5",
+        "1 Corinthians 16:19",
+        "2 Timothy 4:19"
+      ],
+      "notes": "Married partner whose shared household, travel, and teaching ministry frame Aquila’s vocational identity across Corinth, Ephesus, and later greetings."
+    },
+    {
+      "character_id": "paul",
+      "type": "mission_partner",
+      "sources": ["acts", "paul_undisputed"],
+      "references": [
+        "Acts 18:2-3",
+        "Acts 18:18",
+        "Romans 16:3-4"
+      ],
+      "notes": "Hosts Paul, labors with him at the shared tentmaking trade, and is celebrated for risking his life to safeguard Paul’s Gentile mission."
+    },
+    {
+      "character_id": "apollos",
+      "type": "mentor_teacher",
+      "sources": ["acts"],
+      "references": [
+        "Acts 18:26"
+      ],
+      "notes": "Together with Priscilla, instructs Apollos more accurately in the way of God, helping refine another prominent teacher."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",

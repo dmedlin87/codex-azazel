@@ -9,6 +9,42 @@
     "coworker",
     "teacher"
   ],
+  "relationships": [
+    {
+      "character_id": "aquila",
+      "type": "spouse_and_coworker",
+      "sources": ["acts", "paul_undisputed", "paul_disputed"],
+      "references": [
+        "Acts 18:2",
+        "Acts 18:18-19",
+        "Acts 18:26",
+        "Romans 16:3-5",
+        "1 Corinthians 16:19",
+        "2 Timothy 4:19"
+      ],
+      "notes": "Married collaborator whose mobility, hospitality, and shared teaching vocation with Aquila anchor their presence from Italy to Ephesus."
+    },
+    {
+      "character_id": "paul",
+      "type": "mission_partner",
+      "sources": ["acts", "paul_undisputed"],
+      "references": [
+        "Acts 18:2",
+        "Acts 18:18",
+        "Romans 16:3-4"
+      ],
+      "notes": "Receives Paul into her household, travels with him, and is commended for risking her life in the service of his Gentile mission."
+    },
+    {
+      "character_id": "apollos",
+      "type": "mentor_teacher",
+      "sources": ["acts"],
+      "references": [
+        "Acts 18:26"
+      ],
+      "notes": "Alongside Aquila, instructs Apollos privately to complete his understanding of the way, demonstrating theological discernment."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",

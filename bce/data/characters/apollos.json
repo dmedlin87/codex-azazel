@@ -8,6 +8,48 @@
     "teacher",
     "missionary"
   ],
+  "relationships": [
+    {
+      "character_id": "priscilla",
+      "type": "mentored_by",
+      "sources": ["acts"],
+      "references": [
+        "Acts 18:26"
+      ],
+      "notes": "Receives fuller instruction in Ephesus from Priscilla, who helps complete his understanding of the way of God."
+    },
+    {
+      "character_id": "aquila",
+      "type": "mentored_by",
+      "sources": ["acts"],
+      "references": [
+        "Acts 18:26"
+      ],
+      "notes": "Along with Priscilla, Aquila corrects and commissions Apollos for more accurate public ministry."
+    },
+    {
+      "character_id": "paul",
+      "type": "fellow_worker",
+      "sources": ["paul_undisputed"],
+      "references": [
+        "1 Corinthians 1:12",
+        "1 Corinthians 3:4-9",
+        "1 Corinthians 3:22",
+        "1 Corinthians 4:6",
+        "1 Corinthians 16:12"
+      ],
+      "notes": "Shares planting and watering labor with Paul among the Corinthians, prompting Paul to address factionalism that misuses their names."
+    },
+    {
+      "character_id": "titus",
+      "type": "itinerant_colleague",
+      "sources": ["paul_disputed"],
+      "references": [
+        "Titus 3:13"
+      ],
+      "notes": "Mentioned alongside Titus’s charge to equip traveling ministers, implying cooperation with his network."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",
