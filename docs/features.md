@@ -2,6 +2,44 @@
 
 This document proposes features that would enhance the Biblical Character Engine beyond the current roadmap. Features are organized by category and priority.
 
+## Implementation status snapshot (2025-11)
+
+Many ideas sketched here now have concrete counterparts in the codebase. This section highlights where proposals have partial or full implementations; the detailed proposal text below remains as design context.
+
+- **Source criticism metadata (1. Data Richness & Scholarship Support → P1)**
+  - Implemented in a minimal form via `bce/data/sources.json` and `bce.sources`.
+  - Fields such as `date_range`, `provenance`, `audience`, and `depends_on` are populated for core sources and surfaced in character dossiers under `source_metadata`.
+  - Covered by tests in `tests/test_dossiers.py` and documented in `docs/SCHEMA.md`.
+
+- **Parallel passage alignment (1. Data Richness → P1)**
+  - Event-level `parallels` field implemented for events like `crucifixion` and `empty_tomb` (`bce/data/events/*.json`).
+  - Exposed through the `Event.parallels` datamodel (`bce.models`), `EventDossier` (`bce.dossier_types`, `bce.dossiers`), Markdown export (`bce.export_markdown`), and graph snapshot (`bce.export_graph`).
+  - Tested in `tests/test_dossiers.py`, `tests/test_export.py`, and `tests/test_export_graph.py`.
+
+- **Full-text search (2. Query & Discovery Enhancements → P1)**
+  - Implemented as `bce.search.search_all` with scoped search across traits, references, accounts, notes, and tags.
+  - High-level wrapper: `bce.api.search_all`.
+  - Tested in `tests/test_search.py` and `tests/test_tags.py`.
+
+- **Relationship graph (2. Query & Discovery Enhancements → P1)**
+  - Character relationships are modeled on the `Character.relationships` field (`bce.models`) and populated in data (e.g., `barnabas.json`, `paul.json`).
+  - Graph representation implemented in `bce.export_graph.build_graph_snapshot`, which emits `GraphNode`/`GraphEdge` structures with `character_relationship` edges and other relationships between characters, events, and sources.
+  - Exposed via `bce.api.build_graph_snapshot` and exercised in `tests/test_export_graph.py` and `tests/test_api.py`.
+
+- **Citation export (4. Export & Interoperability → P1)**
+  - Implemented as `bce.export_citations.export_citations(format="bibtex")` and re-exposed via `bce.export` and `bce.api.export_citations`.
+  - Produces `@misc{...}` BibTeX entries for sources, characters, and events.
+  - Tested in `tests/test_export_citations.py` and `tests/test_api.py`.
+
+- **CSV/Spreadsheet export (4. Export & Interoperability → P2)**
+  - Implemented as `bce.export_csv.export_characters_csv` and `bce.export_csv.export_events_csv`, with a facade in `bce.export` and high-level wrappers in `bce.api`.
+  - Tests: `tests/test_export_csv.py` and API-level coverage in `tests/test_api.py`.
+
+- **Reference validation and cross-reference validation (3. Data Quality & Validation → P1)**
+  - Implemented in `bce.validation` as `validate_reference`, `validate_all`, and cross-reference checks, with coverage in `tests/test_validation.py` and `tests/test_data_integrity.py`.
+
+Other proposals in this document (e.g., advanced analytics, manuscript variants, HTTP/GraphQL APIs, DB backends, plugin system) remain **conceptual** and are not yet implemented; they can be revisited and revised in light of the current `bce.api`, dossier schemas, and graph snapshot.
+
 ## Priority Legend
 
 - **P0**: Critical for core functionality

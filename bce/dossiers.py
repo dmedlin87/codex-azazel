@@ -23,9 +23,11 @@ from .dossier_types import (
     DOSSIER_KEY_SOURCE_METADATA,
     DOSSIER_KEY_TRAIT_COMPARISON,
     DOSSIER_KEY_TRAIT_CONFLICTS,
+    DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES,
     DOSSIER_KEY_TRAITS_BY_SOURCE,
     DOSSIER_KEY_RELATIONSHIPS,
     DOSSIER_KEY_PARALLELS,
+    DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES,
 )
 
 
@@ -46,6 +48,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
     character = queries.get_character(char_id)
     trait_comparison = contradictions.compare_character_sources(char_id)
     trait_conflicts = contradictions.find_trait_conflicts(char_id)
+    trait_conflict_summaries = contradictions.summarize_character_conflicts(char_id)
 
     traits_by_source: Dict[str, Dict[str, str]] = {}
     references_by_source: Dict[str, List[str]] = {}
@@ -83,6 +86,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_REFERENCES_BY_SOURCE: references_by_source,
         DOSSIER_KEY_TRAIT_COMPARISON: trait_comparison,
         DOSSIER_KEY_TRAIT_CONFLICTS: trait_conflicts,
+        DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES: trait_conflict_summaries,
         DOSSIER_KEY_RELATIONSHIPS: list(character.relationships),
         DOSSIER_KEY_PARALLELS: [],
     }
@@ -97,6 +101,7 @@ def build_event_dossier(event_id: str) -> EventDossier:
     """
     event: Event = queries.get_event(event_id)
     account_conflicts = contradictions.find_events_with_conflicting_accounts(event_id)
+    account_conflict_summaries = contradictions.summarize_event_conflicts(event_id)
 
     accounts = [
         {
@@ -114,6 +119,7 @@ def build_event_dossier(event_id: str) -> EventDossier:
         DOSSIER_KEY_PARTICIPANTS: list(event.participants),
         DOSSIER_KEY_ACCOUNTS: accounts,
         DOSSIER_KEY_ACCOUNT_CONFLICTS: account_conflicts,
+        DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES: account_conflict_summaries,
         DOSSIER_KEY_PARALLELS: list(event.parallels),
     }
     return dossier

@@ -1,5 +1,5 @@
 from .models import Character, SourceProfile, Event, EventAccount
-from . import queries
+from . import queries, api
 
 __all__ = [
     "Character",
@@ -7,4 +7,5 @@ __all__ = [
     "Event",
     "EventAccount",
     "queries",
+    "api",
 ]

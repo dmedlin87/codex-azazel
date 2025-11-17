@@ -81,23 +81,39 @@ These commands read from the JSON data under `bce/data` and print or export stru
 
 ## Quickstart: Python
 
-Basic usage from a Python shell or script:
+Basic usage from a Python shell or script is via the high-level `bce.api` module:
 
 ```python
-from bce import queries, contradictions
+from bce import api
 
-# Load a character
-jesus = queries.get_character("jesus")
+# Load core objects
+jesus = api.get_character("jesus")
+crucifixion = api.get_event("crucifixion")
+
 print(jesus.id, jesus.canonical_name)
+print(crucifixion.id, crucifixion.label)
 
 # List IDs
-print(queries.list_character_ids())
-print(queries.list_event_ids())
+print(api.list_character_ids())
+print(api.list_event_ids())
 
-# Compare traits for Jesus across sources
-comparison = contradictions.compare_character_sources("jesus")
-print(comparison)
+# Build dossiers
+char_dossier = api.build_character_dossier("jesus")
+event_dossier = api.build_event_dossier("crucifixion")
+
+# Search traits and tags
+results = api.search_all("resurrection", scope=["traits", "tags"])
+
+# Export data
+all_characters = api.export_all_characters()
+all_events = api.export_all_events()
+
+# Build a property-graph snapshot (for graph/DB tooling)
+graph = api.build_graph_snapshot()
+print(len(graph.nodes), "nodes", len(graph.edges), "edges")
 ```
+
+Lower-level modules such as `bce.queries`, `bce.contradictions`, and `bce.search` remain available for advanced use, but `bce.api` is the recommended entry point for most consumers.
 
 For a more complete walkthrough, see `examples/basic_usage.py`.
 

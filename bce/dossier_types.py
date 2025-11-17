@@ -14,6 +14,7 @@ class CharacterDossier(TypedDict):
     references_by_source: Dict[str, List[str]]
     trait_comparison: Dict[str, Dict[str, str]]
     trait_conflicts: Dict[str, Dict[str, str]]
+    trait_conflict_summaries: Dict[str, Dict[str, object]]
     relationships: List[dict]
     parallels: List[dict]
 
@@ -31,6 +32,7 @@ class EventDossier(TypedDict):
     participants: List[str]
     accounts: List[EventAccountDossier]
     account_conflicts: Dict[str, Dict[str, str]]
+    account_conflict_summaries: Dict[str, Dict[str, object]]
     parallels: List[dict]
 
 
@@ -45,9 +47,11 @@ DOSSIER_KEY_TRAITS_BY_SOURCE = "traits_by_source"
 DOSSIER_KEY_REFERENCES_BY_SOURCE = "references_by_source"
 DOSSIER_KEY_TRAIT_COMPARISON = "trait_comparison"
 DOSSIER_KEY_TRAIT_CONFLICTS = "trait_conflicts"
+DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES = "trait_conflict_summaries"
 DOSSIER_KEY_PARTICIPANTS = "participants"
 DOSSIER_KEY_ACCOUNTS = "accounts"
 DOSSIER_KEY_ACCOUNT_CONFLICTS = "account_conflicts"
+DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES = "account_conflict_summaries"
 DOSSIER_KEY_SUMMARY = "summary"
 DOSSIER_KEY_DESCRIPTION = "description"
 DOSSIER_KEY_RELATIONSHIPS = "relationships"

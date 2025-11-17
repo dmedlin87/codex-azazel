@@ -16,9 +16,11 @@ from .dossier_types import (
     DOSSIER_KEY_REFERENCES_BY_SOURCE,
     DOSSIER_KEY_TRAIT_COMPARISON,
     DOSSIER_KEY_TRAIT_CONFLICTS,
+    DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES,
     DOSSIER_KEY_PARTICIPANTS,
     DOSSIER_KEY_ACCOUNTS,
     DOSSIER_KEY_ACCOUNT_CONFLICTS,
+    DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES,
     DOSSIER_KEY_SUMMARY,
     DOSSIER_KEY_DESCRIPTION,
     DOSSIER_KEY_RELATIONSHIPS,
@@ -151,6 +153,27 @@ def dossier_to_markdown(dossier: dict) -> str:
     if isinstance(trait_conflicts, dict):
         _add_nested_mapping_section("Trait conflicts", trait_conflicts)
 
+    trait_conflict_summaries = dossier.get(DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES)
+    if isinstance(trait_conflict_summaries, dict) and trait_conflict_summaries:
+        lines.append("")
+        lines.append("## Trait conflict summaries")
+        for field, meta in trait_conflict_summaries.items():
+            if not isinstance(field, str) or not isinstance(meta, dict):
+                continue
+            severity = meta.get("severity")
+            category = meta.get("category")
+            distinct_values = meta.get("distinct_values")
+            parts: list[str] = []
+            if isinstance(severity, str) and severity:
+                parts.append(f"severity={severity}")
+            if isinstance(category, str) and category:
+                parts.append(f"category={category}")
+            if isinstance(distinct_values, list) and distinct_values:
+                parts.append(f"distinct_values={len(distinct_values)}")
+            if not parts:
+                parts = [f"{k}={v}" for k, v in meta.items()]
+            lines.append(f"- {field}: {'; '.join(parts)}")
+
     participants = dossier.get(DOSSIER_KEY_PARTICIPANTS)
     if isinstance(participants, list):
         _add_list_section("Participants", participants)
@@ -209,6 +232,27 @@ def dossier_to_markdown(dossier: dict) -> str:
     account_conflicts = dossier.get(DOSSIER_KEY_ACCOUNT_CONFLICTS)
     if isinstance(account_conflicts, dict):
         _add_nested_mapping_section("Account conflicts", account_conflicts)
+
+    account_conflict_summaries = dossier.get(DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES)
+    if isinstance(account_conflict_summaries, dict) and account_conflict_summaries:
+        lines.append("")
+        lines.append("## Account conflict summaries")
+        for field, meta in account_conflict_summaries.items():
+            if not isinstance(field, str) or not isinstance(meta, dict):
+                continue
+            severity = meta.get("severity")
+            category = meta.get("category")
+            distinct_values = meta.get("distinct_values")
+            parts: list[str] = []
+            if isinstance(severity, str) and severity:
+                parts.append(f"severity={severity}")
+            if isinstance(category, str) and category:
+                parts.append(f"category={category}")
+            if isinstance(distinct_values, list) and distinct_values:
+                parts.append(f"distinct_values={len(distinct_values)}")
+            if not parts:
+                parts = [f"{k}={v}" for k, v in meta.items()]
+            lines.append(f"- {field}: {'; '.join(parts)}")
 
     parallels = dossier.get(DOSSIER_KEY_PARALLELS)
     if isinstance(parallels, list) and parallels:

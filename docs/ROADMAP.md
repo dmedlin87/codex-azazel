@@ -4,6 +4,43 @@ Codex Azazel (the `bce` package) is a contradiction-aware Bible character and ev
 
 This roadmap keeps development focused and prevents scope drift.
 
+## Current implementation status (2025-11)
+
+This file was originally written as a forward-looking plan. As of November 2025, the core phases below map to concrete code:
+
+- **Phase 0 – Core, Dossiers, Export & Examples**
+  - Implemented via:
+    - Core models and storage: `bce.models`, `bce.storage`, `bce.queries`.
+    - Dossiers: `bce.dossiers`, `bce.dossier_types`.
+    - JSON/Markdown/CSV/citation exports: `bce.export_json`, `bce.export_markdown`, `bce.export_csv`, `bce.export_citations`, `bce.export_graph`, and the `bce.export` facade.
+    - CLI: `bce.cli`, `dev_cli.py`.
+    - Examples: `examples/basic_usage.py`, `examples/print_dossier_markdown.py`.
+    - Tests: `tests/test_dossiers.py`, `tests/test_export*.py`, `tests/test_cli.py`, `tests/test_integration.py`, etc.
+
+- **Phase 1 – Data Coverage & Validation**
+  - v0 canon characters and events seeded under `bce/data/characters` and `bce/data/events`.
+  - Validation helpers and tests live in `bce.validation` and `tests/test_validation.py`, `tests/test_data_integrity.py`.
+
+- **Phase 2 – Thematic Tagging & Query Helpers**
+  - `tags: list[str]` fields added to core models (`bce.models`) and selected data files (e.g. `jesus.json`, `empty_tomb.json`).
+  - Tag helpers: `bce.queries.list_characters_with_tag`, `bce.queries.list_events_with_tag` plus high-level wrappers in `bce.api`.
+  - Search extended with tag-aware scope in `bce.search`, with coverage in `tests/test_search.py` and `tests/test_tags.py`.
+
+- **Phase 3 – Conflict Objects & Ergonomics**
+  - Normalized conflict summaries implemented in `bce.contradictions.summarize_character_conflicts` and `bce.contradictions.summarize_event_conflicts`.
+  - Summaries embedded into dossiers as `trait_conflict_summaries` and `account_conflict_summaries` (`bce.dossier_types`, `bce.dossiers`).
+  - Tested in `tests/test_contradictions.py`, `tests/test_dossiers.py`, and documented in `docs/SCHEMA.md`.
+
+- **Phase 4 – Stable API Surface for External Tools**
+  - High-level API module: `bce.api` exposes stable helpers for loading characters/events, building dossiers, running searches, listing tag matches, exporting data, and building a graph snapshot.
+  - Schema documentation: `docs/SCHEMA.md` describes model, dossier, conflict, search, and tag shapes.
+  - API tests: `tests/test_api.py` exercise only `bce.api` to lock in the public contract.
+
+- **Phase 5 – Optional Extensions (Low Priority)**
+  - The roadmap items in this phase (HTTP API, JSON-LD export, etc.) remain **proposals** only; they are not implemented in the current codebase.
+
+The sections below preserve the original roadmap language for context and future planning.
+
 ---
 
 ## Phase 0 – Core, Dossiers, Export & Examples (CURRENT)
