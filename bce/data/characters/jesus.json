@@ -1,49 +1,203 @@
 {
   "id": "jesus",
   "canonical_name": "Jesus of Nazareth",
-  "aliases": ["Jesus", "Jesus Christ", "Christ"],
-  "roles": ["teacher", "prophet", "messiah"],
-  "tags": ["jesus", "apocalyptic", "resurrection"],
+  "aliases": [
+    "Jesus",
+    "Jesus Christ",
+    "Christ",
+    "Son of Man",
+    "Son of God"
+  ],
+  "roles": [
+    "teacher",
+    "prophet",
+    "messiah",
+    "healer",
+    "exorcist",
+    "rabbi",
+    "suffering servant",
+    "son of man",
+    "son of god",
+    "itinerant preacher"
+  ],
+  "tags": [
+    "jesus",
+    "apocalyptic",
+    "resurrection",
+    "galilean",
+    "crucifixion",
+    "parables",
+    "kingdom of god",
+    "discipleship"
+  ],
+  "relationships": {
+    "family": [
+      {
+        "name": "Mary",
+        "relationship": "mother",
+        "notes": "Primary familial bond; depicted as faithful witness from birth narratives through the cross.",
+        "sources": ["Mark", "Matthew", "Luke", "John"],
+        "references": ["Mark 3:31-35", "Matthew 1-2", "Luke 1-2", "John 19:25-27"]
+      },
+      {
+        "name": "Joseph",
+        "relationship": "legal father",
+        "notes": "Davidic descendant who protects the family in infancy narratives and models obedience.",
+        "sources": ["Matthew", "Luke"],
+        "references": ["Matthew 1:18-25", "Matthew 2:13-23", "Luke 2:1-52"]
+      },
+      {
+        "name": "James and siblings",
+        "relationship": "brothers",
+        "notes": "Skeptical during ministry yet key leaders in Jerusalem after the resurrection.",
+        "sources": ["Mark", "John", "Acts", "Paul"],
+        "references": ["Mark 6:3", "John 7:5", "Acts 15:13-21", "1 Corinthians 15:7"]
+      }
+    ],
+    "mentors": [
+      {
+        "name": "John the Baptist",
+        "relationship": "prophetic forerunner and baptizer",
+        "notes": "Commissioned Jesus into public ministry and framed his message in apocalyptic repentance.",
+        "sources": ["Mark", "Matthew", "Luke", "John"],
+        "references": ["Mark 1:2-11", "Matthew 3:1-17", "Luke 3:1-22", "John 1:19-34"]
+      }
+    ],
+    "close_disciples": [
+      {
+        "name": "Peter",
+        "relationship": "inner circle disciple",
+        "notes": "Confesses Jesus as messiah yet misunderstands suffering path; leader in early church.",
+        "sources": ["Mark", "Matthew", "Luke", "John", "Acts"],
+        "references": ["Mark 8:27-33", "Matthew 16:13-20", "Luke 5:1-11", "John 21:15-19", "Acts 2-5"]
+      },
+      {
+        "name": "James (son of Zebedee)",
+        "relationship": "inner circle disciple",
+        "notes": "Witness to key revelations and martyr referenced in Acts.",
+        "sources": ["Mark", "Matthew", "Luke", "Acts"],
+        "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "Acts 12:1-2"]
+      },
+      {
+        "name": "John (son of Zebedee)",
+        "relationship": "inner circle disciple",
+        "notes": "Traditionally associated with the beloved disciple and Johannine witness.",
+        "sources": ["Mark", "Matthew", "Luke", "John", "Revelation"],
+        "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "John 13:23", "Revelation 1:1-9"]
+      },
+      {
+        "name": "Mary Magdalene",
+        "relationship": "disciple and resurrection witness",
+        "notes": "Supports Jesus's ministry materially and becomes first witness in multiple gospels.",
+        "sources": ["Mark", "Matthew", "Luke", "John"],
+        "references": ["Mark 15:40-41", "Matthew 27:55-28:10", "Luke 8:1-3", "John 20:1-18"]
+      }
+    ],
+    "opponents": [
+      {
+        "name": "Pharisees and scribes",
+        "relationship": "religious critics",
+        "notes": "Debate purity, Sabbath, and authority claims; conflicts showcase interpretations of Torah.",
+        "sources": ["Mark", "Matthew", "Luke", "John"],
+        "references": ["Mark 2:1-3:6", "Matthew 23", "Luke 11:37-54", "John 7:45-52"]
+      },
+      {
+        "name": "Roman prefects and client rulers",
+        "relationship": "imperial authorities",
+        "notes": "Pontius Pilate and Herod Antipas interrogate and ultimately execute Jesus under treason charges.",
+        "sources": ["Mark", "Matthew", "Luke", "John", "Acts"],
+        "references": ["Mark 15:1-15", "Matthew 27:11-26", "Luke 23:6-25", "John 18:28-19:22", "Acts 4:26-28"]
+      }
+    ]
+  },
   "source_profiles": [
     {
       "source_id": "mark",
       "traits": {
-        "birth_narrative": "none",
-        "christology": "veiled suffering messiah; divine son revealed at baptism and cross",
-        "resurrection": "empty tomb with angelic message; earliest manuscripts end without appearances"
+        "mission_focus": "Announces the in-breaking kingdom of God with urgency and secrecy, calling disciples to follow on the way of the cross.",
+        "miracles": "Frequent healings and exorcisms that authenticate authority yet are meant to remain veiled (e.g., Gerasene demoniac, Jairus's daughter).",
+        "conflicts": "Clashes with religious leaders over Sabbath, purity, and temple commerce culminating in plots to kill him.",
+        "death_resurrection": "Portrayed as the suffering Son of Man whose crucifixion reveals divine sonship and whose empty tomb prompts fearful proclamation.",
+        "eschatology": "Apocalyptic discourse warns of tribulation, vigilance, and the Son of Man's imminent return."
       },
-      "references": [
-        "Mark 1:9-11",
-        "Mark 8:27-30",
-        "Mark 15:33-39",
-        "Mark 16:1-8"
-      ]
+      "references": ["Mark 1:14-15", "Mark 2:1-3:6", "Mark 5:1-43", "Mark 8:27-9:1", "Mark 13", "Mark 15:33-39", "Mark 16:1-8"]
     },
     {
       "source_id": "matthew",
       "traits": {
-        "birth_narrative": "birth in Bethlehem, visit of magi, Herod's persecution and flight to Egypt",
-        "christology": "Davidic messiah and Emmanuel fulfilling Scripture",
-        "resurrection": "empty tomb with angel and commissioned appearances in Galilee"
+        "mission_focus": "Depicts Jesus as the Davidic and Mosaic teacher who fulfills Scripture while forming a Torah-observant kingdom community.",
+        "miracles": "Signs underscore authority over nature, illness, and demonic forces while linking to fulfillment motifs.",
+        "conflicts": "Extended woes against Pharisees and disputes over halakha highlight Jesus as definitive interpreter of the Law.",
+        "death_resurrection": "Narrates cosmic portents at crucifixion and authoritative commissioning of disciples after resurrection appearances in Galilee.",
+        "eschatology": "Parables and the Olivet Discourse stress readiness for judgment, inclusive mission to nations, and the Son of Man's glorious arrival."
       },
-      "references": [
-        "Matthew 1-2",
-        "Matthew 5-7",
-        "Matthew 28:1-20"
-      ]
+      "references": ["Matthew 1-2", "Matthew 5-7", "Matthew 8-9", "Matthew 23", "Matthew 24-25", "Matthew 28:1-20"]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "mission_focus": "Frames Jesus as Spirit-anointed liberator prioritizing the poor, women, and Gentiles while journeying toward Jerusalem.",
+        "miracles": "Emphasizes healings and restorations that manifest Jubilee reversal, such as raising the widow's son and cleansing lepers.",
+        "conflicts": "Prophetic laments over Jerusalem and table disputes reveal tension with elites resistant to God's visitation.",
+        "death_resurrection": "Highlights Jesus's innocence, forgiveness from the cross, and appearances that ground witness and table fellowship.",
+        "eschatology": "Balances imminence with patience, urging watchfulness amid persecution and hope for redemption."
+      },
+      "references": ["Luke 1-4", "Luke 7:11-17", "Luke 9:51-62", "Luke 11:37-54", "Luke 13:34-35", "Luke 21", "Luke 22-24"]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "mission_focus": "Portrays Jesus as the incarnate Logos revealing the Father through signs that evoke belief and abiding life.",
+        "miracles": "Select 'signs' such as Cana, healing the blind, and raising Lazarus unveil glory and provoke decision.",
+        "conflicts": "Dialogues with Judean leaders center on identity, testimony, and divine origin, escalating toward arrest.",
+        "death_resurrection": "Cross is enthronement where the Lamb completes mission; resurrection appearances recommission disciples with Spirit.",
+        "eschatology": "Presents realized eternal life now while promising future resurrection and Spirit-paraclete guidance."
+      },
+      "references": ["John 1:1-18", "John 2:1-11", "John 5", "John 8", "John 11", "John 13-17", "John 18-21"]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "mission_focus": "Risen Jesus inaugurates worldwide witness from Jerusalem to Rome, directing apostles through Spirit guidance.",
+        "miracles": "Post-resurrection appearances and ascension, along with signs through apostles, validate his ongoing authority.",
+        "conflicts": "Opposition from Sanhedrin and Herodian rulers is framed as resistance to the enthroned Messiah.",
+        "death_resurrection": "Proclaimed boldly in apostolic speeches as God's vindication that enthrones Jesus as Lord and Christ.",
+        "eschatology": "Ascension promises future return, motivating communal perseverance amid mission expansion."
+      },
+      "references": ["Acts 1:1-11", "Acts 2:22-36", "Acts 3:11-26", "Acts 4:23-31", "Acts 5:27-32", "Acts 10:34-43"]
+    },
+    {
+      "source_id": "revelation",
+      "traits": {
+        "mission_focus": "Visionary Christ walks among churches, calls for overcoming, and directs prophetic witness against imperial idolatry.",
+        "miracles": "Depicted as Lamb who opens seals, shepherds nations, and enacts cosmic judgments.",
+        "conflicts": "Faces the dragon, beastly powers, and false prophets, urging saints to resist assimilation.",
+        "death_resurrection": "Slain-yet-standing Lamb's sacrifice ransoms multitudes and grounds final victory.",
+        "eschatology": "Returns as warrior-king, ushers final judgment, and renews creation with New Jerusalem."
+      },
+      "references": ["Revelation 1:12-20", "Revelation 5", "Revelation 12", "Revelation 19", "Revelation 21-22"]
     },
     {
       "source_id": "paul_undisputed",
       "traits": {
-        "birth_narrative": "not described",
-        "christology": "crucified and risen Lord; sometimes preexistent and cosmic",
-        "resurrection": "appearances to witnesses including Paul; foundation of salvation"
+        "mission_focus": "Proclaims crucified and risen Lord to Jew and Gentile alike, forming Spirit-led communities through apostolic correspondence.",
+        "miracles": "References signs and wonders accompanying mission though secondary to the preached cross.",
+        "conflicts": "Debates over Torah observance, table-fellowship, and apostolic legitimacy highlight cross-shaped leadership.",
+        "death_resurrection": "Centers gospel on atoning death and resurrection appearances that ground justification and hope.",
+        "eschatology": "Anticipates imminent parousia while teaching resurrection bodies and transformative hope."
       },
-      "references": [
-        "1 Corinthians 1:18-25",
-        "1 Corinthians 15:3-8",
-        "Philippians 2:5-11"
-      ]
+      "references": ["1 Corinthians 1:18-25", "1 Corinthians 2:1-5", "Romans 15:18-19", "Galatians 2:11-21", "1 Corinthians 15:3-28", "1 Thessalonians 4:13-18"]
+    },
+    {
+      "source_id": "hebrews",
+      "traits": {
+        "mission_focus": "Presents Jesus as exalted Son and heavenly high priest mediating a better covenant through obedient suffering.",
+        "miracles": "Emphasis on completed sacrificial work and testimonies confirmed by signs received from witnesses.",
+        "conflicts": "Warns against apostasy by contrasting Jesus's priesthood with Levitical system and unbelief of wilderness generation.",
+        "death_resurrection": "Highlights perfection through suffering, once-for-all sacrifice, and enthronement at God's right hand.",
+        "eschatology": "Encourages persevering pilgrimage toward the unshakable kingdom and heavenly city."
+      },
+      "references": ["Hebrews 1:1-4", "Hebrews 2:3-4", "Hebrews 3:1-19", "Hebrews 4:14-16", "Hebrews 7-10", "Hebrews 12:1-29"]
     }
   ]
 }
