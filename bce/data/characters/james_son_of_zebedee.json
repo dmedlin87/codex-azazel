@@ -9,6 +9,54 @@
     "disciple",
     "apostle"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "inner_circle_disciple",
+      "sources": ["mark", "matthew", "luke"],
+      "references": [
+        "Mark 1:19-20",
+        "Mark 5:37",
+        "Mark 9:2",
+        "Mark 14:33",
+        "Matthew 17:1",
+        "Luke 8:51"
+      ],
+      "notes": "Leaves the family fishing business at Jesus’s call and accompanies him at key healings, the transfiguration, and Gethsemane."
+    },
+    {
+      "character_id": "john",
+      "type": "brother_and_ministry_partner",
+      "sources": ["mark", "matthew", "luke"],
+      "references": [
+        "Mark 1:19-20",
+        "Mark 10:35-41",
+        "Luke 9:54",
+        "Matthew 20:20-24"
+      ],
+      "notes": "Paired with his brother John in call narratives, ambition for seats of honor, and the 'sons of thunder' episode in Samaritan territory."
+    },
+    {
+      "character_id": "peter",
+      "type": "inner_circle_colleague",
+      "sources": ["mark", "luke"],
+      "references": [
+        "Mark 5:37",
+        "Mark 9:2",
+        "Luke 8:51"
+      ],
+      "notes": "Frequently grouped with Peter (and John) at pivotal miracles and revelations, reflecting a core leadership trio."
+    },
+    {
+      "character_id": "herod_agrippa_i",
+      "type": "martyrdom_at_hands_of",
+      "sources": ["acts"],
+      "references": [
+        "Acts 12:1-2"
+      ],
+      "notes": "Executed by Herod Agrippa I with the sword, becoming the first of the Twelve to be martyred."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",

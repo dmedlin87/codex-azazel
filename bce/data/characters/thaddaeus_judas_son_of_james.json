@@ -9,6 +9,29 @@
     "disciple",
     "apostle"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "commissioned_disciple_and_dialogue_partner",
+      "sources": ["matthew", "mark", "luke", "john"],
+      "references": [
+        "Matthew 10:3",
+        "Mark 3:18",
+        "Luke 6:16",
+        "John 14:22-24"
+      ],
+      "notes": "Receives Jesus’s commissioning among the Twelve and later questions him during the farewell discourse, prompting teaching on love and divine self-disclosure."
+    },
+    {
+      "character_id": "judas",
+      "type": "namesake_contrasted_with_betrayer",
+      "sources": ["luke"],
+      "references": [
+        "Luke 6:16"
+      ],
+      "notes": "Luke explicitly distinguishes Judas son of James from Judas Iscariot who became a traitor, preserving his identity within the apostolic circle."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics_acts",
