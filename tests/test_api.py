@@ -97,3 +97,21 @@ def test_build_graph_snapshot_via_api() -> None:
     assert isinstance(snapshot, GraphSnapshot)
     assert snapshot.nodes
     assert snapshot.edges
+
+
+def test_bible_helpers_via_api() -> None:
+    translations = api.list_bible_translations()
+
+    assert "web" in translations
+    assert "asvs" in translations
+
+    text = api.get_verse_text("Genesis", 1, 1)
+
+    assert "In the beginning" in text
+
+    parallel = api.get_parallel_verse_text("Genesis", 1, 1, ["web", "asvs"])
+
+    assert set(parallel.keys()) == {"web", "asvs"}
+    for code, verse in parallel.items():
+        assert isinstance(verse, str)
+        assert verse

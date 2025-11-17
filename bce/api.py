@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from . import dossiers, queries, contradictions, search, export, export_graph
+from . import dossiers, queries, contradictions, search, export, export_graph, bibles
 
 
 # Core data access
@@ -177,3 +177,29 @@ def build_graph_snapshot() -> export_graph.GraphSnapshot:
     """
 
     return export_graph.build_graph_snapshot()
+
+
+# Bible text helpers
+
+
+def list_bible_translations() -> List[str]:
+    """List available Bible translations (by code)."""
+
+    return bibles.list_translations()
+
+
+def get_verse_text(book: str, chapter: int, verse: int, translation: str = "web") -> str:
+    """Return Bible verse text for the given reference and translation."""
+
+    return bibles.get_verse(book, chapter, verse, translation=translation)
+
+
+def get_parallel_verse_text(
+    book: str,
+    chapter: int,
+    verse: int,
+    translations: List[str],
+) -> Dict[str, str]:
+    """Return a mapping of translation code to verse text for the given reference."""
+
+    return bibles.get_parallel(book, chapter, verse, translations=translations)
