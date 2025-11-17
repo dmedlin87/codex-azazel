@@ -44,6 +44,7 @@ def search_all(query: str, scope: Optional[List[str]] = None) -> List[Dict[str, 
         - "references": character references by source
         - "accounts": event account summaries and references
         - "notes": event account notes
+        - "tags": character and event tags
 
         When omitted or empty, all supported scopes are searched.
 
@@ -60,12 +61,12 @@ def search_all(query: str, scope: Optional[List[str]] = None) -> List[Dict[str, 
         "source_id", "field", "value", and "reference".
     """
 
-    scopes = set(scope or ["traits", "references", "accounts", "notes"])
+    scopes = set(scope or ["traits", "references", "accounts", "notes", "tags"])
     needle = query.lower()
     results: List[Dict[str, Any]] = []
 
     # Character search
-    if scopes & {"traits", "references"}:
+    if scopes & {"traits", "references", "tags"}:
         for entry in _iter_characters():
             char = entry["character"]
             for profile in getattr(char, "source_profiles", []):
@@ -101,8 +102,20 @@ def search_all(query: str, scope: Optional[List[str]] = None) -> List[Dict[str, 
                                 }
                             )
 
+                if "tags" in scopes:
+                    for tag in getattr(char, "tags", []):
+                        if _contains(tag, needle):
+                            results.append(
+                                {
+                                    "type": "character",
+                                    "id": char.id,
+                                    "match_in": "tags",
+                                    "tag": tag,
+                                }
+                            )
+
     # Event search
-    if scopes & {"accounts", "notes"}:
+    if scopes & {"accounts", "notes", "tags"}:
         for entry in _iter_events():
             event = entry["event"]
             for account in getattr(event, "accounts", []):

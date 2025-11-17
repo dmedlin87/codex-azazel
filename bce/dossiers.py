@@ -84,6 +84,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_TRAIT_COMPARISON: trait_comparison,
         DOSSIER_KEY_TRAIT_CONFLICTS: trait_conflicts,
         DOSSIER_KEY_RELATIONSHIPS: list(character.relationships),
+        DOSSIER_KEY_PARALLELS: [],
     }
     return dossier
 

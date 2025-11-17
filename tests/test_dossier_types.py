@@ -41,6 +41,7 @@ def test_character_dossier_typed_dict_keys() -> None:
         DOSSIER_KEY_TRAIT_COMPARISON,
         DOSSIER_KEY_TRAIT_CONFLICTS,
         DOSSIER_KEY_RELATIONSHIPS,
+        DOSSIER_KEY_PARALLELS,
     }
 
     assert set(CharacterDossier.__annotations__.keys()) == expected_keys

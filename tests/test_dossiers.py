@@ -278,3 +278,34 @@ class TestDossierEdgeCases:
 
         assert parsed_char["id"] == "jesus"
         assert parsed_event["id"] == "crucifixion"
+
+    def test_character_dossier_includes_relationships(self) -> None:
+        dossier = dossiers.build_character_dossier("paul")
+
+        assert "relationships" in dossier
+        relationships = dossier["relationships"]
+        assert isinstance(relationships, list)
+        assert relationships, "expected at least one relationship for paul"
+
+        first = relationships[0]
+        assert isinstance(first, dict)
+        assert "character_id" in first
+        assert "type" in first
+        assert "sources" in first
+        assert "references" in first
+        assert "notes" in first
+
+    def test_event_dossier_includes_parallels(self) -> None:
+        dossier = dossiers.build_event_dossier("empty_tomb")
+
+        assert "parallels" in dossier
+        parallels = dossier["parallels"]
+        assert isinstance(parallels, list)
+        assert parallels, "expected at least one parallels entry for empty_tomb"
+
+        entry = parallels[0]
+        assert isinstance(entry, dict)
+        assert "sources" in entry
+        assert "references" in entry
+        assert isinstance(entry["sources"], list)
+        assert isinstance(entry["references"], dict)

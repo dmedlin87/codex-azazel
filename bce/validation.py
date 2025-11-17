@@ -227,3 +227,85 @@ def validate_all() -> List[str]:
     _validate_characters(errors)
     _validate_events(errors)
     return errors
+
+
+def validate_cross_references() -> List[str]:
+    """Validate cross-references between events and characters.
+
+    This helper focuses on relationships *between* core objects rather than on
+    individual field formats. It checks that:
+
+    - All event participants reference existing characters.
+    - Each event account's source_id is present in at least one participant's
+      source profile.
+
+    Returns a list of human-readable error messages; an empty list means that
+    all cross-reference checks passed.
+    """
+
+    errors: List[str] = []
+
+    # Build a mapping of character_id -> set(source_ids) from source_profiles.
+    character_ids = queries.list_character_ids()
+    character_id_set = set(character_ids)
+    character_sources: Dict[str, set[str]] = {}
+
+    for char_id in character_ids:
+        try:
+            character = queries.get_character(char_id)
+        except Exception as exc:  # type: ignore[redundant-except]
+            errors.append(
+                f"Failed to load character '{char_id}' for cross-reference validation: {exc}"
+            )
+            continue
+
+        sources_for_char: set[str] = set()
+        for profile in getattr(character, "source_profiles", []):
+            source_id = getattr(profile, "source_id", None)
+            if isinstance(source_id, str) and source_id:
+                sources_for_char.add(source_id)
+        character_sources[char_id] = sources_for_char
+
+    # Now walk events and check participants + their account sources.
+    for event_id in queries.list_event_ids():
+        try:
+            event = queries.get_event(event_id)
+        except Exception as exc:  # type: ignore[redundant-except]
+            errors.append(
+                f"Failed to load event '{event_id}' for cross-reference validation: {exc}"
+            )
+            continue
+
+        participants = [p for p in getattr(event, "participants", []) if isinstance(p, str)]
+
+        # 1) Ensure all event participants exist as characters.
+        for participant_id in participants:
+            if participant_id not in character_id_set:
+                errors.append(
+                    f"Event '{event_id}' participant '{participant_id}' not found in characters"
+                )
+
+        # 2) Ensure event accounts' sources are present in at least one
+        #    participant's source profiles. If there are no participants, skip
+        #    this check for the event.
+        if not participants:
+            continue
+
+        for account in getattr(event, "accounts", []):
+            source_id = getattr(account, "source_id", None)
+            if not isinstance(source_id, str) or not source_id:
+                continue
+
+            has_matching_profile = any(
+                source_id in character_sources.get(participant_id, set())
+                for participant_id in participants
+                if participant_id in character_sources
+            )
+
+            if not has_matching_profile:
+                errors.append(
+                    f"Event '{event_id}' account from '{source_id}' has no participant "
+                    "with matching source profile"
+                )
+
+    return errors

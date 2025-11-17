@@ -2,6 +2,7 @@
   "id": "empty_tomb",
   "label": "Discovery of the Empty Tomb",
   "participants": ["jesus", "mary_magdalene", "peter"],
+  "tags": ["resurrection", "empty_tomb"],
   "accounts": [
     {
       "source_id": "mark",
@@ -26,6 +27,18 @@
       "reference": "John 20:1-18",
       "summary": "Mary Magdalene goes alone to the tomb while it is still dark and finds the stone removed. She runs to tell Peter and the beloved disciple, who race to the tomb and find only linen wrappings. After they leave, Mary sees two angels in white inside the tomb, then turns and sees Jesus (whom she mistakes for the gardener) before he reveals himself.",
       "notes": "Mary Magdalene goes alone initially. Two angels appear only after Peter and beloved disciple leave. Jesus appears to Mary alone at the tomb. Completely different sequence and participants than the synoptic accounts."
+    }
+  ],
+  "parallels": [
+    {
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": {
+        "mark": "Mark 16:1-8",
+        "matthew": "Matthew 28:1-10",
+        "luke": "Luke 24:1-12",
+        "john": "John 20:1-18"
+      },
+      "relationship": "gospel_parallel"
     }
   ]
 }

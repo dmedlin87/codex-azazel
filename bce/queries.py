@@ -48,3 +48,35 @@ def list_event_ids() -> List[str]:
 
 def list_events_for_character(char_id: str) -> List[Event]:
     return [event for event in storage.iter_events() if char_id in event.participants]
+
+
+def list_characters_with_tag(tag: str) -> List[str]:
+    """Return IDs of characters whose tags include the given tag.
+
+    Matching is case-insensitive; tags are compared by normalized lowercase
+    value.
+    """
+
+    needle = tag.lower()
+    result: List[str] = []
+    for char in storage.iter_characters():
+        tags = getattr(char, "tags", [])
+        if any(isinstance(t, str) and t.lower() == needle for t in tags):
+            result.append(char.id)
+    return sorted(result)
+
+
+def list_events_with_tag(tag: str) -> List[str]:
+    """Return IDs of events whose tags include the given tag.
+
+    Matching is case-insensitive; tags are compared by normalized lowercase
+    value.
+    """
+
+    needle = tag.lower()
+    result: List[str] = []
+    for event in storage.iter_events():
+        tags = getattr(event, "tags", [])
+        if any(isinstance(t, str) and t.lower() == needle for t in tags):
+            result.append(event.id)
+    return sorted(result)

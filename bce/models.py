@@ -34,6 +34,7 @@ class Character:
     roles: List[str] = field(default_factory=list)
     source_profiles: List[SourceProfile] = field(default_factory=list)
     relationships: List[dict] = field(default_factory=list)
+    tags: List[str] = field(default_factory=list)
 
     def get_source_profile(self, source_id: str) -> Optional[SourceProfile]:
         for profile in self.source_profiles:
@@ -77,3 +78,4 @@ class Event:
     participants: List[str] = field(default_factory=list)
     accounts: List[EventAccount] = field(default_factory=list)
     parallels: List[dict] = field(default_factory=list)
+    tags: List[str] = field(default_factory=list)

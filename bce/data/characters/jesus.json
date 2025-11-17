@@ -3,6 +3,7 @@
   "canonical_name": "Jesus of Nazareth",
   "aliases": ["Jesus", "Jesus Christ", "Christ"],
   "roles": ["teacher", "prophet", "messiah"],
+  "tags": ["jesus", "apocalyptic", "resurrection"],
   "source_profiles": [
     {
       "source_id": "mark",

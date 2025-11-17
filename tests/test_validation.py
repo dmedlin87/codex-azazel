@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from bce.validation import validate_all, validate_reference
+from bce.validation import validate_all, validate_cross_references, validate_reference
 
 
 def test_validate_all_has_no_errors() -> None:
@@ -99,3 +99,105 @@ def test_validate_reference_invalid_chapter_reports_error() -> None:
     assert result["book"] == "Mark"
     assert isinstance(result["error"], str)
     assert "only" in result["error"].lower()
+
+
+def test_validate_cross_references_reports_missing_participant_and_source(monkeypatch) -> None:
+    """validate_cross_references should report missing participants and source mismatches."""
+
+    character_ids = ["char_a"]
+    event_ids = ["event_1"]
+
+    character_map = {
+        "char_a": SimpleNamespace(
+            id="char_a",
+            source_profiles=[SimpleNamespace(source_id="source1")],
+        ),
+    }
+
+    event_map = {
+        "event_1": SimpleNamespace(
+            id="event_1",
+            participants=["char_a", "missing_char"],
+            accounts=[
+                SimpleNamespace(source_id="source1"),
+                SimpleNamespace(source_id="source2"),
+            ],
+        ),
+    }
+
+    def fake_list_character_ids() -> list[str]:
+        return list(character_ids)
+
+    def fake_get_character(char_id: str) -> SimpleNamespace:
+        return character_map[char_id]
+
+    def fake_list_event_ids() -> list[str]:
+        return list(event_ids)
+
+    def fake_get_event(event_id: str) -> SimpleNamespace:
+        return event_map[event_id]
+
+    monkeypatch.setattr("bce.validation.queries.list_character_ids", fake_list_character_ids)
+    monkeypatch.setattr("bce.validation.queries.get_character", fake_get_character)
+    monkeypatch.setattr("bce.validation.queries.list_event_ids", fake_list_event_ids)
+    monkeypatch.setattr("bce.validation.queries.get_event", fake_get_event)
+
+    errors = validate_cross_references()
+
+    assert (
+        "Event 'event_1' participant 'missing_char' not found in characters" in errors
+    )
+    assert (
+        "Event 'event_1' account from 'source2' has no participant with matching source profile"
+        in errors
+    )
+
+
+def test_validate_cross_references_no_errors_when_consistent(monkeypatch) -> None:
+    """Consistent participants and sources should yield no cross-reference errors."""
+
+    character_ids = ["char_a", "char_b"]
+    event_ids = ["event_ok"]
+
+    character_map = {
+        "char_a": SimpleNamespace(
+            id="char_a",
+            source_profiles=[SimpleNamespace(source_id="source1")],
+        ),
+        "char_b": SimpleNamespace(
+            id="char_b",
+            source_profiles=[SimpleNamespace(source_id="source2")],
+        ),
+    }
+
+    event_map = {
+        "event_ok": SimpleNamespace(
+            id="event_ok",
+            participants=["char_a", "char_b"],
+            accounts=[
+                SimpleNamespace(source_id="source1"),
+                SimpleNamespace(source_id="source2"),
+            ],
+        ),
+    }
+
+    def fake_list_character_ids() -> list[str]:
+        return list(character_ids)
+
+    def fake_get_character(char_id: str) -> SimpleNamespace:
+        return character_map[char_id]
+
+    def fake_list_event_ids() -> list[str]:
+        return list(event_ids)
+
+    def fake_get_event(event_id: str) -> SimpleNamespace:
+        return event_map[event_id]
+
+    monkeypatch.setattr("bce.validation.queries.list_character_ids", fake_list_character_ids)
+    monkeypatch.setattr("bce.validation.queries.get_character", fake_get_character)
+    monkeypatch.setattr("bce.validation.queries.list_event_ids", fake_list_event_ids)
+    monkeypatch.setattr("bce.validation.queries.get_event", fake_get_event)
+
+    errors = validate_cross_references()
+
+    assert errors == []

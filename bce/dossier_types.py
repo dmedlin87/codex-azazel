@@ -15,6 +15,7 @@ class CharacterDossier(TypedDict):
     trait_comparison: Dict[str, Dict[str, str]]
     trait_conflicts: Dict[str, Dict[str, str]]
     relationships: List[dict]
+    parallels: List[dict]
 
 
 class EventAccountDossier(TypedDict):
