@@ -8,6 +8,22 @@
     "follower",
     "witness"
   ],
+  "relationships": [
+    {
+      "character_id": "mary_magdalene",
+      "type": "tomb_companion",
+      "sources": ["mark"],
+      "references": ["Mark 15:40-41", "Mark 16:1-4"],
+      "notes": "Travels with Mary Magdalene and Mary mother of James to anoint Jesus, forming the core eyewitness team that traces events from Golgotha to the empty tomb."
+    },
+    {
+      "character_id": "peter",
+      "type": "entrusted_with_message_for",
+      "sources": ["mark"],
+      "references": ["Mark 16:6-8"],
+      "notes": "Hears the young man’s charge to tell the disciples and Peter that Jesus goes ahead to Galilee, showing her role in carrying the resurrection announcement even amid fear."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",

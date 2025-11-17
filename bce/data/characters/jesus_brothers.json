@@ -7,6 +7,22 @@
   "roles": [
     "family_group"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "sibling_relationship",
+      "sources": ["mark_matthew", "john"],
+      "references": ["Mark 3:31-35", "Mark 6:3", "John 7:3-5"],
+      "notes": "Their attempts to intervene in his ministry and later skepticism frame Jesus’s teaching about true kinship and highlight the tension within his own household."
+    },
+    {
+      "character_id": "mary_mother_of_jesus",
+      "type": "shared_family_mission",
+      "sources": ["mark_matthew", "acts"],
+      "references": ["Mark 3:31", "Acts 1:14"],
+      "notes": "Appear alongside Mary both when seeking Jesus during his ministry and later when praying with her after the ascension, charting their movement from misunderstanding to solidarity."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark_matthew",

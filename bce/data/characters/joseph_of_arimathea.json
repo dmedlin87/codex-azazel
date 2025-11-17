@@ -8,6 +8,22 @@
     "council_member",
     "follower"
   ],
+  "relationships": [
+    {
+      "character_id": "pilate",
+      "type": "petitions_for_body",
+      "sources": ["mark", "matthew", "luke"],
+      "references": ["Mark 15:43-45", "Matthew 27:57-58", "Luke 23:52-53"],
+      "notes": "Approaches Pilate to secure Jesus’s corpse, ensuring a lawful transfer from Roman custody so burial preparations can begin before Sabbath."
+    },
+    {
+      "character_id": "nicodemus",
+      "type": "burial_collaborator",
+      "sources": ["john"],
+      "references": ["John 19:38-42"],
+      "notes": "Works with Nicodemus, who brings spices, to wrap the body with linen and place it in the garden tomb, combining resources for an honorable burial."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",

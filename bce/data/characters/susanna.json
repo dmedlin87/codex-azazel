@@ -7,6 +7,22 @@
   "roles": [
     "follower"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "resource_patronage",
+      "sources": ["luke"],
+      "references": ["Luke 8:1-3"],
+      "notes": "Contributes material support to Jesus and the Twelve after being healed, demonstrating how benefaction from women disciples sustains the mission."
+    },
+    {
+      "character_id": "joanna",
+      "type": "co-benefactor",
+      "sources": ["luke"],
+      "references": ["Luke 8:1-3"],
+      "notes": "Named with Joanna and others, reflecting a network of women patrons who travel with Jesus and coordinate provision for his party."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "luke",
