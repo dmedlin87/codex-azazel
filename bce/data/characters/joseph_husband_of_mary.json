@@ -8,10 +8,26 @@
   "Joseph the carpenter"
   ],
   "roles": [
-  "family_member",
-  "legal_father",
-  "guardian",
-  "artisan"
+    "family_member",
+    "legal_father",
+    "guardian",
+    "artisan"
+  ],
+  "relationships": [
+    {
+      "character_id": "mary_mother_of_jesus",
+      "type": "spousal_guardianship",
+      "sources": ["matthew", "luke"],
+      "references": ["Matthew 1:18-24", "Luke 2:4-5"],
+      "notes": "Serves as Mary’s husband who protects her honor and accompanies her to Bethlehem, modeling obedient partnership in the infancy narratives."
+    },
+    {
+      "character_id": "jesus",
+      "type": "legal_fatherhood",
+      "sources": ["matthew", "luke"],
+      "references": ["Matthew 1:24-25", "Luke 2:48-51"],
+      "notes": "Names and raises Jesus as his own son, guiding the family through exile and pilgrimage so the messianic child can grow within a devout household."
+    }
   ],
   "source_profiles": [
   {

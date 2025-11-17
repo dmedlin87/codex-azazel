@@ -7,6 +7,22 @@
   "roles": [
     "follower"
   ],
+  "relationships": [
+    {
+      "character_id": "lazarus_of_bethany",
+      "type": "sibling_bond",
+      "sources": ["john"],
+      "references": ["John 11:2", "John 11:28-44", "John 12:1-3"],
+      "notes": "Her brother’s death and restoration anchor her posture of mourning and prophetic anointing, showing how family grief becomes the stage for her testimony to Jesus’s glory."
+    },
+    {
+      "character_id": "martha_of_bethany",
+      "type": "sibling_tension_and_balance",
+      "sources": ["luke", "john"],
+      "references": ["Luke 10:38-42", "John 11:20-32"],
+      "notes": "The sisters’ contrasting responses—Mary at Jesus’s feet listening while Martha serves, both lamenting Lazarus—highlight complementary modes of discipleship within the same household."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "luke",

@@ -9,6 +9,22 @@
     "group",
     "followers"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "witnesses_death_burial_resurrection",
+      "sources": ["synoptics"],
+      "references": ["Mark 15:40-47", "Matthew 27:55-61", "Luke 23:49-24:1"],
+      "notes": "Remain with Jesus through crucifixion, burial, and dawn visit to the tomb, providing continuous eyewitness testimony that ties the passion narrative together."
+    },
+    {
+      "character_id": "peter",
+      "type": "delivers_resurrection_testimony_to",
+      "sources": ["synoptics"],
+      "references": ["Mark 16:6-8", "Luke 24:9-11"],
+      "notes": "Commissioned to inform Peter and the Eleven about the risen Jesus, even when their report is initially dismissed as idle talk."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics",

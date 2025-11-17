@@ -7,6 +7,22 @@
   "roles": [
     "family_group"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "sibling_relationship",
+      "sources": ["mark_matthew"],
+      "references": ["Mark 6:3", "Matthew 13:55-56"],
+      "notes": "Their presence in Nazareth anchors perceptions of Jesus’s ordinary family roots, which fuel hometown skepticism about his authority."
+    },
+    {
+      "character_id": "mary_mother_of_jesus",
+      "type": "household_connection",
+      "sources": ["mark_matthew"],
+      "references": ["Mark 6:3", "Matthew 13:55"],
+      "notes": "Mentioned alongside Mary and the brothers, indicating that the wider sibling group belongs to the same Nazareth household that shaped Jesus’s upbringing."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark_matthew",
