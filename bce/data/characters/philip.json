@@ -8,6 +8,36 @@
     "disciple",
     "apostle"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "teacher_and_tester",
+      "sources": ["john"],
+      "references": ["John 1:43-46", "John 6:5-7", "John 14:8-9"],
+      "notes": "Personally called by Jesus, tested over feeding the crowd, and instructed that seeing Jesus is seeing the Father."
+    },
+    {
+      "character_id": "andrew",
+      "type": "co_mediator_for_seekers",
+      "sources": ["john"],
+      "references": ["John 12:20-22"],
+      "notes": "Partners with Andrew to escort Greeks who desire an audience with Jesus, illustrating collaborative mission."
+    },
+    {
+      "character_id": "nathanael",
+      "type": "evangelistic_partner",
+      "sources": ["john"],
+      "references": ["John 1:45-49"],
+      "notes": "Finds Nathanael and testifies about Jesus as the fulfillment of Moses and the prophets, prompting Nathanael’s confession."
+    },
+    {
+      "character_id": "bartholomew",
+      "type": "paired_apostle",
+      "sources": ["mark_matthew_luke"],
+      "references": ["Mark 3:18", "Matthew 10:3", "Luke 6:14"],
+      "notes": "Consistently listed alongside Bartholomew in the Synoptic apostolic rosters, indicating their partnership within the Jerusalem leadership circle."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark_matthew_luke",

@@ -13,6 +13,36 @@
   "leader",
   "pillar"
   ],
+  "relationships": [
+  {
+  "character_id": "jesus",
+  "type": "teacher_and_commissioner",
+  "sources": ["luke", "matthew", "john"],
+  "references": ["Luke 5:1-11", "Matthew 16:16-19", "John 21:15-19"],
+  "notes": "Called from fishing to follow Jesus, confesses him as Messiah, receives the keys imagery, and is recommissioned by the risen Jesus to feed the flock."
+  },
+  {
+  "character_id": "andrew",
+  "type": "brother_and_fishing_partner",
+  "sources": ["mark", "john"],
+  "references": ["Mark 1:16-18", "John 1:40-42"],
+  "notes": "Shares a household and fishing trade with Andrew, who introduces him to Jesus and partners in the initial call narrative."
+  },
+  {
+  "character_id": "james_the_just",
+  "type": "jerusalem_leadership_partner",
+  "sources": ["acts", "paul_undisputed"],
+  "references": ["Acts 12:17", "Acts 15:6-11", "Galatians 2:9"],
+  "notes": "Reports miraculous deliverance to James and collaborates with him at the Jerusalem council where they discern Gentile inclusion."
+  },
+  {
+  "character_id": "paul",
+  "type": "colleague_with_conflict",
+  "sources": ["paul_undisputed"],
+  "references": ["Galatians 2:7-14"],
+  "notes": "Recognizes Paul’s Gentile mission yet is confronted by him in Antioch for withdrawing from table fellowship with Gentile believers."
+  }
+  ],
   "source_profiles": [
   {
   "source_id": "mark",

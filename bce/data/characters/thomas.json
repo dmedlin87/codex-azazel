@@ -12,6 +12,29 @@
   "apostle",
   "member_of_the_twelve"
   ],
+  "relationships": [
+  {
+  "character_id": "jesus",
+  "type": "teacher_who_addresses_doubt",
+  "sources": ["john"],
+  "references": ["John 11:16", "John 14:5", "John 20:24-29"],
+  "notes": "Voices loyalty about dying with Jesus, questions his destination, and finally confesses him as Lord and God when the risen Jesus meets his conditions for belief."
+  },
+  {
+  "character_id": "peter",
+  "type": "jerusalem_colleague",
+  "sources": ["acts"],
+  "references": ["Acts 1:13-14"],
+  "notes": "Remains in prayer with Peter and the other apostles in Jerusalem after the ascension, sharing responsibility for the community’s leadership."
+  },
+  {
+  "character_id": "disciples",
+  "type": "skeptical_peer_relationship",
+  "sources": ["john"],
+  "references": ["John 20:24-25"],
+  "notes": "Refuses to accept the testimony of the other disciples about Jesus’s resurrection until he personally inspects the wounds, highlighting internal tension within the group."
+  }
+  ],
   "source_profiles": [
   {
   "source_id": "mark",
