@@ -22,6 +22,13 @@ def test_list_ids_via_api() -> None:
     assert "crucifixion" in event_ids
 
 
+def test_list_aliases_via_api() -> None:
+    """list_characters/list_events should mirror list_*_ids helpers."""
+
+    assert api.list_characters() == api.list_character_ids()
+    assert api.list_events() == api.list_event_ids()
+
+
 def test_build_dossiers_via_api() -> None:
     char_dossier = api.build_character_dossier("jesus")
     event_dossier = api.build_event_dossier("crucifixion")
@@ -62,6 +69,19 @@ def test_export_all_characters_and_events_via_api() -> None:
     assert isinstance(events, list)
     assert any(c["id"] == "jesus" for c in chars)
     assert any(e["id"] == "crucifixion" for e in events)
+
+    # Ensure these are dossier-shaped dicts, not raw dataclasses.
+    sample_char = next(c for c in chars if c["id"] == "jesus")
+    assert isinstance(sample_char, dict)
+    assert "canonical_name" in sample_char
+    assert "traits_by_source" in sample_char
+    assert "trait_conflicts" in sample_char
+
+    sample_event = next(e for e in events if e["id"] == "crucifixion")
+    assert isinstance(sample_event, dict)
+    assert "label" in sample_event
+    assert "accounts" in sample_event
+    assert "account_conflicts" in sample_event
 
 
 def test_export_citations_via_api() -> None:

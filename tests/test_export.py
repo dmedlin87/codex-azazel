@@ -330,6 +330,27 @@ def test_dossier_with_trait_conflicts() -> None:
     assert "conflict_trait:" in md
 
 
+def test_dossier_with_trait_conflict_summaries() -> None:
+    """trait_conflict_summaries should be rendered when present."""
+
+    dossier = {
+        "id": "test",
+        "canonical_name": "Test",
+        "trait_conflict_summaries": {
+            "trait1": {
+                "severity": "medium",
+                "category": "narrative",
+                "distinct_values": ["a", "b"],
+            }
+        },
+    }
+    md = dossier_to_markdown(dossier)
+
+    assert "## Trait conflict summaries" in md
+    assert "trait1:" in md
+    assert "severity=medium" in md
+
+
 def test_dossier_with_account_conflicts() -> None:
     """account_conflicts should be rendered as nested mapping."""
     dossier = {
@@ -343,6 +364,27 @@ def test_dossier_with_account_conflicts() -> None:
 
     assert "## Account conflicts" in md
     assert "field1:" in md
+
+
+def test_dossier_with_account_conflict_summaries() -> None:
+    """account_conflict_summaries should be rendered when present."""
+
+    dossier = {
+        "id": "test",
+        "label": "Test Event",
+        "account_conflict_summaries": {
+            "summary": {
+                "severity": "high",
+                "category": "narrative",
+                "distinct_values": ["x", "y", "z"],
+            }
+        },
+    }
+    md = dossier_to_markdown(dossier)
+
+    assert "## Account conflict summaries" in md
+    assert "summary:" in md
+    assert "severity=high" in md
 
 
 def test_dossiers_to_markdown_with_empty_dict() -> None:
