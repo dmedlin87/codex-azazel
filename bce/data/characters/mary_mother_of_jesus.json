@@ -9,6 +9,29 @@
   "roles": [
     "family_member"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "mother_of",
+      "sources": ["matthew", "luke", "john"],
+      "references": ["Matthew 1:18-25", "Luke 1:31-35", "Luke 2:1-52", "John 2:1-12", "John 19:25-27"],
+      "notes": "Identified as the virgin mother who bears, raises, and accompanies Jesus from birth narratives through his public ministry, with Luke and John highlighting her faithful presence and symbolic maternity at the cross."
+    },
+    {
+      "character_id": "joseph_husband_of_mary",
+      "type": "betrothed_spouse_and_co-guardian",
+      "sources": ["matthew", "luke"],
+      "references": ["Matthew 1:18-25", "Matthew 2:13-23", "Luke 2:4-7", "Luke 2:16"],
+      "notes": "Mary is betrothed to and later lives with Joseph of Nazareth, sharing in the protective decisions around Jesus’s birth, flight to Egypt, and return to Galilee."
+    },
+    {
+      "character_id": "elizabeth",
+      "type": "kinswoman_and_mutual_supporter",
+      "sources": ["luke"],
+      "references": ["Luke 1:36", "Luke 1:39-56"],
+      "notes": "Luke presents Mary visiting her relative Elizabeth, who confirms the angelic message and receives Mary’s extended stay as the two women encourage one another in their divinely given pregnancies."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "matthew",
