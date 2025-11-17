@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from bce.validation import validate_all
+from bce.validation import validate_all, validate_reference
 
 
 def test_validate_all_has_no_errors() -> None:
@@ -77,3 +77,25 @@ def test_validate_all_reports_character_and_event_errors(monkeypatch) -> None:
 
     for message in expected_messages:
         assert message in errors, f"Missing expected error: {message}"
+
+
+def test_validate_reference_valid_mark_range() -> None:
+    result = validate_reference("Mark 16:1-8")
+
+    assert result["valid"] is True
+    assert result["book"] == "Mark"
+    assert result["chapter"] == 16
+    assert result["verse_start"] == 1
+    assert result["verse_end"] == 8
+    assert result["canonical"] is True
+    assert result["error"] is None
+
+
+def test_validate_reference_invalid_chapter_reports_error() -> None:
+    result = validate_reference("Mark 99:1")
+
+    assert result["valid"] is False
+    assert result["canonical"] is True
+    assert result["book"] == "Mark"
+    assert isinstance(result["error"], str)
+    assert "only" in result["error"].lower()

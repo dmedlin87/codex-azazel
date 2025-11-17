@@ -15,5 +15,17 @@
       "summary": "Jesus is crucified as 'King of the Jews,' cares for his mother, and dies after declaring 'It is finished.'",
       "notes": "Portrays Jesus as sovereign and in control; details of piercing and fulfillment of Scripture."
     }
+  ],
+  "parallels": [
+    {
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": {
+        "mark": "Mark 15:22-37",
+        "matthew": "Matthew 27:33-50",
+        "luke": "Luke 23:33-46",
+        "john": "John 19:17-30"
+      },
+      "relationship": "gospel_parallel"
+    }
   ]
 }

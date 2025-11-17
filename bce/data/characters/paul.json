@@ -12,6 +12,22 @@
     "letter_writer",
     "theologian"
   ],
+  "relationships": [
+    {
+      "character_id": "barnabas",
+      "type": "companion",
+      "sources": ["acts"],
+      "references": ["Acts 11:25-30", "Acts 13-14"],
+      "notes": "Early missionary partner; later separated over John Mark."
+    },
+    {
+      "character_id": "peter",
+      "type": "colleague_with_conflict",
+      "sources": ["paul_undisputed"],
+      "references": ["Galatians 2:11-14"],
+      "notes": "Confrontation at Antioch over table fellowship."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "paul_undisputed",

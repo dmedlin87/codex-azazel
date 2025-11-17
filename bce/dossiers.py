@@ -24,6 +24,8 @@ from .dossier_types import (
     DOSSIER_KEY_TRAIT_COMPARISON,
     DOSSIER_KEY_TRAIT_CONFLICTS,
     DOSSIER_KEY_TRAITS_BY_SOURCE,
+    DOSSIER_KEY_RELATIONSHIPS,
+    DOSSIER_KEY_PARALLELS,
 )
 
 
@@ -81,6 +83,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_REFERENCES_BY_SOURCE: references_by_source,
         DOSSIER_KEY_TRAIT_COMPARISON: trait_comparison,
         DOSSIER_KEY_TRAIT_CONFLICTS: trait_conflicts,
+        DOSSIER_KEY_RELATIONSHIPS: list(character.relationships),
     }
     return dossier
 
@@ -110,6 +113,7 @@ def build_event_dossier(event_id: str) -> EventDossier:
         DOSSIER_KEY_PARTICIPANTS: list(event.participants),
         DOSSIER_KEY_ACCOUNTS: accounts,
         DOSSIER_KEY_ACCOUNT_CONFLICTS: account_conflicts,
+        DOSSIER_KEY_PARALLELS: list(event.parallels),
     }
     return dossier
 

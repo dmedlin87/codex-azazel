@@ -22,6 +22,8 @@ from bce.dossier_types import (
     DOSSIER_KEY_TRAIT_COMPARISON,
     DOSSIER_KEY_TRAIT_CONFLICTS,
     DOSSIER_KEY_TRAITS_BY_SOURCE,
+    DOSSIER_KEY_RELATIONSHIPS,
+    DOSSIER_KEY_PARALLELS,
 )
 
 
@@ -38,6 +40,7 @@ def test_character_dossier_typed_dict_keys() -> None:
         DOSSIER_KEY_REFERENCES_BY_SOURCE,
         DOSSIER_KEY_TRAIT_COMPARISON,
         DOSSIER_KEY_TRAIT_CONFLICTS,
+        DOSSIER_KEY_RELATIONSHIPS,
     }
 
     assert set(CharacterDossier.__annotations__.keys()) == expected_keys
@@ -51,6 +54,7 @@ def test_event_dossier_typed_dict_keys() -> None:
         DOSSIER_KEY_PARTICIPANTS,
         DOSSIER_KEY_ACCOUNTS,
         DOSSIER_KEY_ACCOUNT_CONFLICTS,
+        DOSSIER_KEY_PARALLELS,
     }
 
     assert set(EventDossier.__annotations__.keys()) == expected_keys
@@ -86,6 +90,8 @@ def test_dossier_key_constant_values() -> None:
     assert DOSSIER_KEY_ACCOUNT_CONFLICTS == "account_conflicts"
     assert DOSSIER_KEY_SUMMARY == "summary"
     assert DOSSIER_KEY_DESCRIPTION == "description"
+    assert DOSSIER_KEY_RELATIONSHIPS == "relationships"
+    assert DOSSIER_KEY_PARALLELS == "parallels"
 
 
 def test_character_dossier_container_types() -> None:
@@ -114,6 +120,10 @@ def test_character_dossier_container_types() -> None:
     assert references_key is str
     assert get_origin(references_value) is list
     assert get_args(references_value) == (str,)
+    relationships = hints["relationships"]
+    assert get_origin(relationships) is list
+    rel_args = get_args(relationships)
+    assert rel_args == (dict,)
     comparison = hints["trait_comparison"]
     assert get_origin(comparison) is dict
     comparison_key, comparison_value = get_args(comparison)
@@ -126,6 +136,10 @@ def test_character_dossier_container_types() -> None:
     assert conflicts_key is str
     assert get_origin(conflicts_value) is dict
     assert get_args(conflicts_value) == (str, str)
+    parallels = hints["parallels"]
+    assert get_origin(parallels) is list
+    parallels_args = get_args(parallels)
+    assert parallels_args == (dict,)
 
 
 def test_event_dossier_accounts_reference_event_account_dossier() -> None:

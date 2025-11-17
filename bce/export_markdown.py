@@ -21,6 +21,8 @@ from .dossier_types import (
     DOSSIER_KEY_ACCOUNT_CONFLICTS,
     DOSSIER_KEY_SUMMARY,
     DOSSIER_KEY_DESCRIPTION,
+    DOSSIER_KEY_RELATIONSHIPS,
+    DOSSIER_KEY_PARALLELS,
 )
 
 
@@ -153,6 +155,33 @@ def dossier_to_markdown(dossier: dict) -> str:
     if isinstance(participants, list):
         _add_list_section("Participants", participants)
 
+    relationships = dossier.get(DOSSIER_KEY_RELATIONSHIPS)
+    if isinstance(relationships, list) and relationships:
+        lines.append("")
+        lines.append("## Relationships")
+        for rel in relationships:
+            if not isinstance(rel, dict):
+                continue
+            character_id = rel.get("character_id")
+            rel_type = rel.get("type")
+            sources_val = rel.get("sources")
+            references_val = rel.get("references")
+            notes = rel.get("notes")
+            bullet_parts = []
+            if rel_type:
+                bullet_parts.append(f"type={rel_type}")
+            if character_id:
+                bullet_parts.append(f"character_id={character_id}")
+            if isinstance(sources_val, list) and sources_val:
+                bullet_parts.append("sources=" + ", ".join(str(s) for s in sources_val))
+            if isinstance(references_val, list) and references_val:
+                bullet_parts.append("references=" + ", ".join(str(r) for r in references_val))
+            if isinstance(notes, str) and notes.strip():
+                bullet_parts.append(f"notes={notes.strip()}")
+            if not bullet_parts:
+                bullet_parts = [f"{k}={v}" for k, v in rel.items()]
+            lines.append(f"- {'; '.join(bullet_parts)}")
+
     accounts = dossier.get(DOSSIER_KEY_ACCOUNTS)
     if isinstance(accounts, list) and accounts:
         lines.append("")
@@ -180,6 +209,28 @@ def dossier_to_markdown(dossier: dict) -> str:
     account_conflicts = dossier.get(DOSSIER_KEY_ACCOUNT_CONFLICTS)
     if isinstance(account_conflicts, dict):
         _add_nested_mapping_section("Account conflicts", account_conflicts)
+
+    parallels = dossier.get(DOSSIER_KEY_PARALLELS)
+    if isinstance(parallels, list) and parallels:
+        lines.append("")
+        lines.append("## Parallels")
+        for para in parallels:
+            if not isinstance(para, dict):
+                continue
+            sources_val = para.get("sources")
+            references_val = para.get("references")
+            relationship = para.get("relationship")
+            bullet_parts = []
+            if isinstance(sources_val, list) and sources_val:
+                bullet_parts.append("sources=" + ", ".join(str(s) for s in sources_val))
+            if isinstance(references_val, dict) and references_val:
+                ref_parts = [f"{k}:{v}" for k, v in references_val.items()]
+                bullet_parts.append("references=" + "; ".join(ref_parts))
+            if relationship:
+                bullet_parts.append(f"relationship={relationship}")
+            if not bullet_parts:
+                bullet_parts = [f"{k}={v}" for k, v in para.items()]
+            lines.append(f"- {'; '.join(bullet_parts)}")
 
     return "\n".join(lines)
 
