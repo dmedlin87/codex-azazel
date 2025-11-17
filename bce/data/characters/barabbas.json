@@ -7,6 +7,29 @@
   "roles": [
     "prisoner"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "released_instead_of",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 15:6-15", "Matthew 27:15-26", "Luke 23:18-25", "John 18:39-40"],
+      "notes": "Is freed at the Passover amnesty while Jesus is condemned, making him the human beneficiary of the crowd’s rejection of the true king."
+    },
+    {
+      "character_id": "pilate",
+      "type": "prisoner_released_by_roman_governor",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 15:6-15", "Matthew 27:17-24", "Luke 23:18-25", "John 18:39-40"],
+      "notes": "Pilate presents Barabbas as an option to satisfy the crowd, ultimately releasing him under political pressure."
+    },
+    {
+      "character_id": "sanhedrin",
+      "type": "crowd_influenced_by_religious_leaders",
+      "sources": ["mark", "matthew"],
+      "references": ["Mark 15:11", "Matthew 27:20"],
+      "notes": "The chief priests and elders persuade the crowd to call for Barabbas’s release and for Jesus’s destruction."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",

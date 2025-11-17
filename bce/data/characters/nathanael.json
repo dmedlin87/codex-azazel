@@ -7,6 +7,29 @@
   "roles": [
     "disciple"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "early_confessor_of_son_of_god",
+      "sources": ["john"],
+      "references": ["John 1:47-51"],
+      "notes": "Meets Jesus after the fig tree revelation, receives the promise of seeing heaven opened, and acclaims him as the Son of God and King of Israel."
+    },
+    {
+      "character_id": "philip",
+      "type": "friend_who_introduces_him_to_jesus",
+      "sources": ["john"],
+      "references": ["John 1:43-46"],
+      "notes": "Philip seeks out Nathanael, answers his Nazareth skepticism, and escorts him to meet Jesus."
+    },
+    {
+      "character_id": "peter",
+      "type": "post_resurrection_fishing_companion",
+      "sources": ["john"],
+      "references": ["John 21:2-3"],
+      "notes": "Appears alongside Simon Peter and other disciples at the Sea of Tiberias where they fish together before the risen Jesus appears."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "john",

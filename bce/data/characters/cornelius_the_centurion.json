@@ -8,6 +8,22 @@
     "centurion",
     "convert"
   ],
+  "relationships": [
+    {
+      "character_id": "peter",
+      "type": "host_and_conversion_catalyst",
+      "sources": ["acts"],
+      "references": ["Acts 10:3-48", "Acts 11:4-18"],
+      "notes": "Sends messengers to summon Peter after the angelic vision, welcomes him into the Caesarean household, and hears the apostolic proclamation that leads to Spirit-gifted baptism."
+    },
+    {
+      "character_id": "jesus",
+      "type": "believes_in_proclaimed_messiah",
+      "sources": ["acts"],
+      "references": ["Acts 10:36-43"],
+      "notes": "Responds to Peter’s witness about Jesus’s death and resurrection, embracing him as Lord of all and receiving forgiveness in his name."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",

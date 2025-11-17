@@ -8,6 +8,29 @@
     "teacher",
     "pharisee"
   ],
+  "relationships": [
+    {
+      "character_id": "sanhedrin",
+      "type": "respected_council_member",
+      "sources": ["acts"],
+      "references": ["Acts 5:34-40"],
+      "notes": "Serves within the council, commands the apostles be removed, and offers measured advice about how the Sanhedrin should respond to the new movement."
+    },
+    {
+      "character_id": "peter",
+      "type": "intervenes_on_behalf_of_apostles",
+      "sources": ["acts"],
+      "references": ["Acts 5:27-40"],
+      "notes": "By counseling restraint, he indirectly protects Peter and his companions from immediate execution, resulting instead in flogging and release."
+    },
+    {
+      "character_id": "paul",
+      "type": "teacher_of_saul",
+      "sources": ["acts"],
+      "references": ["Acts 22:3"],
+      "notes": "Paul recounts that he was educated at the feet of Gamaliel in Jerusalem, highlighting Gamaliel’s stature in Pharisaic scholarship."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",

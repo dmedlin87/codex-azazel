@@ -8,6 +8,22 @@
   "roles": [
     "encounter"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "dialogue_partner_and_witness",
+      "sources": ["john"],
+      "references": ["John 4:7-26"],
+      "notes": "Engages Jesus in theological conversation about living water and worship, recognizes him as a prophet and potential Messiah, and receives direct self-revelation."
+    },
+    {
+      "character_id": "samaritan_villagers_of_sychar",
+      "type": "evangelist_to_home_town",
+      "sources": ["john"],
+      "references": ["John 4:28-30", "John 4:39-42"],
+      "notes": "Returns to Sychar to summon her neighbors, whose belief grows first through her testimony and then through their own encounter with Jesus."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "john",
