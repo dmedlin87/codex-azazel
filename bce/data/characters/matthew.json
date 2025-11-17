@@ -2,73 +2,96 @@
   "id": "matthew",
   "canonical_name": "Matthew",
   "aliases": [
-  "Matthew",
-  "Matthew the tax collector",
-  "Matthew the apostle",
-  "Levi",
-  "Levi son of Alphaeus"
+    "Matthew",
+    "Matthew the tax collector",
+    "Matthew the apostle",
+    "Levi",
+    "Levi son of Alphaeus"
   ],
   "roles": [
-  "disciple",
-  "apostle",
-  "tax_collector",
-  "evangelist"
+    "disciple",
+    "apostle",
+    "tax_collector",
+    "evangelist"
+  ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "disciple_of",
+      "sources": ["mark", "matthew", "luke"],
+      "references": ["Mark 2:13-17", "Matthew 9:9-13", "Luke 5:27-32"],
+      "notes": "Called directly by Jesus from the tax booth and immediately follows him, entering Jesus’s itinerant circle."
+    },
+    {
+      "character_id": "pharisees",
+      "type": "conflict_over_association",
+      "sources": ["mark", "matthew", "luke"],
+      "references": ["Mark 2:16", "Matthew 9:11", "Luke 5:30"],
+      "notes": "Matthew’s banquet with tax collectors and sinners sparks Pharisaic criticism about Jesus’s table fellowship."
+    },
+    {
+      "character_id": "peter",
+      "type": "colleague_apostle",
+      "sources": ["matthew", "acts"],
+      "references": ["Matthew 10:2-4", "Acts 1:13-14"],
+      "notes": "Serves alongside Peter within the Twelve and the Jerusalem prayer gathering prior to Matthias’s selection."
+    }
   ],
   "source_profiles": [
-  {
-  "source_id": "mark",
-  "traits": {
-  "identity_and_names": "Mark names a tax collector whom Jesus calls 'Levi son of Alphaeus' and separately lists 'Matthew' among the Twelve, without explicitly identifying them as the same person.",
-  "call_and_vocation": "Levi is called from his tax booth by Jesus, leaves his station, and later hosts a meal with many tax collectors and sinners, provoking controversy about Jesus’s associations.",
-  "conflict_over_table_fellowship": "The meal at Levi’s house becomes the setting for a dispute with scribes of the Pharisees over Jesus eating with tax collectors and sinners.",
-  "role_among_twelve": "Matthew appears only in the formal list of the Twelve and receives no individual speech or action distinct from the group.",
-  "narrative_profile": "Mark emphasizes the call of the tax collector Levi and the controversy it sparks, while leaving Matthew as a largely anonymous name in the apostolic roster."
-  },
-  "references": [
-  "Mark 2:13-17",
-  "Mark 3:16-19"
+    {
+      "source_id": "mark",
+      "traits": {
+        "identity_and_names": "Mark names a tax collector whom Jesus calls 'Levi son of Alphaeus' and separately lists 'Matthew' among the Twelve without explicitly identifying them as the same person.",
+        "call_and_vocation": "Levi is called from his tax booth by Jesus, leaves his station, and later hosts a meal with many tax collectors and sinners, provoking controversy about Jesus’s associations.",
+        "conflict_over_table_fellowship": "The meal at Levi’s house becomes the setting for a dispute with scribes of the Pharisees over Jesus eating with tax collectors and sinners.",
+        "role_among_twelve": "Matthew appears only in the formal list of the Twelve and receives no individual speech or action distinct from the group.",
+        "narrative_profile": "Mark emphasizes the call of the tax collector Levi and the controversy it sparks while leaving Matthew as a largely anonymous name in the apostolic roster."
+      },
+      "references": [
+        "Mark 2:13-17",
+        "Mark 3:16-19"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "identity_and_background": "Introduced as 'a man called Matthew' sitting at the tax booth, marking him as a toll collector in service of the fiscal system.",
+        "call_and_conversion": "Jesus calls Matthew to follow him; Matthew immediately rises and follows, with the narrative stressing the abruptness and decisiveness of the response.",
+        "meal_with_sinners": "Matthew hosts a meal where many tax collectors and sinners dine with Jesus and his disciples, provoking Pharisaic criticism and prompting Jesus’s saying about mercy over sacrifice.",
+        "role_among_twelve": "In the list of the Twelve, he is explicitly labeled 'Matthew the tax collector', linking the called tax collector directly with the apostolic office.",
+        "evangelist_tradition": "The gospel text itself remains anonymous but later titles and Christian tradition associate this apostle-tax collector with the authorship of the gospel bearing his name."
+      },
+      "references": [
+        "Matthew 9:9-13",
+        "Matthew 10:2-4"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "identity_and_names": "Luke calls the tax collector in the call story 'Levi', not Matthew, while listing 'Matthew' separately among the Twelve, preserving a distinction between the names at the narrative level.",
+        "call_and_vocation": "Levi leaves everything, rises, and follows Jesus after being called from his tax booth, emphasizing total renunciation of his former occupation.",
+        "banquet_and_conflict": "Levi holds a great banquet for Jesus with a large crowd of tax collectors, leading to disputes with Pharisees and scribes over eating with such people.",
+        "role_among_twelve": "Matthew is named in the apostolic list but receives no individual scenes or descriptors beyond inclusion among the appointed apostles.",
+        "narrative_profile": "Luke foregrounds the exemplary repentance of Levi and the ensuing controversy, while Matthew as an apostle remains a largely unelaborated figure."
+      },
+      "references": [
+        "Luke 5:27-32",
+        "Luke 6:13-16"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "role_in_early_community": "Named among the apostles who gather in the upper room in Jerusalem after Jesus’s ascension, continuing in prayer with the wider group of believers.",
+        "apostolic_status": "Counted as one of the core witnesses to Jesus’s ministry and resurrection, forming part of the foundational leadership before the choice of Matthias.",
+        "narrative_silence": "Acts provides no individual speeches, journeys, or episodes for Matthew, leaving his later activities entirely in the background of the emerging mission."
+      },
+      "references": [
+        "Acts 1:12-14",
+        "Acts 1:23-26"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "matthew",
-  "traits": {
-  "identity_and_background": "Introduced as 'a man called Matthew' sitting at the tax booth, marking him as a toll collector in service of the fiscal system.",
-  "call_and_conversion": "Jesus calls Matthew to follow him; Matthew immediately rises and follows, with the narrative stressing the abruptness and decisiveness of the response.",
-  "meal_with_sinners": "Matthew hosts a meal where many tax collectors and sinners dine with Jesus and his disciples, provoking Pharisaic criticism and prompting Jesus’s saying about mercy over sacrifice.",
-  "role_among_twelve": "In the list of the Twelve, he is explicitly labeled 'Matthew the tax collector', linking the called tax collector directly with the apostolic office.",
-  "evangelist_tradition": "The gospel text itself remains anonymous but later titles and Christian tradition associate this apostle-tax collector with the authorship of the gospel bearing his name."
-  },
-  "references": [
-  "Matthew 9:9-13",
-  "Matthew 10:2-4"
-  ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "identity_and_names": "Luke calls the tax collector in the call story 'Levi', not Matthew, while listing 'Matthew' separately among the Twelve, preserving a distinction between the names at the narrative level.",
-  "call_and_vocation": "Levi leaves everything, rises, and follows Jesus after being called from his tax booth, emphasizing total renunciation of his former occupation.",
-  "banquet_and_conflict": "Levi holds a great banquet for Jesus with a large crowd of tax collectors, leading to disputes with Pharisees and scribes over eating with such people.",
-  "role_among_twelve": "Matthew is named in the apostolic list but receives no individual scenes or descriptors beyond inclusion among the appointed apostles.",
-  "narrative_profile": "Luke foregrounds the exemplary repentance of Levi and the ensuing controversy, while Matthew as an apostle remains a largely unelaborated figure."
-  },
-  "references": [
-  "Luke 5:27-32",
-  "Luke 6:13-16"
-  ]
-  },
-  {
-  "source_id": "acts",
-  "traits": {
-  "role_in_early_community": "Named among the apostles who gather in the upper room in Jerusalem after Jesus’s ascension, continuing in prayer with the wider group of believers.",
-  "apostolic_status": "Counted as one of the core witnesses to Jesus’s ministry and resurrection, forming part of the foundational leadership before the choice of Matthias.",
-  "narrative_silence": "Acts provides no individual speeches, journeys, or episodes for Matthew, leaving his later activities entirely in the background of the emerging mission."
-  },
-  "references": [
-  "Acts 1:12-14",
-  "Acts 1:23-26"
-  ]
-  }
-  ]
-  }
+}
   
