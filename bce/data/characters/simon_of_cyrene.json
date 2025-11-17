@@ -7,6 +7,22 @@
   "roles": [
     "bystander"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "compelled_cross_bearer",
+      "sources": ["synoptics"],
+      "references": ["Mark 15:21", "Matthew 27:32", "Luke 23:26"],
+      "notes": "Forced to carry Jesus’s cross behind him on the way to Golgotha, physically sharing in the path to crucifixion."
+    },
+    {
+      "character_id": "pilate",
+      "type": "subject_to_roman_execution_detail",
+      "sources": ["synoptics"],
+      "references": ["Mark 15:15-21"],
+      "notes": "Is pressed into service by soldiers implementing Pilate’s sentence, illustrating how Roman authority could conscript passersby during crucifixions."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics",

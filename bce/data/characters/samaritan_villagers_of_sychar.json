@@ -1,0 +1,40 @@
+{
+  "id": "samaritan_villagers_of_sychar",
+  "canonical_name": "Samaritan villagers of Sychar",
+  "aliases": [
+    "Samaritans of Sychar",
+    "Sychar villagers"
+  ],
+  "roles": [
+    "community"
+  ],
+  "relationships": [
+    {
+      "character_id": "samaritan_woman_at_the_well",
+      "type": "believe_through_her_testimony",
+      "sources": ["john"],
+      "references": ["John 4:28-30", "John 4:39"],
+      "notes": "Respond to the woman’s report about Jesus, going out to see him because of what she said."
+    },
+    {
+      "character_id": "jesus",
+      "type": "hosts_for_two_day_ministry",
+      "sources": ["john"],
+      "references": ["John 4:40-42"],
+      "notes": "Urge Jesus to stay, hear his teaching over two days, and confess him as the Savior of the world based on their own experience."
+    }
+  ],
+  "source_profiles": [
+    {
+      "source_id": "john",
+      "traits": {
+        "initial_response": "Leave the town to meet Jesus after hearing the woman’s testimony about a man who told her everything she ever did.",
+        "growing_faith": "Move from belief because of her words to belief grounded in personal encounter, confessing Jesus as Savior of the world.",
+        "hospitality": "Invite Jesus to remain with them, resulting in a two-day stay that extends his ministry beyond Judea and Galilee."
+      },
+      "references": [
+        "John 4:28-42"
+      ]
+    }
+  ]
+}

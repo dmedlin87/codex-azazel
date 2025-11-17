@@ -8,6 +8,29 @@
     "prophet",
     "forerunner"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "forerunner_and_baptizer",
+      "sources": ["mark_matthew_luke", "john"],
+      "references": ["Mark 1:9-11", "John 1:29-34", "John 3:27-30"],
+      "notes": "Prepares the way for Jesus, baptizes him in the Jordan, testifies that he is the Lamb of God, and insists that he must decrease while Jesus increases."
+    },
+    {
+      "character_id": "herod_antipas",
+      "type": "rebukes_ruler_and_is_executed",
+      "sources": ["mark_matthew_luke"],
+      "references": ["Mark 6:17-29", "Luke 3:19-20"],
+      "notes": "Denounces Herod’s marriage to Herodias, leading to imprisonment at Machaerus and eventual beheading at Herod’s banquet."
+    },
+    {
+      "character_id": "andrew",
+      "type": "former_disciple_redirected_to_jesus",
+      "sources": ["john"],
+      "references": ["John 1:35-40"],
+      "notes": "Andrew is one of the Baptist’s disciples who follows Jesus after John identifies him as the Lamb of God."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark_matthew_luke",
