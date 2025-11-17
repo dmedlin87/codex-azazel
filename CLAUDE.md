@@ -35,25 +35,28 @@ codex-azazel/
 │   ├── queries.py               # High-level query API with LRU caching
 │   ├── contradictions.py        # Comparison and conflict detection
 │   ├── dossiers.py              # Build structured dossiers for export
+│   ├── dossier_types.py         # TypedDict definitions for dossiers
 │   ├── export.py                # Main export module (imports json/markdown)
 │   ├── export_json.py           # JSON export helpers
 │   ├── export_markdown.py       # Markdown export helpers
 │   ├── validation.py            # Data validation helpers
 │   ├── cli.py                   # Main CLI entry point
 │   └── data/
-│       ├── characters/          # Character JSON files
+│       ├── characters/          # Character JSON files (61 total)
 │       │   ├── jesus.json
 │       │   ├── paul.json
 │       │   ├── peter.json
 │       │   ├── judas.json
-│       │   └── pilate.json
-│       └── events/              # Event JSON files
+│       │   ├── pilate.json
+│       │   └── ... (56 more characters)
+│       └── events/              # Event JSON files (10 total)
 │           ├── crucifixion.json
 │           ├── damascus_road.json
 │           ├── betrayal.json
 │           ├── resurrection_appearance.json
-│           └── trial_before_pilate.json
-├── tests/                       # Test suite
+│           ├── trial_before_pilate.json
+│           └── ... (5 more events)
+├── tests/                       # Test suite (15 files, 258 test functions)
 │   ├── test_basic.py
 │   ├── test_cli.py
 │   ├── test_contradictions.py
@@ -61,13 +64,15 @@ codex-azazel/
 │   ├── test_dossier_markdown.py
 │   ├── test_export.py
 │   ├── test_storage.py
-│   └── test_validation.py
+│   ├── test_validation.py
+│   └── ... (7 more test files)
 ├── examples/                    # Usage examples
 │   ├── basic_usage.py
 │   └── print_dossier_markdown.py
 ├── docs/
 │   └── ROADMAP.md              # Project roadmap and phases
 ├── dev_cli.py                  # Development CLI (legacy, being phased out)
+├── start.ps1                   # PowerShell startup script (Windows)
 ├── pyproject.toml              # Package configuration
 ├── README.md                   # User-facing documentation
 └── .gitignore                  # Git ignore rules
@@ -174,6 +179,8 @@ Key functions:
   - Returns only traits that differ between sources
 - `find_events_with_conflicting_accounts(event_id: str) -> Dict[str, Dict[str, str]]`
   - Returns event fields that differ between accounts
+- `_find_conflicts(comparison: Dict[str, Dict[str, str]]) -> Dict[str, Dict[str, str]]`
+  - Internal helper function extracted in commit 60c183b to improve code reusability
 
 ### `bce/dossiers.py`
 
@@ -186,6 +193,18 @@ Key functions:
   - Includes identity, participants, accounts, conflicts
 - `build_all_character_dossiers() -> list[dict]`
 - `build_all_event_dossiers() -> list[dict]`
+
+### `bce/dossier_types.py`
+
+Type definitions for dossier structures to improve type safety and code clarity.
+
+Key types:
+- `CharacterDossier` - TypedDict defining the structure of character dossiers
+- `EventDossier` - TypedDict defining the structure of event dossiers
+- `EventAccountDossier` - TypedDict for event account entries
+- Constants: `DOSSIER_KEY_*` - String constants for dossier dictionary keys to avoid string literals throughout the codebase
+
+This module was added in commit 60c183b (Nov 16, 2025) to extract type definitions and improve maintainability.
 
 ### `bce/export_json.py`
 
@@ -352,6 +371,22 @@ python dev_cli.py export-chars exports/all_characters.json
 # Export all events to JSON
 python dev_cli.py export-events exports/all_events.json
 ```
+
+### PowerShell Startup Script (`start.ps1`)
+
+Convenience script for Windows PowerShell users:
+
+```powershell
+# View character dossier
+./start.ps1 character jesus --format markdown
+
+# View event dossier
+./start.ps1 event crucifixion --format markdown
+```
+
+The script automatically:
+- Activates the virtual environment (`.venv`) if present
+- Forwards all arguments to `python -m bce.cli`
 
 ## Key Patterns for AI Assistants
 
@@ -533,6 +568,8 @@ python dev_cli.py export-events exports/events.json
 
 ---
 
-**Last Updated**: 2025-11-16
+**Last Updated**: 2025-11-17
 **Current Phase**: Phase 0 (Complete)
 **Python Version**: 3.11+
+**Data Files**: 61 characters, 10 events
+**Test Coverage**: 258 test functions across 15 test files
