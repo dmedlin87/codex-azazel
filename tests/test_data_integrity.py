@@ -26,6 +26,28 @@ class TestCharacterEventCrossReferences:
                     f"character '{participant_id}'"
                 )
 
+
+class TestJsonValidity:
+    """Ensure all JSON data files are loadable via storage.
+
+    These tests provide an early, focused signal if any underlying
+    data file becomes malformed or unreadable.
+    """
+
+    def test_all_character_files_are_loadable(self):
+        """Every character JSON file should load without error."""
+        for char_id in storage.list_character_ids():
+            # Will raise if JSON is malformed or encoding is invalid
+            char = storage.load_character(char_id)
+            assert char.id == char_id
+
+    def test_all_event_files_are_loadable(self):
+        """Every event JSON file should load without error."""
+        for event_id in storage.list_event_ids():
+            # Will raise if JSON is malformed or encoding is invalid
+            event = storage.load_event(event_id)
+            assert event.id == event_id
+
     def test_character_ids_match_filenames(self):
         """Character IDs should match their JSON filenames."""
         for char_id in queries.list_character_ids():

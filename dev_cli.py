@@ -4,7 +4,7 @@ import argparse
 import json
 from dataclasses import asdict
 
-from bce import queries
+from bce import queries, storage
 from bce import export as export_mod
 from bce import dossiers
 
@@ -47,6 +47,10 @@ def main(argv=None) -> int:
     )
     export_events.add_argument("output_path")
 
+    check_data = subparsers.add_parser(
+        "check-data", help="Validate that all data files are loadable",
+    )
+
     try:
         args = parser.parse_args(argv)
     except SystemExit as e:
@@ -78,6 +82,13 @@ def main(argv=None) -> int:
         elif args.command == "export-events":
             export_mod.export_all_events(args.output_path)
             print(f"Exported events to {args.output_path}")
+        elif args.command == "check-data":
+            # Reuse storage-level loading to verify JSON + encoding correctness.
+            for cid in storage.list_character_ids():
+                storage.load_character(cid)
+            for eid in storage.list_event_ids():
+                storage.load_event(eid)
+            print("All character and event data files loaded successfully.")
     except Exception as e:
         print(f"Error: {e}", file=__import__("sys").stderr)
         return 1
