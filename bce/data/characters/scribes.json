@@ -8,6 +8,43 @@
     "group",
     "religious_leaders"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "question_and_accuse",
+      "sources": ["synoptics"],
+      "references": ["Mark 2:6-7", "Mark 3:22", "Mark 14:1"],
+      "notes": "Scribes observe Jesus’s teaching and miracles, charge him with blasphemy and alliance with Beelzebul, and help plot his arrest, acting as legal opponents."
+    },
+    {
+      "character_id": "pharisees",
+      "type": "collaborators_with",
+      "sources": ["synoptics"],
+      "references": ["Mark 2:16", "Matthew 23:2"],
+      "notes": "Scribes often appear alongside Pharisees, sharing concerns about purity and authority, and together occupying Moses’s seat as recognized interpreters of the law."
+    },
+    {
+      "character_id": "sanhedrin",
+      "type": "members_of",
+      "sources": ["synoptics", "acts"],
+      "references": ["Mark 14:53", "Acts 4:5"],
+      "notes": "They sit with chief priests and elders in the council chambers that try Jesus and later the apostles, contributing legal expertise to deliberations."
+    },
+    {
+      "character_id": "peter",
+      "type": "interrogates",
+      "sources": ["acts"],
+      "references": ["Acts 4:5-7"],
+      "notes": "Scribes join the Jerusalem rulers in questioning Peter and John about the authority behind the healing at the Beautiful Gate, extending their scrutiny to apostolic witnesses."
+    },
+    {
+      "character_id": "pilate",
+      "type": "accuses_before",
+      "sources": ["synoptics"],
+      "references": ["Mark 15:1", "Mark 15:31"],
+      "notes": "Alongside the chief priests and elders, scribes participate in the delegation that hands Jesus to Pilate and later mock him at the cross, reinforcing Roman condemnation."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics",

@@ -8,6 +8,29 @@
     "client_king",
     "ruler"
   ],
+  "relationships": [
+    {
+      "character_id": "john_the_baptist",
+      "type": "persecutor_and_executioner_of",
+      "sources": ["mark", "matthew", "luke"],
+      "references": ["Mark 6:17-29", "Matthew 14:3-12", "Luke 3:19-20"],
+      "notes": "Herod Antipas imprisons John for condemning his marriage to Herodias and ultimately has him beheaded after the banquet oath, making him the ruler responsible for silencing the prophet."
+    },
+    {
+      "character_id": "jesus",
+      "type": "interrogator_and_mocking_ruler_of",
+      "sources": ["luke"],
+      "references": ["Luke 13:31-33", "Luke 23:6-12"],
+      "notes": "Luke depicts Antipas both as the threat from whom Jesus refuses to flee and as the tetrarch who questions Jesus during the passion, mocks him when no sign is performed, and sends him back to Pilate."
+    },
+    {
+      "character_id": "pilate",
+      "type": "political_peer_reconciled_with",
+      "sources": ["luke"],
+      "references": ["Luke 23:6-12"],
+      "notes": "Pilate refers Jesus to Antipas as the Galilean’s rightful tetrarch, and after sharing responsibility for the interrogation they become friends, highlighting cooperation among Roman-aligned rulers during Jesus’s trial."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",

@@ -8,6 +8,57 @@
     "council",
     "religious_leaders"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "convenes_trial_of",
+      "sources": ["synoptics"],
+      "references": ["Mark 14:53-65", "Luke 22:66-71"],
+      "notes": "The council assembles to interrogate Jesus about his identity, declares his testimony blasphemous, and determines to hand him over for execution."
+    },
+    {
+      "character_id": "pilate",
+      "type": "delivers_prisoner_to",
+      "sources": ["synoptics"],
+      "references": ["Mark 15:1", "Matthew 27:1-2"],
+      "notes": "After reaching their verdict, the council members bind Jesus and present him to the Roman governor Pilate, illustrating their dependence on Roman authority for capital sentences."
+    },
+    {
+      "character_id": "peter",
+      "type": "persecutes_and_commands_silence_of",
+      "sources": ["acts"],
+      "references": ["Acts 4:5-22", "Acts 5:27-40"],
+      "notes": "The Sanhedrin arrests Peter and other apostles, interrogates them about healing and preaching, and orders them not to speak in Jesus’s name, enforcing institutional opposition to the movement."
+    },
+    {
+      "character_id": "stephen",
+      "type": "tries_and_executes",
+      "sources": ["acts"],
+      "references": ["Acts 6:12-15", "Acts 7:1-60"],
+      "notes": "Stephen is seized and brought before the council, delivers a prophetic speech, and is condemned, showing the body’s willingness to authorize mob execution when provoked."
+    },
+    {
+      "character_id": "paul",
+      "type": "examines_and_divides_over",
+      "sources": ["acts"],
+      "references": ["Acts 22:30", "Acts 23:1-10"],
+      "notes": "Paul appears before the council, sparks conflict between Pharisees and Sadducees by affirming the resurrection, and exposes the council’s factionalism."
+    },
+    {
+      "character_id": "pharisees",
+      "type": "faction_within",
+      "sources": ["acts"],
+      "references": ["Acts 23:6-9"],
+      "notes": "Luke describes Pharisees as one component of the council whose belief in the resurrection occasionally moderates sentences against apostles."
+    },
+    {
+      "character_id": "sadducees",
+      "type": "faction_within",
+      "sources": ["acts"],
+      "references": ["Acts 5:17", "Acts 23:6-8"],
+      "notes": "Sadducean high priests dominate several hearings, opposing the apostles’ resurrection preaching and clashing with the Pharisaic minority."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics",

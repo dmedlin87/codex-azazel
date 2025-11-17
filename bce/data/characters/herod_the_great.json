@@ -8,6 +8,22 @@
     "client_king",
     "ruler"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "threatener_of",
+      "sources": ["matthew"],
+      "references": ["Matthew 2:1-18"],
+      "notes": "Herod seeks the newborn “king of the Jews,” attempts to learn his location from the magi, and orders the massacre of Bethlehem’s boys, making him the first royal antagonist to Jesus’s mission."
+    },
+    {
+      "character_id": "john_the_baptist",
+      "type": "chronological_context_for",
+      "sources": ["luke"],
+      "references": ["Luke 1:5"],
+      "notes": "Luke dates the conception of John the Baptist and the priestly ministry of Zechariah to the days of Herod, marking the high-priestly and royal setting from which the prophetic movement emerges."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "matthew",
