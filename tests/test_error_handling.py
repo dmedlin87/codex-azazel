@@ -84,7 +84,7 @@ class TestCharacterErrorMessages:
         storage.configure_data_root(custom_root)
 
         try:
-            with pytest.raises(TypeError) as exc_info:
+            with pytest.raises(ValueError) as exc_info:
                 storage.load_character("incomplete")
 
             error_message = str(exc_info.value)
@@ -162,7 +162,7 @@ class TestEventErrorMessages:
         storage.configure_data_root(custom_root)
 
         try:
-            with pytest.raises(TypeError) as exc_info:
+            with pytest.raises(ValueError) as exc_info:
                 storage.load_event("incomplete")
 
             error_message = str(exc_info.value)

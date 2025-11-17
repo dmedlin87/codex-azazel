@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import logging
 from typing import List
 
 from . import queries
+
+logger = logging.getLogger(__name__)
 
 
 def _validate_characters(errors: List[str]) -> None:
@@ -73,8 +76,16 @@ def validate_all() -> List[str]:
     Returns a list of human-readable error messages. An empty list means that
     all checks passed.
     """
-
+    logger.info("Starting validation of all characters and events")
     errors: List[str] = []
     _validate_characters(errors)
     _validate_events(errors)
+
+    if errors:
+        logger.warning(f"Validation completed with {len(errors)} error(s)")
+        for error in errors:
+            logger.error(f"Validation error: {error}")
+    else:
+        logger.info("Validation completed successfully with no errors")
+
     return errors

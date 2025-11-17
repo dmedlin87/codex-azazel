@@ -121,7 +121,7 @@ class TestStorageErrorHandling:
             storage.reset_data_root()
 
     def test_load_character_missing_required_fields(self, tmp_path):
-        """Loading character with missing required fields should raise TypeError."""
+        """Loading character with missing required fields should raise ValueError."""
         custom_root = tmp_path / "data"
         char_dir = custom_root / "characters"
         char_dir.mkdir(parents=True)
@@ -132,13 +132,13 @@ class TestStorageErrorHandling:
 
         storage.configure_data_root(custom_root)
         try:
-            with pytest.raises(TypeError):
+            with pytest.raises(ValueError):
                 storage.load_character("incomplete")
         finally:
             storage.reset_data_root()
 
     def test_load_event_missing_required_fields(self, tmp_path):
-        """Loading event with missing required fields should raise TypeError."""
+        """Loading event with missing required fields should raise ValueError."""
         custom_root = tmp_path / "data"
         event_dir = custom_root / "events"
         event_dir.mkdir(parents=True)
@@ -149,7 +149,7 @@ class TestStorageErrorHandling:
 
         storage.configure_data_root(custom_root)
         try:
-            with pytest.raises(TypeError):
+            with pytest.raises(ValueError):
                 storage.load_event("incomplete")
         finally:
             storage.reset_data_root()

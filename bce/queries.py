@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import logging
 from functools import lru_cache
 from typing import List, Optional
 
 from .models import Character, Event, SourceProfile
 from . import storage
+
+logger = logging.getLogger(__name__)
 
 
 # Character API
@@ -38,8 +41,29 @@ def get_event(event_id: str) -> Event:
 
 def clear_cache() -> None:
     """Clear the cached character/event loads."""
+    logger.debug("Clearing query cache")
     get_character.cache_clear()
     get_event.cache_clear()
+    logger.info("Query cache cleared")
+
+
+def get_cache_stats() -> dict:
+    """Return cache performance statistics for character and event queries.
+
+    Returns:
+        Dictionary with cache statistics including:
+        - character_cache: CacheInfo for character lookups (hits, misses, maxsize, currsize)
+        - event_cache: CacheInfo for event lookups (hits, misses, maxsize, currsize)
+
+    Example:
+        >>> stats = get_cache_stats()
+        >>> print(f"Character cache hits: {stats['character_cache'].hits}")
+        >>> print(f"Event cache misses: {stats['event_cache'].misses}")
+    """
+    return {
+        "character_cache": get_character.cache_info(),
+        "event_cache": get_event.cache_info(),
+    }
 
 
 def list_event_ids() -> List[str]:

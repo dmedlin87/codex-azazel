@@ -20,6 +20,9 @@ from .dossier_types import (
     DOSSIER_KEY_ACCOUNT_CONFLICTS,
     DOSSIER_KEY_SUMMARY,
     DOSSIER_KEY_DESCRIPTION,
+    DOSSIER_KEY_SOURCE_ID,
+    DOSSIER_KEY_REFERENCE,
+    DOSSIER_KEY_NOTES,
 )
 
 
@@ -155,10 +158,10 @@ def dossier_to_markdown(dossier: dict) -> str:
         for acc in accounts:
             if not isinstance(acc, dict):
                 continue
-            source = acc.get("source_id")
-            reference = acc.get("reference")
-            summary = acc.get("summary")
-            notes = acc.get("notes")
+            source = acc.get(DOSSIER_KEY_SOURCE_ID)
+            reference = acc.get(DOSSIER_KEY_REFERENCE)
+            summary = acc.get(DOSSIER_KEY_SUMMARY)
+            notes = acc.get(DOSSIER_KEY_NOTES)
             bullet_parts = []
             if source:
                 bullet_parts.append(f"source={source}")
@@ -179,11 +182,25 @@ def dossier_to_markdown(dossier: dict) -> str:
     return "\n".join(lines)
 
 
-def dossiers_to_markdown(dossiers: dict[str, dict]) -> str:
-    """Render a mapping of IDs to dossiers as a single Markdown string."""
+def dossiers_to_markdown(dossiers: Iterable[dict] | dict[str, dict]) -> str:
+    """Render an iterable of dossiers as a single Markdown string.
 
+    Args:
+        dossiers: An iterable of dossier dictionaries, or a dict mapping IDs to dossiers.
+                  If a dict is provided, only its values (the dossiers) will be rendered.
+
+    Returns:
+        A single Markdown string with all dossiers separated by horizontal rules.
+    """
     blocks: list[str] = []
-    for dossier in dossiers.values():
+
+    # Handle dict[str, dict] by extracting values
+    if isinstance(dossiers, dict):
+        dossier_items = dossiers.values()
+    else:
+        dossier_items = dossiers
+
+    for dossier in dossier_items:
         if not isinstance(dossier, dict):
             continue
         blocks.append(dossier_to_markdown(dossier))
