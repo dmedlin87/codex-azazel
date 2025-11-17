@@ -7,6 +7,35 @@
   "roles": [
     "apostle"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "witness_of_public_ministry",
+      "sources": ["acts"],
+      "references": [
+        "Acts 1:21-22"
+      ],
+      "notes": "Put forward as someone who had accompanied Jesus from John’s baptism through the ascension, qualifying him to testify to the resurrection."
+    },
+    {
+      "character_id": "peter",
+      "type": "commissioned_through_apostolic_discernment",
+      "sources": ["acts"],
+      "references": [
+        "Acts 1:15-26"
+      ],
+      "notes": "Selected after Peter leads the Jerusalem community in prayer and casting lots to restore the Twelve."
+    },
+    {
+      "character_id": "judas",
+      "type": "successor_to",
+      "sources": ["acts"],
+      "references": [
+        "Acts 1:16-20"
+      ],
+      "notes": "Chosen specifically to take the place of Judas Iscariot so that the apostolic band would again number twelve."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",
