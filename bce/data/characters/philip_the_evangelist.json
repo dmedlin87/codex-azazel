@@ -8,6 +8,35 @@
     "deacon",
     "evangelist"
   ],
+  "relationships": [
+    {
+      "character_id": "peter",
+      "type": "mission_collaboration",
+      "sources": ["acts"],
+      "references": [
+        "Acts 8:14-25"
+      ],
+      "notes": "Peter and John visit the Samaritan believers Philip has evangelized, confirming his work through prayer and the laying on of hands."
+    },
+    {
+      "character_id": "john",
+      "type": "mission_collaboration",
+      "sources": ["acts"],
+      "references": [
+        "Acts 8:14-25"
+      ],
+      "notes": "John accompanies Peter to Samaria, interacting with Philip’s converts and highlighting apostolic validation of his outreach."
+    },
+    {
+      "character_id": "paul",
+      "type": "host_and_supporter",
+      "sources": ["acts"],
+      "references": [
+        "Acts 21:8-9"
+      ],
+      "notes": "Later welcomes Paul and his companions into his Caesarean household, where his four prophetic daughters symbolize an established ministry base."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",
