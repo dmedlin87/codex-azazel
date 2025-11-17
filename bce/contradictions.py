@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 from . import queries
 
@@ -56,3 +56,118 @@ def find_events_with_conflicting_accounts(event_id: str) -> Dict[str, Dict[str, 
             field_map.setdefault(field_name, {})[account.source_id] = value
 
     return _find_conflicts(field_map)
+
+
+def _classify_trait_category(trait_name: str) -> str:
+    """Best-effort classification of a character trait into a conflict category.
+
+    This is intentionally heuristic and conservative; categories are designed
+    to be stable, human-readable labels rather than a strict taxonomy.
+    """
+
+    name = trait_name.lower()
+    if "birth" in name or "narrative" in name or "story" in name:
+        return "narrative"
+    if "chronolog" in name or "date" in name or "timeline" in name or "order" in name:
+        return "chronology"
+    if "christolog" in name or "theolog" in name or "resurrect" in name or "salvation" in name:
+        return "theology"
+    if "location" in name or "place" in name or "region" in name or "city" in name:
+        return "geography"
+    return "other"
+
+
+def _classify_event_field_category(field_name: str) -> str:
+    """Classify an event account field into a conflict category."""
+
+    if field_name == "reference":
+        return "chronology"
+    if field_name in {"summary", "notes"}:
+        return "narrative"
+    return "other"
+
+
+def _estimate_severity(num_sources: int, num_distinct: int) -> str:
+    """Estimate conflict severity from how many sources and values disagree."""
+
+    if num_distinct >= 3 or num_sources >= 4:
+        return "high"
+    if num_distinct == 2 and num_sources >= 3:
+        return "medium"
+    return "low"
+
+
+def summarize_character_conflicts(char_id: str) -> Dict[str, Dict[str, Any]]:
+    """Summarize character trait conflicts with basic severity metadata.
+
+    Returns
+    -------
+    dict
+        Mapping ``trait -> info`` where ``info`` includes:
+
+        - ``field``: the trait name
+        - ``severity``: "low", "medium", or "high"
+        - ``category``: coarse category such as "narrative" or "theology"
+        - ``sources``: the original ``source_id -> value`` mapping
+        - ``distinct_values``: list of distinct non-empty values
+        - ``notes``: short human-readable summary string
+    """
+
+    conflicts = find_trait_conflicts(char_id)
+    summary: Dict[str, Dict[str, Any]] = {}
+
+    for trait, per_source in conflicts.items():
+        values = {v for v in per_source.values() if v}
+        num_sources = len(per_source)
+        num_distinct = len(values)
+        severity = _estimate_severity(num_sources, num_distinct)
+        category = _classify_trait_category(trait)
+
+        summary[trait] = {
+            "field": trait,
+            "severity": severity,
+            "category": category,
+            "sources": per_source,
+            "distinct_values": sorted(values),
+            "notes": f"{num_distinct} distinct value(s) across {num_sources} source(s)",
+        }
+
+    return summary
+
+
+def summarize_event_conflicts(event_id: str) -> Dict[str, Dict[str, Any]]:
+    """Summarize event account conflicts with basic severity metadata.
+
+    Returns
+    -------
+    dict
+        Mapping ``field_name -> info`` where ``info`` includes:
+
+        - ``field``: the account field name (e.g. "summary")
+        - ``severity``: "low", "medium", or "high"
+        - ``category``: coarse category such as "narrative" or "chronology"
+        - ``sources``: the original ``source_id -> value`` mapping
+        - ``distinct_values``: list of distinct non-empty values
+        - ``notes``: short human-readable summary string
+    """
+
+    conflicts = find_events_with_conflicting_accounts(event_id)
+    summary: Dict[str, Dict[str, Any]] = {}
+
+    for field_name, per_source in conflicts.items():
+        values = {v for v in per_source.values() if v}
+        num_sources = len(per_source)
+        num_distinct = len(values)
+        severity = _estimate_severity(num_sources, num_distinct)
+        category = _classify_event_field_category(field_name)
+
+        summary[field_name] = {
+            "field": field_name,
+            "severity": severity,
+            "category": category,
+            "sources": per_source,
+            "distinct_values": sorted(values),
+            "notes": f"{num_distinct} distinct value(s) across {num_sources} source(s)",
+        }
+
+    return summary

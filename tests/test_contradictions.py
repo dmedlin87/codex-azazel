@@ -419,3 +419,41 @@ class TestEdgeCases:
 
             finally:
                 storage.reset_data_root()
+
+
+class TestConflictSummaries:
+    """Tests for conflict summary helpers with severity metadata."""
+
+    def test_summarize_character_conflicts_shape(self) -> None:
+        """summarize_character_conflicts should mirror trait_conflicts keys and add metadata."""
+        raw_conflicts = contradictions.find_trait_conflicts("jesus")
+        summary = contradictions.summarize_character_conflicts("jesus")
+
+        assert isinstance(summary, dict)
+        assert set(summary.keys()) == set(raw_conflicts.keys())
+
+        for trait, info in summary.items():
+            assert isinstance(info, dict)
+            assert info["field"] == trait
+            assert info["sources"] == raw_conflicts[trait]
+            assert isinstance(info.get("distinct_values"), list)
+            assert info.get("severity") in {"low", "medium", "high"}
+            assert isinstance(info.get("category"), str)
+            assert isinstance(info.get("notes"), str)
+
+    def test_summarize_event_conflicts_shape(self) -> None:
+        """summarize_event_conflicts should mirror event conflicts keys and add metadata."""
+        raw_conflicts = contradictions.find_events_with_conflicting_accounts("crucifixion")
+        summary = contradictions.summarize_event_conflicts("crucifixion")
+
+        assert isinstance(summary, dict)
+        assert set(summary.keys()) == set(raw_conflicts.keys())
+
+        for field_name, info in summary.items():
+            assert isinstance(info, dict)
+            assert info["field"] == field_name
+            assert info["sources"] == raw_conflicts[field_name]
+            assert isinstance(info.get("distinct_values"), list)
+            assert info.get("severity") in {"low", "medium", "high"}
+            assert isinstance(info.get("category"), str)
+            assert isinstance(info.get("notes"), str)
