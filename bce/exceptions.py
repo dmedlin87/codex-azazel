@@ -9,7 +9,7 @@ class BceError(Exception):
     """
 
 
-class DataNotFoundError(BceError):
+class DataNotFoundError(FileNotFoundError, BceError):
     """Raised when requested character, event, or source data doesn't exist.
 
     Examples:
@@ -30,7 +30,7 @@ class ValidationError(BceError):
     """
 
 
-class StorageError(BceError):
+class StorageError(RuntimeError, BceError):
     """Raised when storage operations fail.
 
     Examples:

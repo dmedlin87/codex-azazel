@@ -75,8 +75,10 @@ class StorageManager:
         try:
             with path.open("r", encoding="utf-8") as f:
                 return json.load(f)
-        except json.JSONDecodeError as e:
-            raise StorageError(f"Invalid JSON in {path}: {e}")
+        except json.JSONDecodeError:
+            # Preserve the original exception type for compatibility with
+            # callers that expect JSONDecodeError.
+            raise
         except (IOError, OSError) as e:
             raise StorageError(f"Failed to read {path}: {e}")
 
@@ -127,11 +129,21 @@ class StorageManager:
         path = self._char_dir / f"{char_id}.json"
         data = self._read_json(path)
 
+        source_profiles = [SourceProfile(**sp) for sp in data.get("source_profiles", [])]
+        relationships = self._normalize_relationships(data.get("relationships"))
+        data = {
+            **data,
+            "source_profiles": source_profiles,
+            "relationships": relationships,
+        }
+
         try:
-            source_profiles = [SourceProfile(**sp) for sp in data.get("source_profiles", [])]
-            data = {**data, "source_profiles": source_profiles}
             return Character(**data)
-        except (TypeError, ValueError) as e:
+        except TypeError:
+            # Surface the original TypeError so existing tests that assert on
+            # the specific error message continue to pass.
+            raise
+        except ValueError as e:
             raise StorageError(f"Invalid character data in {path}: {e}")
 
     def iter_characters(self) -> Iterator[Character]:
@@ -184,12 +196,38 @@ class StorageManager:
         path = self._event_dir / f"{event_id}.json"
         data = self._read_json(path)
 
+        accounts = [EventAccount(**acc) for acc in data.get("accounts", [])]
+        data = {**data, "accounts": accounts}
+
         try:
-            accounts = [EventAccount(**acc) for acc in data.get("accounts", [])]
-            data = {**data, "accounts": accounts}
             return Event(**data)
-        except (TypeError, ValueError) as e:
+        except TypeError:
+            raise
+        except ValueError as e:
             raise StorageError(f"Invalid event data in {path}: {e}")
+
+    def _normalize_relationships(self, value: Any) -> List[dict]:
+        """Convert relationships data to a list of dictionaries."""
+
+        if value is None:
+            return []
+        if isinstance(value, list):
+            return [
+                rel
+                for rel in value
+                if isinstance(rel, dict) and rel.get("character_id")
+            ]
+        if isinstance(value, dict):
+            flattened: List[dict] = []
+            for group in value.values():
+                if isinstance(group, list):
+                    flattened.extend(
+                        rel
+                        for rel in group
+                        if isinstance(rel, dict) and rel.get("character_id")
+                    )
+            return flattened
+        return []
 
     def iter_events(self) -> Iterator[Event]:
         """Iterate over all events.
