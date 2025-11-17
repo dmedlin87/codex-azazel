@@ -5,6 +5,7 @@ from typing import Any, Dict, List
 import re
 
 from . import queries
+from .exceptions import DataNotFoundError, StorageError, BceError
 
 
 _REF_RE = re.compile(
@@ -150,7 +151,7 @@ def _validate_characters(errors: List[str]) -> None:
     for char_id in ids:
         try:
             character = queries.get_character(char_id)
-        except Exception as exc:  # type: ignore[redundant-except]
+        except (DataNotFoundError, StorageError, BceError) as exc:
             errors.append(f"Failed to load character '{char_id}': {exc}")
             continue
 
@@ -192,7 +193,7 @@ def _validate_events(errors: List[str]) -> None:
     for event_id in ids:
         try:
             event = queries.get_event(event_id)
-        except Exception as exc:  # type: ignore[redundant-except]
+        except (DataNotFoundError, StorageError, BceError) as exc:
             errors.append(f"Failed to load event '{event_id}': {exc}")
             continue
 
@@ -253,7 +254,7 @@ def validate_cross_references() -> List[str]:
     for char_id in character_ids:
         try:
             character = queries.get_character(char_id)
-        except Exception as exc:  # type: ignore[redundant-except]
+        except (DataNotFoundError, StorageError, BceError) as exc:
             errors.append(
                 f"Failed to load character '{char_id}' for cross-reference validation: {exc}"
             )
@@ -270,7 +271,7 @@ def validate_cross_references() -> List[str]:
     for event_id in queries.list_event_ids():
         try:
             event = queries.get_event(event_id)
-        except Exception as exc:  # type: ignore[redundant-except]
+        except (DataNotFoundError, StorageError, BceError) as exc:
             errors.append(
                 f"Failed to load event '{event_id}' for cross-reference validation: {exc}"
             )
