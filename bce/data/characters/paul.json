@@ -9,41 +9,161 @@
   "roles": [
     "apostle",
     "missionary",
+    "church_planter",
+    "pastor",
     "letter_writer",
     "theologian"
   ],
   "relationships": [
     {
       "character_id": "barnabas",
-      "type": "companion",
-      "sources": ["acts"],
-      "references": ["Acts 11:25-30", "Acts 13-14"],
-      "notes": "Early missionary partner; later separated over John Mark."
+      "type": "companion_and_advocate",
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Acts 11:25-30",
+        "Acts 13:1-3",
+        "Acts 15:36-41",
+        "Galatians 2:1-10"
+      ],
+      "notes": "Introduces Paul to the Antioch community, co-leads the first mission, and later separates after the dispute over Mark."
     },
     {
       "character_id": "peter",
       "type": "colleague_with_conflict",
-      "sources": ["paul_undisputed"],
-      "references": ["Galatians 2:11-14"],
-      "notes": "Confrontation at Antioch over table fellowship."
+      "sources": [
+        "paul_undisputed"
+      ],
+      "references": [
+        "Galatians 2:7-14"
+      ],
+      "notes": "Recognized as a pillar in Jerusalem yet confronted publicly in Antioch over table fellowship with Gentiles."
+    },
+    {
+      "character_id": "james_the_just",
+      "type": "jerusalem_leader",
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Acts 15:13-21",
+        "Galatians 1:18-19",
+        "Galatians 2:9-10"
+      ],
+      "notes": "Represents the Jerusalem leadership with whom Paul negotiates Gentile inclusion and relief efforts."
+    },
+    {
+      "character_id": "mark",
+      "type": "coworker_with_conflict_and_reconciliation",
+      "sources": [
+        "acts",
+        "paul_disputed"
+      ],
+      "references": [
+        "Acts 13:13",
+        "Acts 15:37-39",
+        "Colossians 4:10",
+        "Philemon 24"
+      ],
+      "notes": "Departs midway through the first mission, causing a rift with Barnabas, but is later listed among Paul's fellow workers."
+    },
+    {
+      "character_id": "silas_silvanus",
+      "type": "missionary_companion",
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Acts 15:40-18:5",
+        "1 Thessalonians 1:1",
+        "2 Corinthians 1:19"
+      ],
+      "notes": "Travels with Paul through Syria, Cilicia, Macedonia, and Achaia, co-signing letters to the Thessalonians and Corinthians."
+    },
+    {
+      "character_id": "timothy",
+      "type": "protégé_and_delegate",
+      "sources": [
+        "acts",
+        "paul_undisputed",
+        "pastorals"
+      ],
+      "references": [
+        "Acts 16:1-5",
+        "1 Thessalonians 3:1-6",
+        "1 Corinthians 4:17",
+        "Philippians 2:19-23",
+        "1 Timothy 1:2",
+        "2 Timothy 1:2"
+      ],
+      "notes": "Circumcised and commissioned in Lystra, later dispatched to congregations as Paul's trusted emissary and addressed personally in the Pastorals."
+    },
+    {
+      "character_id": "titus",
+      "type": "delegate_and_problem_solver",
+      "sources": [
+        "paul_undisputed",
+        "pastorals"
+      ],
+      "references": [
+        "Galatians 2:1-3",
+        "2 Corinthians 2:12-13",
+        "2 Corinthians 7:6-15",
+        "2 Corinthians 8:16-23",
+        "Titus 1:4-5"
+      ],
+      "notes": "Uncircumcised Greek associate who accompanies Paul to Jerusalem, mediates with the Corinthians, and receives instructions for structuring the Cretan churches."
+    },
+    {
+      "character_id": "aquila",
+      "type": "coworker_and_host",
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Acts 18:1-3",
+        "Acts 18:18-19",
+        "Romans 16:3-4",
+        "1 Corinthians 16:19"
+      ],
+      "notes": "Jewish artisan who, with Priscilla, hosts Paul in Corinth and later leads house churches that support his mission."
+    },
+    {
+      "character_id": "priscilla",
+      "type": "coworker_and_teacher",
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Acts 18:18-26",
+        "Romans 16:3-5",
+        "2 Timothy 4:19"
+      ],
+      "notes": "Partners with Aquila in mentoring Apollos and is greeted warmly in Paul's letters as a fellow worker who risks her life for him."
     }
   ],
   "source_profiles": [
     {
       "source_id": "paul_undisputed",
       "traits": {
-        "self_identification_and_call": "Presents himself as a called apostle of Jesus Christ, commissioned by God to proclaim the gospel.",
-        "relationship_to_jesus": "Knows Jesus as the exalted, risen Lord and treats the crucifixion and resurrection as central saving events.",
-        "mission_and_audience": "Understands his primary vocation as apostle to the Gentiles while also engaging Jews in cities across the eastern Mediterranean.",
-        "theological_emphases": "Develops themes of justification, participation in Christ, the work of the Spirit, and the inclusion of Gentiles apart from the works of the Mosaic law.",
-        "conflicts_and_authority": "Frequently defends his apostolic authority against rivals and negotiates tensions with Jerusalem leaders and local communities.",
-        "suffering_and_ministry_style": "Describes his ministry as marked by weakness, hardship, and persecution interpreted as participation in Christ's sufferings.",
-        "co_workers_and_networks": "Names a wide network of co-workers, patrons, and house-church leaders across many assemblies."
+        "self_identification_and_call": "Presents himself as a called apostle of Jesus Christ commissioned directly by God to proclaim the gospel to the nations.",
+        "relationship_to_jesus": "Knows Jesus as the exalted Lord encountered through revelation, grounding his message in the crucifixion and resurrection.",
+        "mission_and_audience": "Defines his vocation as apostle to the Gentiles while still reasoning in synagogues and engaging diaspora Jewish communities.",
+        "theological_emphases": "Develops themes of justification, participation in Christ, the work of the Spirit, and the inclusion of Gentiles apart from the Mosaic law.",
+        "conflicts_and_authority": "Frequently defends his apostolic authority against rivals, negotiates with Jerusalem leaders, and disciplines local assemblies.",
+        "suffering_and_ministry_style": "Describes hardships, imprisonments, and weakness as marks of authentic apostolic ministry that mirror Christ's sufferings.",
+        "co_workers_and_networks": "Names an expansive network of colleagues, patrons, and house-church leaders who sustain his itinerant mission."
       },
       "references": [
         "Romans 1:1-17",
         "Romans 11:13",
-        "1 Corinthians 1:1-2",
+        "Romans 15:15-33",
         "1 Corinthians 9:1-23",
         "2 Corinthians 11:16-33",
         "2 Corinthians 12:1-10",
@@ -57,13 +177,13 @@
     {
       "source_id": "acts",
       "traits": {
-        "pre_christian_persecutor": "Introduced as Saul, a zealous persecutor of the Jesus movement who approves the stoning of Stephen.",
-        "conversion_and_call": "Experiences a dramatic encounter with the risen Jesus on the road to Damascus that reorients him from persecutor to chosen instrument.",
-        "commission_and_relationship_to_church": "Is commissioned to carry the name of Jesus before Gentiles, kings, and Israelites while remaining connected to Jerusalem and Antioch leaders.",
-        "missionary_journeys": "Undertakes multiple missionary journeys across Asia Minor and Greece, typically beginning in synagogues before turning to Gentile audiences.",
-        "signs_speeches_and_theology": "Performs healings and exorcisms and delivers speeches that summarize the gospel in ways suited to Jewish and Gentile audiences.",
-        "suffering_trials_and_status": "Endures imprisonments, beatings, plots, and shipwrecks yet also benefits from Roman citizenship and invokes legal rights.",
-        "journey_to_rome_and_fate": "Appeals to Caesar and is transported to Rome, where he preaches the kingdom of God; his ultimate fate is left unstated."
+        "pre_christian_persecutor": "Introduced as Saul, a zealous persecutor who approves the stoning of Stephen and ravages the Jerusalem community.",
+        "conversion_and_call": "Experiences a dramatic encounter with the risen Jesus on the Damascus road that transforms him from persecutor to chosen instrument.",
+        "commission_and_relationship_to_church": "Receives commissioning to carry Jesus' name before Gentiles, kings, and Israelites while cooperating with Jerusalem and Antioch leaders.",
+        "missionary_journeys": "Undertakes multiple journeys across Asia Minor and Greece, typically entering synagogues first before turning to Gentile audiences.",
+        "signs_speeches_and_theology": "Performs healings and exorcisms and delivers speeches summarizing the gospel in culturally adaptive ways.",
+        "suffering_trials_and_status": "Endures imprisonments, beatings, plots, and shipwrecks yet invokes Roman citizenship for protection.",
+        "journey_to_rome_and_fate": "Appeals to Caesar, travels to Rome, and continues preaching there as the narrative closes without describing his death."
       },
       "references": [
         "Acts 7:58-8:3",
@@ -77,6 +197,52 @@
         "Acts 19:1-41",
         "Acts 20:17-38",
         "Acts 21:27-28:31"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "cosmic_christology": "Presents Christ as the cosmic head over every power, emphasizing reconciliation of all things and the exalted enthronement of Jesus.",
+        "ecclesiology_and_unity": "Highlights the church as Christ's body or household, stressing unity between Jews and Gentiles and the maturity of the whole community.",
+        "household_and_social_orders": "Provides extended household codes governing spouses, children, slaves, and masters as expressions of the gospel in daily life.",
+        "mission_from_imprisonment": "Frames Paul as an imprisoned ambassador whose chains advance the gospel through letter writing and envoys.",
+        "letter_partners_and_messengers": "Names coworkers like Tychicus, Onesimus, Timothy, and Epaphras who deliver letters and report on community health."
+      },
+      "references": [
+        "Ephesians 1:15-23",
+        "Ephesians 2:11-22",
+        "Ephesians 3:1-13",
+        "Ephesians 4:11-16",
+        "Ephesians 5:21-6:9",
+        "Colossians 1:15-20",
+        "Colossians 1:24-29",
+        "Colossians 3:18-4:1",
+        "Colossians 4:7-18",
+        "2 Thessalonians 1:3-12",
+        "2 Thessalonians 3:6-15"
+      ]
+    },
+    {
+      "source_id": "pastorals",
+      "traits": {
+        "postpauline_context": "Situates Paul late in life or after release from imprisonment, continuing ministry through delegated representatives in Ephesus and Crete.",
+        "leadership_structure": "Outlines qualifications for overseers, elders, and deacons to safeguard doctrinal integrity and communal reputation.",
+        "opponents_and_false_teaching": "Warns Timothy and Titus about speculations, myths, and divisive teachers who must be corrected or removed.",
+        "ethical_and_household_guidance": "Provides instructions for widows, slaves, gender roles, and generational discipleship as part of orderly households of God.",
+        "personal_relationships_and_requests": "Mentions coworkers such as Onesiphorus, Demas, Tychicus, and John Mark while requesting visits, scrolls, and pastoral care.",
+        "suffering_and_endurance": "Emphasizes endurance, fight of faith, and readiness for martyrdom as Paul anticipates the crown of righteousness."
+      },
+      "references": [
+        "1 Timothy 1:3-7",
+        "1 Timothy 3:1-13",
+        "1 Timothy 5:3-16",
+        "1 Timothy 6:11-16",
+        "2 Timothy 1:13-18",
+        "2 Timothy 2:1-13",
+        "2 Timothy 4:6-18",
+        "Titus 1:4-9",
+        "Titus 2:1-15",
+        "Titus 3:12-15"
       ]
     }
   ]
