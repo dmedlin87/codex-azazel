@@ -1,65 +1,94 @@
 {
   "id": "pilate",
   "canonical_name": "Pontius Pilate",
-  "aliases": ["Pilate", "Pontius Pilate"],
-  "roles": ["Roman governor", "judge in Jesus' trial"],
+  "aliases": [
+    "Pontius Pilate",
+    "Pilate"
+  ],
+  "roles": [
+    "prefect",
+    "governor",
+    "roman_authority"
+  ],
   "source_profiles": [
     {
       "source_id": "mark",
       "traits": {
-        "office": "Roman prefect governing Judea under the emperor.",
-        "portrayal": "reluctant but pressured judge who yields to the crowd and orders crucifixion.",
-        "responsibility_for_jesus": "authorizes execution while attempting to distance himself from blame."
+        "office_and_authority": "Roman governor of Judea with power to interrogate Jesus and authorize crucifixion.",
+        "interaction_with_jesus": "Questions Jesus about being 'king of the Jews' and is struck by his silence under accusation.",
+        "responsibility_for_crucifixion": "Reluctantly yields to crowd pressure, releases Barabbas, and hands Jesus over to be crucified.",
+        "character_portrayal": "Appears politically cautious and expedient, more concerned with crowd management than justice, yet not portrayed as personally hostile."
       },
       "references": [
-        "Mark 15:1-15"
+        "Mark 15:1-15",
+        "Mark 15:43-45"
       ]
     },
     {
       "source_id": "matthew",
       "traits": {
-        "office": "Roman governor stationed in Jerusalem.",
-        "portrayal": "hesitant judge who receives a warning dream through his wife and symbolically washes his hands.",
-        "responsibility_for_jesus": "declares innocence but releases Barabbas and hands Jesus over to be crucified."
+        "office_and_authority": "Roman governor to whom Jesus is delivered after the Jewish leaders' deliberations.",
+        "interaction_with_jesus": "Questions Jesus about royal claims, recognizes the trial as driven by envy, and receives a warning from his wife based on a troubling dream.",
+        "responsibility_for_crucifixion": "Symbolically washes his hands to disclaim responsibility, yet formally authorizes the scourging and crucifixion while releasing Barabbas.",
+        "role_in_passion_narrative": "Presented as hesitant and somewhat sympathetic to Jesus, shifting primary blame toward the Jewish leaders and crowd, and later cooperating in securing the tomb."
       },
       "references": [
-        "Matthew 27:11-26"
+        "Matthew 27:1-2",
+        "Matthew 27:11-26",
+        "Matthew 27:62-66"
       ]
     },
     {
       "source_id": "luke",
       "traits": {
-        "office": "Roman governor hearing charges against Jesus.",
-        "portrayal": "repeatedly declares Jesus innocent and tries to release him, sending him to Herod as well.",
-        "responsibility_for_jesus": "ultimately concedes to the crowd's demand for crucifixion."
+        "office_and_authority": "Named as governor of Judea under Tiberius and associated with prior acts of brutality against Galileans.",
+        "interaction_with_jesus": "Examines Jesus, declares him innocent, sends him to Herod Antipas, and repeatedly proposes release.",
+        "responsibility_for_crucifixion": "Ultimately capitulates to crowd and leadership demands, authorizing crucifixion despite multiple stated findings of no guilt.",
+        "character_portrayal": "Depicted as a ruler who recognizes Jesus’ innocence but fails to act justly, constrained by political pressures and the desire to appease accusers."
       },
       "references": [
-        "Luke 23:1-25"
+        "Luke 3:1",
+        "Luke 13:1",
+        "Luke 23:1-25",
+        "Luke 23:52"
       ]
     },
     {
       "source_id": "john",
       "traits": {
-        "office": "Roman governor engaged in a political and theological dialogue with Jesus.",
-        "portrayal": "vacillating ruler who questions Jesus about kingship and truth but fears the crowd and the charge of disloyalty to Caesar.",
-        "responsibility_for_jesus": "has authority to release or crucify and ultimately delivers Jesus to be executed."
+        "office_and_authority": "Roman governor who conducts an extended interrogation of Jesus within the praetorium.",
+        "interaction_with_jesus": "Engages in a theological-political dialogue about kingship and truth, repeatedly states he finds no basis for a charge, yet becomes fearful when challenged about loyalty to Caesar.",
+        "responsibility_for_crucifixion": "Authorizes crucifixion after Jewish leaders invoke Caesar, and orders the inscription 'King of the Jews' to be placed on the cross and remain unchanged.",
+        "character_portrayal": "Drawn as conflicted and somewhat intrigued by Jesus, yet ultimately portrayed as a compromised official whose fear and political calculation override his recognition of Jesus’ innocence."
       },
       "references": [
         "John 18:28-40",
-        "John 19:1-16"
+        "John 19:1-22",
+        "John 19:38"
       ]
     },
     {
       "source_id": "acts",
       "traits": {
-        "office": "Roman ruler mentioned in apostolic preaching as participant in Jesus' condemnation.",
-        "portrayal": "figure in salvation history aligned with other rulers opposing God's holy servant.",
-        "responsibility_for_jesus": "named among those who condemned and killed Jesus, though details are not narrated again."
+        "role_in_salvation_history": "Recalled as one of the rulers who, together with Jewish leaders and Herod, acts against Jesus in fulfillment of Scripture.",
+        "responsibility_for_crucifixion": "Portrayed as the authority who consented to Jesus' execution at the request of Jerusalem's inhabitants.",
+        "character_portrayal": "Functions primarily as a historical and theological reference point, an example of human rulers opposing God's servant yet unwittingly serving the divine plan."
       },
       "references": [
         "Acts 3:13",
         "Acts 4:27",
         "Acts 13:28"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "role_in_christ_confession": "Mentioned as the official before whom Christ Jesus made a 'good confession,' anchoring Jesus’ witness in a specific historical judicial setting.",
+        "function_in_letter": "Serves as a point of comparison and exhortation for Timothy to keep the commandment faithfully, just as Christ bore witness before Pilate.",
+        "character_portrayal": "Not characterized in detail; functions mainly as a named Roman judge situating Jesus’ testimony within Roman legal context."
+      },
+      "references": [
+        "1 Timothy 6:13"
       ]
     }
   ]

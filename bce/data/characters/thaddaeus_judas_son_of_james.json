@@ -9,5 +9,32 @@
     "disciple",
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics_acts",
+      "traits": {
+        "name_variation": "Appears in the apostolic lists under different names: Thaddaeus in Matthew and Mark, and Judas son of James in Luke and Acts, reflecting variant traditions.",
+        "listing_among_twelve": "Included among the Twelve appointed by Jesus, but without individual stories or sayings recorded.",
+        "distinction_from_judas_iscariot": "Differentiated from Judas Iscariot in Luke–Acts, ensuring that the name Judas in the circle of apostles is not exclusively associated with the betrayer.",
+        "narrative_silence": "The lack of further narrative detail has encouraged later hagiographical development, but the canonical texts present him simply as a lesser-known apostle." 
+      },
+      "references": [
+        "Matthew 10:3",
+        "Mark 3:18",
+        "Luke 6:16",
+        "Acts 1:13"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "possible_identification": "John mentions 'Judas (not Iscariot)' asking Jesus about his self-disclosure to the disciples and not to the world; many interpreters associate this figure with Judas son of James, though the Gospel does not explicitly equate them.",
+        "role_in_farewell_discourse": "His question provides a setting for Jesus’s teaching about loving him, keeping his word, and the Father and Son making their home with believers.",
+        "critical_note": "The identification of this Judas with Thaddaeus/Judas son of James remains a plausible but debated harmonization among scholars."
+      },
+      "references": [
+        "John 14:22-24"
+      ]
+    }
+  ]
 }

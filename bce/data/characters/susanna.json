@@ -7,5 +7,17 @@
   "roles": [
     "follower"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "luke",
+      "traits": {
+        "member_of_women_group": "Named briefly among the women who had been healed of evil spirits and infirmities and who accompanied Jesus and the Twelve.",
+        "benefactor_role": "Participates in providing for Jesus and his followers out of their means, indicating economic agency.",
+        "narrative_function": "Though individually unelaborated, she contributes to Luke’s portrait of a substantial group of women disciples integrated into Jesus’s itinerant mission." 
+      },
+      "references": [
+        "Luke 8:1-3"
+      ]
+    }
+  ]
 }

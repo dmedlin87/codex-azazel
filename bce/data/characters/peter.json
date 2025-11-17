@@ -1,81 +1,138 @@
 {
   "id": "peter",
   "canonical_name": "Simon Peter",
-  "aliases": ["Simon", "Simon Peter", "Cephas"],
-  "roles": ["disciple", "apostle", "leader of the Twelve"],
+  "aliases": [
+  "Simon",
+  "Simon Peter",
+  "Peter",
+  "Cephas"
+  ],
+  "roles": [
+  "disciple",
+  "apostle",
+  "leader",
+  "pillar"
+  ],
   "source_profiles": [
-    {
-      "source_id": "mark",
-      "traits": {
-        "role_among_twelve": "prominent disciple and spokesperson; confesses Jesus as Christ but rebuked for misunderstanding suffering.",
-        "portrayal": "impulsive and bold, both exemplary and failing disciple.",
-        "fate_or_ending": "restoration implied but not narrated in detail; mentioned as recipient of resurrection message."
-      },
-      "references": [
-        "Mark 1:16-18",
-        "Mark 8:27-33",
-        "Mark 14:66-72",
-        "Mark 16:7"
-      ]
-    },
-    {
-      "source_id": "matthew",
-      "traits": {
-        "role_among_twelve": "chief disciple given special revelations and responsibilities.",
-        "portrayal": "confesses Jesus as Messiah and Son of God; given keys of the kingdom yet still capable of failure.",
-        "fate_or_ending": "commissioned with the others after resurrection; future role implied rather than narrated."
-      },
-      "references": [
-        "Matthew 4:18-20",
-        "Matthew 14:28-31",
-        "Matthew 16:13-23",
-        "Matthew 26:69-75",
-        "Matthew 28:16-20"
-      ]
-    },
-    {
-      "source_id": "luke",
-      "traits": {
-        "role_among_twelve": "leading apostle who strengthens others.",
-        "portrayal": "denies Jesus but is prayed for and later confirms the brothers.",
-        "fate_or_ending": "restoration hinted and leadership anticipated; detailed ministry continues in Acts."
-      },
-      "references": [
-        "Luke 5:1-11",
-        "Luke 22:31-34",
-        "Luke 22:54-62",
-        "Luke 24:34"
-      ]
-    },
-    {
-      "source_id": "john",
-      "traits": {
-        "role_among_twelve": "prominent disciple who runs to the tomb and is reinstated by the risen Jesus.",
-        "portrayal": "both impulsive and devoted; questioned about love and tasked to shepherd the flock.",
-        "fate_or_ending": "future martyrdom hinted in symbolic language; leadership role affirmed."
-      },
-      "references": [
-        "John 1:40-42",
-        "John 6:66-69",
-        "John 18:15-27",
-        "John 20:3-10",
-        "John 21:15-19"
-      ]
-    },
-    {
-      "source_id": "acts",
-      "traits": {
-        "role_among_twelve": "primary spokesperson for the Jerusalem church and mission to Jews.",
-        "portrayal": "bold preacher and miracle worker, interpreter of events at Pentecost and key figure in early mission.",
-        "fate_or_ending": "leadership gradually gives way to Paul; Peter exits narrative after key missions."
-      },
-      "references": [
-        "Acts 1:15-26",
-        "Acts 2:14-41",
-        "Acts 3:1-10",
-        "Acts 10:1-48",
-        "Acts 12:1-17"
-      ]
-    }
+  {
+  "source_id": "mark",
+  "traits": {
+  "calling_and_background": "Introduced as a Galilean fisherman called by Jesus from his nets to become a fisher of people, leaving his work immediately.",
+  "role_among_twelve": "Regularly named first among the Twelve and functions as their spokesperson, present at key private moments like healings and the transfiguration.",
+  "confession_and_misunderstanding": "Confesses Jesus as the Christ at Caesarea Philippi but is sharply rebuked as Satan for rejecting the necessity of the suffering Son of Man.",
+  "failure_and_denial": "Boasts of loyalty yet denies Jesus three times during the trial sequence, fulfilling Jesus’s prediction and weeping when he realizes what he has done.",
+  "post_resurrection_note": "The young man at the tomb instructs the women to tell the disciples and Peter that Jesus goes before them to Galilee, implying continued significance but not narrating restoration."
+  },
+  "references": [
+  "Mark 1:16-18",
+  "Mark 3:13-19",
+  "Mark 5:37",
+  "Mark 8:27-33",
+  "Mark 9:2-8",
+  "Mark 14:27-31",
+  "Mark 14:66-72",
+  "Mark 16:7"
   ]
-}
+  },
+  {
+  "source_id": "matthew",
+  "traits": {
+  "calling_and_background": "Called with his brother Andrew from their fishing work on the Sea of Galilee to follow Jesus as disciples.",
+  "role_among_twelve": "Consistently listed first and singled out for special experiences and sayings, marking him as a chief disciple.",
+  "confession_and_primacy": "Confesses Jesus as the Messiah, the Son of the living God, and is addressed as Peter the rock upon which Jesus will build his church, entrusted with the keys of the kingdom and binding-loosing authority.",
+  "faith_and_weakness": "Briefly walks on water toward Jesus but sinks in fear, and later is rebuked as a stumbling block for opposing Jesus’s passion predictions.",
+  "denial_and_after": "Denies Jesus three times despite earlier protestations but goes out and weeps bitterly; the risen Jesus later commissions the Eleven (including Peter) with universal mission, leaving his individual restoration implicit."
+  },
+  "references": [
+  "Matthew 4:18-20",
+  "Matthew 10:2",
+  "Matthew 14:28-31",
+  "Matthew 16:13-23",
+  "Matthew 17:1-8",
+  "Matthew 17:24-27",
+  "Matthew 26:31-35",
+  "Matthew 26:69-75",
+  "Matthew 28:16-20"
+  ]
+  },
+  {
+  "source_id": "luke",
+  "traits": {
+  "calling_and_background": "Introduced as Simon, a fisherman whose boat Jesus uses before the miraculous catch that leads him to leave everything and follow.",
+  "role_among_twelve": "Emerges as a leading disciple, renamed Peter and included in the inner circle present at significant events such as the transfiguration.",
+  "warning_and_denial": "Jesus predicts that Satan has demanded to sift him like wheat but that Jesus has prayed for his faith; despite this, Peter denies Jesus three times before the rooster crows.",
+  "restoration_hint": "Jesus charges him to strengthen his brothers once he has turned back, signaling anticipated restoration and leadership beyond the failure.",
+  "resurrection_witness_tradition": "Luke preserves a brief report that the Lord has appeared to Simon, marking him as an early resurrection witness without narrating the encounter."
+  },
+  "references": [
+  "Luke 5:1-11",
+  "Luke 6:14",
+  "Luke 8:45",
+  "Luke 9:28-36",
+  "Luke 22:31-34",
+  "Luke 22:54-62",
+  "Luke 24:34"
+  ]
+  },
+  {
+  "source_id": "john",
+  "traits": {
+  "name_and_identity": "Introduced as Simon son of John, whom Jesus renames Cephas (Peter), highlighting a new identity linked to his role.",
+  "relationship_to_jesus": "Frequently appears alongside the beloved disciple in scenes of intimacy and tension, such as the last supper, the high priest’s courtyard, and the empty tomb.",
+  "confession_and_loyalty_claims": "Affirms that Jesus has the words of eternal life and insists that he will lay down his life for Jesus, claims that are undercut by his subsequent denial.",
+  "denial_and_interrogation": "Denies being Jesus’s disciple three times in the high priest’s courtyard, paralleling but distinct from the Synoptic denial narratives.",
+  "reinstatement_and_future": "The risen Jesus questions his love three times beside the sea, commands him to feed and tend his flock, and hints at a future martyrdom by which he will glorify God."
+  },
+  "references": [
+  "John 1:40-42",
+  "John 6:66-69",
+  "John 13:6-9",
+  "John 13:36-38",
+  "John 18:10",
+  "John 18:15-27",
+  "John 20:2-10",
+  "John 21:2-23"
+  ]
+  },
+  {
+  "source_id": "acts",
+  "traits": {
+  "leadership_in_jerusalem": "Acts opens with Peter taking initiative among the disciples, overseeing the replacement of Judas and speaking on behalf of the group.",
+  "pentecost_and_preaching": "Serves as the primary interpreter of the Pentecost event, delivering major speeches that frame Jesus’s death and resurrection in terms of scripture and divine plan.",
+  "miracle_work_and_conflict": "Performs healings and signs reminiscent of Jesus’s ministry and confronts opposition from the Jerusalem authorities.",
+  "mission_and_inclusion": "Plays a central role in the Cornelius episode, where his vision and visit help legitimize Gentile inclusion without full Torah observance.",
+  "narrative_exit": "Dominates the early chapters but gradually recedes as Paul becomes the main narrative focus, last appearing prominently after his escape from Herod’s prison."
+  },
+  "references": [
+  "Acts 1:15-26",
+  "Acts 2:14-41",
+  "Acts 3:1-10",
+  "Acts 4:5-22",
+  "Acts 5:1-16",
+  "Acts 8:14-25",
+  "Acts 10:1-48",
+  "Acts 12:1-17"
+  ]
+  },
+  {
+  "source_id": "paul_undisputed",
+  "traits": {
+  "name_and_status": "Referred to as Cephas, recognized as a leading figure among the Jerusalem apostles.",
+  "pillar_role": "Counted among the reputed pillars of the Jerusalem community, associated with James and John as leaders.",
+  "agreement_and_mission": "In Galatians, Paul portrays an agreement in which he and Barnabas would go to the Gentiles while Cephas and the others focus on the circumcised.",
+  "conflict_at_antioch": "Paul recounts confronting Cephas publicly in Antioch over withdrawal from table fellowship with Gentiles, using him as an example of inconsistency with the gospel.",
+  "reputation_in_communities": "In 1 Corinthians, some believers identify themselves with Cephas as a factional leader alongside Paul and Apollos, reflecting his broader authority and influence."
+  },
+  "references": [
+  "Galatians 1:18",
+  "Galatians 2:7-9",
+  "Galatians 2:11-14",
+  "1 Corinthians 1:12",
+  "1 Corinthians 3:22",
+  "1 Corinthians 9:5",
+  "1 Corinthians 15:5"
+  ]
+  }
+  ]
+  }
+  

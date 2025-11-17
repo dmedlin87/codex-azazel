@@ -8,5 +8,35 @@
     "disciple",
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark_matthew_luke",
+      "traits": {
+        "listing_among_twelve": "Named in the lists of the Twelve across the Synoptic Gospels, paired with Bartholomew and included among those Jesus appoints and sends.",
+        "lack_of_individual_episodes": "In the Synoptics, receives no distinctive stories or dialogues, functioning as part of the foundational apostolic group.",
+        "missionary_connotation": "By virtue of the apostolic commission, shares in the delegated authority to preach, heal, and cast out demons, even if specific acts are not narrated."
+      },
+      "references": [
+        "Mark 3:16-19",
+        "Matthew 10:2-4",
+        "Luke 6:13-16"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "call_and_initial_witness": "Personally called by Jesus with the words 'Follow me,' and quickly finds Nathanael, testifying that they have found the one about whom Moses and the prophets wrote.",
+        "mediator_figure": "Acts as an intermediary bringing others to Jesus, including Nathanael and later Greeks who wish to see Jesus at the festival.",
+        "testing_in_feeding_sign": "Tested by Jesus in the feeding of the multitude when asked where to buy bread; his practical calculation highlights the inadequacy of human resources before the sign.",
+        "request_for_revelation": "In the farewell discourse, asks Jesus to show them the Father, prompting Jesus’s response that seeing him is seeing the Father, making Philip a foil for Johannine Christology.",
+        "narrative_profile": "In John, emerges as a somewhat questioning yet responsive disciple who helps move others toward encounter with Jesus while also embodying partial understanding."
+      },
+      "references": [
+        "John 1:43-46",
+        "John 6:5-7",
+        "John 12:20-22",
+        "John 14:8-9"
+      ]
+    }
+  ]
 }

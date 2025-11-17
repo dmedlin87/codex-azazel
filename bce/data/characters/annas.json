@@ -7,5 +7,32 @@
   "roles": [
     "high_priest"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "luke_acts",
+      "traits": {
+        "high_priestly_status": "Named alongside Caiaphas in connection with the high priesthood, indicating a leading figure within the Jerusalem priestly establishment.",
+        "background_reference": "Appears in the temporal and political framing of John the Baptist’s ministry, situating that ministry within a specific high-priestly regime.",
+        "association_with_early_opposition": "Linked to the circle of rulers, elders, and scribes who later interrogate Peter and John after the healing of the lame man.",
+        "family_and_power": "Represents a powerful priestly family whose influence extends into the early chapters of the church’s story."
+      },
+      "references": [
+        "Luke 3:2",
+        "Acts 4:6-7"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "family_connections": "Identified as the father-in-law of Caiaphas, the high priest that year, linking two high-priestly households.",
+        "role_in_jesus_arrest_and_hearing": "Jesus is brought first to Annas for questioning after his arrest, before being sent on to Caiaphas.",
+        "interrogation_focus": "Questions Jesus about his disciples and teaching, presenting him as an initial examiner in the passion proceedings.",
+        "narrative_function": "Serves to emphasize the entanglement of Jesus’s fate with the Jerusalem high-priestly elite before the Roman trial." 
+      },
+      "references": [
+        "John 18:13",
+        "John 18:19-24"
+      ]
+    }
+  ]
 }

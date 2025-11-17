@@ -9,5 +9,57 @@
     "disciple",
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "calling_and_family": "Called by Jesus while mending nets with his brother John and their father Zebedee, leaving their boat and hired men to follow him.",
+        "sons_of_thunder": "Together with John, given the name Boanerges, 'sons of thunder,' hinting at a fiery or forceful temperament.",
+        "inner_circle": "Belongs to the inner trio (with Peter and John) present at key moments such as the raising of Jairus’s daughter, the transfiguration, and Gethsemane.",
+        "ambition_and_misunderstanding": "Along with John, requests seats at Jesus’s right and left in glory, provoking indignation among the others and prompting Jesus’s teaching on servant leadership."
+      },
+      "references": [
+        "Mark 1:19-20",
+        "Mark 3:16-17",
+        "Mark 5:37",
+        "Mark 9:2",
+        "Mark 10:35-41",
+        "Mark 14:33"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "call_and_role": "Called with John from the boat of Zebedee and listed among the Twelve, paired with his brother.",
+        "family_request_for_honor": "In Matthew’s version, their mother (the mother of the sons of Zebedee) asks that they sit at Jesus’s right and left in his kingdom, revealing family ambition and misunderstanding of greatness.",
+        "presence_in_key_scenes": "Included with Peter and John at the transfiguration and at Gethsemane, marking him as part of Jesus’s closest circle." 
+      },
+      "references": [
+        "Matthew 4:21-22",
+        "Matthew 10:2",
+        "Matthew 17:1",
+        "Matthew 20:20-24",
+        "Matthew 26:37"
+      ]
+    },
+    {
+      "source_id": "luke_acts",
+      "traits": {
+        "fisherman_disciple": "Implicitly associated with the Zebedee fishing business in the call narrative where partners of Simon are astonished at the catch.",
+        "selection_as_apostle": "Named among those whom Jesus designates as apostles after a night of prayer.",
+        "inner_circle_participation": "Appears with Peter and John at the transfiguration and is mentioned when a Samaritan village rejects Jesus, a context sometimes linked to the 'sons of thunder' reputation.",
+        "martyrdom_in_acts": "Acts notes that Herod Agrippa I kills James the brother of John with the sword, making him the first of the Twelve to be martyred.",
+        "narrative_profile": "Combines early prominence within Jesus’s ministry with a brief but significant notice of martyrdom in the early church."
+      },
+      "references": [
+        "Luke 5:10",
+        "Luke 6:13-16",
+        "Luke 8:51",
+        "Luke 9:28",
+        "Luke 9:51-56",
+        "Luke 22:8",
+        "Acts 12:1-2"
+      ]
+    }
+  ]
 }

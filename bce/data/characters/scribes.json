@@ -8,5 +8,37 @@
     "group",
     "religious_leaders"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics",
+      "traits": {
+        "identity_and_function": "Portrayed as experts in the law, teachers and interpreters of Scripture often associated with the Pharisees and chief priests.",
+        "reaction_to_jesus_teaching": "Astonished that Jesus teaches with authority and not like the scribes, highlighting a contrast in mode and impact.",
+        "conflicts_with_jesus": "Question Jesus about his authority, his forgiving sins, his association with sinners, and his interpretation of the law, and are targets of his critiques of hypocrisy and externalism.",
+        "role_in_passion_plot": "Appear among those who conspire to arrest and kill Jesus and participate in mockery during the crucifixion.",
+        "positive_note": "Occasionally a scribe is portrayed more favorably, acknowledging the priority of love for God and neighbor." 
+      },
+      "references": [
+        "Mark 1:22",
+        "Mark 2:6-7",
+        "Mark 2:16",
+        "Mark 7:1-13",
+        "Mark 12:28-34",
+        "Mark 14:1",
+        "Mark 15:31",
+        "Matthew 23:1-36"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "presence_in_councils": "Mentioned among the groups within the council, including some Pharisees who are scribes defending Paul against excessive harshness.",
+        "ongoing_role": "Represent continuity of legal expertise within the structures that adjudicate the early Christian movement." 
+      },
+      "references": [
+        "Acts 4:5",
+        "Acts 23:9"
+      ]
+    }
+  ]
 }

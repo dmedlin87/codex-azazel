@@ -8,5 +8,21 @@
     "centurion",
     "convert"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "identity_and_piety": "Introduced as a centurion of the Italian cohort stationed in Caesarea, described as devout, God-fearing, generous in almsgiving, and constant in prayer.",
+        "angelic_vision": "Receives a vision in which an angel instructs him to send for Simon Peter in Joppa, affirming that his prayers and alms have ascended as a memorial before God.",
+        "encounter_with_peter": "Welcomes Peter into his household, gathers relatives and close friends to hear the message, and listens as Peter proclaims the good news about Jesus.",
+        "gentile_pentecost": "While Peter is still speaking, the Holy Spirit falls on all who hear the word, leading to their baptism and shocking the circumcised believers present.",
+        "role_in_church_debate": "Peter later recounts Cornelius’s story to defend Gentile inclusion without circumcision, and the episode is recalled in the Jerusalem council as evidence that God gives the Spirit to Gentiles as to Jews."
+      },
+      "references": [
+        "Acts 10:1-48",
+        "Acts 11:1-18",
+        "Acts 15:7-9"
+      ]
+    }
+  ]
 }

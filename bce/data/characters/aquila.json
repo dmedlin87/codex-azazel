@@ -8,5 +8,42 @@
     "coworker",
     "teacher"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "origin_and_trade": "Introduced as a Jew from Pontus who, with his wife Priscilla, had recently come from Italy because Claudius had ordered all Jews to leave Rome; works as a tentmaker.",
+        "partnership_with_paul": "Hosts Paul in Corinth, working together at the same trade and sharing life and mission.",
+        "mobility_in_mission": "Accompanies Paul as he leaves Corinth, traveling with him to Ephesus before remaining there for further ministry.",
+        "instruction_of_apollos": "Together with Priscilla, takes Apollos aside in Ephesus and explains the way of God more accurately, shaping another influential teacher."
+      },
+      "references": [
+        "Acts 18:2-3",
+        "Acts 18:18-19",
+        "Acts 18:26"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "coworker_and_risk_taker": "Named with Prisca/Priscilla as Paul’s coworkers who risked their necks for his life, prompting thanks from Paul and all the churches of the Gentiles.",
+        "house_church_leaders": "Host a church in their house, indicating a role in leading and organizing local assemblies.",
+        "network_and_greetings": "Appear in Paul’s greetings as trusted collaborators whose presence strengthens communities in different cities."
+      },
+      "references": [
+        "Romans 16:3-5",
+        "1 Corinthians 16:19"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "later_tradition": "Greeted, along with Prisca, in a later letter, suggesting continued prominence within the network of Pauline churches.",
+        "critical_note": "This greeting occurs in a letter widely regarded by critical scholarship as post-Pauline, reflecting the enduring memory of the couple’s ministry."
+      },
+      "references": [
+        "2 Timothy 4:19"
+      ]
+    }
+  ]
 }

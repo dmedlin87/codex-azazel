@@ -8,5 +8,50 @@
     "council_member",
     "follower"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "respected_council_member": "Described as a respected member of the council who is himself looking for the kingdom of God.",
+        "bold_request": "Gathers courage to ask Pilate for Jesus’s body after the crucifixion.",
+        "burial_actions": "Buys a linen shroud, takes Jesus down, wraps him, and lays him in a tomb hewn out of rock, rolling a stone against the entrance."
+      },
+      "references": [
+        "Mark 15:42-46"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "rich_disciple": "Called a rich man from Arimathea who had also become a disciple of Jesus.",
+        "own_new_tomb": "Places Jesus in his own new tomb, which he had hewn in the rock, and rolls a great stone to the door.",
+        "role_in_guarding_narrative": "His tomb becomes the locus for the guard and sealing of the stone, central to Matthew’s empty-tomb polemic."
+      },
+      "references": [
+        "Matthew 27:57-61"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "good_and_righteous": "Characterized as a good and righteous man who had not consented to the council’s plan and action.",
+        "waiting_for_kingdom": "Also said to be waiting expectantly for the kingdom of God.",
+        "careful_burial": "Takes the body down, wraps it in a linen cloth, and lays it in a rock-hewn tomb where no one had ever been laid."
+      },
+      "references": [
+        "Luke 23:50-53"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "secret_disciple": "Identified as a disciple of Jesus, though a secret one for fear of the Jews.",
+        "collaboration_with_nicodemus": "Works together with Nicodemus, who brings a mixture of myrrh and aloes, to prepare and bury Jesus according to Jewish burial customs.",
+        "garden_tomb": "Uses a new tomb in a garden near the place of crucifixion, in which no one had yet been laid."
+      },
+      "references": [
+        "John 19:38-42"
+      ]
+    }
+  ]
 }

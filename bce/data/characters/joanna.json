@@ -7,5 +7,20 @@
   "roles": [
     "follower"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "luke",
+      "traits": {
+        "identity_and_status": "Named as the wife of Chuza, Herod’s steward, indicating a woman of some social standing connected to the Herodian court.",
+        "benefactor_role": "Counts among the women who accompany Jesus and the Twelve, providing for them out of their resources.",
+        "healed_follower": "Described as someone from whom evil spirits or infirmities had been healed, linking her discipleship to Jesus’s liberating work.",
+        "witness_to_resurrection": "Appears among the women who go to the tomb, encounter the empty tomb and angelic message, and report these things to the apostles.",
+        "narrative_function": "Embodies the presence of women in Jesus’s itinerant circle and as first witnesses to the resurrection, connecting Galilean ministry to the Easter proclamation."
+      },
+      "references": [
+        "Luke 8:1-3",
+        "Luke 24:1-10"
+      ]
+    }
+  ]
 }

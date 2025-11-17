@@ -9,5 +9,39 @@
     "disciple",
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "listing_among_twelve": "Named in Mark’s roster of the Twelve as James the son of Alphaeus.",
+        "lack_of_narrative_detail": "Receives no individual stories, speeches, or distinctive characterization beyond his inclusion in the list."
+      },
+      "references": [
+        "Mark 3:16-19"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "mission_list": "Appears in the list of the Twelve whom Jesus commissions and sends out with authority over unclean spirits and disease.",
+        "collective_portrayal": "Like several of the lesser-known apostles, functions primarily as part of the collective rather than as an individually profiled figure."
+      },
+      "references": [
+        "Matthew 10:2-4"
+      ]
+    },
+    {
+      "source_id": "luke_acts",
+      "traits": {
+        "selection_and_appointment": "Included in Luke’s list of those whom Jesus names apostles after a night of prayer.",
+        "presence_in_early_community": "Named among those gathered in the upper room in Jerusalem after the ascension, participating in prayer as they await the Spirit.",
+        "ongoing_anonymity": "Apart from these lists, remains unelaborated, illustrating how the foundational group includes both prominent and largely anonymous witnesses.",
+        "later_traditions": "Later Christian tradition associates him with other figures called James (such as James the Less), but the canonical texts do not explicitly make these identifications."
+      },
+      "references": [
+        "Luke 6:13-16",
+        "Acts 1:13-14"
+      ]
+    }
+  ]
 }

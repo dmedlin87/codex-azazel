@@ -7,5 +7,54 @@
   "roles": [
     "prisoner"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "identity_and_crimes": "Described as a prisoner who had committed murder in an insurrection, associated with violent resistance to Roman rule.",
+        "passover_release_custom": "Placed in a scene where Pilate customarily releases one prisoner at the crowd’s request during the festival.",
+        "contrast_with_jesus": "Contrasted with Jesus as the crowd chooses the insurrectionist over the one accused of being 'king of the Jews.'",
+        "role_in_passion_narrative": "Embodies the crowds’ choice and the inversion of justice that leads to Jesus’s crucifixion."
+      },
+      "references": [
+        "Mark 15:6-15"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "notorious_prisoner": "Called a notorious prisoner, suggesting a figure well known for serious crimes.",
+        "crowd_manipulation": "His release results from the chief priests and elders persuading the crowd to ask for Barabbas and destroy Jesus.",
+        "pilates_dilemma": "Functions within Pilate’s attempt to release Jesus by offering the crowd a choice, which instead underscores their rejection of Jesus.",
+        "symbolic_exchange": "His freedom contrasts with Jesus’s condemnation, heightening themes of substitution and injustice in the passion story."
+      },
+      "references": [
+        "Matthew 27:15-26"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "insurrection_and_murder": "Identified as someone imprisoned for an insurrection in the city and for murder.",
+        "public_demand": "The crowd cries out to release Barabbas and crucify Jesus, overriding Pilate’s repeated declarations of Jesus’s innocence.",
+        "political_dimensions": "Highlights political tensions in Jerusalem, where a known rebel is preferred over the one proclaimed as Messiah.",
+        "narrative_function": "Serves to sharpen Luke’s emphasis on the wrongful condemnation of Jesus despite Pilate’s stated reluctance."
+      },
+      "references": [
+        "Luke 23:18-25"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "bandit_label": "Described as a bandit (robber or brigand), aligning him with violent or criminal activity rather than mere political dissent.",
+        "choice_of_the_crowd": "The crowd chooses Barabbas instead of Jesus when Pilate offers to release 'the King of the Jews.'",
+        "emphasis_on_misrecognition": "Intensifies the Johannine theme of misrecognition, as the people reject the true king and light in favor of a criminal.",
+        "role_in_trial_scene": "Appears briefly but decisively in the trial narrative as the one for whom Jesus is effectively substituted."
+      },
+      "references": [
+        "John 18:39-40"
+      ]
+    }
+  ]
 }

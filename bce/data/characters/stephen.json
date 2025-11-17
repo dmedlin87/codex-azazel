@@ -8,5 +8,22 @@
     "deacon",
     "martyr"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "appointment_among_seven": "Chosen as one of the seven men full of the Spirit and wisdom appointed to oversee the distribution to widows in the Jerusalem community.",
+        "full_of_grace_and_power": "Described as full of grace and power, performing great wonders and signs among the people.",
+        "dispute_and_arrest": "Engages in debate with members of various synagogues; when they cannot withstand his wisdom and Spirit, they bring false accusations about his words against the temple and the law.",
+        "speech_before_council": "Delivers a lengthy speech rehearsing Israel’s history, emphasizing God’s presence beyond the temple and critiquing resistance to the Holy Spirit.",
+        "vision_and_martyrdom": "Sees the heavens opened and the Son of Man standing at God’s right hand; is stoned outside the city while praying for his executioners’ forgiveness, becoming the first Christian martyr.",
+        "impact_on_mission": "His death triggers great persecution in Jerusalem that scatters believers and leads to wider mission beyond the city; Saul consents to his killing and begins persecuting the church."
+      },
+      "references": [
+        "Acts 6:1-15",
+        "Acts 7:1-60",
+        "Acts 8:1-4"
+      ]
+    }
+  ]
 }

@@ -7,5 +7,21 @@
   "roles": [
     "follower"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "john",
+      "traits": {
+        "beloved_friend": "Introduced as the one whom Jesus loves, brother of Mary and Martha of Bethany.",
+        "illness_and_death": "Falls ill and dies after Jesus delays coming, setting the stage for a sign revealing Jesus as the resurrection and the life.",
+        "raising_from_the_dead": "Called out of the tomb by Jesus after four days, still bound in grave clothes, providing a climactic sign in the Gospel.",
+        "impact_on_belief_and_opposition": "His raising leads many Jews to believe in Jesus but also provokes the chief priests and Pharisees to plot against Jesus and later to plan to kill Lazarus as well.",
+        "presence_at_banquet": "Reclines at table with Jesus in Bethany when Mary anoints Jesus’s feet, serving as a living sign of Jesus’s power over death."
+      },
+      "references": [
+        "John 11:1-44",
+        "John 11:45-53",
+        "John 12:1-11"
+      ]
+    }
+  ]
 }

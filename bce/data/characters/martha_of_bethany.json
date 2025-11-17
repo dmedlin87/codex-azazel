@@ -7,5 +7,29 @@
   "roles": [
     "follower"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "luke",
+      "traits": {
+        "hospitality_role": "Welcomes Jesus into her home and is busy with much serving while her sister Mary sits at Jesus’s feet listening to his word.",
+        "gentle_rebuke": "Receives Jesus’s response that she is anxious and troubled about many things, while Mary has chosen the better part that will not be taken away from her.",
+        "symbolic_reading": "Often interpreted as representing the tension between active service and contemplative listening in discipleship."
+      },
+      "references": [
+        "Luke 10:38-42"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "sister_of_lazarus": "Appears as one of the sisters of Lazarus, who sends word to Jesus about her brother’s illness.",
+        "dialogue_about_resurrection": "Engages Jesus in a dialogue about resurrection, expressing belief in a future resurrection and then confessing Jesus as the Messiah, the Son of God.",
+        "participation_in_sign": "Witnesses Jesus’s raising of Lazarus and participates in the family hospitality at the subsequent banquet in Bethany."
+      },
+      "references": [
+        "John 11:1-27",
+        "John 12:1-2"
+      ]
+    }
+  ]
 }

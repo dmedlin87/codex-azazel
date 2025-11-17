@@ -7,5 +7,18 @@
   "roles": [
     "apostle"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "criteria_for_selection": "Proposed as a candidate to replace Judas among the Twelve, having accompanied the disciples from the baptism of John to the ascension and thus able to serve as a witness to the resurrection.",
+        "casting_lots": "Chosen by lot after prayer that the Lord would show which candidate he has chosen, underscoring divine guidance in restoring the apostolic circle.",
+        "role_as_witness": "Though no further stories about him are narrated, he is counted with the eleven apostles, symbolically restoring the number of Israel’s tribes in the new movement.",
+        "narrative_silence": "Acts’s silence beyond his selection has encouraged later traditions to speculate about his subsequent ministry, but the canonical text keeps the focus on his representative function."
+      },
+      "references": [
+        "Acts 1:15-26"
+      ]
+    }
+  ]
 }

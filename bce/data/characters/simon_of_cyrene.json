@@ -7,5 +7,20 @@
   "roles": [
     "bystander"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics",
+      "traits": {
+        "compelled_to_carry_cross": "Seized or compelled by the soldiers to carry Jesus’s cross on the way to Golgotha.",
+        "identification_by_family": "In Mark, identified as the father of Alexander and Rufus, suggesting that his family was known in early Christian circles.",
+        "origin": "Described as coming in from the country and being from Cyrene in North Africa, highlighting the diverse geography around the passion narrative.",
+        "narrative_role": "Serves as an unexpected participant in the passion, bearing the cross after Jesus and symbolically sharing in his suffering."
+      },
+      "references": [
+        "Mark 15:21",
+        "Matthew 27:32",
+        "Luke 23:26"
+      ]
+    }
+  ]
 }

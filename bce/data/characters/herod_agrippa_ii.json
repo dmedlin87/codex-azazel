@@ -8,5 +8,21 @@
     "client_king",
     "ruler"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "identity_and_context": "Appears as King Agrippa, visiting Caesarea with Bernice during the governorship of Festus, and consulted about Paul’s case.",
+        "knowledge_of_jewish_matters": "Recognized by Paul as knowledgeable about Jewish customs and controversies, making him an appropriate hearer for Paul’s defense.",
+        "hearing_of_paul": "Listens to Paul’s detailed account of his background, persecution of Christians, and encounter with the risen Jesus on the Damascus road.",
+        "reaction_to_message": "Responds skeptically or ambivalently to Paul’s appeal, with the famous remark about whether Paul would persuade him to become a Christian in such a short time.",
+        "assessment_of_paul": "Concludes with Festus that Paul has done nothing deserving death or imprisonment and could have been set free if he had not appealed to Caesar.",
+        "narrative_function": "Serves as a royal audience for Paul’s testimony, highlighting both the plausibility of Paul’s case and the ongoing distance between the movement and certain elite hearers."
+      },
+      "references": [
+        "Acts 25:13-27",
+        "Acts 26:1-32"
+      ]
+    }
+  ]
 }

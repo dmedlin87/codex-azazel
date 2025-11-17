@@ -8,5 +8,21 @@
     "client_king",
     "ruler"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "acts",
+      "traits": {
+        "persecution_of_church": "Portrayed as a ruler who lays violent hands on members of the Jerusalem church, killing James the son of Zebedee with the sword and arresting Peter to please certain Judeans.",
+        "political_motives": "Acts highlights his desire to curry favor with the people by attacking key leaders of the Jesus movement.",
+        "public_display_and_death": "While dressed in royal robes and receiving acclamation as a god in Caesarea, is struck down by an angel of the Lord because he does not give glory to God and is eaten by worms and dies.",
+        "theological_interpretation": "His death is framed as divine judgment, contrasting human self-exaltation with God’s sovereignty and the continued growth of the word."
+      },
+      "references": [
+        "Acts 12:1-3",
+        "Acts 12:5-11",
+        "Acts 12:20-23",
+        "Acts 12:24"
+      ]
+    }
+  ]
 }

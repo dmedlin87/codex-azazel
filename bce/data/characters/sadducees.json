@@ -8,5 +8,35 @@
     "group",
     "religious_leaders"
   ],
-  "source_profiles": []
+  "source_profiles": [
+    {
+      "source_id": "synoptics",
+      "traits": {
+        "identity_and_beliefs": "Presented as a Jewish group associated with priestly and aristocratic circles, characterized by denial of the resurrection and skepticism about angels and spirits.",
+        "conflict_with_jesus": "Approach Jesus with a question about levirate marriage in the resurrection, intending to show the doctrine’s absurdity; Jesus rebukes their ignorance of Scripture and the power of God.",
+        "role_in_passion": "Appear among the chief priests and leaders involved in plots against Jesus and in his trial before the council.",
+        "contrast_with_pharisees": "In the Gospels, often paired with Pharisees yet distinguished by their different stance on resurrection and the supernatural." 
+      },
+      "references": [
+        "Matthew 16:1-12",
+        "Matthew 22:23-33",
+        "Mark 12:18-27",
+        "Luke 20:27-40"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "opposition_to_apostles": "Some Sadducees, particularly those associated with the high priestly family, are annoyed at the apostles’ proclamation of resurrection and have them arrested.",
+        "participation_in_council": "Represent the faction in the council most resistant to the message of resurrection, contributing to the early persecution of the church.",
+        "pharisee_sadducee_divide": "Paul exploits the division between Pharisees and Sadducees over resurrection, angels, and spirits to create dissension in the council.",
+        "narrative_role": "Act as chief opponents of the resurrection message in Acts, illustrating intra-Jewish theological conflicts that shape responses to the gospel." 
+      },
+      "references": [
+        "Acts 4:1-2",
+        "Acts 5:17",
+        "Acts 23:6-8"
+      ]
+    }
+  ]
 }
