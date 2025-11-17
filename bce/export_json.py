@@ -13,8 +13,12 @@ def _export_iterable(objs: Iterable[object], output_path: str) -> None:
     path = Path(output_path)
     data = [asdict(obj) for obj in objs]
     path.parent.mkdir(parents=True, exist_ok=True)
+    # Use ensure_ascii=True so the file only contains ASCII bytes; this
+    # makes it safely decodable even when opened with a non-UTF-8
+    # default encoding (e.g., cp1252 on Windows), while json.load
+    # still returns proper Unicode strings.
     with path.open("w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        json.dump(data, f, ensure_ascii=True, indent=2)
 
 
 def export_all_characters(output_path: str) -> None:

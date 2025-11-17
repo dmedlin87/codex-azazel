@@ -158,6 +158,7 @@ def dossier_to_markdown(dossier: dict) -> str:
             source = acc.get("source_id")
             reference = acc.get("reference")
             summary = acc.get("summary")
+            notes = acc.get("notes")
             bullet_parts = []
             if source:
                 bullet_parts.append(f"source={source}")
@@ -165,6 +166,8 @@ def dossier_to_markdown(dossier: dict) -> str:
                 bullet_parts.append(f"ref={reference}")
             if summary:
                 bullet_parts.append(f"summary={summary}")
+            if isinstance(notes, str) and notes.strip():
+                bullet_parts.append(f"notes={notes.strip()}")
             if not bullet_parts:
                 bullet_parts = [f"{k}={v}" for k, v in acc.items()]
             lines.append(f"- {'; '.join(bullet_parts)}")

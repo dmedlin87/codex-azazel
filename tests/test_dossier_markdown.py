@@ -15,3 +15,23 @@ def test_character_dossier_to_markdown_smoke() -> None:
 
     assert isinstance(markdown, str)
     assert markdown.strip(), "expected non-empty markdown output"
+
+
+def test_event_account_notes_retain_markdown_output() -> None:
+    """Event notes should be rendered when accounts include them."""
+    dossier = {
+        "id": "notes_event",
+        "label": "Notes Event",
+        "accounts": [
+            {
+                "source_id": "source-a",
+                "reference": "Ref 1:1",
+                "summary": "Summary",
+                "notes": "  important context  ",
+            }
+        ],
+    }
+
+    markdown = dossier_to_markdown(dossier)
+
+    assert "notes=important context" in markdown
