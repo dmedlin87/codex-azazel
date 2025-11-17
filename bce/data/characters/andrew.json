@@ -13,6 +13,36 @@
   "apostle",
   "fisherman"
   ],
+  "relationships": [
+  {
+  "character_id": "jesus",
+  "type": "teacher_and_first_contact",
+  "sources": ["mark", "john"],
+  "references": ["Mark 1:16-18", "John 1:35-39"],
+  "notes": "Leaves his nets at Jesus’s call and is among the earliest disciples to remain with him after John the Baptist’s witness."
+  },
+  {
+  "character_id": "peter",
+  "type": "brother_and_mediator",
+  "sources": ["mark", "john"],
+  "references": ["Mark 1:29-30", "John 1:40-42"],
+  "notes": "Identified as Simon Peter’s brother who brings him to Jesus and shares household scenes in Capernaum."
+  },
+  {
+  "character_id": "philip",
+  "type": "mission_partner",
+  "sources": ["john"],
+  "references": ["John 1:43-46", "John 12:20-22"],
+  "notes": "Works with Philip to bring seekers to Jesus, from Nathanael near Bethsaida to Greeks who request an audience."
+  },
+  {
+  "character_id": "john",
+  "type": "inner_circle_colleague",
+  "sources": ["mark"],
+  "references": ["Mark 13:3"],
+  "notes": "Appears with Peter, James, and John on the Mount of Olives questioning Jesus about Jerusalem’s fate, reflecting participation in the leadership core."
+  }
+  ],
   "source_profiles": [
   {
   "source_id": "mark",

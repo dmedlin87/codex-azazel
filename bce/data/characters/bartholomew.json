@@ -8,6 +8,29 @@
     "disciple",
     "apostle"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "teacher_and_commissioner",
+      "sources": ["mark", "luke_acts"],
+      "references": ["Mark 3:16-19", "Luke 6:13-16"],
+      "notes": "Receives appointment from Jesus among the Twelve after the night of prayer, sharing the mandate to be with him and be sent out."
+    },
+    {
+      "character_id": "philip",
+      "type": "paired_mission_partner",
+      "sources": ["mark", "matthew", "luke_acts"],
+      "references": ["Mark 3:18", "Matthew 10:3", "Luke 6:14"],
+      "notes": "Repeatedly paired with Philip in apostolic lists, signaling a collaborative missionary partnership."
+    },
+    {
+      "character_id": "peter",
+      "type": "jerusalem_leadership_colleague",
+      "sources": ["luke_acts"],
+      "references": ["Acts 1:13-14"],
+      "notes": "Prays with Peter and the Jerusalem apostles in the upper room after the ascension, remaining part of the leadership core awaiting the Spirit."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",
