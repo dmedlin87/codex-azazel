@@ -8,6 +8,39 @@
   "roles": [
     "disciple"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "beloved_disciple_and_witness",
+      "sources": ["john"],
+      "references": [
+        "John 13:23-25",
+        "John 19:26-27",
+        "John 21:20-24"
+      ],
+      "notes": "Featured as the disciple whom Jesus loved, reclining beside him at the supper, entrusted with testimony, and remaining close through the passion and resurrection appearances."
+    },
+    {
+      "character_id": "mary_mother_of_jesus",
+      "type": "entrusted_caregiver",
+      "sources": ["john"],
+      "references": [
+        "John 19:26-27"
+      ],
+      "notes": "From the cross Jesus entrusts his mother to the beloved disciple, who receives Mary into his own household, symbolizing a new familial bond."
+    },
+    {
+      "character_id": "peter",
+      "type": "collaborative_witness_with_friendly_rivalry",
+      "sources": ["john"],
+      "references": [
+        "John 13:24",
+        "John 20:2-8",
+        "John 21:7"
+      ],
+      "notes": "Runs with Peter to the tomb, signals to him at the supper, and recognizes the risen Jesus on the shore, reflecting intertwined leadership and testimony."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "john",
