@@ -5,18 +5,58 @@
     "Luke"
   ],
   "roles": [
-    "coworker"
+    "coworker",
+    "physician",
+    "evangelist"
+  ],
+  "relationships": [
+    {
+      "character_id": "paul",
+      "type": "coworker_and_confidant",
+      "sources": ["paul_undisputed", "paul_disputed", "paul_pastoral"],
+      "references": ["Philemon 1:24", "Colossians 4:14", "2 Timothy 4:11"],
+      "notes": "Appears in Paul’s greeting lists as a trusted coworker, praised as the beloved physician, and remembered as the sole companion who stayed with Paul near the end."
+    },
+    {
+      "character_id": "mark",
+      "type": "coworker_network_associate",
+      "sources": ["paul_undisputed", "paul_disputed"],
+      "references": ["Philemon 1:24", "Colossians 4:10-14"],
+      "notes": "Named alongside Mark within Paul’s circle of coworkers, indicating overlapping mission networks and shared travel plans."
+    }
   ],
   "source_profiles": [
     {
       "source_id": "paul_undisputed",
       "traits": {
-        "relationship_to_paul": "listed among Paul's fellow workers in the closing greetings.",
-        "status": "appears in a network of collaborators alongside Mark and others.",
-        "later_tradition_note": "later Christian tradition identifies Luke as a physician and author of a Gospel and Acts, but this is not stated in the undisputed letters."
+        "relationship_to_paul": "Listed among Paul’s fellow workers in greeting material, implying hands-on collaboration in the mission.",
+        "network_status": "Appears within a cluster of coworkers that communities are expected to recognize and honor.",
+        "later_tradition_note": "Subsequent tradition identifies him as a physician and evangelist, though the undisputed letter only names him as a coworker."
       },
       "references": [
-        "Philemon 24"
+        "Philemon 1:24"
+      ]
+    },
+    {
+      "source_id": "paul_disputed",
+      "traits": {
+        "beloved_physician": "Called the 'beloved physician,' the only explicit New Testament description of his profession.",
+        "greeting_and_presence": "Sends greetings from Paul’s company to the Colossian assembly, showing his presence with Paul during imprisonment.",
+        "association_with_mark": "Named in close proximity to Mark and other coworkers, reinforcing his integration within the same mission cohort."
+      },
+      "references": [
+        "Colossians 4:10-14"
+      ]
+    },
+    {
+      "source_id": "paul_pastoral",
+      "traits": {
+        "loyal_companion": "Remembered as the only coworker still with Paul late in his ministry, underscoring steadfast loyalty.",
+        "usefulness_to_ministry": "His presence is valued enough that Timothy is told Luke alone remains, highlighting his utility in supporting Paul.",
+        "historical_memory": "The reference preserves a later memory of Luke as a long-term associate who endured hardship alongside Paul."
+      },
+      "references": [
+        "2 Timothy 4:11"
       ]
     }
   ]

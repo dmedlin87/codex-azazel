@@ -13,6 +13,29 @@
   "fisherman",
   "pillar"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "inner_circle_disciple",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "John 21:2"],
+      "notes": "Consistently accompanies Jesus at pivotal healings, the transfiguration, and resurrection appearances as part of the closest disciple circle."
+    },
+    {
+      "character_id": "james_son_of_zebedee",
+      "type": "brother_and_coworker",
+      "sources": ["mark", "matthew", "luke", "acts"],
+      "references": ["Mark 1:19-20", "Matthew 4:21-22", "Luke 5:10", "Acts 12:2"],
+      "notes": "The two sons of Zebedee leave their fishing business together to follow Jesus and remain paired in ministry until James’s martyrdom."
+    },
+    {
+      "character_id": "peter",
+      "type": "inner_circle_peer_and_colleague",
+      "sources": ["mark", "matthew", "luke", "john", "acts", "paul_undisputed"],
+      "references": ["Mark 5:37", "Matthew 26:37", "Luke 8:51", "John 20:2-8", "Acts 3:1", "Galatians 2:9"],
+      "notes": "Frequently paired with Peter during Jesus’s ministry, in resurrection narratives, and in Jerusalem leadership, culminating in Paul’s recognition of both as pillars."
+    }
+  ],
   "source_profiles": [
   {
   "source_id": "mark",
