@@ -10,6 +10,37 @@
     "missionary",
     "delegate"
   ],
+  "relationships": [
+    {
+      "character_id": "paul",
+      "type": "mentor_and_delegate",
+      "sources": ["acts", "paul_undisputed", "paul_pastoral"],
+      "references": [
+        "Acts 16:1-3",
+        "Acts 17:14-15",
+        "Acts 19:22",
+        "1 Corinthians 4:17",
+        "1 Corinthians 16:10-11",
+        "Philippians 2:19-23",
+        "1 Timothy 1:2",
+        "2 Timothy 1:2"
+      ],
+      "notes": "Called Paul’s beloved child and coworker, entrusted with sensitive visits to Thessalonica, Corinth, and Ephesus to reinforce Paul’s teaching."
+    },
+    {
+      "character_id": "silas_silvanus",
+      "type": "co_sender_and_envoy",
+      "sources": ["acts", "paul_undisputed"],
+      "references": [
+        "Acts 17:14-15",
+        "Acts 18:5",
+        "1 Thessalonians 1:1",
+        "1 Thessalonians 3:2",
+        "2 Corinthians 1:19"
+      ],
+      "notes": "Works alongside Silas in Macedonia and appears with him as a co-author of the Thessalonian correspondence, sharing responsibility for pastoral follow-up."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "paul_undisputed",
