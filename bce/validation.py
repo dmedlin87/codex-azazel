@@ -17,10 +17,39 @@ _REF_RE = re.compile(
 
 
 _BOOK_MAX_CHAPTER: Dict[str, int] = {
+    # Gospels
     "Matthew": 28,
     "Mark": 16,
     "Luke": 24,
     "John": 21,
+    # History
+    "Acts": 28,
+    # Pauline Epistles (Undisputed)
+    "Romans": 16,
+    "1 Corinthians": 16,
+    "2 Corinthians": 13,
+    "Galatians": 6,
+    "Philippians": 4,
+    "1 Thessalonians": 5,
+    "Philemon": 1,
+    # Pauline Epistles (Disputed)
+    "Ephesians": 6,
+    "Colossians": 4,
+    "2 Thessalonians": 3,
+    "1 Timothy": 6,
+    "2 Timothy": 4,
+    "Titus": 3,
+    # General Epistles
+    "Hebrews": 13,
+    "James": 5,
+    "1 Peter": 5,
+    "2 Peter": 3,
+    "1 John": 5,
+    "2 John": 1,
+    "3 John": 1,
+    "Jude": 1,
+    # Apocalyptic
+    "Revelation": 22,
 }
 
 _SUPPORTED_BOOKS_FOR_GLOBAL_VALIDATION = set(_BOOK_MAX_CHAPTER.keys())

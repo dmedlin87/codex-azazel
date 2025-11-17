@@ -52,7 +52,16 @@ class Character:
         return result
 
     def has_trait(self, trait: str, source: Optional[str] = None) -> bool:
-        """Return True when a trait or tag matches the requested name."""
+        """Return True when a trait or tag matches the requested name.
+
+        NOTE: This method has ambiguous semantics when source is specified.
+        Consider using has_trait_in_source() or has_trait_in_any_source()
+        for clearer intent. See FIXES.md for details.
+
+        When source is None, checks all source profiles AND global tags.
+        When source is specified, checks that source's traits OR global tags
+        (which may be surprising - the source might not mention the trait).
+        """
 
         needle = trait.lower()
 
@@ -69,6 +78,76 @@ class Character:
             if any(k.lower() == needle for k in profile.traits.keys()):
                 return True
         return any(isinstance(tag, str) and tag.lower() == needle for tag in self.tags)
+
+    def has_trait_in_source(self, trait: str, source: str) -> bool:
+        """Check if a specific source mentions this trait.
+
+        Returns True only if the named source profile contains the trait.
+        Does NOT fall back to checking global tags.
+
+        This method has clear semantics: it answers "does source X mention trait Y?"
+
+        Parameters:
+            trait: Trait name to search for (case-insensitive)
+            source: Source ID (e.g., "mark", "matthew")
+
+        Returns:
+            True if the source profile contains the trait, False otherwise
+
+        Examples:
+            >>> jesus = get_character("jesus")
+            >>> jesus.has_trait_in_source("miracles", "mark")
+            True
+            >>> jesus.has_trait_in_source("nonexistent_trait", "mark")
+            False
+        """
+        needle = trait.lower()
+        profile = self.get_source_profile(source)
+        if profile is None:
+            return False
+        return any(k.lower() == needle for k in profile.traits.keys())
+
+    def has_trait_in_any_source(self, trait: str) -> bool:
+        """Check if ANY source mentions this trait.
+
+        Returns True if at least one source profile contains the trait.
+        Does NOT check global tags.
+
+        Parameters:
+            trait: Trait name to search for (case-insensitive)
+
+        Returns:
+            True if any source profile contains the trait, False otherwise
+
+        Examples:
+            >>> jesus = get_character("jesus")
+            >>> jesus.has_trait_in_any_source("miracles")
+            True
+        """
+        needle = trait.lower()
+        for profile in self.source_profiles:
+            if any(k.lower() == needle for k in profile.traits.keys()):
+                return True
+        return False
+
+    def has_tag(self, tag: str) -> bool:
+        """Check if character has a specific tag.
+
+        Tags are global metadata tags, not source-specific traits.
+
+        Parameters:
+            tag: Tag name to search for (case-insensitive)
+
+        Returns:
+            True if the character has the tag, False otherwise
+
+        Examples:
+            >>> jesus = get_character("jesus")
+            >>> jesus.has_tag("galilean")
+            True
+        """
+        needle = tag.lower()
+        return any(isinstance(t, str) and t.lower() == needle for t in self.tags)
 
 
 @dataclass(slots=True)
