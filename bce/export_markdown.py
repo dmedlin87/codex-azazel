@@ -11,6 +11,7 @@ from .dossier_types import (
     DOSSIER_KEY_ALIASES,
     DOSSIER_KEY_ROLES,
     DOSSIER_KEY_SOURCE_IDS,
+    DOSSIER_KEY_SOURCE_METADATA,
     DOSSIER_KEY_TRAITS_BY_SOURCE,
     DOSSIER_KEY_REFERENCES_BY_SOURCE,
     DOSSIER_KEY_TRAIT_COMPARISON,
@@ -108,6 +109,10 @@ def dossier_to_markdown(dossier: dict) -> str:
     source_ids = dossier.get(DOSSIER_KEY_SOURCE_IDS)
     if isinstance(source_ids, list):
         _add_list_section("Source IDs", source_ids)
+
+    source_metadata = dossier.get(DOSSIER_KEY_SOURCE_METADATA)
+    if isinstance(source_metadata, dict):
+        _add_nested_mapping_section("Source metadata", source_metadata)
 
     traits_by_source = dossier.get(DOSSIER_KEY_TRAITS_BY_SOURCE)
     if isinstance(traits_by_source, dict):

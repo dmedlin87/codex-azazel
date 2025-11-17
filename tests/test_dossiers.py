@@ -6,12 +6,34 @@ from bce import dossiers
 def test_build_character_dossier_basic() -> None:
     d = dossiers.build_character_dossier("jesus")
 
-    for key in ("id", "canonical_name", "aliases", "roles", "source_ids", "traits_by_source", "trait_conflicts"):
+    for key in (
+        "id",
+        "canonical_name",
+        "aliases",
+        "roles",
+        "source_ids",
+        "source_metadata",
+        "traits_by_source",
+        "trait_conflicts",
+    ):
         assert key in d
 
     assert d["id"] == "jesus"
     assert isinstance(d["source_ids"], list)
     assert isinstance(d["traits_by_source"], dict)
+
+
+def test_character_dossier_includes_source_metadata_for_known_sources() -> None:
+    """Character dossier should include source metadata for known sources."""
+    d = dossiers.build_character_dossier("jesus")
+
+    assert "source_metadata" in d
+    meta = d["source_metadata"]
+    assert isinstance(meta, dict)
+    # At least Mark should have metadata defined in sources.json
+    assert "mark" in meta
+    assert isinstance(meta["mark"], dict)
+    assert "date_range" in meta["mark"]
 
 
 def test_build_event_dossier_basic() -> None:

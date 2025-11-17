@@ -18,6 +18,7 @@ This document proposes features that would enhance the Biblical Character Engine
 **Problem**: Currently we track which source says what, but not *why* or *when* those sources were written.
 
 **Proposal**: Add source metadata to track:
+
 - Estimated dating (e.g., "Mark: 66-70 CE", "John: 90-110 CE")
 - Geographic provenance (e.g., "Rome", "Antioch", "Ephesus")
 - Intended audience (e.g., "Gentile Christians", "Jewish Christians")
@@ -26,6 +27,7 @@ This document proposes features that would enhance the Biblical Character Engine
 **Use case**: Researchers can understand *why* contradictions exist by seeing temporal and cultural contexts.
 
 **Implementation**:
+
 ```json
 {
   "source_id": "mark",
@@ -282,6 +284,7 @@ result = validate_reference("Mark 99:1")
 **Problem**: Events reference character IDs, but we don't validate that those characters actually exist or have relevant source profiles.
 
 **Proposal**: Enhance validation to check:
+
 - All event participants exist as characters
 - Event accounts reference sources that participants have profiles for
 - No orphaned references or broken links
@@ -326,6 +329,7 @@ report = completeness_report("jesus")
 **Problem**: Data entry errors can create logical inconsistencies.
 
 **Proposal**: Add consistency validators:
+
 - Check that inverse relationships match (if A mentions B, does B mention A?)
 - Verify event chronology doesn't have loops
 - Ensure source IDs are consistent across all files
@@ -562,6 +566,7 @@ query {
 ```
 
 Severity levels:
+
 - **low**: Minor details (e.g., exact wording of inscription)
 - **medium**: Significant narrative differences (e.g., resurrection appearances)
 - **high**: Fundamental theological differences (e.g., Jesus's nature)
@@ -702,6 +707,7 @@ configure_cache(
 **Problem**: Contributors don't know how to add quality data.
 
 **Proposal**: Create `docs/DATA_ENTRY_GUIDE.md` with:
+
 - How to research a character/event
 - What sources to consult
 - How to identify contradictions
@@ -715,6 +721,7 @@ configure_cache(
 **Problem**: Users don't know what the engine is good for.
 
 **Proposal**: Add `examples/` for common tasks:
+
 - `examples/synoptic_comparison.py` - Compare parallel passages
 - `examples/conflict_report.py` - Generate conflict analysis report
 - `examples/character_network.py` - Build social network graph
@@ -727,6 +734,7 @@ configure_cache(
 **Problem**: Visual exploration is more accessible than code.
 
 **Proposal**: Add `notebooks/`:
+
 - `notebooks/getting_started.ipynb` - Introduction to BCE
 - `notebooks/conflict_analysis.ipynb` - Interactive conflict exploration
 - `notebooks/synoptic_problem.ipynb` - Visualizing gospel relationships
@@ -738,6 +746,7 @@ configure_cache(
 **Problem**: Some users prefer video content.
 
 **Proposal**: Create screencast tutorials:
+
 - "Getting started with Codex Azazel"
 - "Adding a new character"
 - "Analyzing contradictions"
@@ -752,6 +761,7 @@ configure_cache(
 **Problem**: No clear process for contributions.
 
 **Proposal**: Create `CONTRIBUTING.md` with:
+
 - Code style requirements
 - Test expectations
 - PR template
@@ -765,6 +775,7 @@ configure_cache(
 **Problem**: Need expert review for biblical data accuracy.
 
 **Proposal**: Add review system:
+
 - Label PRs as "needs-scholar-review"
 - Maintain list of volunteer reviewers
 - Use GitHub Discussions for data debates
@@ -795,6 +806,7 @@ Load plugins: `bce --plugin my_analysis character jesus`
 Based on impact and alignment with project goals:
 
 **Immediate (P0-P1):**
+
 1. Source criticism metadata
 2. Parallel passage alignment
 3. Full-text search
@@ -804,6 +816,7 @@ Based on impact and alignment with project goals:
 7. Dataclass helper methods
 
 **Near-term (P1-P2):**
+
 1. Geographic metadata
 2. Conflict severity scoring
 3. Graph database export
@@ -812,6 +825,7 @@ Based on impact and alignment with project goals:
 6. Data entry guide
 
 **Future (P2-P3):**
+
 1. Chronology support
 2. Manuscript variation tracking
 3. Statistical analysis

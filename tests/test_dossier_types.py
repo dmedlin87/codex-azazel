@@ -17,6 +17,7 @@ from bce.dossier_types import (
     DOSSIER_KEY_REFERENCES_BY_SOURCE,
     DOSSIER_KEY_ROLES,
     DOSSIER_KEY_SOURCE_IDS,
+    DOSSIER_KEY_SOURCE_METADATA,
     DOSSIER_KEY_SUMMARY,
     DOSSIER_KEY_TRAIT_COMPARISON,
     DOSSIER_KEY_TRAIT_CONFLICTS,
@@ -32,6 +33,7 @@ def test_character_dossier_typed_dict_keys() -> None:
         DOSSIER_KEY_ALIASES,
         DOSSIER_KEY_ROLES,
         DOSSIER_KEY_SOURCE_IDS,
+        DOSSIER_KEY_SOURCE_METADATA,
         DOSSIER_KEY_TRAITS_BY_SOURCE,
         DOSSIER_KEY_REFERENCES_BY_SOURCE,
         DOSSIER_KEY_TRAIT_COMPARISON,
@@ -74,6 +76,7 @@ def test_dossier_key_constant_values() -> None:
     assert DOSSIER_KEY_ALIASES == "aliases"
     assert DOSSIER_KEY_ROLES == "roles"
     assert DOSSIER_KEY_SOURCE_IDS == "source_ids"
+    assert DOSSIER_KEY_SOURCE_METADATA == "source_metadata"
     assert DOSSIER_KEY_TRAITS_BY_SOURCE == "traits_by_source"
     assert DOSSIER_KEY_REFERENCES_BY_SOURCE == "references_by_source"
     assert DOSSIER_KEY_TRAIT_COMPARISON == "trait_comparison"
@@ -93,6 +96,12 @@ def test_character_dossier_container_types() -> None:
     assert get_args(hints["roles"]) == (str,)
     assert get_origin(hints["source_ids"]) is list
     assert get_args(hints["source_ids"]) == (str,)
+    source_metadata = hints["source_metadata"]
+    assert get_origin(source_metadata) is dict
+    sm_key, sm_value = get_args(source_metadata)
+    assert sm_key is str
+    assert get_origin(sm_value) is dict
+    assert get_args(sm_value) == (str, str)
     traits = hints["traits_by_source"]
     assert get_origin(traits) is dict
     traits_key, traits_value = get_args(traits)

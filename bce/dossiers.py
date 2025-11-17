@@ -5,6 +5,7 @@ from typing import Dict, List
 
 from . import queries
 from . import contradictions
+from . import sources
 from .models import Character, Event
 from .dossier_types import (
     CharacterDossier,
@@ -19,6 +20,7 @@ from .dossier_types import (
     DOSSIER_KEY_REFERENCES_BY_SOURCE,
     DOSSIER_KEY_ROLES,
     DOSSIER_KEY_SOURCE_IDS,
+    DOSSIER_KEY_SOURCE_METADATA,
     DOSSIER_KEY_TRAIT_COMPARISON,
     DOSSIER_KEY_TRAIT_CONFLICTS,
     DOSSIER_KEY_TRAITS_BY_SOURCE,
@@ -49,12 +51,32 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         traits_by_source[profile.source_id] = dict(profile.traits)
         references_by_source[profile.source_id] = list(profile.references)
 
+    source_metadata: Dict[str, Dict[str, str]] = {}
+    for source_id in _build_source_ids(character):
+        meta = sources.load_source_metadata(source_id)
+        if meta is None:
+            continue
+
+        meta_dict: Dict[str, str] = {}
+        if meta.date_range:
+            meta_dict["date_range"] = meta.date_range
+        if meta.provenance:
+            meta_dict["provenance"] = meta.provenance
+        if meta.audience:
+            meta_dict["audience"] = meta.audience
+        if meta.depends_on:
+            meta_dict["depends_on"] = ", ".join(meta.depends_on)
+
+        if meta_dict:
+            source_metadata[source_id] = meta_dict
+
     dossier: CharacterDossier = {
         DOSSIER_KEY_ID: character.id,
         DOSSIER_KEY_CANONICAL_NAME: character.canonical_name,
         DOSSIER_KEY_ALIASES: list(character.aliases),
         DOSSIER_KEY_ROLES: list(character.roles),
         DOSSIER_KEY_SOURCE_IDS: _build_source_ids(character),
+        DOSSIER_KEY_SOURCE_METADATA: source_metadata,
         DOSSIER_KEY_TRAITS_BY_SOURCE: traits_by_source,
         DOSSIER_KEY_REFERENCES_BY_SOURCE: references_by_source,
         DOSSIER_KEY_TRAIT_COMPARISON: trait_comparison,

@@ -1,0 +1,32 @@
+{
+  "mark": {
+    "date_range": "66-70 CE",
+    "provenance": "Rome (traditional)",
+    "audience": "Gentile Christians",
+    "depends_on": []
+  },
+  "matthew": {
+    "date_range": "80-90 CE",
+    "provenance": "Syrian Antioch (probable)",
+    "audience": "Jewish Christians",
+    "depends_on": ["mark", "q"]
+  },
+  "luke": {
+    "date_range": "80-90 CE",
+    "provenance": "Greece or Asia Minor (traditional)",
+    "audience": "Mixed Gentile/Jewish Christians",
+    "depends_on": ["mark", "q"]
+  },
+  "john": {
+    "date_range": "90-110 CE",
+    "provenance": "Ephesus (traditional)",
+    "audience": "Mixed Christian communities",
+    "depends_on": []
+  },
+  "paul_undisputed": {
+    "date_range": "49-62 CE",
+    "provenance": "Various (Corinth, Ephesus, Rome, etc.)",
+    "audience": "Early Gentile and Jewish-Christian assemblies",
+    "depends_on": []
+  }
+}
