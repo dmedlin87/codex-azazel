@@ -8,6 +8,22 @@
     "client_king",
     "ruler"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "persecutor_of_followers_of",
+      "sources": ["acts"],
+      "references": ["Acts 12:1-4"],
+      "notes": "Acts introduces Agrippa I as stretching out his hand against the church belonging to Jesus, treating violence against the apostles as a way to oppose the risen Lord’s movement and curry favor with Jerusalem audiences."
+    },
+    {
+      "character_id": "peter",
+      "type": "imprisoner_of",
+      "sources": ["acts"],
+      "references": ["Acts 12:3-11"],
+      "notes": "After executing James, Agrippa arrests Peter during the Festival of Unleavened Bread, holds him under heavy guard, and plans a public trial before God’s intervention frees the apostle."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "acts",

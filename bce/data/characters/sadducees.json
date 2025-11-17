@@ -8,6 +8,50 @@
     "group",
     "religious_leaders"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "doctrinal_opponents_of",
+      "sources": ["synoptics"],
+      "references": ["Matthew 22:23-33", "Mark 12:18-27", "Luke 20:27-40"],
+      "notes": "Sadducees challenge Jesus with a resurrection riddle to discredit belief in life after death, prompting Jesus to correct their understanding of Scripture and God’s power."
+    },
+    {
+      "character_id": "john_the_baptist",
+      "type": "leadership_context_for",
+      "sources": ["synoptics"],
+      "references": ["Matthew 3:7"],
+      "notes": "Matthew groups Sadducees with Pharisees who come to John’s baptism and receive his denunciation, signaling priestly suspicion toward the preparatory movement."
+    },
+    {
+      "character_id": "peter",
+      "type": "arrest_and_interrogate",
+      "sources": ["acts"],
+      "references": ["Acts 4:1-7"],
+      "notes": "Sadducean priests and the captain of the temple seize Peter and John for proclaiming resurrection in Jesus, jailing them and bringing them before the council."
+    },
+    {
+      "character_id": "paul",
+      "type": "opposes_teaching_of",
+      "sources": ["acts"],
+      "references": ["Acts 23:6-8"],
+      "notes": "Paul exploits the Sadducees’ denial of resurrection, angels, and spirits when he appears before the council, exposing their doctrinal conflict with Pharisees."
+    },
+    {
+      "character_id": "sanhedrin",
+      "type": "dominant_faction_within",
+      "sources": ["acts"],
+      "references": ["Acts 5:17", "Acts 23:6-8"],
+      "notes": "The high priest and his Sadducean associates lead the council in opposing the apostles, demonstrating their institutional power."
+    },
+    {
+      "character_id": "pilate",
+      "type": "collaborates_with_over_jesus",
+      "sources": ["synoptics"],
+      "references": ["Matthew 27:1-2"],
+      "notes": "As part of the chief priestly leadership, Sadducees participate in delivering Jesus to Pilate for Roman sentencing, aligning temple authority with imperial power."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "synoptics",

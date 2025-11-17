@@ -11,6 +11,50 @@
   "religious_leaders",
   "teachers_of_law"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "debates_and_opposes",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 2:15-28", "Matthew 23:1-36", "Luke 11:37-54", "John 9:13-34"],
+      "notes": "Pharisees question Jesus’s table fellowship, Sabbath practices, and authority, becoming key antagonists whose disputes highlight Jesus’s interpretation of Torah and prophetic critique of hypocrisy."
+    },
+    {
+      "character_id": "john_the_baptist",
+      "type": "rejects_message_of",
+      "sources": ["matthew", "luke", "john"],
+      "references": ["Matthew 3:7-10", "Luke 7:29-30", "John 1:24"],
+      "notes": "Pharisees send envoys to question John and, according to Luke, refuse his baptism, illustrating their skepticism toward the repentance movement that prepared Jesus’s way."
+    },
+    {
+      "character_id": "peter",
+      "type": "opponents_of_apostolic_message",
+      "sources": ["acts"],
+      "references": ["Acts 4:5", "Acts 5:34-40"],
+      "notes": "Pharisaic scribes participate in Sanhedrin hearings over Peter and the apostles, with figures like Gamaliel urging caution even while the party remains wary of the movement."
+    },
+    {
+      "character_id": "paul",
+      "type": "former_member_and_strategic_identifier",
+      "sources": ["acts"],
+      "references": ["Acts 23:6", "Acts 26:5"],
+      "notes": "Paul testifies that he was a Pharisee and uses that identity before the council to divide Pharisees from Sadducees over the resurrection hope."
+    },
+    {
+      "character_id": "sanhedrin",
+      "type": "faction_within",
+      "sources": ["acts"],
+      "references": ["Acts 23:6-9"],
+      "notes": "Luke depicts Pharisees as one bloc inside the Sanhedrin that can sway deliberations when theological issues such as angels or resurrection arise."
+    },
+    {
+      "character_id": "herod_antipas",
+      "type": "plots_with",
+      "sources": ["mark", "matthew"],
+      "references": ["Mark 3:6", "Matthew 22:15-22"],
+      "notes": "The Pharisees conspire with the Herodians to destroy Jesus and later send disciples with Herod’s party to trap him about paying taxes to Caesar, showing their willingness to leverage Roman-aligned allies."
+    }
+  ],
   "source_profiles": [
   {
   "source_id": "mark",

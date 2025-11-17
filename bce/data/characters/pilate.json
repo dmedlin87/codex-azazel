@@ -10,6 +10,43 @@
     "governor",
     "roman_authority"
   ],
+  "relationships": [
+    {
+      "character_id": "jesus",
+      "type": "roman_judge_of",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 15:1-15", "Matthew 27:11-26", "Luke 23:1-25", "John 18:28-40", "John 19:1-22"],
+      "notes": "Pilate interrogates Jesus about kingship, declares him innocent yet yields to pressure, and authorizes crucifixion while posting the 'King of the Jews' inscription, making him the Roman adjudicator of the passion."
+    },
+    {
+      "character_id": "sanhedrin",
+      "type": "receives_prisoner_from",
+      "sources": ["mark", "matthew", "john"],
+      "references": ["Mark 15:1", "Matthew 27:1-2", "John 18:28-32"],
+      "notes": "The chief priests, elders, and council deliver Jesus to Pilate’s headquarters, forcing a negotiation between Jewish leadership and the Roman governor over charges and execution."
+    },
+    {
+      "character_id": "herod_antipas",
+      "type": "shares_jurisdiction_with",
+      "sources": ["luke"],
+      "references": ["Luke 23:6-12"],
+      "notes": "Pilate sends Jesus to Herod Antipas upon learning he is a Galilean, and the two rulers become friends that day, illustrating interlocking Roman client relationships."
+    },
+    {
+      "character_id": "peter",
+      "type": "referenced_by",
+      "sources": ["acts"],
+      "references": ["Acts 3:13", "Acts 4:27"],
+      "notes": "Peter’s sermons recall Pilate as the governor who handed over God’s Servant, framing the crucifixion as a joint action of Roman and Jerusalem authorities."
+    },
+    {
+      "character_id": "paul",
+      "type": "historical_reference_for",
+      "sources": ["acts", "paul_disputed"],
+      "references": ["Acts 13:28", "1 Timothy 6:13"],
+      "notes": "Paul and later Pauline tradition cite Pilate as the official who consented to Jesus’s death and before whom Christ made the 'good confession,' anchoring apostolic preaching in Roman judicial history."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",
