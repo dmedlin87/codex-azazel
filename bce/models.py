@@ -52,15 +52,23 @@ class Character:
         return result
 
     def has_trait(self, trait: str, source: Optional[str] = None) -> bool:
+        """Return True when a trait or tag matches the requested name."""
+
+        needle = trait.lower()
+
         if source is not None:
             profile = self.get_source_profile(source)
-            if profile is None:
-                return False
-            return profile.has_trait(trait)
-        for profile in self.source_profiles:
-            if profile.has_trait(trait):
+            if profile and any(k.lower() == needle for k in profile.traits.keys()):
                 return True
-        return False
+            # Fallback to tag lookup so callers that previously relied on
+            # global character tags continue to work when a specific source is
+            # requested.
+            return any(isinstance(tag, str) and tag.lower() == needle for tag in self.tags)
+
+        for profile in self.source_profiles:
+            if any(k.lower() == needle for k in profile.traits.keys()):
+                return True
+        return any(isinstance(tag, str) and tag.lower() == needle for tag in self.tags)
 
 
 @dataclass(slots=True)

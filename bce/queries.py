@@ -1,15 +1,17 @@
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import List, Optional
+from typing import List
 
-from .models import Character, Event, SourceProfile
+from .cache import CacheRegistry
+from .models import Character, Event
 from . import storage
+from . import services
 
 
 # Character API
 
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=128)
 def get_character(char_id: str) -> Character:
     return storage.load_character(char_id)
 
@@ -22,16 +24,13 @@ def list_all_characters() -> List[Character]:
     return list(storage.iter_characters())
 
 
-def get_source_profile(char: Character, source_id: str) -> Optional[SourceProfile]:
-    for profile in char.source_profiles:
-        if profile.source_id == source_id:
-            return profile
-    return None
+# Delegate to services layer for backward compatibility
+get_source_profile = services.get_source_profile
 
 
 # Event API
 
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=128)
 def get_event(event_id: str) -> Event:
     return storage.load_event(event_id)
 
@@ -40,6 +39,10 @@ def clear_cache() -> None:
     """Clear the cached character/event loads."""
     get_character.cache_clear()
     get_event.cache_clear()
+
+
+# Register cache invalidator with CacheRegistry
+CacheRegistry.register(clear_cache)
 
 
 def list_event_ids() -> List[str]:
