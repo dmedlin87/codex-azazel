@@ -139,12 +139,15 @@ class StorageManager:
 
         try:
             return Character(**data)
-        except TypeError:
-            # Surface the original TypeError so existing tests that assert on
-            # the specific error message continue to pass.
-            raise
+        except TypeError as e:
+            # Wrap TypeError with context about which file failed
+            raise StorageError(
+                f"Failed to load character from {path}: {e}. "
+                f"The JSON data may be missing required fields (id, canonical_name) "
+                f"or have incorrect field types."
+            ) from e
         except ValueError as e:
-            raise StorageError(f"Invalid character data in {path}: {e}")
+            raise StorageError(f"Invalid character data in {path}: {e}") from e
 
     def iter_characters(self) -> Iterator[Character]:
         """Iterate over all characters.
@@ -201,10 +204,15 @@ class StorageManager:
 
         try:
             return Event(**data)
-        except TypeError:
-            raise
+        except TypeError as e:
+            # Wrap TypeError with context about which file failed
+            raise StorageError(
+                f"Failed to load event from {path}: {e}. "
+                f"The JSON data may be missing required fields (id, label) "
+                f"or have incorrect field types."
+            ) from e
         except ValueError as e:
-            raise StorageError(f"Invalid event data in {path}: {e}")
+            raise StorageError(f"Invalid event data in {path}: {e}") from e
 
     def _normalize_relationships(self, value: Any, char_id: str) -> List[dict]:
         """Convert relationships data to a list of dictionaries.

@@ -1,0 +1,51 @@
+{
+  "id": "elizabeth",
+  "canonical_name": "Elizabeth (mother of John the Baptist)",
+  "aliases": [
+    "Elizabeth",
+    "Wife of Zechariah"
+  ],
+  "roles": [
+    "family_member",
+    "prophet"
+  ],
+  "tags": [
+    "women",
+    "nativity",
+    "prophecy"
+  ],
+  "relationships": [
+    {
+      "character_id": "mary_mother_of_jesus",
+      "type": "kinswoman_and_mutual_supporter",
+      "sources": ["luke"],
+      "references": ["Luke 1:36", "Luke 1:39-56"],
+      "notes": "Mary visits Elizabeth, who is filled with the Holy Spirit and blesses Mary and the child in her womb, while Mary responds with the Magnificat."
+    },
+    {
+      "character_id": "john_the_baptist",
+      "type": "mother_of",
+      "sources": ["luke"],
+      "references": ["Luke 1:57-80"],
+      "notes": "Elizabeth gives birth to John the Baptist in her old age after being barren, and confirms his name should be John rather than Zechariah."
+    }
+  ],
+  "source_profiles": [
+    {
+      "source_id": "luke",
+      "traits": {
+        "background_and_barrenness": "Described as a descendant of Aaron, married to the priest Zechariah, and righteous before God but barren and advanced in years.",
+        "miraculous_conception": "Conceives John the Baptist after the angel Gabriel announces it to Zechariah, experiencing the removal of her disgrace among people.",
+        "greeting_and_prophecy": "When Mary visits, Elizabeth is filled with the Holy Spirit, blesses Mary as 'the mother of my Lord', and prophesies about the child Mary carries.",
+        "naming_of_john": "Insists that her child be named John despite family expectations that he be named Zechariah, confirming the angelic instruction.",
+        "theological_function": "Serves as a prophetic witness to Jesus's identity and dignity even before his birth, and as a model of faithful reception of God's unlikely promises."
+      },
+      "references": [
+        "Luke 1:5-7",
+        "Luke 1:24-25",
+        "Luke 1:39-45",
+        "Luke 1:57-66"
+      ]
+    }
+  ]
+}
