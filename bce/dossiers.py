@@ -6,6 +6,7 @@ from typing import Dict, List
 from . import queries
 from . import contradictions
 from . import sources
+from .hooks import HookPoint, HookRegistry
 from .models import Character, Event
 from .dossier_types import (
     CharacterDossier,
@@ -45,6 +46,30 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
     The returned dict includes core identity fields, per-source traits,
     and nested comparisons/conflicts for traits across sources.
     """
+    # Trigger before build hook
+    ctx = HookRegistry.trigger(
+        HookPoint.BEFORE_DOSSIER_BUILD,
+        data={"char_id": char_id, "entity_type": "character"}
+    )
+
+    if ctx.abort:
+        # Return minimal dossier if aborted
+        return {
+            DOSSIER_KEY_ID: char_id,
+            DOSSIER_KEY_CANONICAL_NAME: "",
+            DOSSIER_KEY_ALIASES: [],
+            DOSSIER_KEY_ROLES: [],
+            DOSSIER_KEY_SOURCE_IDS: [],
+            DOSSIER_KEY_SOURCE_METADATA: {},
+            DOSSIER_KEY_TRAITS_BY_SOURCE: {},
+            DOSSIER_KEY_REFERENCES_BY_SOURCE: {},
+            DOSSIER_KEY_TRAIT_COMPARISON: {},
+            DOSSIER_KEY_TRAIT_CONFLICTS: {},
+            DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES: [],
+            DOSSIER_KEY_RELATIONSHIPS: [],
+            DOSSIER_KEY_PARALLELS: [],
+        }
+
     character = queries.get_character(char_id)
     trait_comparison = contradictions.compare_character_sources(char_id)
     trait_conflicts = contradictions.find_trait_conflicts(char_id)
@@ -90,7 +115,25 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_RELATIONSHIPS: list(character.relationships),
         DOSSIER_KEY_PARALLELS: [],
     }
-    return dossier
+
+    # Trigger enrichment hook (allows adding custom fields)
+    ctx = HookRegistry.trigger(
+        HookPoint.DOSSIER_ENRICH,
+        data=dossier,
+        character=character,
+        entity_type="character"
+    )
+    dossier = ctx.data
+
+    # Trigger after build hook
+    ctx = HookRegistry.trigger(
+        HookPoint.AFTER_DOSSIER_BUILD,
+        data=dossier,
+        char_id=char_id,
+        entity_type="character"
+    )
+
+    return ctx.data
 
 
 def build_event_dossier(event_id: str) -> EventDossier:
@@ -99,6 +142,24 @@ def build_event_dossier(event_id: str) -> EventDossier:
     The returned dict includes core identity fields, per-source accounts,
     and nested differences between those accounts.
     """
+    # Trigger before build hook
+    ctx = HookRegistry.trigger(
+        HookPoint.BEFORE_DOSSIER_BUILD,
+        data={"event_id": event_id, "entity_type": "event"}
+    )
+
+    if ctx.abort:
+        # Return minimal dossier if aborted
+        return {
+            DOSSIER_KEY_ID: event_id,
+            DOSSIER_KEY_LABEL: "",
+            DOSSIER_KEY_PARTICIPANTS: [],
+            DOSSIER_KEY_ACCOUNTS: [],
+            DOSSIER_KEY_ACCOUNT_CONFLICTS: {},
+            DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES: [],
+            DOSSIER_KEY_PARALLELS: [],
+        }
+
     event: Event = queries.get_event(event_id)
     account_conflicts = contradictions.find_events_with_conflicting_accounts(event_id)
     account_conflict_summaries = contradictions.summarize_event_conflicts(event_id)
@@ -122,7 +183,25 @@ def build_event_dossier(event_id: str) -> EventDossier:
         DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES: account_conflict_summaries,
         DOSSIER_KEY_PARALLELS: list(event.parallels),
     }
-    return dossier
+
+    # Trigger enrichment hook (allows adding custom fields)
+    ctx = HookRegistry.trigger(
+        HookPoint.DOSSIER_ENRICH,
+        data=dossier,
+        event=event,
+        entity_type="event"
+    )
+    dossier = ctx.data
+
+    # Trigger after build hook
+    ctx = HookRegistry.trigger(
+        HookPoint.AFTER_DOSSIER_BUILD,
+        data=dossier,
+        event_id=event_id,
+        entity_type="event"
+    )
+
+    return ctx.data
 
 
 def build_all_character_dossiers() -> list[CharacterDossier]:

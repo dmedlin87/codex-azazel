@@ -15,6 +15,7 @@ All core data lives in JSON format, and the Python API is designed to be simple,
 
 - **Source-aware modeling**: Track how each Gospel and source portrays characters differently
 - **Contradiction detection**: Surface conflicts and differences between parallel accounts
+- **Hooks and plugins**: Extend functionality without modifying core code (30+ hook points)
 - **Structured exports**: JSON, Markdown, CSV, BibTeX citations, and graph formats
 - **Full-text search**: Search across traits, references, accounts, and tags
 - **Property graph export**: Build graph snapshots for Neo4j, RDF, or other graph databases
@@ -140,6 +141,38 @@ parallel = api.get_parallel_verse_text("John", 3, 16, translations=["web", "kjv"
 ```
 
 For a complete walkthrough, see [`examples/basic_usage.py`](examples/basic_usage.py).
+
+### Hooks and Extensibility
+
+BCE includes a powerful hooks system that allows you to extend functionality without modifying core code:
+
+```python
+from bce.hooks import hook, HookPoint
+
+# Auto-tag apostles when saving
+@hook(HookPoint.BEFORE_CHARACTER_SAVE)
+def auto_tag_apostles(ctx):
+    if "apostle" in ctx.data.roles and "apostle" not in ctx.data.tags:
+        ctx.data.tags.append("apostle")
+    return ctx
+
+# Enrich dossiers with external links
+@hook(HookPoint.DOSSIER_ENRICH)
+def add_external_links(ctx):
+    character = ctx.metadata.get("character")
+    if character:
+        ctx.data["external_resources"] = {
+            "wikipedia": f"https://en.wikipedia.org/wiki/{character.canonical_name}",
+            "bible_gateway": f"https://www.biblegateway.com/quicksearch/?quicksearch={character.canonical_name}"
+        }
+    return ctx
+```
+
+**Available Hook Points**: 30+ hooks covering data lifecycle, validation, dossier building, search, export, and more.
+
+**Example Plugins**: See `examples/plugins/` for ready-to-use plugins demonstrating auto-tagging and dossier enrichment.
+
+**Learn More**: Read the complete [Hooks and Plugins Guide](docs/HOOKS_AND_PLUGINS.md) for detailed documentation and examples.
 
 ## Features
 
