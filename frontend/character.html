@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Detail - Biblical Character Engine</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mark': '#10b981',
+                        'matthew': '#3b82f6',
+                        'luke': '#8b5cf6',
+                        'john': '#ef4444',
+                        'paul': '#f97316',
+                        'acts': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">BCE</h1>
+                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
+                    <a href="characters.html" class="hover:text-blue-200 transition">Characters</a>
+                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
+                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Character Header -->
+    <section id="character-header" class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-12">
+        <!-- Loaded dynamically -->
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Conflicts Section -->
+                <div id="conflicts-section"></div>
+
+                <!-- Traits by Source -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Traits by Source</h3>
+                    <div id="traits-by-source"></div>
+                </div>
+
+                <!-- References -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Scripture References</h3>
+                    <div id="references-section"></div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Info Card -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Information</h3>
+                    <div id="info-card"></div>
+                </div>
+
+                <!-- Relationships -->
+                <div id="relationships-section"></div>
+
+                <!-- Related Events -->
+                <div id="events-section"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-2">Biblical Character Engine (BCE) v0.1.0</p>
+            <p class="text-sm text-gray-500">A contradiction-aware data engine for New Testament research</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        // Get character ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const charId = urlParams.get('id');
+
+        if (!charId) {
+            window.location.href = 'characters.html';
+        }
+
+        async function loadCharacter() {
+            try {
+                const dossier = await API.getCharacter(charId);
+                renderCharacter(dossier);
+            } catch (error) {
+                console.error('Error loading character:', error);
+                document.body.innerHTML = '<div class="container mx-auto px-6 py-12 text-center"><h1 class="text-2xl text-red-600">Character not found</h1><a href="characters.html" class="text-blue-600 underline mt-4 inline-block">Back to Characters</a></div>';
+            }
+        }
+
+        function renderCharacter(dossier) {
+            const identity = dossier.identity;
+
+            // Header
+            document.getElementById('character-header').innerHTML = `
+                <div class="container mx-auto px-6">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-2">${identity.canonical_name}</h2>
+                            ${identity.aliases && identity.aliases.length > 0 ? `
+                                <p class="text-blue-100 text-lg mb-4">Also known as: ${identity.aliases.join(', ')}</p>
+                            ` : ''}
+                            ${identity.roles && identity.roles.length > 0 ? `
+                                <div class="flex gap-2 flex-wrap">
+                                    ${identity.roles.map(role => `<span class="px-3 py-1 bg-blue-800 rounded-full text-sm">${role}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <a href="characters.html" class="text-blue-200 hover:text-white transition">← Back</a>
+                    </div>
+                </div>
+            `;
+
+            // Info Card
+            const sources = Object.keys(dossier.traits_by_source || {});
+            document.getElementById('info-card').innerHTML = `
+                <div class="space-y-3">
+                    <div>
+                        <div class="text-sm text-gray-500 mb-1">Character ID</div>
+                        <div class="font-mono text-sm bg-gray-100 px-2 py-1 rounded">${identity.id}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-500 mb-1">Sources</div>
+                        <div class="flex flex-wrap gap-2">
+                            ${sources.map(s => `<span class="source-badge source-${s.split('_')[0]}">${s}</span>`).join('')}
+                        </div>
+                    </div>
+                    ${identity.tags && identity.tags.length > 0 ? `
+                        <div>
+                            <div class="text-sm text-gray-500 mb-1">Tags</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${identity.tags.map(tag => `<span class="px-2 py-1 bg-gray-100 rounded text-sm">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            // Conflicts
+            if (dossier.conflicts && Object.keys(dossier.conflicts).length > 0) {
+                document.getElementById('conflicts-section').innerHTML = `
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">⚠️</span>
+                            <h3 class="text-2xl font-bold text-amber-900">Source Conflicts Detected</h3>
+                        </div>
+                        <div class="space-y-4">
+                            ${Object.entries(dossier.conflicts).map(([trait, conflict]) => `
+                                <div class="bg-white p-4 rounded-lg">
+                                    <div class="font-bold text-gray-900 mb-2">${trait.replace(/_/g, ' ').toUpperCase()}</div>
+                                    ${Object.entries(conflict.values).map(([value, sources]) => `
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span class="text-gray-700">"${value}"</span>
+                                            <span class="text-gray-400">—</span>
+                                            ${sources.map(s => `<span class="source-badge source-${s.split('_')[0]}">${s}</span>`).join('')}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Traits by Source
+            document.getElementById('traits-by-source').innerHTML = Object.entries(dossier.traits_by_source || {}).map(([source, traits]) => `
+                <div class="mb-6 pb-6 border-b last:border-b-0">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="source-badge source-${source.split('_')[0]}">${source}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        ${Object.entries(traits).map(([key, value]) => `
+                            <div class="bg-slate-50 p-3 rounded">
+                                <div class="text-sm font-semibold text-gray-600 mb-1">${key.replace(/_/g, ' ')}</div>
+                                <div class="text-gray-900">${value}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // References
+            document.getElementById('references-section').innerHTML = Object.entries(dossier.references_by_source || {}).map(([source, refs]) => `
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="source-badge source-${source.split('_')[0]}">${source}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        ${refs.map(ref => `<span class="px-3 py-1 bg-blue-50 text-blue-900 rounded font-mono text-sm">${ref}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Relationships
+            if (dossier.relationships && dossier.relationships.length > 0) {
+                document.getElementById('relationships-section').innerHTML = `
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Relationships</h3>
+                        <div class="space-y-3">
+                            ${dossier.relationships.map(rel => `
+                                <div class="border-l-4 border-blue-500 pl-3">
+                                    <div class="font-semibold text-gray-900">${rel.type}</div>
+                                    <a href="character.html?id=${rel.to}" class="text-blue-600 hover:underline">${rel.to}</a>
+                                    ${rel.description ? `<p class="text-sm text-gray-600 mt-1">${rel.description}</p>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Load related events
+            loadRelatedEvents(identity.id);
+        }
+
+        async function loadRelatedEvents(charId) {
+            try {
+                const eventIds = await API.getEvents();
+                const promises = eventIds.map(id => API.getEvent(id));
+                const events = await Promise.all(promises);
+                const relatedEvents = events.filter(e => e.identity.participants.includes(charId));
+
+                if (relatedEvents.length > 0) {
+                    document.getElementById('events-section').innerHTML = `
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Related Events</h3>
+                            <div class="space-y-2">
+                                ${relatedEvents.map(event => `
+                                    <a href="event.html?id=${event.identity.id}" class="block p-3 bg-slate-50 hover:bg-slate-100 rounded transition">
+                                        <div class="font-semibold text-gray-900">${event.identity.label}</div>
+                                        <div class="text-sm text-gray-600">${event.accounts.length} account(s)</div>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading related events:', error);
+            }
+        }
+
+        loadCharacter();
+    </script>
+</body>
+</html>

@@ -48,6 +48,7 @@ pytest
 - Python 3.11 or higher
 - Dependencies: None (uses only Python standard library)
 - Dev dependencies: pytest, pytest-cov
+- Web dependencies (optional): fastapi, uvicorn
 
 ## Quick Start
 
@@ -140,6 +141,42 @@ parallel = api.get_parallel_verse_text("John", 3, 16, translations=["web", "kjv"
 ```
 
 For a complete walkthrough, see [`examples/basic_usage.py`](examples/basic_usage.py).
+
+### Web Interface
+
+BCE includes a **polished, modern web interface** for exploring the data interactively:
+
+```bash
+# Install web dependencies
+pip install -e .[web]
+
+# Start the web server
+bce-server
+
+# Or alternatively:
+python -m bce.server
+```
+
+The web interface will be available at `http://localhost:8000`
+
+#### Web Features
+
+- **Character Browser**: Filterable grid view of 60+ New Testament characters
+- **Event Browser**: Compare parallel accounts across different Gospel sources
+- **Detailed Dossiers**: Comprehensive character and event pages with conflict highlighting
+- **Network Graph**: Interactive D3.js visualization of relationships between characters, events, and sources
+- **Full-Text Search**: Search across characters, events, traits, and references
+- **Source Comparison**: Side-by-side source analysis with color-coded badges
+- **Responsive Design**: Mobile-first design that works on all devices
+
+#### API Documentation
+
+The web server also provides interactive API documentation:
+
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+
+See [`frontend/README.md`](frontend/README.md) for detailed frontend documentation.
 
 ## Features
 
@@ -257,9 +294,10 @@ set_default_config(config)
 
 ```text
 codex-azazel/
-├── bce/                          # Main package (23 modules)
+├── bce/                          # Main package (24 modules)
 │   ├── __init__.py              # Package exports
 │   ├── api.py                   # HIGH-LEVEL API (recommended entry point)
+│   ├── server.py                # FastAPI web server (NEW)
 │   ├── models.py                # Core dataclasses
 │   ├── storage.py               # JSON loading/saving
 │   ├── queries.py               # Query API with caching
@@ -285,6 +323,20 @@ codex-azazel/
 │       ├── characters/          # 63 character JSON files
 │       ├── events/              # 10 event JSON files
 │       └── sources.json         # Source metadata
+├── frontend/                    # Modern web interface (NEW)
+│   ├── index.html               # Landing page
+│   ├── characters.html          # Character browser
+│   ├── character.html           # Character detail page
+│   ├── events.html              # Event browser
+│   ├── event.html               # Event detail page
+│   ├── graph.html               # Network visualization
+│   ├── css/
+│   │   └── styles.css           # Custom styles
+│   └── js/
+│       ├── api.js               # API client
+│       ├── components.js        # UI components
+│       ├── app.js               # Homepage logic
+│       └── graph.js             # D3.js visualization
 ├── tests/                       # Comprehensive test suite (24 files)
 ├── examples/                    # Usage examples
 │   ├── basic_usage.py
@@ -398,16 +450,21 @@ BCE follows a clean layered architecture:
 - **Contradiction-forward**: Conflicts are features, not bugs
 - **Export-oriented**: Easy to get data out in multiple formats
 
-### Non-Goals
+### Core Design Philosophy
 
-This project explicitly does **NOT** include:
+BCE is primarily a **data and analysis engine** with the following focus:
 
-- Frontend/UI or web application
+- **Data-first approach**: Clean, structured JSON data that can be consumed by any tool
+- **Source awareness**: Track and compare how different sources portray the same figures and events
+- **Contradiction-forward**: Surface conflicts as valuable data points for scholarship
+- **Multiple interfaces**: CLI, Python API, and web interface for different use cases
+
+What BCE explicitly does **NOT** include:
+
 - Debate engine or apologetics logic
-- General-purpose Bible study app features
-- LLM prompt logic or AI pipelines
-
-It is a **data and analysis engine** designed to be consumed by other tools.
+- Theological interpretation or commentary
+- General-purpose Bible study app features with devotional content
+- LLM prompt logic or AI pipelines (though AI features are available as optional extensions)
 
 ## Project Status
 
@@ -422,15 +479,22 @@ BCE has completed the foundational phases of development:
 - ✅ **Phase 3**: Conflict objects and ergonomics improvements
 - ✅ **Phase 4**: Stable API surface for external tools
 
+### Recent Additions
+
+- ✅ **Web Interface**: Modern, responsive web UI with interactive visualizations
+- ✅ **REST API**: FastAPI-based HTTP API for web services
+- ✅ **Network Visualization**: D3.js-powered graph of relationships
+
 ### Future Directions
 
-Potential future enhancements (proposals, not yet implemented):
+Potential future enhancements:
 
 - **More coverage**: Additional characters, events, and source perspectives
 - **Richer trait vocabulary**: More structured keys for theological and narrative features
-- **Integration layers**: Optional HTTP API (FastAPI/Flask) for web services
-- **Visualization tools**: Graph visualizations and relationship diagrams
 - **Extended source coverage**: Pre-canonical texts, apocrypha, church fathers
+- **Advanced visualizations**: Timeline views, geographical maps
+- **Export enhancements**: JSON-LD, RDF, additional citation formats
+- **Progressive Web App**: Offline support and mobile app capabilities
 
 See **[ROADMAP.md](docs/ROADMAP.md)** for detailed phase information.
 

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters - Biblical Character Engine</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mark': '#10b981',
+                        'matthew': '#3b82f6',
+                        'luke': '#8b5cf6',
+                        'john': '#ef4444',
+                        'paul': '#f97316',
+                        'acts': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">BCE</h1>
+                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
+                    <a href="characters.html" class="hover:text-blue-200 transition font-semibold border-b-2 border-white pb-1">Characters</a>
+                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
+                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="bg-blue-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-4">New Testament Characters</h2>
+            <p class="text-blue-100 text-lg">Browse and compare character profiles across different biblical sources</p>
+        </div>
+    </section>
+
+    <!-- Filters and Search -->
+    <section class="bg-white py-6 shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Search -->
+                <div class="w-full md:w-1/2">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Search characters..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+
+                <!-- Filter by Source -->
+                <div class="flex gap-3 flex-wrap">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="mark">Mark</button>
+                    <button class="filter-btn" data-filter="matthew">Matthew</button>
+                    <button class="filter-btn" data-filter="luke">Luke</button>
+                    <button class="filter-btn" data-filter="john">John</button>
+                    <button class="filter-btn" data-filter="paul">Paul</button>
+                    <button class="filter-btn" data-filter="conflicts">Has Conflicts</button>
+                </div>
+            </div>
+
+            <!-- Tag Filter -->
+            <div class="mt-4">
+                <div class="text-sm text-gray-600 mb-2">Filter by tag:</div>
+                <div id="tag-filters" class="flex flex-wrap gap-2">
+                    <!-- Tags loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Character Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-gray-600">
+                    <span id="character-count">0</span> characters
+                </div>
+                <div class="flex gap-2">
+                    <button id="sort-name" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition text-sm">Sort by Name</button>
+                    <button id="sort-sources" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition text-sm">Sort by Sources</button>
+                </div>
+            </div>
+
+            <div id="characters-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Character cards loaded dynamically -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+                <p class="mt-4 text-gray-600">Loading characters...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-12">
+                <div class="text-6xl mb-4">🔍</div>
+                <p class="text-xl text-gray-600">No characters found</p>
+                <p class="text-gray-500 mt-2">Try adjusting your filters or search query</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-2">Biblical Character Engine (BCE) v0.1.0</p>
+            <p class="text-sm text-gray-500">A contradiction-aware data engine for New Testament research</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        // Characters page logic
+        let allCharacters = [];
+        let currentFilter = 'all';
+        let currentTag = null;
+        let searchQuery = '';
+
+        async function loadCharacters() {
+            try {
+                const charIds = await API.getCharacters();
+                const promises = charIds.map(id => API.getCharacter(id));
+                const dossiers = await Promise.all(promises);
+                allCharacters = dossiers;
+                renderCharacters();
+                loadTags();
+            } catch (error) {
+                console.error('Error loading characters:', error);
+                document.getElementById('loading').innerHTML = '<p class="text-red-600">Error loading characters</p>';
+            }
+        }
+
+        function loadTags() {
+            const tags = new Set();
+            allCharacters.forEach(char => {
+                if (char.identity.tags) {
+                    char.identity.tags.forEach(tag => tags.add(tag));
+                }
+            });
+
+            const tagFilters = document.getElementById('tag-filters');
+            tagFilters.innerHTML = Array.from(tags).sort().map(tag =>
+                `<button class="tag-filter-btn px-3 py-1 bg-gray-100 hover:bg-blue-100 rounded-full text-sm transition" data-tag="${tag}">${tag}</button>`
+            ).join('');
+
+            // Add event listeners
+            document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active-tag'));
+                    if (currentTag === btn.dataset.tag) {
+                        currentTag = null;
+                    } else {
+                        currentTag = btn.dataset.tag;
+                        btn.classList.add('active-tag');
+                    }
+                    renderCharacters();
+                });
+            });
+        }
+
+        function renderCharacters() {
+            document.getElementById('loading').classList.add('hidden');
+            const grid = document.getElementById('characters-grid');
+
+            let filtered = allCharacters.filter(char => {
+                // Filter by source
+                if (currentFilter !== 'all') {
+                    if (currentFilter === 'conflicts') {
+                        if (!char.conflicts || Object.keys(char.conflicts).length === 0) return false;
+                    } else {
+                        const sources = char.traits_by_source ? Object.keys(char.traits_by_source) : [];
+                        if (!sources.some(s => s.includes(currentFilter))) return false;
+                    }
+                }
+
+                // Filter by tag
+                if (currentTag && !char.identity.tags?.includes(currentTag)) return false;
+
+                // Filter by search
+                if (searchQuery) {
+                    const name = char.identity.canonical_name.toLowerCase();
+                    const aliases = (char.identity.aliases || []).join(' ').toLowerCase();
+                    const roles = (char.identity.roles || []).join(' ').toLowerCase();
+                    const query = searchQuery.toLowerCase();
+                    if (!name.includes(query) && !aliases.includes(query) && !roles.includes(query)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            document.getElementById('character-count').textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                document.getElementById('empty-state').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('empty-state').classList.add('hidden');
+            grid.innerHTML = filtered.map(char => Components.characterCard(char)).join('');
+        }
+
+        // Event listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderCharacters();
+            });
+        });
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderCharacters();
+        });
+
+        document.getElementById('sort-name').addEventListener('click', () => {
+            allCharacters.sort((a, b) => a.identity.canonical_name.localeCompare(b.identity.canonical_name));
+            renderCharacters();
+        });
+
+        document.getElementById('sort-sources').addEventListener('click', () => {
+            allCharacters.sort((a, b) => {
+                const aCount = Object.keys(a.traits_by_source || {}).length;
+                const bCount = Object.keys(b.traits_by_source || {}).length;
+                return bCount - aCount;
+            });
+            renderCharacters();
+        });
+
+        // Load on page load
+        loadCharacters();
+    </script>
+</body>
+</html>

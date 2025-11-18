@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Detail - Biblical Character Engine</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">BCE</h1>
+                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
+                    <a href="characters.html" class="hover:text-blue-200 transition">Characters</a>
+                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
+                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Event Header -->
+    <section id="event-header" class="bg-gradient-to-br from-purple-900 to-purple-800 text-white py-12">
+        <!-- Loaded dynamically -->
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <!-- Conflicts Section -->
+        <div id="conflicts-section" class="mb-8"></div>
+
+        <!-- Parallels Section -->
+        <div id="parallels-section" class="mb-8"></div>
+
+        <!-- Accounts Comparison -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Accounts Across Sources</h3>
+            <div id="accounts-section" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+        </div>
+
+        <!-- Participants -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Participants</h3>
+            <div id="participants-section" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-2">Biblical Character Engine (BCE) v0.1.0</p>
+            <p class="text-sm text-gray-500">A contradiction-aware data engine for New Testament research</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('id');
+
+        if (!eventId) {
+            window.location.href = 'events.html';
+        }
+
+        async function loadEvent() {
+            try {
+                const dossier = await API.getEvent(eventId);
+                renderEvent(dossier);
+            } catch (error) {
+                console.error('Error loading event:', error);
+                document.body.innerHTML = '<div class="container mx-auto px-6 py-12 text-center"><h1 class="text-2xl text-red-600">Event not found</h1><a href="events.html" class="text-blue-600 underline mt-4 inline-block">Back to Events</a></div>';
+            }
+        }
+
+        function renderEvent(dossier) {
+            const identity = dossier.identity;
+
+            // Header
+            document.getElementById('event-header').innerHTML = `
+                <div class="container mx-auto px-6">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-4">${identity.label}</h2>
+                            ${identity.tags && identity.tags.length > 0 ? `
+                                <div class="flex gap-2 flex-wrap">
+                                    ${identity.tags.map(tag => `<span class="px-3 py-1 bg-purple-800 rounded-full text-sm">${tag}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <a href="events.html" class="text-purple-200 hover:text-white transition">← Back</a>
+                    </div>
+                </div>
+            `;
+
+            // Conflicts
+            if (dossier.conflicts && Object.keys(dossier.conflicts).length > 0) {
+                document.getElementById('conflicts-section').innerHTML = `
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">⚠️</span>
+                            <h3 class="text-2xl font-bold text-amber-900">Account Conflicts Detected</h3>
+                        </div>
+                        <div class="space-y-4">
+                            ${Object.entries(dossier.conflicts).map(([field, conflict]) => `
+                                <div class="bg-white p-4 rounded-lg">
+                                    <div class="font-bold text-gray-900 mb-2">${field.toUpperCase()}</div>
+                                    ${Object.entries(conflict.values).map(([value, sources]) => `
+                                        <div class="flex items-start gap-2 mb-2">
+                                            <div class="flex-1">
+                                                <div class="text-gray-700 mb-1">${value}</div>
+                                                <div class="flex gap-2 flex-wrap">
+                                                    ${sources.map(s => `<span class="source-badge source-${s.split('_')[0]}">${s}</span>`).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Parallels
+            if (dossier.parallels && dossier.parallels.length > 0) {
+                document.getElementById('parallels-section').innerHTML = `
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4">Parallel Accounts</h3>
+                        <div class="space-y-3">
+                            ${dossier.parallels.map(parallel => `
+                                <div class="bg-white p-4 rounded-lg">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="font-semibold text-gray-700">Type:</span>
+                                        <span class="px-2 py-1 bg-blue-100 rounded text-sm">${parallel.type}</span>
+                                    </div>
+                                    <div class="flex gap-2 flex-wrap mb-2">
+                                        ${parallel.sources.map(s => `<span class="source-badge source-${s.split('_')[0]}">${s}</span>`).join('')}
+                                    </div>
+                                    ${parallel.notes ? `<p class="text-gray-600 text-sm mt-2">${parallel.notes}</p>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Accounts
+            document.getElementById('accounts-section').innerHTML = dossier.accounts.map(account => `
+                <div class="border-2 border-gray-200 rounded-lg p-5 hover:border-blue-300 transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="source-badge source-${account.source_id.split('_')[0]}">${account.source_id}</span>
+                        <span class="text-sm font-mono text-gray-600">${account.reference}</span>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed mb-3">${account.summary}</p>
+                    ${account.notes ? `
+                        <div class="bg-gray-50 p-3 rounded text-sm text-gray-600 border-l-4 border-gray-300">
+                            <strong>Note:</strong> ${account.notes}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+
+            // Participants
+            if (identity.participants && identity.participants.length > 0) {
+                loadParticipants(identity.participants);
+            } else {
+                document.getElementById('participants-section').innerHTML = '<p class="text-gray-500">No participants recorded</p>';
+            }
+        }
+
+        async function loadParticipants(participantIds) {
+            try {
+                const promises = participantIds.map(id => API.getCharacter(id));
+                const characters = await Promise.all(promises);
+
+                document.getElementById('participants-section').innerHTML = characters.map(char => `
+                    <a href="character.html?id=${char.identity.id}" class="block p-4 bg-slate-50 hover:bg-slate-100 rounded-lg transition">
+                        <div class="font-bold text-gray-900 mb-2">${char.identity.canonical_name}</div>
+                        ${char.identity.roles && char.identity.roles.length > 0 ? `
+                            <div class="text-sm text-gray-600">${char.identity.roles[0]}</div>
+                        ` : ''}
+                        <div class="text-xs text-gray-500 mt-2">${Object.keys(char.traits_by_source || {}).length} source(s)</div>
+                    </a>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading participants:', error);
+                document.getElementById('participants-section').innerHTML = '<p class="text-red-600">Error loading participants</p>';
+            }
+        }
+
+        loadEvent();
+    </script>
+</body>
+</html>
