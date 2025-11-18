@@ -405,6 +405,7 @@ for evidence in answer["evidence"]:
 ```
 
 **Question types supported**:
+
 - Character comparisons ("Which source portrays X as...")
 - Source analysis ("How does Mark depict...")
 - Trait queries ("Who has the trait...")
@@ -446,6 +447,7 @@ for trait in traits["suggested_traits"]:
 ```
 
 **Extraction patterns**:
+
 - Social status (Pharisee, priest, ruler, etc.)
 - Occupations (fisherman, tax collector, etc.)
 - Actions that reveal character
@@ -475,6 +477,7 @@ for parallel in parallels["parallels"]:
 ```
 
 **Parallel types detected**:
+
 - `triple_tradition`: All three synoptics
 - `synoptic_parallel`: Two synoptic gospels with Mark
 - `q_material_candidate`: Matthew-Luke without Mark
@@ -502,11 +505,13 @@ for sugg in suggestions:
 ```
 
 **Inference methods**:
+
 - Co-occurrence in events
 - Mentions in trait contexts
 - Role-based inference (apostles, teachers, etc.)
 
 **Relationship types**:
+
 - `fellow_disciple`, `teacher_student`, `family`, `sibling`, `associate`, etc.
 
 ---
@@ -532,6 +537,7 @@ print(summary)
 ```
 
 **Summary styles**:
+
 - `academic`: Scholarly language with source citations and conflict analysis
 - `accessible`: Simple, clear language for general audiences
 - `technical`: Data-focused with statistics and IDs
@@ -539,7 +545,8 @@ print(summary)
 **Output**:
 
 Example academic summary:
-```
+
+```text
 Paul of Tarsus appears in Acts and the Pauline epistles as apostle and teacher.
 Sources present 3 significant contradictions regarding conversion_timeline (Acts vs Galatians)
 and torah_observance (Acts 21:20-26 vs Galatians 3:23-29). Documented relationships
@@ -571,6 +578,7 @@ print(f"Priorities: {patterns['narrative_priorities']}")
 ```
 
 **Pattern types detected**:
+
 - `messianic_secrecy` (Mark)
 - `disciple_misunderstanding`
 - `divine_christology` (John)
@@ -578,6 +586,7 @@ print(f"Priorities: {patterns['narrative_priorities']}")
 - `suffering_emphasis`
 
 **Narrative priorities**:
+
 - Suffering christology
 - Divine christology
 - Kingdom theology
@@ -609,6 +618,7 @@ print(f"Implications: {ai['implications']}")
 ```
 
 **Assessment dimensions**:
+
 - **Theological significance**: high/medium/low based on doctrinal importance
 - **Historical significance**: importance for historical reconstruction
 - **Narrative coherence impact**: effect on story consistency
@@ -641,6 +651,7 @@ for element in timeline["timeline_elements"]:
 ```
 
 **Timeline elements extracted**:
+
 - Time of day/timing
 - Location
 - Participants
