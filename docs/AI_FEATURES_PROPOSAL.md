@@ -718,6 +718,7 @@ bce ai extract-traits --character nicodemus --source john --reference "John 3:1-
 - **Classification**: Fine-tuned BERT models for specific tasks
 
 **API-Based Options** (Optional, for advanced features):
+
 - **OpenAI**: GPT 5.1 for complex reasoning tasks and long-context analysis
 - **Configurable per feature**: Allow users to choose backend
 
