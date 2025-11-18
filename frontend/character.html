@@ -24,23 +24,13 @@
     </script>
 </head>
 <body class="bg-slate-50 min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-blue-900 text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <h1 class="text-2xl font-bold">BCE</h1>
-                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
-                    <a href="characters.html" class="hover:text-blue-200 transition">Characters</a>
-                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
-                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation (rendered dynamically) -->
+    <div id="nav-container"></div>
+    <script>
+        // Render navigation immediately
+        document.getElementById('nav-container').innerHTML = Components.renderNavigation('characters');
+        Components.initMobileMenu();
+    </script>
 
     <!-- Character Header -->
     <section id="character-header" class="bg-gradient-to-br from-blue-900 to-blue-800 text-white py-12">
@@ -226,7 +216,9 @@
                             ${dossier.relationships.map(rel => `
                                 <div class="border-l-4 border-blue-500 pl-3">
                                     <div class="font-semibold text-gray-900">${rel.type}</div>
-                                    <a href="character.html?id=${rel.to}" class="text-blue-600 hover:underline">${rel.to}</a>
+                                    <a href="character.html?id=${rel.to}" class="text-blue-600 hover:underline">
+                                        ${rel.to_name || rel.to}
+                                    </a>
                                     ${rel.description ? `<p class="text-sm text-gray-600 mt-1">${rel.description}</p>` : ''}
                                 </div>
                             `).join('')}
@@ -242,8 +234,8 @@
         async function loadRelatedEvents(charId) {
             try {
                 const eventIds = await API.getEvents();
-                const promises = eventIds.map(id => API.getEvent(id));
-                const events = await Promise.all(promises);
+                // Use batch endpoint to load all events in one request
+                const events = await API.getEventsBatch(eventIds);
                 const relatedEvents = events.filter(e => e.identity.participants.includes(charId));
 
                 if (relatedEvents.length > 0) {

@@ -105,6 +105,25 @@ async def get_character(char_id: str) -> Dict[str, Any]:
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/api/characters/batch/dossiers")
+async def get_characters_batch(
+    ids: str = Query(..., description="Comma-separated character IDs")
+) -> List[Dict[str, Any]]:
+    """Get multiple character dossiers in a single request (batch endpoint)."""
+    try:
+        char_ids = [id.strip() for id in ids.split(",") if id.strip()]
+        dossiers = []
+        for char_id in char_ids:
+            try:
+                dossiers.append(api.build_character_dossier(char_id))
+            except exceptions.DataNotFoundError:
+                # Skip characters that don't exist
+                continue
+        return dossiers
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get("/api/events")
 async def list_events() -> List[str]:
     """List all event IDs."""
@@ -121,6 +140,25 @@ async def get_event(event_id: str) -> Dict[str, Any]:
         return api.build_event_dossier(event_id)
     except exceptions.DataNotFoundError:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/events/batch/dossiers")
+async def get_events_batch(
+    ids: str = Query(..., description="Comma-separated event IDs")
+) -> List[Dict[str, Any]]:
+    """Get multiple event dossiers in a single request (batch endpoint)."""
+    try:
+        event_ids = [id.strip() for id in ids.split(",") if id.strip()]
+        dossiers = []
+        for event_id in event_ids:
+            try:
+                dossiers.append(api.build_event_dossier(event_id))
+            except exceptions.DataNotFoundError:
+                # Skip events that don't exist
+                continue
+        return dossiers
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

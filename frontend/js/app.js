@@ -35,8 +35,8 @@ async function loadFeaturedCharacters() {
     const featuredIds = ['jesus', 'paul', 'peter'];
 
     try {
-        const promises = featuredIds.map(id => API.getCharacter(id).catch(() => null));
-        const dossiers = await Promise.all(promises);
+        // Use batch endpoint to load all featured characters in one request
+        const dossiers = await API.getCharactersBatch(featuredIds);
         const validDossiers = dossiers.filter(d => d !== null);
 
         const container = document.getElementById('featured-characters');
