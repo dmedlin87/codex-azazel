@@ -25,14 +25,7 @@
   "type": "jerusalem_colleague",
   "sources": ["acts"],
   "references": ["Acts 1:13-14"],
-  "notes": "Remains in prayer with Peter and the other apostles in Jerusalem after the ascension, sharing responsibility for the community’s leadership."
-  },
-  {
-  "character_id": "disciples",
-  "type": "skeptical_peer_relationship",
-  "sources": ["john"],
-  "references": ["John 20:24-25"],
-  "notes": "Refuses to accept the testimony of the other disciples about Jesus’s resurrection until he personally inspects the wounds, highlighting internal tension within the group."
+  "notes": "Remains in prayer with Peter and the other apostles in Jerusalem after the ascension, sharing responsibility for the community's leadership."
   }
   ],
   "source_profiles": [

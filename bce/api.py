@@ -10,7 +10,34 @@ from . import dossiers, queries, contradictions, search, export, export_graph, b
 def get_character(char_id: str):
     """Return a Character object by ID.
 
-    Thin wrapper around ``bce.queries.get_character``.
+    Loads and returns a complete Character object with all source profiles,
+    relationships, tags, and metadata.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier (e.g., "jesus", "paul", "peter")
+
+    Returns
+    -------
+    Character
+        Complete character object with all fields populated
+
+    Raises
+    ------
+    DataNotFoundError
+        If the character ID does not exist
+    StorageError
+        If the character file cannot be read or parsed
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> jesus = api.get_character("jesus")
+    >>> print(jesus.canonical_name)
+    Jesus of Nazareth
+    >>> print(jesus.list_sources())
+    ['mark', 'matthew', 'luke', 'john', 'paul_undisputed']
     """
 
     return queries.get_character(char_id)
@@ -19,7 +46,34 @@ def get_character(char_id: str):
 def get_event(event_id: str):
     """Return an Event object by ID.
 
-    Thin wrapper around ``bce.queries.get_event``.
+    Loads and returns a complete Event object with all accounts, participants,
+    parallels, and tags.
+
+    Parameters
+    ----------
+    event_id : str
+        Event identifier (e.g., "crucifixion", "resurrection_appearance")
+
+    Returns
+    -------
+    Event
+        Complete event object with all fields populated
+
+    Raises
+    ------
+    DataNotFoundError
+        If the event ID does not exist
+    StorageError
+        If the event file cannot be read or parsed
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> crucifixion = api.get_event("crucifixion")
+    >>> print(crucifixion.label)
+    Crucifixion of Jesus
+    >>> print([acc.source_id for acc in crucifixion.accounts])
+    ['mark', 'john']
     """
 
     return queries.get_event(event_id)
@@ -53,13 +107,74 @@ def list_events() -> List[str]:
 
 
 def build_character_dossier(char_id: str) -> Dict[str, Any]:
-    """Build a JSON-friendly dossier for a character."""
+    """Build a comprehensive JSON-friendly dossier for a character.
+
+    A dossier includes the character's identity (name, aliases, roles, tags),
+    per-source traits organized by source ID, all scripture references,
+    relationships with other characters, and detected conflicts between sources.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+
+    Returns
+    -------
+    dict
+        Character dossier with keys: identity, traits_by_source, all_traits,
+        references_by_source, all_references, relationships, conflicts
+
+    Raises
+    ------
+    DataNotFoundError
+        If the character does not exist
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> dossier = api.build_character_dossier("paul")
+    >>> print(dossier["identity"]["canonical_name"])
+    Paul (Saul of Tarsus)
+    >>> print(dossier["conflicts"].keys())
+    dict_keys(['conversion_timeline', 'authority_source'])
+    """
 
     return dossiers.build_character_dossier(char_id)
 
 
 def build_event_dossier(event_id: str) -> Dict[str, Any]:
-    """Build a JSON-friendly dossier for an event."""
+    """Build a comprehensive JSON-friendly dossier for an event.
+
+    An event dossier includes the event's identity (label, tags), all
+    participating characters, per-source accounts with references and
+    summaries, parallel pericope information, and detected conflicts
+    between different accounts.
+
+    Parameters
+    ----------
+    event_id : str
+        Event identifier
+
+    Returns
+    -------
+    dict
+        Event dossier with keys: identity, participants, accounts,
+        parallels, conflicts
+
+    Raises
+    ------
+    DataNotFoundError
+        If the event does not exist
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> dossier = api.build_event_dossier("crucifixion")
+    >>> print(dossier["identity"]["label"])
+    Crucifixion of Jesus
+    >>> print(len(dossier["accounts"]))
+    2
+    """
 
     return dossiers.build_event_dossier(event_id)
 
@@ -80,13 +195,71 @@ def build_all_event_dossiers() -> List[Dict[str, Any]]:
 
 
 def summarize_character_conflicts(char_id: str) -> Dict[str, Dict[str, Any]]:
-    """Return normalized conflict summaries for a character's traits."""
+    """Return normalized conflict summaries for a character's traits.
+
+    Analyzes a character's source profiles and identifies traits where
+    different sources provide conflicting information. The summary groups
+    sources by their reported value for each conflicting trait.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+
+    Returns
+    -------
+    dict
+        Mapping of trait name to conflict summary. Each conflict summary
+        has a "values" key mapping trait values to lists of sources.
+        Empty dict if no conflicts exist.
+
+    Raises
+    ------
+    DataNotFoundError
+        If the character does not exist
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> conflicts = api.summarize_character_conflicts("judas")
+    >>> print(conflicts["death_method"]["values"])
+    {'hanging': ['matthew'], 'falling_headlong': ['acts']}
+    """
 
     return contradictions.summarize_character_conflicts(char_id)
 
 
 def summarize_event_conflicts(event_id: str) -> Dict[str, Dict[str, Any]]:
-    """Return normalized conflict summaries for an event's accounts."""
+    """Return normalized conflict summaries for an event's accounts.
+
+    Analyzes an event's accounts across different sources and identifies
+    fields where sources provide conflicting information. The summary
+    groups sources by their reported value for each conflicting field.
+
+    Parameters
+    ----------
+    event_id : str
+        Event identifier
+
+    Returns
+    -------
+    dict
+        Mapping of field name to conflict summary. Each conflict summary
+        has a "values" key mapping field values to lists of sources.
+        Empty dict if no conflicts exist.
+
+    Raises
+    ------
+    DataNotFoundError
+        If the event does not exist
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> conflicts = api.summarize_event_conflicts("crucifixion")
+    >>> print(conflicts.keys())
+    dict_keys(['summary', 'notes'])
+    """
 
     return contradictions.summarize_event_conflicts(event_id)
 
@@ -107,9 +280,37 @@ def list_events_with_tag(tag: str) -> List[str]:
 
 
 def search_all(query: str, scope: Optional[List[str]] = None) -> List[Dict[str, Any]]:
-    """Search across characters and events.
+    """Search across characters and events using full-text search.
 
-    Thin wrapper around ``bce.search.search_all``.
+    Searches through character traits, tags, roles, event accounts, notes,
+    parallels, and scripture references. Results include match context
+    showing where and how the query matched.
+
+    Parameters
+    ----------
+    query : str
+        Search query (case-insensitive)
+    scope : list of str, optional
+        Limit search to specific fields. Options: "traits", "references",
+        "accounts", "notes", "tags", "roles". If None, searches all fields.
+
+    Returns
+    -------
+    list of dict
+        Search results with keys: type (character/event), id, match_in
+        (field that matched), snippet (matching text context)
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> results = api.search_all("resurrection")
+    >>> print(len(results))
+    15
+    >>> print(results[0]["type"])
+    character
+    >>> results = api.search_all("John 3:16", scope=["references"])
+    >>> print(results[0]["match_in"])
+    references
     """
 
     return search.search_all(query, scope=scope)

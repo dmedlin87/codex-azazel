@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from bce import queries, storage
+from bce.exceptions import StorageError
 from bce.models import Character, Event, EventAccount, SourceProfile
 
 
@@ -121,7 +122,7 @@ class TestStorageErrorHandling:
             storage.reset_data_root()
 
     def test_load_character_missing_required_fields(self, tmp_path):
-        """Loading character with missing required fields should raise TypeError."""
+        """Loading character with missing required fields should raise StorageError."""
         custom_root = tmp_path / "data"
         char_dir = custom_root / "characters"
         char_dir.mkdir(parents=True)
@@ -132,13 +133,16 @@ class TestStorageErrorHandling:
 
         storage.configure_data_root(custom_root)
         try:
-            with pytest.raises(TypeError):
+            with pytest.raises(StorageError) as exc_info:
                 storage.load_character("incomplete")
+            # Verify error message is helpful
+            assert "canonical_name" in str(exc_info.value)
+            assert "incomplete.json" in str(exc_info.value)
         finally:
             storage.reset_data_root()
 
     def test_load_event_missing_required_fields(self, tmp_path):
-        """Loading event with missing required fields should raise TypeError."""
+        """Loading event with missing required fields should raise StorageError."""
         custom_root = tmp_path / "data"
         event_dir = custom_root / "events"
         event_dir.mkdir(parents=True)
@@ -149,8 +153,11 @@ class TestStorageErrorHandling:
 
         storage.configure_data_root(custom_root)
         try:
-            with pytest.raises(TypeError):
+            with pytest.raises(StorageError) as exc_info:
                 storage.load_event("incomplete")
+            # Verify error message is helpful
+            assert "label" in str(exc_info.value)
+            assert "incomplete.json" in str(exc_info.value)
         finally:
             storage.reset_data_root()
 
