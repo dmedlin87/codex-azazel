@@ -397,11 +397,53 @@ class TestStaticFilesAndFrontend:
         # Should return either FileResponse or a message
         assert response.status_code in [200, 404]
 
+    def test_root_route_with_no_frontend(self, client):
+        """Test root route when frontend directory doesn't exist."""
+        import tempfile
+        from pathlib import Path
+
+        # Temporarily replace FRONTEND_DIR with a non-existent path
+        original_frontend = server.FRONTEND_DIR
+        try:
+            server.FRONTEND_DIR = Path(tempfile.gettempdir()) / "nonexistent_frontend_12345"
+            response = client.get("/")
+            assert response.status_code == 200
+            data = response.json()
+            assert "message" in data
+            assert "Frontend not found" in data["message"]
+        finally:
+            server.FRONTEND_DIR = original_frontend
+
     def test_html_page_route_exists(self, client):
         """Test HTML page route is registered."""
         # This might return 404 if frontend doesn't exist, which is fine
         response = client.get("/test.html")
         assert response.status_code in [200, 404]
+
+    def test_html_page_route_with_existing_file(self, client):
+        """Test serving an HTML page that exists."""
+        import tempfile
+        from pathlib import Path
+
+        # Create a temporary frontend directory with an HTML file
+        original_frontend = server.FRONTEND_DIR
+        try:
+            temp_dir = Path(tempfile.mkdtemp())
+            server.FRONTEND_DIR = temp_dir
+
+            # Create a test HTML file
+            test_page = temp_dir / "testpage.html"
+            test_page.write_text("<html><body>Test</body></html>")
+
+            response = client.get("/testpage.html")
+            assert response.status_code == 200
+            assert b"Test" in response.content
+        finally:
+            server.FRONTEND_DIR = original_frontend
+            # Clean up
+            if temp_dir.exists():
+                test_page.unlink(missing_ok=True)
+                temp_dir.rmdir()
 
     def test_html_page_route_not_found(self, client):
         """Test requesting non-existent HTML page returns 404."""
@@ -448,3 +490,176 @@ class TestRunServerFunction:
         messages = " ".join(print_calls)
         assert "localhost" in messages
         assert "3000" in messages
+
+
+class TestMainBlock:
+    """Test the __main__ block execution."""
+
+    def test_main_block_is_defined(self):
+        """Test that the module has a __main__ block."""
+        import inspect
+
+        # Read the server module source
+        source = inspect.getsource(server)
+        assert 'if __name__ == "__main__":' in source
+        assert "run_server(reload=True)" in source
+
+
+class TestEdgeCasesAndIntegration:
+    """Test edge cases and integration scenarios."""
+
+    def test_stats_with_real_data(self, client):
+        """Test stats endpoint with real data from the system."""
+        response = client.get("/api/stats")
+        data = response.json()
+
+        # Verify that we have actual data
+        assert data["total_characters"] > 0
+        assert data["total_events"] > 0
+        # Tags should exist if data is properly tagged
+        assert isinstance(data["tags"], list)
+
+    def test_search_empty_results(self, client):
+        """Test search with a query that returns no results."""
+        response = client.get("/api/search?q=zzz_unlikely_to_match_anything_xyz123")
+        assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, list)
+
+    def test_search_scope_parsing(self, client):
+        """Test that scope parameter is properly parsed."""
+        # Test with multiple scopes
+        response = client.get("/api/search?q=test&scope=traits,references,tags")
+        assert response.status_code == 200
+
+        # Test with single scope
+        response = client.get("/api/search?q=test&scope=traits")
+        assert response.status_code == 200
+
+    def test_character_dossier_structure(self, client):
+        """Test that character dossier has expected complete structure."""
+        list_response = client.get("/api/characters")
+        char_ids = list_response.json()
+
+        if char_ids:
+            char_id = char_ids[0]
+            response = client.get(f"/api/characters/{char_id}")
+            assert response.status_code == 200
+            dossier = response.json()
+
+            # Check for key dossier components
+            assert "identity" in dossier or "id" in dossier
+            # Dossiers should have multiple sections
+            assert len(dossier.keys()) > 1
+
+    def test_event_dossier_structure(self, client):
+        """Test that event dossier has expected complete structure."""
+        list_response = client.get("/api/events")
+        event_ids = list_response.json()
+
+        if event_ids:
+            event_id = event_ids[0]
+            response = client.get(f"/api/events/{event_id}")
+            assert response.status_code == 200
+            dossier = response.json()
+
+            # Check for key dossier components
+            assert "identity" in dossier or "id" in dossier
+            # Dossiers should have multiple sections
+            assert len(dossier.keys()) > 1
+
+    def test_graph_snapshot_completeness(self, client):
+        """Test that graph snapshot includes expected data."""
+        response = client.get("/api/graph")
+        data = response.json()
+
+        # Should have both nodes and edges
+        assert "nodes" in data
+        assert "edges" in data
+
+        # With real data, should have actual content
+        assert len(data["nodes"]) > 0
+
+        # Nodes should have proper structure
+        for node in data["nodes"]:
+            assert "id" in node
+            assert "type" in node
+            assert "label" in node
+            assert "properties" in node
+
+        # Edges should have proper structure
+        for edge in data["edges"]:
+            assert "source" in edge
+            assert "target" in edge
+            assert "type" in edge
+            assert "properties" in edge
+
+    def test_tags_with_actual_tags(self, client):
+        """Test tag endpoints with actual tags from the system."""
+        # Get stats to find available tags
+        stats_response = client.get("/api/stats")
+        stats = stats_response.json()
+
+        if stats["tags"]:
+            # Test with first available tag
+            tag = stats["tags"][0]
+
+            char_response = client.get(f"/api/tags/characters/{tag}")
+            assert char_response.status_code == 200
+            assert isinstance(char_response.json(), list)
+
+            event_response = client.get(f"/api/tags/events/{tag}")
+            assert event_response.status_code == 200
+            assert isinstance(event_response.json(), list)
+
+    def test_conflicts_return_dict_structure(self, client):
+        """Test that conflict endpoints return proper dict structure."""
+        # Get a character with potential conflicts
+        char_list = client.get("/api/characters").json()
+
+        if char_list:
+            char_id = char_list[0]
+            response = client.get(f"/api/characters/{char_id}/conflicts")
+            assert response.status_code == 200
+            conflicts = response.json()
+            assert isinstance(conflicts, dict)
+
+            # Each conflict should be a dict of sources
+            for trait, sources in conflicts.items():
+                assert isinstance(sources, dict)
+
+    @patch("bce.server.api.get_character")
+    def test_character_endpoint_with_datanotfound_exception(self, mock_get, client):
+        """Test that DataNotFoundError is properly converted to 404."""
+        from bce import exceptions
+
+        mock_get.side_effect = exceptions.DataNotFoundError("Test not found")
+        response = client.get("/api/characters/test_id/conflicts")
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+
+    @patch("bce.server.api.get_event")
+    def test_event_endpoint_with_datanotfound_exception(self, mock_get, client):
+        """Test that DataNotFoundError is properly converted to 404."""
+        from bce import exceptions
+
+        mock_get.side_effect = exceptions.DataNotFoundError("Test not found")
+        response = client.get("/api/events/test_id/conflicts")
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+
+    def test_api_documentation_endpoint(self, client):
+        """Test that FastAPI auto-generated docs are available."""
+        # FastAPI automatically creates /docs endpoint
+        response = client.get("/docs")
+        assert response.status_code == 200
+
+    def test_openapi_schema_endpoint(self, client):
+        """Test that OpenAPI schema is available."""
+        # FastAPI automatically creates /openapi.json endpoint
+        response = client.get("/openapi.json")
+        assert response.status_code == 200
+        schema = response.json()
+        assert "openapi" in schema
+        assert "info" in schema
+        assert schema["info"]["title"] == "Biblical Character Engine API"
