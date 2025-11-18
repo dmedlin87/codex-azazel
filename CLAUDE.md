@@ -29,53 +29,85 @@ It is a **data and analysis engine** designed to be consumed by other tools.
 
 ```text
 codex-azazel/
-├── bce/                          # Main package
-│   ├── __init__.py              # Package exports
-│   ├── models.py                # Core dataclasses (Character, Event, etc.)
+├── bce/                          # Main package (23 modules)
+│   ├── __init__.py              # Package exports and public API
+│   ├── api.py                   # HIGH-LEVEL API (recommended entry point)
+│   ├── models.py                # Core dataclasses (Character, Event, SourceProfile, etc.)
 │   ├── storage.py               # JSON loading/saving with configurable data root
-│   ├── queries.py               # High-level query API with LRU caching
+│   ├── queries.py               # Query API with caching
 │   ├── contradictions.py        # Comparison and conflict detection
 │   ├── dossiers.py              # Build structured dossiers for export
 │   ├── dossier_types.py         # TypedDict definitions for dossiers
-│   ├── export.py                # Main export module (imports json/markdown)
+│   ├── search.py                # Full-text search across characters and events
+│   ├── export.py                # Main export facade
 │   ├── export_json.py           # JSON export helpers
 │   ├── export_markdown.py       # Markdown export helpers
+│   ├── export_csv.py            # CSV export helpers
+│   ├── export_citations.py      # Citation export (BibTeX, etc.)
+│   ├── export_graph.py          # Graph/network export (GraphSnapshot)
 │   ├── validation.py            # Data validation helpers
+│   ├── config.py                # Configuration management (BceConfig)
+│   ├── cache.py                 # Cache registry and invalidation
+│   ├── exceptions.py            # Structured exception hierarchy
+│   ├── sources.py               # Source metadata management
+│   ├── services.py              # Service layer
+│   ├── bibles.py                # Bible text integration
 │   ├── cli.py                   # Main CLI entry point
 │   └── data/
-│       ├── characters/          # Character JSON files (61 total)
+│       ├── characters/          # Character JSON files (62 total)
 │       │   ├── jesus.json
 │       │   ├── paul.json
 │       │   ├── peter.json
 │       │   ├── judas.json
 │       │   ├── pilate.json
-│       │   └── ... (56 more characters)
-│       └── events/              # Event JSON files (10 total)
-│           ├── crucifixion.json
-│           ├── damascus_road.json
-│           ├── betrayal.json
-│           ├── resurrection_appearance.json
-│           ├── trial_before_pilate.json
-│           └── ... (5 more events)
-├── tests/                       # Test suite (15 files, 258 test functions)
+│       │   └── ... (57 more characters)
+│       ├── events/              # Event JSON files (10 total)
+│       │   ├── crucifixion.json
+│       │   ├── damascus_road.json
+│       │   ├── betrayal.json
+│       │   ├── resurrection_appearance.json
+│       │   ├── trial_before_pilate.json
+│       │   └── ... (5 more events)
+│       └── sources.json         # Source metadata
+├── tests/                       # Test suite (24 files, 74 test functions)
+│   ├── test_api.py              # API surface tests
 │   ├── test_basic.py
+│   ├── test_bibles.py           # Bible text integration tests
 │   ├── test_cli.py
 │   ├── test_contradictions.py
+│   ├── test_data_integrity.py   # Data integrity tests
 │   ├── test_dossiers.py
 │   ├── test_dossier_markdown.py
+│   ├── test_dossier_types.py
+│   ├── test_error_handling.py   # Exception handling tests
 │   ├── test_export.py
+│   ├── test_export_citations.py
+│   ├── test_export_csv.py
+│   ├── test_export_graph.py
+│   ├── test_export_json.py
+│   ├── test_integration.py      # Integration tests
+│   ├── test_main_cli.py
+│   ├── test_models.py
+│   ├── test_models_helpers.py
+│   ├── test_queries.py
+│   ├── test_search.py           # Search functionality tests
 │   ├── test_storage.py
-│   ├── test_validation.py
-│   └── ... (7 more test files)
+│   ├── test_tags.py             # Tag-based query tests
+│   └── test_validation.py
 ├── examples/                    # Usage examples
 │   ├── basic_usage.py
 │   └── print_dossier_markdown.py
 ├── docs/
-│   └── ROADMAP.md              # Project roadmap and phases
-├── dev_cli.py                  # Development CLI (legacy, being phased out)
+│   ├── ROADMAP.md              # Project roadmap and phases
+│   ├── SCHEMA.md               # API schema documentation
+│   ├── DATA_ENTRY_GUIDE.md     # Guide for adding data
+│   └── features.md             # Feature documentation
+├── dev_cli.py                  # Development CLI (legacy, still functional)
 ├── start.ps1                   # PowerShell startup script (Windows)
 ├── pyproject.toml              # Package configuration
 ├── README.md                   # User-facing documentation
+├── CHANGELOG.md                # Version history
+├── CLAUDE.md                   # This file - AI assistant guide
 └── .gitignore                  # Git ignore rules
 ```
 
@@ -83,7 +115,7 @@ codex-azazel/
 
 ### Character
 
-Defined in `bce/models.py:15-20`:
+Defined in `bce/models.py:30-52`:
 
 ```python
 @dataclass(slots=True)
@@ -93,11 +125,18 @@ class Character:
     aliases: List[str]                       # Alternative names
     roles: List[str]                         # e.g., ["teacher", "prophet", "messiah"]
     source_profiles: List[SourceProfile]     # Per-source data
+    relationships: List[dict]                # Character relationships (NEW in Phase 0.5)
+    tags: List[str]                          # Topical tags (NEW in Phase 2)
+
+    # Helper methods
+    def get_source_profile(self, source_id: str) -> Optional[SourceProfile]
+    def list_sources(self) -> List[str]
+    def has_trait(self, trait: str, source: Optional[str] = None) -> bool
 ```
 
 ### SourceProfile
 
-Defined in `bce/models.py:8-11`:
+Defined in `bce/models.py:8-18`:
 
 ```python
 @dataclass(slots=True)
@@ -105,11 +144,29 @@ class SourceProfile:
     source_id: str                  # e.g., "mark", "matthew", "paul_undisputed"
     traits: Dict[str, str]          # Narrative/theological features
     references: List[str]           # Scripture references
+
+    # Helper methods
+    def has_trait(self, trait: str) -> bool
+    def get_trait(self, trait: str, default: Optional[str] = None) -> Optional[str]
+```
+
+### SourceMetadata
+
+Defined in `bce/models.py:21-27` (NEW in Phase 0.5):
+
+```python
+@dataclass(slots=True)
+class SourceMetadata:
+    source_id: str                  # e.g., "mark", "matthew"
+    date_range: Optional[str]       # e.g., "70-75 CE"
+    provenance: Optional[str]       # e.g., "Rome" or "Antioch"
+    audience: Optional[str]         # e.g., "Gentile Christians"
+    depends_on: List[str]           # Sources this one likely depends on
 ```
 
 ### Event
 
-Defined in `bce/models.py:32-36`:
+Defined in `bce/models.py:83-90`:
 
 ```python
 @dataclass(slots=True)
@@ -118,11 +175,13 @@ class Event:
     label: str                      # Display name
     participants: List[str]         # Character IDs involved
     accounts: List[EventAccount]    # Per-source accounts
+    parallels: List[dict]           # Parallel pericope records (NEW in Phase 0.5)
+    tags: List[str]                 # Topical tags (NEW in Phase 2)
 ```
 
 ### EventAccount
 
-Defined in `bce/models.py:24-28`:
+Defined in `bce/models.py:75-80`:
 
 ```python
 @dataclass(slots=True)
@@ -135,9 +194,29 @@ class EventAccount:
 
 ## Module Responsibilities
 
+### **RECOMMENDED ENTRY POINT: `bce/api.py`**
+
+**The `bce.api` module is the recommended high-level entry point for external tools.** It provides a stable, ergonomic API surface that wraps lower-level modules.
+
+Key functions:
+- **Data access**: `get_character(id)`, `get_event(id)`, `list_character_ids()`, `list_event_ids()`
+- **Dossiers**: `build_character_dossier(id)`, `build_event_dossier(id)`, `build_all_character_dossiers()`, `build_all_event_dossiers()`
+- **Conflicts**: `summarize_character_conflicts(id)`, `summarize_event_conflicts(id)`
+- **Search & Tags**: `search_all(query, scope)`, `list_characters_with_tag(tag)`, `list_events_with_tag(tag)`
+- **Export**: `export_all_characters()`, `export_all_events()`, `export_characters_csv(path)`, `export_events_csv(path)`, `export_citations(format)`
+- **Graph**: `build_graph_snapshot()` - Returns a `GraphSnapshot` with nodes and edges
+- **Bible text**: `list_bible_translations()`, `get_verse_text(book, chapter, verse, translation)`, `get_parallel_verse_text(book, chapter, verse, translations)`
+
+**Always prefer `bce.api` over direct module imports when building external tools.**
+
 ### `bce/models.py`
 
-Pure dataclass definitions with no business logic. Uses `slots=True` for efficiency.
+Pure dataclass definitions with helper methods. Uses `slots=True` for efficiency. Now includes:
+- `Character` with helper methods: `get_source_profile()`, `list_sources()`, `has_trait()`
+- `SourceProfile` with helper methods: `has_trait()`, `get_trait()`
+- `Event` with new fields: `parallels`, `tags`
+- `EventAccount` (unchanged)
+- `SourceMetadata` (new in Phase 0.5) for source-level metadata
 
 ### `bce/storage.py`
 
@@ -225,6 +304,127 @@ Key functions:
 - `dossier_to_markdown(dossier: dict) -> str`
 - `dossiers_to_markdown(dossiers: list[dict]) -> str`
 
+### `bce/export_csv.py` (NEW in Phase 0.5)
+
+CSV export utilities for tabular data exports.
+
+Key functions:
+- `export_characters_csv(output_path: str, include_fields: Optional[List[str]]) -> None`
+- `export_events_csv(output_path: str, include_fields: Optional[List[str]]) -> None`
+
+### `bce/export_citations.py` (NEW in Phase 0.5)
+
+Citation export utilities for academic references.
+
+Key functions:
+- `export_citations(format: str = "bibtex") -> List[str]`
+  - Exports citations for sources, characters, and events in BibTeX or other formats
+
+### `bce/export_graph.py` (NEW in Phase 0.5)
+
+Graph/network export for property-graph representations of BCE data.
+
+Key classes and constants:
+- `GraphSnapshot` dataclass with `nodes: List[GraphNode]` and `edges: List[GraphEdge]`
+- `GraphNode` and `GraphEdge` dataclasses for lightweight graph representation
+- Node types: `NODE_TYPE_CHARACTER`, `NODE_TYPE_EVENT`, `NODE_TYPE_SOURCE`
+- Edge types: `EDGE_TYPE_CHARACTER_PARTICIPATED_IN_EVENT`, `EDGE_TYPE_CHARACTER_PROFILE_IN_SOURCE`, etc.
+
+Key functions:
+- `build_graph_snapshot() -> GraphSnapshot`
+  - Builds an in-memory property graph suitable for Neo4j, RDF, or other graph backends
+
+### `bce/search.py` (NEW in Phase 2)
+
+Full-text search across characters and events.
+
+Key functions:
+- `search_all(query: str, scope: Optional[List[str]]) -> List[Dict[str, Any]]`
+  - Searches traits, references, accounts, notes, and tags
+  - Returns structured results with match context
+  - Supports scoped searches: `["traits", "references", "accounts", "notes", "tags"]`
+
+### `bce/config.py` (NEW in Phase 0.5)
+
+Configuration management for BCE.
+
+Key class:
+- `BceConfig` - Configuration object with environment variable support
+  - `data_root: Path` - Path to data directory
+  - `cache_size: int` - Maximum cached items (default: 128)
+  - `enable_validation: bool` - Enable automatic validation (default: True)
+  - `log_level: str` - Logging level (default: WARNING)
+  - Properties: `char_dir`, `event_dir`, `sources_file`
+  - Method: `validate_paths() -> List[str]`
+
+Environment variables:
+- `BCE_DATA_ROOT` - Override data root path
+- `BCE_CACHE_SIZE` - Override cache size
+- `BCE_ENABLE_VALIDATION` - Enable/disable validation
+- `BCE_LOG_LEVEL` - Set log level
+
+Functions:
+- `get_default_config() -> BceConfig` - Get singleton config
+- `set_default_config(config: BceConfig) -> None` - Set global config
+- `reset_default_config() -> None` - Reset to defaults
+
+### `bce/cache.py` (NEW in Phase 0.5)
+
+Cache registry for cache invalidation across modules.
+
+Key class:
+- `CacheRegistry` - Registry for cache invalidation callbacks
+  - `register(invalidator: Callable[[], None])` - Register cache invalidator
+  - `unregister(invalidator: Callable[[], None])` - Unregister invalidator
+  - `invalidate_all()` - Invalidate all registered caches
+  - `clear_registry()` - Clear all invalidators (for testing)
+  - `count() -> int` - Return number of registered invalidators
+
+This replaces the fragile `sys.modules` inspection pattern previously used.
+
+### `bce/exceptions.py` (NEW in Phase 0.5)
+
+Structured exception hierarchy for BCE.
+
+Exception classes:
+- `BceError` - Base exception for all BCE errors
+- `DataNotFoundError` - Requested data doesn't exist (inherits from FileNotFoundError)
+- `ValidationError` - Data validation failed
+- `StorageError` - Storage operations failed (inherits from RuntimeError)
+- `CacheError` - Cache operations failed
+- `ConfigurationError` - Invalid or missing configuration
+- `SearchError` - Search operations failed
+
+All exceptions inherit from `BceError`, making it easy to catch any BCE-specific error.
+
+### `bce/sources.py` (NEW in Phase 0.5)
+
+Source metadata management.
+
+Loads and manages source metadata from `bce/data/sources.json`.
+
+Key functions:
+- `load_source_metadata(source_id: str) -> SourceMetadata`
+- `list_source_ids() -> List[str]`
+- Functions for accessing source-level information
+
+### `bce/services.py` (NEW in Phase 0.5)
+
+Service layer providing high-level business logic and orchestration.
+
+(Consult the module directly for current service offerings.)
+
+### `bce/bibles.py` (NEW in Phase 0.5)
+
+Bible text integration for fetching verse text.
+
+Key functions:
+- `list_translations() -> List[str]` - List available translations
+- `get_verse(book: str, chapter: int, verse: int, translation: str = "web") -> str`
+- `get_parallel(book: str, chapter: int, verse: int, translations: List[str]) -> Dict[str, str]`
+
+Enables direct integration of scripture text alongside character/event data.
+
 ### `bce/validation.py`
 
 Data integrity validation.
@@ -298,6 +498,14 @@ pytest -v
   "canonical_name": "Display Name",
   "aliases": ["Alternative", "Names"],
   "roles": ["role1", "role2"],
+  "tags": ["tag1", "tag2"],
+  "relationships": [
+    {
+      "type": "relationship_type",
+      "to": "other_character_id",
+      "description": "Relationship description"
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "source_name",
@@ -310,6 +518,8 @@ pytest -v
 }
 ```
 
+**Note**: `tags` and `relationships` fields are optional but recommended for Phase 2+ data.
+
 **Event JSON Structure:**
 
 ```json
@@ -317,6 +527,14 @@ pytest -v
   "id": "event_id",
   "label": "Event Name",
   "participants": ["char_id1", "char_id2"],
+  "tags": ["tag1", "tag2"],
+  "parallels": [
+    {
+      "sources": ["mark", "matthew", "luke"],
+      "type": "synoptic_parallel",
+      "notes": "Optional parallel notes"
+    }
+  ],
   "accounts": [
     {
       "source_id": "source_name",
@@ -325,6 +543,28 @@ pytest -v
       "notes": "Optional notes"
     }
   ]
+}
+```
+
+**Note**: `tags` and `parallels` fields are optional but recommended for Phase 2+ data.
+
+**Source Metadata JSON Structure** (in `bce/data/sources.json`):
+```json
+{
+  "mark": {
+    "source_id": "mark",
+    "date_range": "70-75 CE",
+    "provenance": "Rome",
+    "audience": "Gentile Christians",
+    "depends_on": []
+  },
+  "matthew": {
+    "source_id": "matthew",
+    "date_range": "80-90 CE",
+    "provenance": "Antioch",
+    "audience": "Jewish Christians",
+    "depends_on": ["mark", "q_source"]
+  }
 }
 ```
 
@@ -400,6 +640,72 @@ The script automatically:
 - Activates the virtual environment (`.venv`) if present
 - Forwards all arguments to `python -m bce.cli`
 
+## Using the BCE API
+
+### Recommended Pattern: Use `bce.api`
+
+**For all external tools, scripts, and integrations, use the `bce.api` module as your primary entry point.**
+
+Example usage:
+
+```python
+from bce import api
+
+# Load data
+jesus = api.get_character("jesus")
+crucifixion = api.get_event("crucifixion")
+
+# List IDs
+char_ids = api.list_character_ids()
+event_ids = api.list_event_ids()
+
+# Build dossiers
+char_dossier = api.build_character_dossier("jesus")
+event_dossier = api.build_event_dossier("crucifixion")
+
+# Find conflicts
+char_conflicts = api.summarize_character_conflicts("jesus")
+event_conflicts = api.summarize_event_conflicts("crucifixion")
+
+# Search
+results = api.search_all("resurrection", scope=["traits", "tags"])
+
+# Tag queries
+resurrection_chars = api.list_characters_with_tag("resurrection")
+resurrection_events = api.list_events_with_tag("resurrection")
+
+# Export data
+all_chars = api.export_all_characters()
+all_events = api.export_all_events()
+
+# Export to files
+api.export_characters_csv("characters.csv")
+api.export_events_csv("events.csv")
+
+# Get citations
+citations = api.export_citations(format="bibtex")
+
+# Build graph snapshot
+graph = api.build_graph_snapshot()
+print(f"Graph has {len(graph.nodes)} nodes and {len(graph.edges)} edges")
+
+# Bible text integration
+translations = api.list_bible_translations()
+verse = api.get_verse_text("John", 3, 16, translation="web")
+parallel = api.get_parallel_verse_text("John", 3, 16, translations=["web", "kjv"])
+```
+
+### Direct Module Access (Advanced)
+
+Lower-level modules are still available for advanced use cases:
+- `bce.queries` - Direct query operations
+- `bce.storage` - Raw JSON I/O
+- `bce.contradictions` - Conflict detection
+- `bce.dossiers` - Dossier builders
+- `bce.search` - Search operations
+
+But **prefer `bce.api`** unless you have specific needs that require direct module access.
+
 ## Key Patterns for AI Assistants
 
 ### 1. When Adding New Characters
@@ -407,17 +713,67 @@ The script automatically:
 1. Create JSON file in `bce/data/characters/<char_id>.json`
 2. Follow the character JSON schema exactly
 3. Include at least one source_profile
-4. Ensure `id` field matches filename (without .json)
-5. Run validation: `python -c "from bce.validation import validate_all; print(validate_all())"`
-6. Add tests if introducing new patterns
+4. **Add `tags` field** with relevant topical tags (Phase 2+)
+5. **Add `relationships` field** if the character has documented relationships (Phase 0.5+)
+6. Ensure `id` field matches filename (without .json)
+7. Run validation: `python -c "from bce.validation import validate_all; print(validate_all())"`
+8. Add tests if introducing new patterns
+
+Example minimal character:
+```json
+{
+  "id": "new_character",
+  "canonical_name": "New Character",
+  "aliases": ["Alternate Name"],
+  "roles": ["role1"],
+  "tags": ["relevant_tag"],
+  "relationships": [],
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "portrayal": "Brief description"
+      },
+      "references": ["Mark 1:1"]
+    }
+  ]
+}
+```
 
 ### 2. When Adding New Events
 
 1. Create JSON file in `bce/data/events/<event_id>.json`
 2. Follow the event JSON schema
 3. Ensure participant IDs reference existing characters
-4. Ensure `id` field matches filename
-5. Run validation to check integrity
+4. **Add `tags` field** with relevant topical tags (Phase 2+)
+5. **Add `parallels` field** for parallel pericopes/accounts (Phase 0.5+)
+6. Ensure `id` field matches filename
+7. Run validation to check integrity
+
+Example minimal event:
+```json
+{
+  "id": "new_event",
+  "label": "New Event",
+  "participants": ["character1", "character2"],
+  "tags": ["relevant_tag"],
+  "parallels": [
+    {
+      "sources": ["mark", "matthew"],
+      "type": "synoptic_parallel",
+      "notes": "Similar account in both gospels"
+    }
+  ],
+  "accounts": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 1:1-5",
+      "summary": "Brief summary of the event",
+      "notes": null
+    }
+  ]
+}
+```
 
 ### 3. When Modifying Data Models
 
@@ -478,22 +834,135 @@ else:
 
 ### 8. Export Workflows
 
-To generate exports for external tools:
+To generate exports for external tools, use `bce.api`:
 
 ```python
-from bce.export import export_all_characters, export_all_events
+from bce import api
 
-# Export to JSON
-export_all_characters("output/characters.json")
-export_all_events("output/events.json")
+# Export all data
+all_chars = api.export_all_characters()
+all_events = api.export_all_events()
+
+# Export to CSV files
+api.export_characters_csv("output/characters.csv")
+api.export_events_csv("output/events.csv")
+
+# Export citations
+citations = api.export_citations(format="bibtex")
+
+# Build graph snapshot for graph databases
+graph = api.build_graph_snapshot()
+# graph.nodes: List[GraphNode]
+# graph.edges: List[GraphEdge]
 
 # Generate Markdown dossiers
-from bce.dossiers import build_character_dossier
-from bce.export import dossier_to_markdown
-
-dossier = build_character_dossier("jesus")
+dossier = api.build_character_dossier("jesus")
+from bce.export_markdown import dossier_to_markdown
 markdown = dossier_to_markdown(dossier)
 print(markdown)
+```
+
+### 9. Error Handling
+
+Use the structured exception hierarchy for robust error handling:
+
+```python
+from bce import api
+from bce import exceptions
+
+try:
+    char = api.get_character("nonexistent")
+except exceptions.DataNotFoundError as e:
+    print(f"Character not found: {e}")
+except exceptions.BceError as e:
+    print(f"BCE error: {e}")
+
+# Configuration errors
+try:
+    from bce.config import BceConfig
+    config = BceConfig(cache_size=-1)
+except exceptions.ConfigurationError as e:
+    print(f"Invalid configuration: {e}")
+
+# Storage errors
+try:
+    from bce import storage
+    storage.save_character(invalid_character)
+except exceptions.StorageError as e:
+    print(f"Storage failed: {e}")
+
+# Validation errors
+try:
+    from bce.validation import validate_all
+    errors = validate_all()
+    if errors:
+        raise exceptions.ValidationError("\n".join(errors))
+except exceptions.ValidationError as e:
+    print(f"Validation failed: {e}")
+```
+
+### 10. Configuration Management
+
+Customize BCE behavior using `BceConfig`:
+
+```python
+from pathlib import Path
+from bce.config import BceConfig, set_default_config
+
+# Create custom configuration
+custom_config = BceConfig(
+    data_root=Path("/custom/data/path"),
+    cache_size=256,
+    enable_validation=True,
+    log_level="INFO"
+)
+
+# Set as default
+set_default_config(custom_config)
+
+# Or use environment variables
+# export BCE_DATA_ROOT=/custom/data/path
+# export BCE_CACHE_SIZE=256
+# export BCE_ENABLE_VALIDATION=true
+# export BCE_LOG_LEVEL=INFO
+
+# Get default config
+from bce.config import get_default_config
+config = get_default_config()
+print(config.data_root)
+print(config.cache_size)
+
+# Validate paths
+errors = config.validate_paths()
+if errors:
+    print("Configuration errors:", errors)
+```
+
+### 11. Search and Tag Queries
+
+Use search and tag features for discovery:
+
+```python
+from bce import api
+
+# Full-text search
+results = api.search_all("resurrection", scope=["traits", "tags"])
+for result in results:
+    print(f"{result['type']}: {result['id']} - {result['match_in']}")
+
+# Scoped searches
+trait_results = api.search_all("messianic", scope=["traits"])
+ref_results = api.search_all("John 3:16", scope=["references"])
+tag_results = api.search_all("apocalyptic", scope=["tags"])
+
+# Tag queries
+chars_with_tag = api.list_characters_with_tag("resurrection")
+events_with_tag = api.list_events_with_tag("passion")
+
+# Check if character has a tag
+jesus = api.get_character("jesus")
+if "messiah" in jesus.tags:
+    print("Jesus is tagged as messiah")
 ```
 
 ## File References in Code
@@ -506,26 +975,44 @@ When discussing code locations, use this format:
 
 ## Roadmap Awareness
 
-Currently in **Phase 0** (Core, Dossiers, Export & Examples) - COMPLETE
+**Current Status**: Phases 0-4 are **largely complete** as of November 2025.
 
-Next phases:
+Completed phases:
+- **Phase 0**: Core, Dossiers, Export & Examples ✅
+- **Phase 1**: Data Coverage & Validation ✅
+  - 62 characters, 10 events
+  - Validation suite in place
+- **Phase 2**: Thematic Tagging & Query Helpers ✅
+  - `tags` field added to Character and Event
+  - Tag query helpers: `list_characters_with_tag()`, `list_events_with_tag()`
+  - Search with tag-aware scope
+- **Phase 3**: Conflict Objects & Ergonomics ✅
+  - Normalized conflict summaries: `summarize_character_conflicts()`, `summarize_event_conflicts()`
+  - Conflict summaries embedded in dossiers
+- **Phase 4**: Stable API Surface for External Tools ✅
+  - `bce.api` module provides stable, high-level API
+  - Schema documentation in `docs/SCHEMA.md`
+  - API tests lock in the public contract
 
-- **Phase 1**: Data Coverage & Validation (v0 canon, more characters/events)
-- **Phase 2**: Thematic Tagging & Query Helpers
-- **Phase 3**: Conflict Objects & Ergonomics
-- **Phase 4**: Stable API Surface for External Tools
-- **Phase 5**: Optional Extensions (HTTP API, additional formats)
+Future work:
+- **Phase 5**: Optional Extensions (Proposals only, not yet implemented)
+  - HTTP API (FastAPI/Flask)
+  - JSON-LD export
+  - Additional output formats
 
-See `docs/ROADMAP.md` for complete phase details.
+See `docs/ROADMAP.md` for complete phase details and implementation status.
 
 ## Common Pitfalls to Avoid
 
-1. **Don't bypass the query API**: Use `queries.get_character()` instead of `storage.load_character()` to benefit from caching
-2. **Don't forget to clear cache**: If manually modifying JSON files, call `queries.clear_cache()`
-3. **Don't create circular dependencies**: Keep imports clean (models → storage → queries → contradictions/dossiers)
-4. **Don't add UI code**: This is a data engine, not a frontend
-5. **Don't hardcode data root paths**: Use `storage.configure_data_root()` for custom data locations
-6. **Don't skip validation**: Always run `validate_all()` after data changes
+1. **USE `bce.api` for external tools**: Always prefer `bce.api` over direct module imports when building external tools or integrations
+2. **Don't bypass the query API**: Use `queries.get_character()` instead of `storage.load_character()` to benefit from caching
+3. **Don't forget to clear cache**: If manually modifying JSON files, call `queries.clear_cache()` or use `CacheRegistry.invalidate_all()`
+4. **Don't create circular dependencies**: Keep imports clean (models → storage → queries → contradictions/dossiers → api)
+5. **Don't add UI code**: This is a data engine, not a frontend
+6. **Don't hardcode data root paths**: Use `BceConfig` for custom data locations
+7. **Don't skip validation**: Always run `validate_all()` after data changes
+8. **Handle exceptions properly**: Use the structured exception hierarchy (`BceError`, `DataNotFoundError`, etc.)
+9. **Don't ignore new fields**: When adding data, include `tags`, `relationships`, and `parallels` where appropriate
 
 ## Testing Strategy
 
@@ -568,24 +1055,60 @@ pytest
 # Run tests with coverage
 pytest --cov=bce
 
+# Run specific test file
+pytest tests/test_api.py
+
 # List characters
 python dev_cli.py list-chars
 
-# View character as markdown
+# View character as markdown (using bce CLI)
 bce character jesus --format markdown
+
+# View event as markdown
+bce event crucifixion --format markdown
 
 # Validate all data
 python -c "from bce.validation import validate_all; print(validate_all() or 'OK')"
 
-# Export everything
+# Export everything (legacy dev_cli)
 python dev_cli.py export-chars exports/characters.json
 python dev_cli.py export-events exports/events.json
+
+# Python API examples
+python -c "from bce import api; print(api.list_character_ids())"
+python -c "from bce import api; print(len(api.export_all_characters()), 'characters')"
+python -c "from bce import api; results = api.search_all('resurrection'); print(len(results), 'results')"
+
+# Environment configuration
+export BCE_DATA_ROOT=/path/to/data
+export BCE_CACHE_SIZE=256
+export BCE_ENABLE_VALIDATION=true
+export BCE_LOG_LEVEL=INFO
 ```
+
+## Additional Documentation
+
+For deeper understanding of specific topics, consult these additional documentation files:
+
+- **`docs/ROADMAP.md`** - Complete project roadmap with implementation status for all phases
+- **`docs/SCHEMA.md`** - Detailed schema documentation for API consumers
+  - Character and Event model schemas
+  - SourceProfile and SourceMetadata schemas
+  - CharacterDossier and EventDossier schemas
+  - Conflict summary schemas
+  - Search result schemas
+  - Tag schemas
+- **`docs/DATA_ENTRY_GUIDE.md`** - Step-by-step guide for adding new characters and events
+- **`docs/features.md`** - Comprehensive feature documentation
+- **`CHANGELOG.md`** - Version history and change log
+- **`README.md`** - User-facing overview and quickstart guide
 
 ---
 
-**Last Updated**: 2025-11-17
-**Current Phase**: Phase 0 (Complete)
+**Last Updated**: 2025-11-18
+**Current Phase**: Phases 0-4 (Largely Complete)
 **Python Version**: 3.11+
-**Data Files**: 61 characters, 10 events
-**Test Coverage**: 258 test functions across 15 test files
+**Data Files**: 62 characters, 10 events
+**Test Coverage**: 74 test functions across 24 test files
+**BCE Modules**: 23 Python modules
+**Key Architectural Change**: `bce.api` is now the recommended entry point (Phase 4)
