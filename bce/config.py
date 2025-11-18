@@ -24,6 +24,10 @@ class BceConfig:
         BCE_CACHE_SIZE: Maximum number of cached characters/events (default: 128)
         BCE_ENABLE_VALIDATION: Enable automatic validation on load (default: true)
         BCE_LOG_LEVEL: Logging level (default: WARNING)
+        BCE_ENABLE_AI_FEATURES: Enable AI-powered features (default: false)
+        BCE_AI_MODEL_BACKEND: AI model backend - "local", "openai", "anthropic" (default: local)
+        BCE_AI_CACHE_DIR: Path to AI cache directory (default: data_root/ai_cache)
+        BCE_EMBEDDING_MODEL: Embedding model name (default: all-MiniLM-L6-v2)
 
     Examples:
         >>> config = BceConfig()
@@ -46,6 +50,10 @@ class BceConfig:
         cache_size: Optional[int] = None,
         enable_validation: Optional[bool] = None,
         log_level: Optional[str] = None,
+        enable_ai_features: Optional[bool] = None,
+        ai_model_backend: Optional[str] = None,
+        ai_cache_dir: Optional[Path] = None,
+        embedding_model: Optional[str] = None,
     ):
         """Initialize configuration.
 
@@ -54,11 +62,20 @@ class BceConfig:
             cache_size: Override cache size (default: from env or 128)
             enable_validation: Override validation setting (default: from env or True)
             log_level: Override log level (default: from env or WARNING)
+            enable_ai_features: Enable AI-powered features (default: from env or False)
+            ai_model_backend: AI model backend - "local", "openai", "anthropic" (default: from env or "local")
+            ai_cache_dir: Path to AI cache directory (default: from env or data_root/ai_cache)
+            embedding_model: Embedding model name (default: from env or "all-MiniLM-L6-v2")
         """
         self.data_root = self._resolve_data_root(data_root)
         self.cache_size = self._resolve_cache_size(cache_size)
         self.enable_validation = self._resolve_validation(enable_validation)
         self.log_level = self._resolve_log_level(log_level)
+        self.enable_ai_features = self._resolve_ai_features(enable_ai_features)
+        self.ai_model_backend = self._resolve_ai_backend(ai_model_backend)
+        self.embedding_model = self._resolve_embedding_model(embedding_model)
+        # ai_cache_dir must be resolved after data_root
+        self.ai_cache_dir = self._resolve_ai_cache_dir(ai_cache_dir)
 
     def _resolve_data_root(self, override: Optional[Path]) -> Path:
         """Resolve data root from override, environment, or default."""
@@ -127,6 +144,53 @@ class BceConfig:
 
         return env_level
 
+    def _resolve_ai_features(self, override: Optional[bool]) -> bool:
+        """Resolve AI features setting from override, environment, or default."""
+        if override is not None:
+            return override
+
+        env_ai = os.getenv("BCE_ENABLE_AI_FEATURES", "").lower()
+        if env_ai in ("false", "0", "no", "off"):
+            return False
+        if env_ai in ("true", "1", "yes", "on"):
+            return True
+
+        return False  # Default: AI features disabled
+
+    def _resolve_ai_backend(self, override: Optional[str]) -> str:
+        """Resolve AI backend from override, environment, or default."""
+        if override is not None:
+            backend = override.lower()
+        else:
+            backend = os.getenv("BCE_AI_MODEL_BACKEND", "local").lower()
+
+        valid_backends = {"local", "openai", "anthropic"}
+        if backend not in valid_backends:
+            raise ConfigurationError(
+                f"Invalid AI backend '{backend}'. Must be one of: {valid_backends}"
+            )
+
+        return backend
+
+    def _resolve_embedding_model(self, override: Optional[str]) -> str:
+        """Resolve embedding model from override, environment, or default."""
+        if override is not None:
+            return override
+
+        return os.getenv("BCE_EMBEDDING_MODEL", "all-MiniLM-L6-v2")
+
+    def _resolve_ai_cache_dir(self, override: Optional[Path]) -> Path:
+        """Resolve AI cache directory from override, environment, or default."""
+        if override is not None:
+            return override
+
+        env_cache = os.getenv("BCE_AI_CACHE_DIR")
+        if env_cache:
+            return Path(env_cache).expanduser().resolve()
+
+        # Default: data_root/ai_cache
+        return self.data_root / "ai_cache"
+
     @property
     def char_dir(self) -> Path:
         """Return the path to the characters data directory."""
@@ -169,7 +233,11 @@ class BceConfig:
             f"data_root={self.data_root}, "
             f"cache_size={self.cache_size}, "
             f"enable_validation={self.enable_validation}, "
-            f"log_level={self.log_level})"
+            f"log_level={self.log_level}, "
+            f"enable_ai_features={self.enable_ai_features}, "
+            f"ai_model_backend={self.ai_model_backend}, "
+            f"ai_cache_dir={self.ai_cache_dir}, "
+            f"embedding_model={self.embedding_model})"
         )
 
 
