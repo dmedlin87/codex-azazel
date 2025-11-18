@@ -12,6 +12,22 @@ from typing import Any, Dict, Optional
 from .config import ensure_ai_enabled, get_ai_backend, validate_api_key
 from ..exceptions import ConfigurationError
 
+# Optional imports for different backends - imported at module level for testability
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    SentenceTransformer = None  # type: ignore
+
+try:
+    import openai
+except ImportError:
+    openai = None  # type: ignore
+
+try:
+    import anthropic
+except ImportError:
+    anthropic = None  # type: ignore
+
 
 class ModelManager:
     """Manager for AI models across different backends."""
@@ -34,9 +50,7 @@ class ModelManager:
         ensure_ai_enabled()
 
         if self._local_model is None:
-            try:
-                from sentence_transformers import SentenceTransformer
-            except ImportError:
+            if SentenceTransformer is None:
                 raise ImportError(
                     "sentence-transformers is required for local AI features. "
                     "Install it with: pip install sentence-transformers"
@@ -83,9 +97,7 @@ class ModelManager:
 
     def _get_openai_client(self):
         """Get OpenAI client."""
-        try:
-            import openai
-        except ImportError:
+        if openai is None:
             raise ImportError(
                 "openai is required for OpenAI backend. "
                 "Install it with: pip install openai"
@@ -96,9 +108,7 @@ class ModelManager:
 
     def _get_anthropic_client(self):
         """Get Anthropic client."""
-        try:
-            import anthropic
-        except ImportError:
+        if anthropic is None:
             raise ImportError(
                 "anthropic is required for Anthropic backend. "
                 "Install it with: pip install anthropic"
