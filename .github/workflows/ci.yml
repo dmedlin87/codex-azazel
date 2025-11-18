@@ -30,17 +30,4 @@ jobs:
 
       - name: Run data validation
         run: |
-          python -c "from bce.validation import validate_all, validate_cross_references; \
-            errors = validate_all(); \
-            xref_errors = validate_cross_references(); \
-            all_errors = errors + xref_errors; \
-            print('=' * 60); \
-            print('BCE Data Validation'); \
-            print('=' * 60); \
-            if all_errors: \
-              print(f'\n❌ {len(all_errors)} validation error(s):'); \
-              for err in all_errors: print(f'  - {err}'); \
-              exit(1); \
-            else: \
-              print('\n✅ All validation checks passed'); \
-              exit(0)"
+          python scripts/validate_data.py
