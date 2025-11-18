@@ -293,6 +293,16 @@ class TestAssessHistoricalSignificance:
 class TestAssessNarrativeImpact:
     """Tests for _assess_narrative_impact internal function."""
 
+    def setup_method(self):
+        """Enable AI features for tests."""
+        reset_default_config()
+        config = BceConfig(enable_ai_features=True)
+        set_default_config(config)
+
+    def teardown_method(self):
+        """Reset configuration."""
+        reset_default_config()
+
     def test_low_impact_high_similarity(self):
         """Should detect low narrative impact for similar values."""
         from bce.ai.conflict_analysis import _assess_narrative_impact
@@ -690,13 +700,13 @@ class TestCachingBehavior:
         set_default_config(config)
 
         # Clear AI caches
-        from bce.ai.cache import clear_all_caches
-        clear_all_caches()
+        from bce.ai.cache import clear_all_ai_caches
+        clear_all_ai_caches()
 
     def teardown_method(self):
         """Reset configuration and clear caches."""
-        from bce.ai.cache import clear_all_caches
-        clear_all_caches()
+        from bce.ai.cache import clear_all_ai_caches
+        clear_all_ai_caches()
         reset_default_config()
 
     def test_cached_vs_uncached_results_identical(self):
@@ -709,14 +719,14 @@ class TestCachingBehavior:
             trait = list(conflicts.keys())[0]
 
             # Clear cache first
-            from bce.ai.cache import clear_all_caches
-            clear_all_caches()
+            from bce.ai.cache import clear_all_ai_caches
+            clear_all_ai_caches()
 
             # Get uncached result
             result_uncached = conflict_analysis.assess_conflict("jesus", trait, use_cache=False)
 
             # Clear cache again
-            clear_all_caches()
+            clear_all_ai_caches()
 
             # Get cached result
             result_cached = conflict_analysis.assess_conflict("jesus", trait, use_cache=True)
@@ -737,8 +747,8 @@ class TestCachingBehavior:
             trait = list(conflicts.keys())[0]
 
             # Clear cache first
-            from bce.ai.cache import clear_all_caches
-            clear_all_caches()
+            from bce.ai.cache import clear_all_ai_caches
+            clear_all_ai_caches()
 
             # First call
             result1 = conflict_analysis.assess_conflict("jesus", trait, use_cache=True)
