@@ -5,6 +5,23 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+## Why "Codex Azazel"?
+
+**Azazel** appears in Leviticus 16 as the mysterious recipient of the scapegoat on the Day of Atonement—one goat "for YHWH" (sacrificed), one goat "for Azazel" (sent alive into the wilderness bearing Israel's sins). The name itself is **contested**: Is it a demon? A place? A functional term meaning "goat that goes away"? Scholars genuinely disagree.
+
+In Second Temple literature (1 Enoch, Dead Sea Scrolls, Apocalypse of Abraham), Azazel is **re-mythologized** as a fallen angel and arch-demon, the origin of all sin, bound in the desert awaiting final judgment. Later Jewish and Christian traditions oscillate between treating Azazel as symbol, geography, controlled demon, or even a type of Satan or Christ.
+
+**Azazel is the perfect mascot for this project** because:
+
+- **Diachronic layers**: A single obscure word evolves through radically different interpretations across centuries
+- **Source-aware modeling**: Each tradition (Torah, Enochic, Rabbinic, Christian) has its own distinct "Azazel profile"
+- **Contested and uncertain**: No single answer exists—honest scholarship must hold multiple possibilities
+- **Contradiction-forward**: The conflicts between portrayals are not bugs; they're the whole point
+
+**This project models biblical figures the way scholars actually encounter them: as layered, contested, source-dependent constructions.** Azazel is our flagship demonstration of that approach.
+
+For the full deep-dive, see **[docs/azazel_case_study.md](docs/azazel_case_study.md)** and **[docs/evidence_card_azazel.md](docs/evidence_card_azazel.md)**.
+
 ## Overview
 
 **Codex Azazel's BCE** (Biblical Character Engine) is a Python library for modeling New Testament characters and events as structured, source-aware data. It represents per-source profiles (Mark, Matthew, Luke, John, undisputed Paul, Acts, etc.) enabling you to compare portrayals, trace contradictions, and support historical-critical analysis.
@@ -24,6 +41,7 @@ All core data lives in JSON format, and the Python API is designed to be simple,
 ### Current Dataset
 
 - **63 characters** spanning disciples, apostles, antagonists, and supporting figures
+  - Including **Azazel** (the project namesake) as a flagship demonstration of multi-profile diachronic modeling
 - **10 major events** including the crucifixion, resurrection appearances, and key moments
 - **Multiple source perspectives** for comparative analysis
 
