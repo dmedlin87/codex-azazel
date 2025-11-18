@@ -848,3 +848,718 @@ class TestCollectCharacterTexts:
 
         texts = _collect_character_texts(char, ["roles", "tags"])
         assert len(texts) >= 2
+
+    def test_collect_empty_relationships(self):
+        """Should handle empty relationships list."""
+        from bce.ai.semantic_search import _collect_character_texts
+
+        char = Character(
+            id="test",
+            canonical_name="Test",
+            aliases=[],
+            roles=[],
+            source_profiles=[],
+            relationships=[],
+            tags=[]
+        )
+
+        texts = _collect_character_texts(char, ["relationships"])
+        assert texts == []
+
+    def test_collect_relationship_without_description(self):
+        """Should handle relationships without description field."""
+        from bce.ai.semantic_search import _collect_character_texts
+
+        char = Character(
+            id="test",
+            canonical_name="Test",
+            aliases=[],
+            roles=[],
+            source_profiles=[],
+            relationships=[
+                {"type": "friend", "to": "john"}
+            ],
+            tags=[]
+        )
+
+        texts = _collect_character_texts(char, ["relationships"])
+        assert len(texts) == 1
+
+
+class TestQueryResultSorting:
+    """Tests for query result sorting and formatting."""
+
+    def setup_method(self):
+        """Setup for each test."""
+        reset_default_config()
+
+    def teardown_method(self):
+        """Cleanup after each test."""
+        reset_default_config()
+
+    def test_results_sorted_by_relevance_descending(self):
+        """Should sort results by relevance score in descending order."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            # Create index with different similarity scores
+            mock_index = [
+                {
+                    "type": "character",
+                    "id": "low_match",
+                    "field": "traits.mark.role",
+                    "text": "text1",
+                    "embedding": np.array([0.1, 0.1, 0.1])  # Low similarity
+                },
+                {
+                    "type": "character",
+                    "id": "high_match",
+                    "field": "traits.mark.role",
+                    "text": "text2",
+                    "embedding": np.array([0.9, 0.9, 0.9])  # High similarity
+                },
+                {
+                    "type": "character",
+                    "id": "mid_match",
+                    "field": "traits.mark.role",
+                    "text": "text3",
+                    "embedding": np.array([0.5, 0.5, 0.5])  # Mid similarity
+                }
+            ]
+
+            query_embedding = np.array([1.0, 1.0, 1.0])
+
+            with patch("bce.ai.semantic_search._build_search_index") as mock_build, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_build.return_value = mock_index
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = query_embedding
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.query(
+                    "test query",
+                    min_score=0.0,
+                    use_cache=False
+                )
+
+                # Results should be in descending order of relevance
+                if len(results) >= 2:
+                    for i in range(len(results) - 1):
+                        assert results[i]["relevance_score"] >= results[i + 1]["relevance_score"]
+
+    def test_matching_context_truncation(self):
+        """Should truncate matching_context to 200 characters."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            # Create long text that exceeds 200 characters
+            long_text = "A" * 300
+
+            mock_index = [{
+                "type": "character",
+                "id": "test",
+                "field": "traits.mark.description",
+                "text": long_text,
+                "embedding": np.array([0.5, 0.5, 0.5])
+            }]
+
+            query_embedding = np.array([0.5, 0.5, 0.5])
+
+            with patch("bce.ai.semantic_search._build_search_index") as mock_build, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_build.return_value = mock_index
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = query_embedding
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.query(
+                    "test",
+                    min_score=0.0,
+                    use_cache=False
+                )
+
+                # Matching context should be truncated to 200 chars
+                assert len(results) > 0
+                assert len(results[0]["matching_context"]) == 200
+
+    def test_relevance_score_rounding(self):
+        """Should round relevance scores to 3 decimal places."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            mock_index = [{
+                "type": "character",
+                "id": "test",
+                "field": "traits.mark.role",
+                "text": "text",
+                "embedding": np.array([0.123456789, 0.5, 0.5])
+            }]
+
+            query_embedding = np.array([0.123456789, 0.5, 0.5])
+
+            with patch("bce.ai.semantic_search._build_search_index") as mock_build, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_build.return_value = mock_index
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = query_embedding
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.query(
+                    "test",
+                    min_score=0.0,
+                    use_cache=False
+                )
+
+                # Score should be rounded to 3 decimal places
+                if results:
+                    score_str = str(results[0]["relevance_score"])
+                    decimal_part = score_str.split('.')[-1] if '.' in score_str else ""
+                    assert len(decimal_part) <= 3
+
+
+class TestQueryEdgeCases:
+    """Tests for edge cases in query function."""
+
+    def setup_method(self):
+        """Setup for each test."""
+        reset_default_config()
+
+    def teardown_method(self):
+        """Cleanup after each test."""
+        reset_default_config()
+
+    def test_query_with_empty_index(self):
+        """Should handle empty search index gracefully."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            empty_index = []
+            query_embedding = np.array([0.5, 0.5, 0.5])
+
+            with patch("bce.ai.semantic_search._build_search_index") as mock_build, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_build.return_value = empty_index
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = query_embedding
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.query("test", use_cache=False)
+
+                assert results == []
+
+    def test_query_with_no_matches_above_threshold(self):
+        """Should return empty list when no results meet min_score."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            # Create index with low similarity
+            mock_index = [{
+                "type": "character",
+                "id": "test",
+                "field": "traits.mark.role",
+                "text": "text",
+                "embedding": np.array([0.0, 0.0, 1.0])
+            }]
+
+            # Query embedding is orthogonal (low similarity)
+            query_embedding = np.array([1.0, 0.0, 0.0])
+
+            with patch("bce.ai.semantic_search._build_search_index") as mock_build, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_build.return_value = mock_index
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = query_embedding
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.query(
+                    "test",
+                    min_score=0.9,  # Very high threshold
+                    use_cache=False
+                )
+
+                assert results == []
+
+    def test_query_with_zero_top_k(self):
+        """Should return empty list when top_k is 0."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            mock_index = [{
+                "type": "character",
+                "id": "test",
+                "field": "traits.mark.role",
+                "text": "text",
+                "embedding": np.array([0.5, 0.5, 0.5])
+            }]
+
+            query_embedding = np.array([0.5, 0.5, 0.5])
+
+            with patch("bce.ai.semantic_search._build_search_index") as mock_build, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_build.return_value = mock_index
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = query_embedding
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.query(
+                    "test",
+                    top_k=0,
+                    min_score=0.0,
+                    use_cache=False
+                )
+
+                assert results == []
+
+
+class TestIndexCaching:
+    """Tests for search index caching behavior."""
+
+    def setup_method(self):
+        """Setup for each test."""
+        reset_default_config()
+
+    def teardown_method(self):
+        """Cleanup after each test."""
+        reset_default_config()
+
+    def test_index_cache_hit(self):
+        """Should use cached index when available."""
+        from bce.ai.semantic_search import _build_search_index
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            cached_index = [{"cached": True}]
+
+            with patch("bce.ai.semantic_search.list_all_characters") as mock_chars, \
+                 patch("bce.ai.semantic_search.list_all_events") as mock_events, \
+                 patch("bce.ai.semantic_search.AIResultCache") as mock_cache_cls:
+
+                mock_chars.return_value = []
+                mock_events.return_value = []
+
+                # Mock cache to return cached data
+                mock_cache = MagicMock()
+                mock_cache.get.return_value = cached_index
+                mock_cache_cls.return_value = mock_cache
+
+                result = _build_search_index(["traits"], use_cache=True)
+
+                # Should return cached data
+                assert result == cached_index
+
+                # Should not call list functions when cache hits
+                mock_chars.assert_not_called()
+                mock_events.assert_not_called()
+
+    def test_index_cache_key_format(self):
+        """Should use consistent cache key format."""
+        from bce.ai.semantic_search import _build_search_index
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            with patch("bce.ai.semantic_search.list_all_characters") as mock_chars, \
+                 patch("bce.ai.semantic_search.list_all_events") as mock_events, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_embed, \
+                 patch("bce.ai.semantic_search.AIResultCache") as mock_cache_cls:
+
+                mock_chars.return_value = []
+                mock_events.return_value = []
+                mock_embed_cache = MagicMock()
+                mock_embed.return_value = mock_embed_cache
+
+                mock_cache = MagicMock()
+                mock_cache.get.return_value = None
+                mock_cache_cls.return_value = mock_cache
+
+                # Call with unsorted scope
+                _build_search_index(["relationships", "accounts", "traits"], use_cache=True)
+
+                # Verify cache key is sorted
+                set_call = mock_cache.set.call_args
+                cache_key = set_call[0][0]
+                assert cache_key == "index_accounts_relationships_traits"
+
+
+class TestBuildIndexEdgeCases:
+    """Tests for edge cases in _build_search_index."""
+
+    def setup_method(self):
+        """Setup for each test."""
+        reset_default_config()
+
+    def teardown_method(self):
+        """Cleanup after each test."""
+        reset_default_config()
+
+    def test_build_index_with_event_notes(self):
+        """Should include event notes in indexed text."""
+        from bce.ai.semantic_search import _build_search_index
+
+        event = Event(
+            id="test_event",
+            label="Test Event",
+            participants=[],
+            accounts=[
+                EventAccount(
+                    source_id="mark",
+                    reference="Mark 1:1",
+                    summary="Summary",
+                    notes="Important notes"
+                )
+            ],
+            parallels=[],
+            tags=[]
+        )
+
+        with patch("bce.ai.semantic_search.list_all_characters") as mock_chars, \
+             patch("bce.ai.semantic_search.list_all_events") as mock_events, \
+             patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+            mock_chars.return_value = []
+            mock_events.return_value = [event]
+
+            mock_cache = MagicMock()
+            mock_cache.get_or_compute.return_value = np.array([0.1])
+            mock_cache_cls.return_value = mock_cache
+
+            index = _build_search_index(["accounts"], use_cache=False)
+
+            assert len(index) == 1
+            assert "Important notes" in index[0]["text"]
+
+    def test_build_index_with_empty_traits(self):
+        """Should handle characters with no traits."""
+        from bce.ai.semantic_search import _build_search_index
+
+        char = Character(
+            id="test",
+            canonical_name="Test",
+            aliases=[],
+            roles=[],
+            source_profiles=[
+                SourceProfile(
+                    source_id="mark",
+                    traits={},  # Empty traits
+                    references=[]
+                )
+            ],
+            relationships=[],
+            tags=[]
+        )
+
+        with patch("bce.ai.semantic_search.list_all_characters") as mock_chars, \
+             patch("bce.ai.semantic_search.list_all_events") as mock_events, \
+             patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+            mock_chars.return_value = [char]
+            mock_events.return_value = []
+
+            mock_cache = MagicMock()
+            mock_cache.get_or_compute.return_value = np.array([0.1])
+            mock_cache_cls.return_value = mock_cache
+
+            index = _build_search_index(["traits"], use_cache=False)
+
+            # Should not add entries for empty traits
+            assert len(index) == 0
+
+    def test_build_index_skips_characters_when_not_in_scope(self):
+        """Should skip character indexing when scope doesn't include character fields."""
+        from bce.ai.semantic_search import _build_search_index
+
+        char = Character(
+            id="test",
+            canonical_name="Test",
+            aliases=[],
+            roles=[],
+            source_profiles=[
+                SourceProfile(
+                    source_id="mark",
+                    traits={"key": "value"},
+                    references=[]
+                )
+            ],
+            relationships=[],
+            tags=[]
+        )
+
+        with patch("bce.ai.semantic_search.list_all_characters") as mock_chars, \
+             patch("bce.ai.semantic_search.list_all_events") as mock_events, \
+             patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+            mock_chars.return_value = [char]
+            mock_events.return_value = []
+
+            mock_cache = MagicMock()
+            mock_cache_cls.return_value = mock_cache
+
+            # Use scope that doesn't include character fields
+            index = _build_search_index(["accounts"], use_cache=False)
+
+            # Should not index characters
+            char_entries = [e for e in index if e["type"] == "character"]
+            assert len(char_entries) == 0
+
+
+class TestSimilarityFunctionsEdgeCases:
+    """Tests for edge cases in similarity functions."""
+
+    def setup_method(self):
+        """Setup for each test."""
+        reset_default_config()
+
+    def teardown_method(self):
+        """Cleanup after each test."""
+        reset_default_config()
+
+    def test_find_similar_characters_respects_top_k(self):
+        """Should limit results to top_k parameter."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            # Create many characters
+            chars = []
+            for i in range(10):
+                chars.append(Character(
+                    id=f"char{i}",
+                    canonical_name=f"Char {i}",
+                    aliases=[],
+                    roles=[],
+                    source_profiles=[],
+                    relationships=[],
+                    tags=[]
+                ))
+
+            with patch("bce.ai.semantic_search.get_character") as mock_get, \
+                 patch("bce.ai.semantic_search.list_all_characters") as mock_list, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_get.return_value = chars[0]
+                mock_list.return_value = chars
+
+                mock_cache = MagicMock()
+                # Return similar embeddings for all
+                mock_cache.get_or_compute.return_value = np.array([0.5, 0.5])
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.find_similar_characters("char0", top_k=3)
+
+                # Should return at most 3 results (excluding self)
+                assert len(results) <= 3
+
+    def test_find_similar_events_respects_top_k(self):
+        """Should limit results to top_k parameter."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            # Create many events
+            events = []
+            for i in range(10):
+                events.append(Event(
+                    id=f"event{i}",
+                    label=f"Event {i}",
+                    participants=[],
+                    accounts=[],
+                    parallels=[],
+                    tags=[]
+                ))
+
+            with patch("bce.ai.semantic_search.get_event") as mock_get, \
+                 patch("bce.ai.semantic_search.list_all_events") as mock_list, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_get.return_value = events[0]
+                mock_list.return_value = events
+
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = np.array([0.5, 0.5])
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.find_similar_events("event0", top_k=2)
+
+                # Should return at most 2 results (excluding self)
+                assert len(results) <= 2
+
+    def test_find_similar_characters_with_no_text(self):
+        """Should handle characters with no extractable text."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            # Character with no traits, roles, relationships, or tags
+            char = Character(
+                id="empty",
+                canonical_name="Empty",
+                aliases=[],
+                roles=[],
+                source_profiles=[],
+                relationships=[],
+                tags=[]
+            )
+
+            with patch("bce.ai.semantic_search.get_character") as mock_get, \
+                 patch("bce.ai.semantic_search.list_all_characters") as mock_list, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_get.return_value = char
+                mock_list.return_value = [char]
+
+                mock_cache = MagicMock()
+                # Empty text will be joined to ""
+                mock_cache.get_or_compute.return_value = np.array([0.0])
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.find_similar_characters("empty")
+
+                # Should handle gracefully (no results since only one character)
+                assert isinstance(results, list)
+
+    def test_find_similar_events_with_empty_accounts(self):
+        """Should handle events with no accounts."""
+        from bce.ai import semantic_search
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config = BceConfig(
+                enable_ai_features=True,
+                ai_cache_dir=Path(tmpdir)
+            )
+            set_default_config(config)
+
+            event = Event(
+                id="empty_event",
+                label="Empty Event",
+                participants=[],
+                accounts=[],  # No accounts
+                parallels=[],
+                tags=[]
+            )
+
+            with patch("bce.ai.semantic_search.get_event") as mock_get, \
+                 patch("bce.ai.semantic_search.list_all_events") as mock_list, \
+                 patch("bce.ai.semantic_search.EmbeddingCache") as mock_cache_cls:
+
+                mock_get.return_value = event
+                mock_list.return_value = [event]
+
+                mock_cache = MagicMock()
+                mock_cache.get_or_compute.return_value = np.array([0.0])
+                mock_cache_cls.return_value = mock_cache
+
+                results = semantic_search.find_similar_events("empty_event")
+
+                # Should handle gracefully
+                assert isinstance(results, list)
+
+
+class TestExplainMatchEdgeCases:
+    """Additional tests for _explain_match function."""
+
+    def test_explain_match_boundary_scores(self):
+        """Should correctly categorize boundary scores."""
+        from bce.ai.semantic_search import _explain_match
+
+        # Test exact boundary at 0.8
+        result_0_8 = _explain_match("q", "t", 0.8, "character", "id")
+        assert "Strong" in result_0_8
+
+        # Test exact boundary at 0.6
+        result_0_6 = _explain_match("q", "t", 0.6, "event", "id")
+        assert "Moderate" in result_0_6
+
+        # Test just below 0.6
+        result_0_59 = _explain_match("q", "t", 0.59, "character", "id")
+        assert "Weak" in result_0_59
+
+    def test_explain_match_includes_query_and_id(self):
+        """Should include query and item ID in explanation."""
+        from bce.ai.semantic_search import _explain_match
+
+        result = _explain_match(
+            "my search query",
+            "matched text",
+            0.75,
+            "character",
+            "specific_id"
+        )
+
+        assert "my search query" in result
+        assert "specific_id" in result
+
+    def test_explain_match_includes_item_type(self):
+        """Should include item type in explanation."""
+        from bce.ai.semantic_search import _explain_match
+
+        char_result = _explain_match("q", "t", 0.7, "character", "id")
+        assert "character" in char_result
+
+        event_result = _explain_match("q", "t", 0.7, "event", "id")
+        assert "event" in event_result
