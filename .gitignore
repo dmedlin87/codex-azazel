@@ -66,6 +66,9 @@ htmlcov/
 _docs_build/
 site/
 
+# AI cache
+bce/data/ai_cache/
+
 # Misc
 *.tmp
 *.bak
