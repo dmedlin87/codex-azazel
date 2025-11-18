@@ -999,7 +999,7 @@ Completed phases:
 
 - **Phase 0**: Core, Dossiers, Export & Examples ✅
 - **Phase 1**: Data Coverage & Validation ✅
-  - 62 characters, 10 events
+  - 63 characters, 10 events
   - Validation suite in place
 - **Phase 2**: Thematic Tagging & Query Helpers ✅
   - `tags` field added to Character and Event
@@ -1128,7 +1128,7 @@ For deeper understanding of specific topics, consult these additional documentat
 **Last Updated**: 2025-11-18
 **Current Phase**: Phases 0-4 (Largely Complete)
 **Python Version**: 3.11+
-**Data Files**: 62 characters, 10 events
+**Data Files**: 63 characters, 10 events
 **Test Coverage**: 74 test functions across 24 test files
 **BCE Modules**: 23 Python modules
 **Key Architectural Change**: `bce.api` is now the recommended entry point (Phase 4)

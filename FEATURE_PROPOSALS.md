@@ -1,7 +1,7 @@
 # Feature Proposals for Codex Azazel (BCE)
 
 **Document Date**: 2025-11-18
-**Current Status**: Phases 0-4 Complete (62 characters, 10 events)
+**Current Status**: Phases 0-4 Complete (63 characters, 10 events)
 **Purpose**: Propose features that extend BCE's core mission as a contradiction-aware Biblical character and event engine
 
 ---
@@ -10,7 +10,7 @@
 
 ### 1.1 Expand Event Coverage (HIGH PRIORITY)
 
-**Current State**: 10 events vs 62 characters - significant imbalance
+**Current State**: 10 events vs 63 characters - significant imbalance
 
 **Proposal**: Add 30-50 additional key NT events to achieve better parity
 
