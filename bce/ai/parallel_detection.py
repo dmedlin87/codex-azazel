@@ -203,6 +203,9 @@ def _find_parallel_groups(
     threshold: float,
 ) -> List[List[Dict[str, Any]]]:
     """Group accounts by similarity."""
+    if len(accounts) == 0:
+        return []
+
     if len(accounts) < 2:
         return [[acc] for acc in accounts]
 
@@ -227,8 +230,9 @@ def _find_parallel_groups(
         if assigned[i]:
             continue
 
-        # Start new group
+        # Start new group with account i
         group = [accounts[i]]
+        group_indices = [i]
         assigned[i] = True
 
         # Find similar accounts
@@ -236,15 +240,15 @@ def _find_parallel_groups(
             if assigned[j]:
                 continue
 
-            # Check if j is similar to any in group
+            # Check if j is similar to any account already in the group
             is_similar = any(
                 similarity_matrix[group_idx][j] >= threshold
-                for group_idx in range(len(accounts))
-                if accounts[group_idx] in group
+                for group_idx in group_indices
             )
 
             if is_similar:
                 group.append(accounts[j])
+                group_indices.append(j)
                 assigned[j] = True
 
         groups.append(group)
@@ -315,6 +319,10 @@ def _generate_combined_summary(summaries: List[str]) -> str:
 
 def _parse_source_from_reference(reference: str) -> Optional[str]:
     """Extract source ID from scripture reference."""
+    # Handle empty or whitespace-only references
+    if not reference or not reference.strip():
+        return None
+
     # Common patterns
     gospels = ["Mark", "Matthew", "Luke", "John"]
     for gospel in gospels:

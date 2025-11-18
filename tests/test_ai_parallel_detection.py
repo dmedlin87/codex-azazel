@@ -415,6 +415,16 @@ class TestParseSourceFromReference:
 class TestFindParallelGroups:
     """Tests for _find_parallel_groups internal function."""
 
+    def setup_method(self):
+        """Enable AI features for tests."""
+        reset_default_config()
+        config = BceConfig(enable_ai_features=True)
+        set_default_config(config)
+
+    def teardown_method(self):
+        """Reset configuration."""
+        reset_default_config()
+
     def test_single_account(self):
         """Should return single group for single account."""
         from bce.ai.parallel_detection import _find_parallel_groups
@@ -693,10 +703,10 @@ class TestDetectEventParallelsEdgeCases:
     def test_cache_disabled_returns_fresh_results(self):
         """Should return fresh results when cache is disabled."""
         from bce.ai import parallel_detection
-        from bce.ai.cache import clear_analysis_cache
+        from bce.ai.cache import clear_all_ai_caches
 
         # Clear any existing cache
-        clear_analysis_cache()
+        clear_all_ai_caches()
 
         # Get results without cache
         result1 = parallel_detection.detect_event_parallels("crucifixion", use_cache=False)

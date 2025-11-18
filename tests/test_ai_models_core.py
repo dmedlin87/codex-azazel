@@ -92,8 +92,8 @@ class TestModelManager:
 
         manager = ModelManager()
 
-        # Patch where it's imported (inside the method)
-        with patch("sentence_transformers.SentenceTransformer", mock_transformer_class):
+        # Patch at module level where it's imported
+        with patch("bce.ai.models.SentenceTransformer", mock_transformer_class):
             result = manager.get_embedding_model()
 
             assert result is mock_model
@@ -107,18 +107,13 @@ class TestModelManager:
     def test_get_embedding_model_caches_model(self):
         """Test get_embedding_model caches the model instance."""
         from bce.ai.models import ModelManager
-        import sys
 
         mock_model = MagicMock()
         mock_transformer_class = MagicMock(return_value=mock_model)
 
-        # Create mock sentence_transformers module
-        mock_st_module = MagicMock()
-        mock_st_module.SentenceTransformer = mock_transformer_class
-
         manager = ModelManager()
 
-        with patch.dict(sys.modules, {"sentence_transformers": mock_st_module}):
+        with patch("bce.ai.models.SentenceTransformer", mock_transformer_class):
             model1 = manager.get_embedding_model()
             model2 = manager.get_embedding_model()
 
@@ -150,8 +145,10 @@ class TestModelManager:
 
         manager = ModelManager()
         mock_client = MagicMock()
+        mock_openai = MagicMock()
+        mock_openai.OpenAI = MagicMock(return_value=mock_client)
 
-        with patch("bce.ai.models.openai.OpenAI", return_value=mock_client):
+        with patch("bce.ai.models.openai", mock_openai):
             result = manager.get_llm_client()
             assert result is mock_client
 
@@ -169,8 +166,10 @@ class TestModelManager:
 
         manager = ModelManager()
         mock_client = MagicMock()
+        mock_anthropic = MagicMock()
+        mock_anthropic.Anthropic = MagicMock(return_value=mock_client)
 
-        with patch("bce.ai.models.anthropic.Anthropic", return_value=mock_client):
+        with patch("bce.ai.models.anthropic", mock_anthropic):
             # Override default backend
             result = manager.get_llm_client(backend="anthropic")
             assert result is mock_client
@@ -567,7 +566,6 @@ class TestModelManagerErrorHandling:
     def test_missing_openai_key_error_message(self):
         """Test missing OpenAI key error has helpful message."""
         from bce.ai.models import ModelManager
-        import sys
 
         os.environ.pop("OPENAI_API_KEY", None)
 
@@ -577,7 +575,7 @@ class TestModelManagerErrorHandling:
         mock_openai_module = MagicMock()
         mock_openai_module.OpenAI = MagicMock()
 
-        with patch.dict(sys.modules, {"openai": mock_openai_module}):
+        with patch("bce.ai.models.openai", mock_openai_module):
             with pytest.raises(ConfigurationError) as exc_info:
                 manager._get_openai_client()
 
@@ -586,7 +584,6 @@ class TestModelManagerErrorHandling:
     def test_missing_anthropic_key_error_message(self):
         """Test missing Anthropic key error has helpful message."""
         from bce.ai.models import ModelManager
-        import sys
 
         os.environ.pop("ANTHROPIC_API_KEY", None)
 
@@ -596,7 +593,7 @@ class TestModelManagerErrorHandling:
         mock_anthropic_module = MagicMock()
         mock_anthropic_module.Anthropic = MagicMock()
 
-        with patch.dict(sys.modules, {"anthropic": mock_anthropic_module}):
+        with patch("bce.ai.models.anthropic", mock_anthropic_module):
             with pytest.raises(ConfigurationError) as exc_info:
                 manager._get_anthropic_client()
 

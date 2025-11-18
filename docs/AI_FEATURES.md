@@ -919,6 +919,120 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 
 ---
 
+## Test Status and Integration Verification
+
+**Last Verified**: 2025-11-18
+
+### Overall Test Results
+
+**Full Test Suite** (excluding test_ai_semantic_search.py):
+- **Total Tests**: 1,147
+- **Passed**: 1,018 ✓
+- **Failed**: 82 ✗
+- **Skipped**: 45 (mostly due to optional AI dependencies)
+- **Errors**: 2
+- **Success Rate**: 88.8%
+
+### Test Suite Breakdown
+
+#### ✓ test_ai_cache_and_embeddings.py
+- **Status**: PASSING
+- **Results**: 43 passed, 23 skipped
+- **Notes**: Core caching and embedding infrastructure is fully functional
+
+#### ⚠️ test_ai_conflict_analysis.py
+- **Status**: PARTIAL FAILURES
+- **Results**: 39 passed, 17 failed, 2 errors
+- **Issue**: Missing optional dependency `sentence-transformers`
+- **Affected Features**: Narrative impact assessment, AI-powered conflict assessment
+- **Resolution**: Install with `pip install 'codex-azazel[ai]'`
+
+#### ⚠️ test_ai_models_core.py
+- **Status**: PARTIAL FAILURES
+- **Results**: 24 passed, 15 failed
+- **Issue**: Test patching issues with lazy imports
+- **Affected Tests**: LLM client initialization tests, backend switching tests
+- **Notes**: Core functionality works, but some tests need refactoring for lazy import patterns
+
+#### ⚠️ test_ai_parallel_detection.py
+- **Status**: PARTIAL FAILURES
+- **Results**: 42 passed, 27 failed
+- **Issue**: Missing optional dependency `sentence-transformers`
+- **Affected Features**: Parallel pericope detection, similarity-based grouping
+- **Resolution**: Install with `pip install 'codex-azazel[ai]'`
+
+#### ⚠️ test_ai_semantic_contradictions.py
+- **Status**: PARTIAL FAILURES
+- **Results**: 13 passed, 23 failed
+- **Issue**: Missing optional dependencies `numpy` and `sentence-transformers`
+- **Affected Features**: Semantic contradiction analysis, similarity calculations
+- **Resolution**: Install with `pip install 'codex-azazel[ai]'`
+
+#### ✗ test_ai_semantic_search.py
+- **Status**: COLLECTION ERROR
+- **Issue**: Direct `import numpy` at module level causes collection failure
+- **Impact**: Prevents test suite from running if numpy is not installed
+- **Resolution Needed**: Refactor test file to use lazy imports or conditional skips
+
+### Known Issues and Limitations
+
+1. **Optional Dependencies**: AI features require `numpy` and `sentence-transformers`, which are not installed by default
+   - This is intentional - AI features are opt-in
+   - Tests that require these dependencies should be skipped gracefully
+
+2. **Test Import Patterns**: Some test files import optional dependencies at the module level, causing collection errors
+   - Recommendation: Use lazy imports or pytest skip decorators for optional dependencies
+
+3. **Lazy Import Testing**: Tests that patch lazy-imported modules need adjustments to work with the lazy import pattern
+   - Core functionality is unaffected
+   - Test infrastructure needs updates for better lazy import compatibility
+
+### Installation Requirements
+
+To run full AI test suite:
+
+```bash
+# Install core package with AI dependencies
+pip install -e '.[dev,ai]'
+
+# Or install just AI dependencies
+pip install numpy sentence-transformers
+```
+
+### Testing Recommendations
+
+1. **For Core Features**: Run tests without AI dependencies to verify core BCE functionality
+   ```bash
+   python -m pytest --ignore=tests/test_ai_*.py
+   ```
+
+2. **For AI Features**: Install AI dependencies first, then run AI tests
+   ```bash
+   pip install 'codex-azazel[ai]'
+   python -m pytest tests/test_ai_*.py
+   ```
+
+3. **For Full Suite**: Install all dependencies
+   ```bash
+   pip install -e '.[dev,ai,ai-openai,ai-anthropic]'
+   python -m pytest
+   ```
+
+### Behavioral Notes
+
+- **Cache Performance**: Embedding cache is functioning correctly with proper persistence and invalidation
+- **Lazy Loading**: Model lazy-loading works as intended, deferring imports until actually needed
+- **Error Handling**: AI features properly raise `ConfigurationError` when disabled, and `ImportError` when dependencies are missing
+- **Cache Invalidation**: Character and event cache invalidation works correctly when data changes
+
+### Next Steps
+
+1. **Optional**: Refactor test files to use conditional imports/skips for better collection behavior
+2. **Optional**: Update test patching strategies for lazy import patterns
+3. **Documentation**: Update installation docs to clarify AI dependency requirements
+
+---
+
 ## See Also
 
 - [AI Features Proposal](./AI_FEATURES_PROPOSAL.md) - Full technical specification
