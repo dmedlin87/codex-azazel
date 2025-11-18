@@ -199,6 +199,7 @@ class EventAccount:
 **The `bce.api` module is the recommended high-level entry point for external tools.** It provides a stable, ergonomic API surface that wraps lower-level modules.
 
 Key functions:
+
 - **Data access**: `get_character(id)`, `get_event(id)`, `list_character_ids()`, `list_event_ids()`
 - **Dossiers**: `build_character_dossier(id)`, `build_event_dossier(id)`, `build_all_character_dossiers()`, `build_all_event_dossiers()`
 - **Conflicts**: `summarize_character_conflicts(id)`, `summarize_event_conflicts(id)`
@@ -212,6 +213,7 @@ Key functions:
 ### `bce/models.py`
 
 Pure dataclass definitions with helper methods. Uses `slots=True` for efficiency. Now includes:
+
 - `Character` with helper methods: `get_source_profile()`, `list_sources()`, `has_trait()`
 - `SourceProfile` with helper methods: `has_trait()`, `get_trait()`
 - `Event` with new fields: `parallels`, `tags`
@@ -309,6 +311,7 @@ Key functions:
 CSV export utilities for tabular data exports.
 
 Key functions:
+
 - `export_characters_csv(output_path: str, include_fields: Optional[List[str]]) -> None`
 - `export_events_csv(output_path: str, include_fields: Optional[List[str]]) -> None`
 
@@ -317,6 +320,7 @@ Key functions:
 Citation export utilities for academic references.
 
 Key functions:
+
 - `export_citations(format: str = "bibtex") -> List[str]`
   - Exports citations for sources, characters, and events in BibTeX or other formats
 
@@ -325,12 +329,14 @@ Key functions:
 Graph/network export for property-graph representations of BCE data.
 
 Key classes and constants:
+
 - `GraphSnapshot` dataclass with `nodes: List[GraphNode]` and `edges: List[GraphEdge]`
 - `GraphNode` and `GraphEdge` dataclasses for lightweight graph representation
 - Node types: `NODE_TYPE_CHARACTER`, `NODE_TYPE_EVENT`, `NODE_TYPE_SOURCE`
 - Edge types: `EDGE_TYPE_CHARACTER_PARTICIPATED_IN_EVENT`, `EDGE_TYPE_CHARACTER_PROFILE_IN_SOURCE`, etc.
 
 Key functions:
+
 - `build_graph_snapshot() -> GraphSnapshot`
   - Builds an in-memory property graph suitable for Neo4j, RDF, or other graph backends
 
@@ -339,6 +345,7 @@ Key functions:
 Full-text search across characters and events.
 
 Key functions:
+
 - `search_all(query: str, scope: Optional[List[str]]) -> List[Dict[str, Any]]`
   - Searches traits, references, accounts, notes, and tags
   - Returns structured results with match context
@@ -349,6 +356,7 @@ Key functions:
 Configuration management for BCE.
 
 Key class:
+
 - `BceConfig` - Configuration object with environment variable support
   - `data_root: Path` - Path to data directory
   - `cache_size: int` - Maximum cached items (default: 128)
@@ -358,12 +366,14 @@ Key class:
   - Method: `validate_paths() -> List[str]`
 
 Environment variables:
+
 - `BCE_DATA_ROOT` - Override data root path
 - `BCE_CACHE_SIZE` - Override cache size
 - `BCE_ENABLE_VALIDATION` - Enable/disable validation
 - `BCE_LOG_LEVEL` - Set log level
 
 Functions:
+
 - `get_default_config() -> BceConfig` - Get singleton config
 - `set_default_config(config: BceConfig) -> None` - Set global config
 - `reset_default_config() -> None` - Reset to defaults
@@ -373,6 +383,7 @@ Functions:
 Cache registry for cache invalidation across modules.
 
 Key class:
+
 - `CacheRegistry` - Registry for cache invalidation callbacks
   - `register(invalidator: Callable[[], None])` - Register cache invalidator
   - `unregister(invalidator: Callable[[], None])` - Unregister invalidator
@@ -387,6 +398,7 @@ This replaces the fragile `sys.modules` inspection pattern previously used.
 Structured exception hierarchy for BCE.
 
 Exception classes:
+
 - `BceError` - Base exception for all BCE errors
 - `DataNotFoundError` - Requested data doesn't exist (inherits from FileNotFoundError)
 - `ValidationError` - Data validation failed
@@ -404,6 +416,7 @@ Source metadata management.
 Loads and manages source metadata from `bce/data/sources.json`.
 
 Key functions:
+
 - `load_source_metadata(source_id: str) -> SourceMetadata`
 - `list_source_ids() -> List[str]`
 - Functions for accessing source-level information
@@ -419,6 +432,7 @@ Service layer providing high-level business logic and orchestration.
 Bible text integration for fetching verse text.
 
 Key functions:
+
 - `list_translations() -> List[str]` - List available translations
 - `get_verse(book: str, chapter: int, verse: int, translation: str = "web") -> str`
 - `get_parallel(book: str, chapter: int, verse: int, translations: List[str]) -> Dict[str, str]`
@@ -549,6 +563,7 @@ pytest -v
 **Note**: `tags` and `parallels` fields are optional but recommended for Phase 2+ data.
 
 **Source Metadata JSON Structure** (in `bce/data/sources.json`):
+
 ```json
 {
   "mark": {
@@ -698,6 +713,7 @@ parallel = api.get_parallel_verse_text("John", 3, 16, translations=["web", "kjv"
 ### Direct Module Access (Advanced)
 
 Lower-level modules are still available for advanced use cases:
+
 - `bce.queries` - Direct query operations
 - `bce.storage` - Raw JSON I/O
 - `bce.contradictions` - Conflict detection
@@ -720,6 +736,7 @@ But **prefer `bce.api`** unless you have specific needs that require direct modu
 8. Add tests if introducing new patterns
 
 Example minimal character:
+
 ```json
 {
   "id": "new_character",
@@ -751,6 +768,7 @@ Example minimal character:
 7. Run validation to check integrity
 
 Example minimal event:
+
 ```json
 {
   "id": "new_event",
@@ -978,6 +996,7 @@ When discussing code locations, use this format:
 **Current Status**: Phases 0-4 are **largely complete** as of November 2025.
 
 Completed phases:
+
 - **Phase 0**: Core, Dossiers, Export & Examples ✅
 - **Phase 1**: Data Coverage & Validation ✅
   - 62 characters, 10 events
@@ -995,6 +1014,7 @@ Completed phases:
   - API tests lock in the public contract
 
 Future work:
+
 - **Phase 5**: Optional Extensions (Proposals only, not yet implemented)
   - HTTP API (FastAPI/Flask)
   - JSON-LD export
