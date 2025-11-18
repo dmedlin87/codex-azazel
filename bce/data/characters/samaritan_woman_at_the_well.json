@@ -8,19 +8,29 @@
   "roles": [
     "encounter"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "dialogue_partner_and_witness",
-      "sources": ["john"],
-      "references": ["John 4:7-26"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 4:7-26"
+      ],
       "notes": "Engages Jesus in theological conversation about living water and worship, recognizes him as a prophet and potential Messiah, and receives direct self-revelation."
     },
     {
       "character_id": "samaritan_villagers_of_sychar",
       "type": "evangelist_to_home_town",
-      "sources": ["john"],
-      "references": ["John 4:28-30", "John 4:39-42"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 4:28-30",
+        "John 4:39-42"
+      ],
       "notes": "Returns to Sychar to summon her neighbors, whose belief grows first through her testimony and then through their own encounter with Jesus."
     }
   ],
@@ -33,7 +43,7 @@
         "life_revelation": "Jesus reveals knowledge of her complex marital history, leading her to perceive him as a prophet.",
         "worship_in_spirit_and_truth": "Receives teaching about worshiping the Father in spirit and truth that transcends Jerusalem–Gerizim debates.",
         "witness_to_town": "Leaves her jar, goes to the town, and invites others to come see a man who told her everything she ever did, leading many Samaritans to believe.",
-        "narrative_profile": "Functions as a paradigmatic figure whose honest questioning and testimony model the movement from outsider status to authentic witness." 
+        "narrative_profile": "Functions as a paradigmatic figure whose honest questioning and testimony model the movement from outsider status to authentic witness."
       },
       "references": [
         "John 4:4-42"

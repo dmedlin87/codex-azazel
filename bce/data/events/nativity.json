@@ -1,7 +1,11 @@
 {
   "id": "nativity",
   "label": "Birth of Jesus",
-  "participants": ["jesus"],
+  "participants": [
+    "jesus"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "matthew",

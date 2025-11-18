@@ -8,47 +8,79 @@
   "roles": [
     "high_priest"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "chief_accuser_of",
-      "sources": ["matthew", "john"],
-      "references": ["Matthew 26:57-68", "John 11:49-53", "John 18:24"],
+      "sources": [
+        "matthew",
+        "john"
+      ],
+      "references": [
+        "Matthew 26:57-68",
+        "John 11:49-53",
+        "John 18:24"
+      ],
       "notes": "Caiaphas convenes the council, questions Jesus about messiahship, declares his statement blasphemy, and earlier argues that Jesus should die for the nation, driving the plot toward crucifixion."
     },
     {
       "character_id": "john_the_baptist",
       "type": "high_priest_during_ministry_of",
-      "sources": ["luke_acts"],
-      "references": ["Luke 3:2"],
+      "sources": [
+        "luke_acts"
+      ],
+      "references": [
+        "Luke 3:2"
+      ],
       "notes": "Luke dates the start of John’s preaching to the high-priestly tandem of Annas and Caiaphas, situating the Baptist’s call to repentance under their oversight."
     },
     {
       "character_id": "peter",
       "type": "interrogator_of",
-      "sources": ["luke_acts"],
-      "references": ["Acts 4:5-7"],
+      "sources": [
+        "luke_acts"
+      ],
+      "references": [
+        "Acts 4:5-7"
+      ],
       "notes": "After Peter and John heal the lame man, Caiaphas stands among the rulers who demand to know by what power the miracle occurred, extending his opposition from Jesus to the apostles."
     },
     {
       "character_id": "sanhedrin",
       "type": "leader_of",
-      "sources": ["matthew", "acts"],
-      "references": ["Matthew 26:57", "Acts 4:5-7"],
+      "sources": [
+        "matthew",
+        "acts"
+      ],
+      "references": [
+        "Matthew 26:57",
+        "Acts 4:5-7"
+      ],
       "notes": "He presides over the high council’s hearings, coordinating chief priests, elders, and scribes in both Jesus’s trial and the examination of the apostles."
     },
     {
       "character_id": "pilate",
       "type": "hands_prisoner_over_to",
-      "sources": ["matthew", "john"],
-      "references": ["Matthew 27:1-2", "John 18:28-32"],
+      "sources": [
+        "matthew",
+        "john"
+      ],
+      "references": [
+        "Matthew 27:1-2",
+        "John 18:28-32"
+      ],
       "notes": "Caiaphas and his colleagues deliver Jesus to Pilate’s praetorium, seeking Roman authorization for execution while avoiding ceremonial defilement."
     },
     {
       "character_id": "annas",
       "type": "high_priestly_family_with",
-      "sources": ["john"],
-      "references": ["John 18:13"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 18:13"
+      ],
       "notes": "John notes that Caiaphas is Annas’s son-in-law, indicating a dynastic priestly household that manages Jesus’s interrogation in stages."
     }
   ],

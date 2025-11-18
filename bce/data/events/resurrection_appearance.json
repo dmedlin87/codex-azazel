@@ -1,7 +1,12 @@
 {
   "id": "resurrection_appearance",
   "label": "Post-Resurrection Appearances of Jesus",
-  "participants": ["jesus", "peter"],
+  "participants": [
+    "jesus",
+    "peter"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "mark",

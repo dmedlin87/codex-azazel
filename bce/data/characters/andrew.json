@@ -2,115 +2,136 @@
   "id": "andrew",
   "canonical_name": "Andrew",
   "aliases": [
-  "Andrew",
-  "Andrew the apostle",
-  "Andrew son of John",
-  "Andrew son of Jonah",
-  "Andrew, brother of Simon Peter"
+    "Andrew",
+    "Andrew the apostle",
+    "Andrew son of John",
+    "Andrew son of Jonah",
+    "Andrew, brother of Simon Peter"
   ],
   "roles": [
-  "disciple",
-  "apostle",
-  "fisherman"
+    "disciple",
+    "apostle",
+    "fisherman"
   ],
+  "tags": [],
   "relationships": [
-  {
-  "character_id": "jesus",
-  "type": "teacher_and_first_contact",
-  "sources": ["mark", "john"],
-  "references": ["Mark 1:16-18", "John 1:35-39"],
-  "notes": "Leaves his nets at Jesus’s call and is among the earliest disciples to remain with him after John the Baptist’s witness."
-  },
-  {
-  "character_id": "peter",
-  "type": "brother_and_mediator",
-  "sources": ["mark", "john"],
-  "references": ["Mark 1:29-30", "John 1:40-42"],
-  "notes": "Identified as Simon Peter’s brother who brings him to Jesus and shares household scenes in Capernaum."
-  },
-  {
-  "character_id": "philip",
-  "type": "mission_partner",
-  "sources": ["john"],
-  "references": ["John 1:43-46", "John 12:20-22"],
-  "notes": "Works with Philip to bring seekers to Jesus, from Nathanael near Bethsaida to Greeks who request an audience."
-  },
-  {
-  "character_id": "john",
-  "type": "inner_circle_colleague",
-  "sources": ["mark"],
-  "references": ["Mark 13:3"],
-  "notes": "Appears with Peter, James, and John on the Mount of Olives questioning Jesus about Jerusalem’s fate, reflecting participation in the leadership core."
-  }
+    {
+      "character_id": "jesus",
+      "type": "teacher_and_first_contact",
+      "sources": [
+        "mark",
+        "john"
+      ],
+      "references": [
+        "Mark 1:16-18",
+        "John 1:35-39"
+      ],
+      "notes": "Leaves his nets at Jesus’s call and is among the earliest disciples to remain with him after John the Baptist’s witness."
+    },
+    {
+      "character_id": "peter",
+      "type": "brother_and_mediator",
+      "sources": [
+        "mark",
+        "john"
+      ],
+      "references": [
+        "Mark 1:29-30",
+        "John 1:40-42"
+      ],
+      "notes": "Identified as Simon Peter’s brother who brings him to Jesus and shares household scenes in Capernaum."
+    },
+    {
+      "character_id": "philip",
+      "type": "mission_partner",
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 1:43-46",
+        "John 12:20-22"
+      ],
+      "notes": "Works with Philip to bring seekers to Jesus, from Nathanael near Bethsaida to Greeks who request an audience."
+    },
+    {
+      "character_id": "john",
+      "type": "inner_circle_colleague",
+      "sources": [
+        "mark"
+      ],
+      "references": [
+        "Mark 13:3"
+      ],
+      "notes": "Appears with Peter, James, and John on the Mount of Olives questioning Jesus about Jerusalem’s fate, reflecting participation in the leadership core."
+    }
   ],
   "source_profiles": [
-  {
-  "source_id": "mark",
-  "traits": {
-  "call_and_vocation": "Introduced as a fisherman by the Sea of Galilee whom Jesus calls, together with his brother Simon, to become a fisher of people.",
-  "relationship_to_peter": "Consistently identified in relation to Simon, appearing with him at their shared house and in the list of the Twelve.",
-  "role_among_twelve": "Named among the Twelve but given little individual characterization beyond being part of the foundational group.",
-  "participation_in_apocalyptic_discourse": "Included among the four disciples who privately question Jesus about the destruction of the temple and the end, giving him a place on the inner edge of the circle.",
-  "narrative_profile": "Functions mainly as a background member of the core disciples, with no independent speeches or actions highlighted apart from group scenes."
-  },
-  "references": [
-  "Mark 1:16-18",
-  "Mark 1:29-31",
-  "Mark 3:16-19",
-  "Mark 13:3-4"
+    {
+      "source_id": "mark",
+      "traits": {
+        "call_and_vocation": "Introduced as a fisherman by the Sea of Galilee whom Jesus calls, together with his brother Simon, to become a fisher of people.",
+        "relationship_to_peter": "Consistently identified in relation to Simon, appearing with him at their shared house and in the list of the Twelve.",
+        "role_among_twelve": "Named among the Twelve but given little individual characterization beyond being part of the foundational group.",
+        "participation_in_apocalyptic_discourse": "Included among the four disciples who privately question Jesus about the destruction of the temple and the end, giving him a place on the inner edge of the circle.",
+        "narrative_profile": "Functions mainly as a background member of the core disciples, with no independent speeches or actions highlighted apart from group scenes."
+      },
+      "references": [
+        "Mark 1:16-18",
+        "Mark 1:29-31",
+        "Mark 3:16-19",
+        "Mark 13:3-4"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "call_and_vocation": "Portrayed as a fisherman in Galilee called along with his brother Simon while casting their net, immediately leaving their work to follow Jesus.",
+        "relationship_to_peter": "Introduced as the brother of Simon who is called Peter, with Peter clearly foregrounded as the more prominent figure.",
+        "role_among_twelve": "Listed among the first four in the roster of the Twelve, pairing him with Peter but without elaborating a distinct personal role.",
+        "narrative_profile": "Appears only in calling and list material, with Matthew otherwise focusing on Peter and the larger group rather than Andrew individually."
+      },
+      "references": [
+        "Matthew 4:18-20",
+        "Matthew 10:2-4"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "role_among_twelve": "Named in the formal selection of the Twelve as one of those whom Jesus designates apostles.",
+        "relationship_to_peter": "Identified as the brother of Simon Peter, linked to him in family terms rather than by independent activity.",
+        "narrative_profile": "Given no individual actions or dialogue and absent from Luke’s call narrative, indicating a strongly collective presentation of his role.",
+        "naming_and_order": "Placed early in the list of apostles, maintaining his association with Peter and the core leadership while still remaining a minor figure."
+      },
+      "references": [
+        "Luke 6:13-16"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "initial_call_and_discipleship": "Introduced as one of the first disciples, initially a follower of John the Baptist who, after hearing John’s testimony, follows Jesus.",
+        "relationship_to_peter": "Explicitly portrayed as Simon Peter’s brother who brings Simon to Jesus and is associated with Bethsaida, their shared hometown.",
+        "mediator_and_recruiter": "Regularly functions as an intermediary who brings others to Jesus, including his brother and later in cooperation with Philip regarding Greeks who wish to see Jesus.",
+        "role_in_sign_stories": "Appears in the feeding narrative by pointing out the boy with loaves and fish, framing the sign through his practical yet limited perspective.",
+        "narrative_profile": "Receives more individual characterization than in the Synoptics as an early and active witness who facilitates access to Jesus, though still overshadowed by Peter."
+      },
+      "references": [
+        "John 1:35-44",
+        "John 6:8-9",
+        "John 12:20-22"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "presence_in_early_community": "Listed among the apostles gathered in Jerusalem after the ascension, participating in the praying community awaiting the promised Spirit.",
+        "apostolic_status": "Counted as one of the core witnesses to Jesus’s ministry, death, and resurrection, forming part of the foundational apostolic group.",
+        "narrative_silence": "Receives no individual stories, speeches, or missionary episodes, reflecting Acts’ focus on Peter, John, Stephen, Philip, and Paul instead."
+      },
+      "references": [
+        "Acts 1:13"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "matthew",
-  "traits": {
-  "call_and_vocation": "Portrayed as a fisherman in Galilee called along with his brother Simon while casting their net, immediately leaving their work to follow Jesus.",
-  "relationship_to_peter": "Introduced as the brother of Simon who is called Peter, with Peter clearly foregrounded as the more prominent figure.",
-  "role_among_twelve": "Listed among the first four in the roster of the Twelve, pairing him with Peter but without elaborating a distinct personal role.",
-  "narrative_profile": "Appears only in calling and list material, with Matthew otherwise focusing on Peter and the larger group rather than Andrew individually."
-  },
-  "references": [
-  "Matthew 4:18-20",
-  "Matthew 10:2-4"
-  ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "role_among_twelve": "Named in the formal selection of the Twelve as one of those whom Jesus designates apostles.",
-  "relationship_to_peter": "Identified as the brother of Simon Peter, linked to him in family terms rather than by independent activity.",
-  "narrative_profile": "Given no individual actions or dialogue and absent from Luke’s call narrative, indicating a strongly collective presentation of his role.",
-  "naming_and_order": "Placed early in the list of apostles, maintaining his association with Peter and the core leadership while still remaining a minor figure."
-  },
-  "references": [
-  "Luke 6:13-16"
-  ]
-  },
-  {
-  "source_id": "john",
-  "traits": {
-  "initial_call_and_discipleship": "Introduced as one of the first disciples, initially a follower of John the Baptist who, after hearing John’s testimony, follows Jesus.",
-  "relationship_to_peter": "Explicitly portrayed as Simon Peter’s brother who brings Simon to Jesus and is associated with Bethsaida, their shared hometown.",
-  "mediator_and_recruiter": "Regularly functions as an intermediary who brings others to Jesus, including his brother and later in cooperation with Philip regarding Greeks who wish to see Jesus.",
-  "role_in_sign_stories": "Appears in the feeding narrative by pointing out the boy with loaves and fish, framing the sign through his practical yet limited perspective.",
-  "narrative_profile": "Receives more individual characterization than in the Synoptics as an early and active witness who facilitates access to Jesus, though still overshadowed by Peter."
-  },
-  "references": [
-  "John 1:35-44",
-  "John 6:8-9",
-  "John 12:20-22"
-  ]
-  },
-  {
-  "source_id": "acts",
-  "traits": {
-  "presence_in_early_community": "Listed among the apostles gathered in Jerusalem after the ascension, participating in the praying community awaiting the promised Spirit.",
-  "apostolic_status": "Counted as one of the core witnesses to Jesus’s ministry, death, and resurrection, forming part of the foundational apostolic group.",
-  "narrative_silence": "Receives no individual stories, speeches, or missionary episodes, reflecting Acts’ focus on Peter, John, Stephen, Philip, and Paul instead."
-  },
-  "references": [
-  "Acts 1:13"
-  ]
-  }
-  ]
-  }
-  
+}

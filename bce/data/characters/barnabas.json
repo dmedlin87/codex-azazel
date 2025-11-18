@@ -9,11 +9,15 @@
     "apostle",
     "missionary"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "paul",
       "type": "companion",
-      "sources": ["acts", "paul_undisputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
       "references": [
         "Acts 11:22-26",
         "Acts 13:1-3",

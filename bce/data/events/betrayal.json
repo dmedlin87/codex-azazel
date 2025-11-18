@@ -1,7 +1,13 @@
 {
   "id": "betrayal",
   "label": "Betrayal of Jesus by Judas",
-  "participants": ["jesus", "judas", "peter"],
+  "participants": [
+    "jesus",
+    "judas",
+    "peter"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "mark",

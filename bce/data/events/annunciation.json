@@ -1,7 +1,11 @@
 {
   "id": "annunciation",
   "label": "Angelic Announcement of Jesus' Birth",
-  "participants": ["jesus"],
+  "participants": [
+    "jesus"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "matthew",

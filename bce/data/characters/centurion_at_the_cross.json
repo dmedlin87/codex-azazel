@@ -7,19 +7,33 @@
   "roles": [
     "centurion"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "crucifixion_witness_and_confessor",
-      "sources": ["mark", "matthew", "luke"],
-      "references": ["Mark 15:39", "Matthew 27:54", "Luke 23:47"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Mark 15:39",
+        "Matthew 27:54",
+        "Luke 23:47"
+      ],
       "notes": "Commands the execution detail at Golgotha, observes the manner of Jesus’s death, and voices the climactic confession about his identity."
     },
     {
       "character_id": "pilate",
       "type": "roman_subordinate_reporting_execution",
-      "sources": ["mark"],
-      "references": ["Mark 15:15", "Mark 15:44-45"],
+      "sources": [
+        "mark"
+      ],
+      "references": [
+        "Mark 15:15",
+        "Mark 15:44-45"
+      ],
       "notes": "Serves under Pilate’s authority, receives Jesus for crucifixion after the governor’s sentence, and later confirms the death when Pilate inquires."
     }
   ],

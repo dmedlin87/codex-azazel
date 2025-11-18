@@ -8,19 +8,29 @@
     "client_king",
     "ruler"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "paul",
       "type": "audience_for_defense_of",
-      "sources": ["acts"],
-      "references": ["Acts 25:23-27", "Acts 26:1-32"],
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 25:23-27",
+        "Acts 26:1-32"
+      ],
       "notes": "Agrippa II convenes with Bernice and the Roman governor Festus to hear Paul’s testimony, allowing the apostle to narrate his persecution of the church, Damascus road encounter, and commission to preach the risen Jesus."
     },
     {
       "character_id": "jesus",
       "type": "hears_testimony_about",
-      "sources": ["acts"],
-      "references": ["Acts 26:19-23"],
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 26:19-23"
+      ],
       "notes": "Although Agrippa never meets Jesus, Paul presses him to believe the prophets by recounting how Jesus fulfilled Scripture through death and resurrection, positioning Agrippa as a royal evaluator of the gospel message."
     }
   ],

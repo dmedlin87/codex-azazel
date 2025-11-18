@@ -1,7 +1,12 @@
 {
   "id": "ascension",
   "label": "Ascension of Jesus",
-  "participants": ["jesus", "peter"],
+  "participants": [
+    "jesus",
+    "peter"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "luke",

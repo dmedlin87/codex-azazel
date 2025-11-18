@@ -8,11 +8,16 @@
     "disciple",
     "apostle"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "apostle_commissioned_by",
-      "sources": ["matthew", "mark", "luke"],
+      "sources": [
+        "matthew",
+        "mark",
+        "luke"
+      ],
       "references": [
         "Matthew 10:2-4",
         "Mark 3:16-19",
@@ -23,7 +28,10 @@
     {
       "character_id": "matthew",
       "type": "apostolic_colleague_of_contrasting_background",
-      "sources": ["matthew", "mark"],
+      "sources": [
+        "matthew",
+        "mark"
+      ],
       "references": [
         "Matthew 10:2-4",
         "Mark 3:18"
@@ -33,7 +41,9 @@
     {
       "character_id": "peter",
       "type": "jerusalem_prayer_circle_companion",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 1:13-14"
       ],

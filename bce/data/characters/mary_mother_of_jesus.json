@@ -9,19 +9,38 @@
   "roles": [
     "family_member"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "mother_of",
-      "sources": ["matthew", "luke", "john"],
-      "references": ["Matthew 1:18-25", "Luke 1:31-35", "Luke 2:1-52", "John 2:1-12", "John 19:25-27"],
+      "sources": [
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Matthew 1:18-25",
+        "Luke 1:31-35",
+        "Luke 2:1-52",
+        "John 2:1-12",
+        "John 19:25-27"
+      ],
       "notes": "Identified as the virgin mother who bears, raises, and accompanies Jesus from birth narratives through his public ministry, with Luke and John highlighting her faithful presence and symbolic maternity at the cross."
     },
     {
       "character_id": "joseph_husband_of_mary",
       "type": "betrothed_spouse_and_co-guardian",
-      "sources": ["matthew", "luke"],
-      "references": ["Matthew 1:18-25", "Matthew 2:13-23", "Luke 2:4-7", "Luke 2:16"],
+      "sources": [
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Matthew 1:18-25",
+        "Matthew 2:13-23",
+        "Luke 2:4-7",
+        "Luke 2:16"
+      ],
       "notes": "Mary is betrothed to and later lives with Joseph of Nazareth, sharing in the protective decisions around Jesus's birth, flight to Egypt, and return to Galilee."
     }
   ],
@@ -32,7 +51,7 @@
         "betrothal_and_conception": "Introduced as betrothed to Joseph when she is found to be with child from the Holy Spirit, prompting Joseph’s initial plan to dismiss her quietly and an angelic correction.",
         "role_in_birth_narrative": "Gives birth to Jesus in Bethlehem, with the narrative focusing more on Joseph’s perspective yet presupposing her obedience.",
         "flight_and_return": "Participates in the flight to Egypt and the subsequent return to Nazareth, placing her at the center of the threatened holy family.",
-        "narrative_function": "Serves primarily as the virginal mother whose child fulfills prophetic expectations about Emmanuel and the Davidic ruler." 
+        "narrative_function": "Serves primarily as the virginal mother whose child fulfills prophetic expectations about Emmanuel and the Davidic ruler."
       },
       "references": [
         "Matthew 1:18-25",
@@ -46,7 +65,7 @@
         "magnificat_and_piety": "Utters the Magnificat, praising God’s mercy and reversal of fortunes, and is portrayed as devout, pondering events in her heart.",
         "birth_and_childhood_scenes": "Features prominently in the birth, presentation, and temple episodes, including losing and finding the boy Jesus in the temple.",
         "family_context": "Appears with Jesus’s family in scenes where they seek him, and in Acts is listed among those praying in the upper room after the ascension.",
-        "theological_profile": "Embodies faithful receptivity to God’s word and serves as a model disciple in Luke’s narrative." 
+        "theological_profile": "Embodies faithful receptivity to God’s word and serves as a model disciple in Luke’s narrative."
       },
       "references": [
         "Luke 1:26-56",
@@ -60,7 +79,7 @@
       "traits": {
         "role_at_cana": "Appears at the wedding at Cana, alerting Jesus to the shortage of wine and prompting the first sign, though Jesus distances himself by emphasizing his hour.",
         "presence_at_cross": "Stands by the cross with other women and the beloved disciple, receiving the beloved disciple as her son at Jesus’s word.",
-        "symbolic_reading": "In Johannine interpretation, often seen as representing Israel or the community that is reconfigured around the crucified Jesus." 
+        "symbolic_reading": "In Johannine interpretation, often seen as representing Israel or the community that is reconfigured around the crucified Jesus."
       },
       "references": [
         "John 2:1-12",

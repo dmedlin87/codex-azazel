@@ -674,3 +674,348 @@ def find_thematic_clusters(
         return clustering.find_event_clusters(num_clusters=num_clusters, use_cache=use_cache)
     else:
         raise ValueError(f"entity_type must be 'characters' or 'events', got '{entity_type}'")
+
+
+# Question Answering (Phase 6.3)
+
+
+def ask_question(question: str, use_cache: bool = True) -> Dict[str, Any]:
+    """Answer a natural language question about BCE data.
+
+    Uses semantic search to find relevant data and structures a response
+    with evidence citations. Requires AI features enabled.
+
+    Parameters
+    ----------
+    question : str
+        Natural language question
+    use_cache : bool, optional
+        Whether to use cached results (default: True)
+
+    Returns
+    -------
+    dict
+        Answer with keys: answer, confidence, evidence, comparison
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> result = api.ask_question("Which gospels portray Jesus as most divine?")
+    >>> print(result["answer"])
+    >>> print(result["confidence"])
+    """
+    from .ai import question_answering
+    return question_answering.ask(question, use_cache=use_cache)
+
+
+# Data Extraction Tools (Phase 6.4)
+
+
+def extract_character_traits(
+    character_id: str,
+    source: str,
+    passage: str,
+    bible_text: str,
+) -> Dict[str, Any]:
+    """Extract suggested character traits from a scripture passage.
+
+    Uses pattern matching and text analysis to identify traits.
+    All suggestions require human review.
+
+    Parameters
+    ----------
+    character_id : str
+        Character identifier
+    source : str
+        Source ID
+    passage : str
+        Scripture reference
+    bible_text : str
+        Full passage text
+
+    Returns
+    -------
+    dict
+        Extraction results with suggested traits
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> traits = api.extract_character_traits(
+    ...     "nicodemus", "john", "John 3:1-21", "<passage text>"
+    ... )
+    >>> for trait in traits["suggested_traits"]:
+    ...     print(f"{trait['trait_key']}: {trait['confidence']}")
+    """
+    from .ai import trait_extraction
+    return trait_extraction.extract_character_traits(
+        character_id, source, passage, bible_text
+    )
+
+
+def detect_parallel_passages(
+    event_id: str,
+    similarity_threshold: float = 0.7,
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Detect parallel accounts for an event across sources.
+
+    Uses semantic similarity to identify synoptic parallels and
+    variant accounts.
+
+    Parameters
+    ----------
+    event_id : str
+        Event identifier
+    similarity_threshold : float, optional
+        Minimum similarity score (default: 0.7)
+    use_cache : bool, optional
+        Whether to use cached results (default: True)
+
+    Returns
+    -------
+    dict
+        Parallel detection results
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> parallels = api.detect_parallel_passages("crucifixion")
+    >>> for parallel in parallels["parallels"]:
+    ...     print(f"{parallel['sources']}: {parallel['type']}")
+    """
+    from .ai import parallel_detection
+    return parallel_detection.detect_event_parallels(
+        event_id, similarity_threshold=similarity_threshold, use_cache=use_cache
+    )
+
+
+def infer_character_relationships(
+    character_id: str,
+    confidence_threshold: float = 0.6,
+) -> List[Dict[str, Any]]:
+    """Infer potential relationships for a character.
+
+    Analyzes co-occurrence and textual evidence to suggest relationships.
+
+    Parameters
+    ----------
+    character_id : str
+        Character identifier
+    confidence_threshold : float, optional
+        Minimum confidence score (default: 0.6)
+
+    Returns
+    -------
+    list of dict
+        Suggested relationships with evidence
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> suggestions = api.infer_character_relationships("martha_of_bethany")
+    >>> for sugg in suggestions:
+    ...     if not sugg["already_exists"]:
+    ...         print(f"New: {sugg['character_id']} ({sugg['suggested_type']})")
+    """
+    from .ai import relationship_inference
+    return relationship_inference.infer_relationships_for_character(
+        character_id, confidence_threshold=confidence_threshold
+    )
+
+
+# Export & Analytics (Phase 6.5)
+
+
+def generate_character_summary(
+    character_id: str,
+    style: str = "academic",
+    max_words: int = 200,
+) -> str:
+    """Generate a natural language summary from a character dossier.
+
+    Parameters
+    ----------
+    character_id : str
+        Character identifier
+    style : str, optional
+        Summary style: "academic", "accessible", or "technical" (default: "academic")
+    max_words : int, optional
+        Maximum word count (default: 200)
+
+    Returns
+    -------
+    str
+        Natural language summary
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> summary = api.generate_character_summary("paul", style="academic")
+    >>> print(summary)
+    """
+    from .ai import summaries
+    dossier = build_character_dossier(character_id)
+    return summaries.generate_character_summary(dossier, style=style, max_words=max_words)
+
+
+def generate_event_summary(
+    event_id: str,
+    style: str = "academic",
+    max_words: int = 150,
+) -> str:
+    """Generate a natural language summary from an event dossier.
+
+    Parameters
+    ----------
+    event_id : str
+        Event identifier
+    style : str, optional
+        Summary style (default: "academic")
+    max_words : int, optional
+        Maximum word count (default: 150)
+
+    Returns
+    -------
+    str
+        Natural language summary
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+    """
+    from .ai import summaries
+    dossier = build_event_dossier(event_id)
+    return summaries.generate_event_summary(dossier, style=style, max_words=max_words)
+
+
+def analyze_source_patterns(
+    source_id: str,
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Analyze systematic patterns in how a source portrays characters/events.
+
+    Identifies theological tendencies and narrative priorities.
+
+    Parameters
+    ----------
+    source_id : str
+        Source identifier (e.g., "mark", "john")
+    use_cache : bool, optional
+        Whether to use cached results (default: True)
+
+    Returns
+    -------
+    dict
+        Source analysis with patterns and priorities
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> patterns = api.analyze_source_patterns("mark")
+    >>> for pattern in patterns["character_portrayal_patterns"]:
+    ...     print(f"{pattern['pattern']}: {pattern['frequency']}")
+    """
+    from .ai import source_analysis
+    return source_analysis.analyze_source_patterns(source_id, use_cache=use_cache)
+
+
+def assess_conflict_significance(
+    character_id: str,
+    trait: str,
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Assess theological, historical, and narrative significance of a conflict.
+
+    Enhances basic contradiction detection with deeper analysis.
+
+    Parameters
+    ----------
+    character_id : str
+        Character identifier
+    trait : str
+        Trait key with conflict
+    use_cache : bool, optional
+        Whether to use cached results (default: True)
+
+    Returns
+    -------
+    dict
+        Enhanced conflict assessment
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> assessment = api.assess_conflict_significance("judas", "death_method")
+    >>> print(assessment["ai_assessment"]["theological_significance"])
+    """
+    from .ai import conflict_analysis
+    return conflict_analysis.assess_conflict(character_id, trait, use_cache=use_cache)
+
+
+def build_event_timeline(event_id: str) -> Dict[str, Any]:
+    """Build a comparative timeline reconstruction of an event.
+
+    Analyzes multiple accounts and creates a structured comparison.
+
+    Parameters
+    ----------
+    event_id : str
+        Event identifier
+
+    Returns
+    -------
+    dict
+        Timeline reconstruction with elements and conflicts
+
+    Raises
+    ------
+    ConfigurationError
+        If AI features are disabled
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> timeline = api.build_event_timeline("crucifixion")
+    >>> for element in timeline["timeline_elements"]:
+    ...     if element["conflict"]:
+    ...         print(f"Conflict in {element['element']}")
+    """
+    from .ai import event_reconstruction
+    return event_reconstruction.build_event_timeline(event_id)

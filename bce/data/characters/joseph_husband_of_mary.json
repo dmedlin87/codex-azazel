@@ -2,10 +2,10 @@
   "id": "joseph_husband_of_mary",
   "canonical_name": "Joseph (husband of Mary)",
   "aliases": [
-  "Joseph",
-  "Joseph of Nazareth",
-  "Joseph, husband of Mary",
-  "Joseph the carpenter"
+    "Joseph",
+    "Joseph of Nazareth",
+    "Joseph, husband of Mary",
+    "Joseph the carpenter"
   ],
   "roles": [
     "family_member",
@@ -13,70 +13,82 @@
     "guardian",
     "artisan"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "mary_mother_of_jesus",
       "type": "spousal_guardianship",
-      "sources": ["matthew", "luke"],
-      "references": ["Matthew 1:18-24", "Luke 2:4-5"],
+      "sources": [
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Matthew 1:18-24",
+        "Luke 2:4-5"
+      ],
       "notes": "Serves as Mary’s husband who protects her honor and accompanies her to Bethlehem, modeling obedient partnership in the infancy narratives."
     },
     {
       "character_id": "jesus",
       "type": "legal_fatherhood",
-      "sources": ["matthew", "luke"],
-      "references": ["Matthew 1:24-25", "Luke 2:48-51"],
+      "sources": [
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Matthew 1:24-25",
+        "Luke 2:48-51"
+      ],
       "notes": "Names and raises Jesus as his own son, guiding the family through exile and pilgrimage so the messianic child can grow within a devout household."
     }
   ],
   "source_profiles": [
-  {
-  "source_id": "matthew",
-  "traits": {
-  "lineage_and_identity": "Presented as a descendant of David through the genealogy and as the husband of Mary, making him the legal father of Jesus.",
-  "righteous_character": "Described as a righteous man who initially plans a quiet divorce to avoid publicly shaming Mary when she is found pregnant.",
-  "revelatory_dreams_and_obedience": "Receives multiple angelic messages in dreams instructing him to take Mary as his wife, to name the child Jesus, to flee to Egypt, and later to return and settle in Galilee; he consistently obeys.",
-  "protector_of_child": "Functions as the guardian who protects the child from Herod’s threat by relocating the family to Egypt and then to Nazareth.",
-  "narrative_role": "Central in the infancy narrative as the obedient Davidic paterfamilias but disappears from the story once Jesus’s adult ministry begins."
-  },
-  "references": [
-  "Matthew 1:16",
-  "Matthew 1:18-25",
-  "Matthew 2:13-23",
-  "Matthew 13:55"
+    {
+      "source_id": "matthew",
+      "traits": {
+        "lineage_and_identity": "Presented as a descendant of David through the genealogy and as the husband of Mary, making him the legal father of Jesus.",
+        "righteous_character": "Described as a righteous man who initially plans a quiet divorce to avoid publicly shaming Mary when she is found pregnant.",
+        "revelatory_dreams_and_obedience": "Receives multiple angelic messages in dreams instructing him to take Mary as his wife, to name the child Jesus, to flee to Egypt, and later to return and settle in Galilee; he consistently obeys.",
+        "protector_of_child": "Functions as the guardian who protects the child from Herod’s threat by relocating the family to Egypt and then to Nazareth.",
+        "narrative_role": "Central in the infancy narrative as the obedient Davidic paterfamilias but disappears from the story once Jesus’s adult ministry begins."
+      },
+      "references": [
+        "Matthew 1:16",
+        "Matthew 1:18-25",
+        "Matthew 2:13-23",
+        "Matthew 13:55"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "betrothal_and_family_status": "Introduced as a man named Joseph of the house of David, betrothed to Mary in Nazareth.",
+        "journey_and_birth_context": "Leads the journey from Nazareth to Bethlehem for the census because of his Davidic lineage and is present at Jesus’s birth setting.",
+        "piety_and_torah_observance": "Participates with Mary in fulfilling Torah requirements for circumcision, presentation in the temple, and regular Passover pilgrimages to Jerusalem.",
+        "parenting_and_misunderstanding": "Appears as one of Jesus’s parents who search anxiously for him when he remains in the temple; Mary speaks of 'your father and I' not understanding his focus on his Father’s business.",
+        "genealogical_note": "The genealogy identifies Jesus as 'the son, as was supposed, of Joseph', marking him as the socially recognized father while hinting at a more complex origin.",
+        "disappearance_from_ministry": "Figures only in infancy and childhood scenes and is absent from the adult ministry narrative, leaving his later fate unstated."
+      },
+      "references": [
+        "Luke 1:26-27",
+        "Luke 2:1-7",
+        "Luke 2:21-24",
+        "Luke 2:39-43",
+        "Luke 2:48-51",
+        "Luke 3:23"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "designation_as_father": "Identified by others as the father of Jesus when Jesus is called the 'son of Joseph' from Nazareth.",
+        "public_perception_of_jesus": "These references show how Jesus’s contemporaries understand him to have ordinary, known parentage rooted in Joseph.",
+        "theological_function": "The mentions highlight tension between Jesus’s known human origins and the gospel’s claims about his heavenly origin."
+      },
+      "references": [
+        "John 1:45",
+        "John 6:42"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "betrothal_and_family_status": "Introduced as a man named Joseph of the house of David, betrothed to Mary in Nazareth.",
-  "journey_and_birth_context": "Leads the journey from Nazareth to Bethlehem for the census because of his Davidic lineage and is present at Jesus’s birth setting.",
-  "piety_and_torah_observance": "Participates with Mary in fulfilling Torah requirements for circumcision, presentation in the temple, and regular Passover pilgrimages to Jerusalem.",
-  "parenting_and_misunderstanding": "Appears as one of Jesus’s parents who search anxiously for him when he remains in the temple; Mary speaks of 'your father and I' not understanding his focus on his Father’s business.",
-  "genealogical_note": "The genealogy identifies Jesus as 'the son, as was supposed, of Joseph', marking him as the socially recognized father while hinting at a more complex origin.",
-  "disappearance_from_ministry": "Figures only in infancy and childhood scenes and is absent from the adult ministry narrative, leaving his later fate unstated."
-  },
-  "references": [
-  "Luke 1:26-27",
-  "Luke 2:1-7",
-  "Luke 2:21-24",
-  "Luke 2:39-43",
-  "Luke 2:48-51",
-  "Luke 3:23"
-  ]
-  },
-  {
-  "source_id": "john",
-  "traits": {
-  "designation_as_father": "Identified by others as the father of Jesus when Jesus is called the 'son of Joseph' from Nazareth.",
-  "public_perception_of_jesus": "These references show how Jesus’s contemporaries understand him to have ordinary, known parentage rooted in Joseph.",
-  "theological_function": "The mentions highlight tension between Jesus’s known human origins and the gospel’s claims about his heavenly origin."
-  },
-  "references": [
-  "John 1:45",
-  "John 6:42"
-  ]
-  }
-  ]
-  }
-  
+}

@@ -7,40 +7,62 @@
   "roles": [
     "high_priest"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "initial_interrogator_of",
-      "sources": ["john"],
-      "references": ["John 18:13", "John 18:19-24"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 18:13",
+        "John 18:19-24"
+      ],
       "notes": "After the arrest in Gethsemane, Jesus is brought first to Annas, who questions him about disciples and teaching before sending him to Caiaphas, indicating Annas’s residual authority."
     },
     {
       "character_id": "caiaphas",
       "type": "father_in_law_of",
-      "sources": ["john"],
-      "references": ["John 18:13"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 18:13"
+      ],
       "notes": "John underscores that Caiaphas, the acting high priest, is Annas’s son-in-law, linking the sequential hearings to a single priestly dynasty."
     },
     {
       "character_id": "john_the_baptist",
       "type": "high_priest_during_ministry_of",
-      "sources": ["luke_acts"],
-      "references": ["Luke 3:2"],
+      "sources": [
+        "luke_acts"
+      ],
+      "references": [
+        "Luke 3:2"
+      ],
       "notes": "Luke situates the arrival of God’s word to John within the time of Annas and Caiaphas, indicating that the Baptist’s call to repentance comes under their broader governance."
     },
     {
       "character_id": "peter",
       "type": "council_member_overseeing",
-      "sources": ["luke_acts"],
-      "references": ["Acts 4:5-7"],
+      "sources": [
+        "luke_acts"
+      ],
+      "references": [
+        "Acts 4:5-7"
+      ],
       "notes": "Annas sits with other rulers, elders, and scribes to examine Peter and John after the healing of the lame man, extending priestly oversight from Jesus to his apostles."
     },
     {
       "character_id": "sanhedrin",
       "type": "member_of",
-      "sources": ["acts"],
-      "references": ["Acts 4:5-7"],
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 4:5-7"
+      ],
       "notes": "Acts portrays Annas among the gathered council that deliberates on apostolic preaching, demonstrating his ongoing participation in high-level decision making."
     }
   ],
@@ -64,7 +86,7 @@
         "family_connections": "Identified as the father-in-law of Caiaphas, the high priest that year, linking two high-priestly households.",
         "role_in_jesus_arrest_and_hearing": "Jesus is brought first to Annas for questioning after his arrest, before being sent on to Caiaphas.",
         "interrogation_focus": "Questions Jesus about his disciples and teaching, presenting him as an initial examiner in the passion proceedings.",
-        "narrative_function": "Serves to emphasize the entanglement of Jesus’s fate with the Jerusalem high-priestly elite before the Roman trial." 
+        "narrative_function": "Serves to emphasize the entanglement of Jesus’s fate with the Jerusalem high-priestly elite before the Roman trial."
       },
       "references": [
         "John 18:13",
