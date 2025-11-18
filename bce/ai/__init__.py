@@ -20,6 +20,8 @@ from __future__ import annotations
 from . import cache, config, embeddings, models
 # Phase 6.2: Data Quality Features
 from . import completeness, semantic_contradictions, validation_assistant
+# Phase 6.3: Enhanced Search
+from . import clustering, semantic_search
 
 __all__ = [
     # Foundation (Phase 6.1)
@@ -31,4 +33,7 @@ __all__ = [
     "completeness",
     "semantic_contradictions",
     "validation_assistant",
+    # Enhanced Search (Phase 6.3)
+    "semantic_search",
+    "clustering",
 ]
