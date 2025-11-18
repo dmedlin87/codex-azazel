@@ -18,10 +18,17 @@ from __future__ import annotations
 
 # Import submodules for easier access
 from . import cache, config, embeddings, models
+# Phase 6.2: Data Quality Features
+from . import completeness, semantic_contradictions, validation_assistant
 
 __all__ = [
+    # Foundation (Phase 6.1)
     "config",
     "embeddings",
     "cache",
     "models",
+    # Data Quality (Phase 6.2)
+    "completeness",
+    "semantic_contradictions",
+    "validation_assistant",
 ]
