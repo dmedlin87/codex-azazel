@@ -424,6 +424,7 @@ clusters = api.find_thematic_clusters(
 ```
 
 All functions raise:
+
 - `ConfigurationError` if AI features are disabled
 - `ImportError` if required dependencies are missing
 
