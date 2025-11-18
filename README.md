@@ -67,6 +67,20 @@ pytest
 - Dependencies: None (uses only Python standard library)
 - Dev dependencies: pytest, pytest-cov
 - Web dependencies (optional): fastapi, uvicorn
+- AI dependencies (optional): sentence-transformers, numpy, scikit-learn, torch
+
+### Installing Optional Dependencies
+
+```bash
+# For AI-powered features (semantic search, conflict analysis, parallel detection)
+pip install -e .[ai]
+
+# For web API server
+pip install -e .[web]
+
+# For development and testing (includes AI tests)
+pip install -e .[dev,ai]
+```
 
 ## Quick Start
 
@@ -386,7 +400,7 @@ Comprehensive documentation is available:
 ### Running Tests
 
 ```bash
-# Run all tests
+# Run all tests (excluding AI tests)
 pytest
 
 # Run with coverage
@@ -397,7 +411,18 @@ pytest tests/test_api.py
 
 # Verbose output
 pytest -v
+
+# Run AI-powered feature tests (requires AI dependencies)
+# First install: pip install -e .[ai]
+pytest tests/test_ai_*.py
 ```
+
+**Note:** AI-powered tests (semantic search, conflict analysis, parallel detection) require the AI optional dependencies:
+```bash
+pip install -e .[ai]
+```
+
+Without these dependencies, AI tests will fail with `ImportError: sentence-transformers is required for AI features`.
 
 ### Data Validation
 
