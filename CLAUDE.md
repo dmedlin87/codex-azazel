@@ -17,6 +17,7 @@ This document provides comprehensive guidance for AI assistants working with the
 ### Non-Goals
 
 This project explicitly does NOT include:
+
 - Frontend/UI or web application
 - Debate engine or apologetics logic
 - General-purpose Bible study app features
@@ -26,7 +27,7 @@ It is a **data and analysis engine** designed to be consumed by other tools.
 
 ## Repository Structure
 
-```
+```text
 codex-azazel/
 ├── bce/                          # Main package
 │   ├── __init__.py              # Package exports
@@ -147,6 +148,7 @@ Pure dataclass definitions with no business logic. Uses `slots=True` for efficie
 - Default data root: `bce/data/`
 
 Key functions:
+
 - `load_character(char_id: str) -> Character`
 - `load_event(event_id: str) -> Event`
 - `save_character(character: Character) -> None`
@@ -161,6 +163,7 @@ Key functions:
 High-level query API with `@lru_cache` decorators for performance.
 
 Key functions:
+
 - `get_character(char_id: str) -> Character` (cached)
 - `get_event(event_id: str) -> Event` (cached)
 - `list_all_characters() -> List[Character]`
@@ -173,6 +176,7 @@ Key functions:
 Comparison and conflict detection between sources.
 
 Key functions:
+
 - `compare_character_sources(char_id: str) -> Dict[str, Dict[str, str]]`
   - Returns `trait -> source_id -> value` mapping
 - `find_trait_conflicts(char_id: str) -> Dict[str, Dict[str, str]]`
@@ -187,6 +191,7 @@ Key functions:
 Builds comprehensive JSON dossiers for characters and events.
 
 Key functions:
+
 - `build_character_dossier(char_id: str) -> dict`
   - Includes identity, traits by source, references, comparisons, conflicts
 - `build_event_dossier(event_id: str) -> dict`
@@ -199,6 +204,7 @@ Key functions:
 Type definitions for dossier structures to improve type safety and code clarity.
 
 Key types:
+
 - `CharacterDossier` - TypedDict defining the structure of character dossiers
 - `EventDossier` - TypedDict defining the structure of event dossiers
 - `EventAccountDossier` - TypedDict for event account entries
@@ -215,6 +221,7 @@ JSON export utilities for aggregating all characters or events.
 Markdown export utilities for dossiers.
 
 Key functions:
+
 - `dossier_to_markdown(dossier: dict) -> str`
 - `dossiers_to_markdown(dossiers: list[dict]) -> str`
 
@@ -223,6 +230,7 @@ Key functions:
 Data integrity validation.
 
 Key function:
+
 - `validate_all() -> List[str]`
   - Returns list of error messages (empty list = all checks passed)
   - Checks for duplicate IDs, loading failures, ID mismatches
@@ -232,6 +240,7 @@ Key function:
 Main CLI entry point (registered as `bce` command in pyproject.toml).
 
 Usage:
+
 ```bash
 bce character <id> --format markdown
 bce event <id> --format markdown
@@ -282,6 +291,7 @@ pytest -v
 ### JSON Data Conventions
 
 **Character JSON Structure:**
+
 ```json
 {
   "id": "character_id",
@@ -301,6 +311,7 @@ pytest -v
 ```
 
 **Event JSON Structure:**
+
 ```json
 {
   "id": "event_id",
@@ -385,6 +396,7 @@ Convenience script for Windows PowerShell users:
 ```
 
 The script automatically:
+
 - Activates the virtual environment (`.venv`) if present
 - Forwards all arguments to `python -m bce.cli`
 
@@ -443,6 +455,7 @@ event_conflicts = contradictions.find_events_with_conflicting_accounts("crucifix
 ### 6. Cache Management
 
 The query module uses `@lru_cache` for performance. When data changes:
+
 - `storage.save_character()` automatically clears cache
 - `storage.save_event()` automatically clears cache
 - `storage.configure_data_root()` automatically clears cache
@@ -486,6 +499,7 @@ print(markdown)
 ## File References in Code
 
 When discussing code locations, use this format:
+
 - `bce/models.py:15-20` for Character dataclass
 - `bce/storage.py:64-69` for load_character function
 - `bce/queries.py:12-14` for get_character function
@@ -495,6 +509,7 @@ When discussing code locations, use this format:
 Currently in **Phase 0** (Core, Dossiers, Export & Examples) - COMPLETE
 
 Next phases:
+
 - **Phase 1**: Data Coverage & Validation (v0 canon, more characters/events)
 - **Phase 2**: Thematic Tagging & Query Helpers
 - **Phase 3**: Conflict Objects & Ergonomics
@@ -515,6 +530,7 @@ See `docs/ROADMAP.md` for complete phase details.
 ## Testing Strategy
 
 Tests should:
+
 - Use pytest fixtures for reusable test data
 - Test both success and failure cases
 - Verify CLI exit codes (0 for success, 1+ for errors)
