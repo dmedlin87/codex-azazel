@@ -147,9 +147,10 @@ def test_api_endpoints_disabled():
 
     # Export & analytics
     with pytest.raises(ConfigurationError):
-        # Need to enable AI for dossier building
-        # This will fail at the summary generation stage
-        pass  # Skip this one as it requires more setup
+        api.generate_character_summary("char")
+
+    with pytest.raises(ConfigurationError):
+        api.generate_event_summary("event")
 
     with pytest.raises(ConfigurationError):
         api.analyze_source_patterns("mark")

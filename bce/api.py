@@ -879,7 +879,10 @@ def generate_character_summary(
     >>> summary = api.generate_character_summary("paul", style="academic")
     >>> print(summary)
     """
+    from .ai.config import ensure_ai_enabled
     from .ai import summaries
+
+    ensure_ai_enabled()
     dossier = build_character_dossier(character_id)
     return summaries.generate_character_summary(dossier, style=style, max_words=max_words)
 
@@ -910,7 +913,10 @@ def generate_event_summary(
     ConfigurationError
         If AI features are disabled
     """
+    from .ai.config import ensure_ai_enabled
     from .ai import summaries
+
+    ensure_ai_enabled()
     dossier = build_event_dossier(event_id)
     return summaries.generate_event_summary(dossier, style=style, max_words=max_words)
 
