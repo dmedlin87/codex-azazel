@@ -9,7 +9,10 @@ from __future__ import annotations
 
 from unittest.mock import patch, MagicMock
 import pytest
-from fastapi.testclient import TestClient
+
+# Try to import FastAPI dependencies - skip all tests if not available
+fastapi = pytest.importorskip("fastapi", reason="FastAPI not installed (requires [web] extras)")
+TestClient = pytest.importorskip("fastapi.testclient", reason="FastAPI TestClient not available").TestClient
 
 from bce import server, exceptions
 
