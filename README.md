@@ -1,202 +1,459 @@
 # Codex Azazel: BCE (Biblical Character Engine)
 
+> A contradiction-aware Biblical character and event engine focused on New Testament data
+
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 ## Overview
 
-Codex Azazel's BCE (Biblical Character Engine) is a small Python library for modeling New Testament characters and events as structured data, currently focused on biblical characters; "Before Canon Engine" is a possible future specialization for broader pre-canonical corpora. It represents per-source profiles (Mark, Matthew, Luke, John, undisputed Paul, Acts, etc.) so that you can compare portrayals, trace contradictions, and support historical-critical analysis.
+**Codex Azazel's BCE** (Biblical Character Engine) is a Python library for modeling New Testament characters and events as structured, source-aware data. It represents per-source profiles (Mark, Matthew, Luke, John, undisputed Paul, Acts, etc.) enabling you to compare portrayals, trace contradictions, and support historical-critical analysis.
 
-All core data lives in JSON (`bce/data/characters`, `bce/data/events`), and the Python API is designed to be simple, pure, and AI-friendly.
+All core data lives in JSON format, and the Python API is designed to be simple, pure, and AI-friendly—perfect for both human developers and automated analysis tools.
 
-## Features
+### Key Capabilities
 
-- **Dataclasses for characters and events**
-  - `Character` objects with per-source `SourceProfile`s.
-  - `Event` objects with per-source `EventAccount`s.
-- **JSON-backed storage**
-  - Characters in `bce/data/characters/*.json`.
-  - Events in `bce/data/events/*.json`.
-- **Query API**
-  - Load a character or event by ID.
-  - List all character IDs and event IDs.
-  - List events in which a given character appears.
-- **Contradiction helpers**
-  - Compare character traits across sources.
-  - Find traits and event fields where sources differ.
-- **Export helpers**
-  - Dump all characters or all events to aggregated JSON files for frontends or external tools.
-- **CLI for quick inspection**
-  - List characters and events, show details, and run exports from the command line.
-- **Examples for onboarding**
-  - `examples/basic_usage.py` demonstrates the main APIs in a single script.
+- **Source-aware modeling**: Track how each Gospel and source portrays characters differently
+- **Contradiction detection**: Surface conflicts and differences between parallel accounts
+- **Structured exports**: JSON, Markdown, CSV, BibTeX citations, and graph formats
+- **Full-text search**: Search across traits, references, accounts, and tags
+- **Property graph export**: Build graph snapshots for Neo4j, RDF, or other graph databases
+- **Bible text integration**: Fetch verse text from multiple translations
+- **Tag-based queries**: Organize and query data by theological and narrative themes
 
-## Project layout
+### Current Dataset
 
-A simplified view of the repository:
+- **63 characters** spanning disciples, apostles, antagonists, and supporting figures
+- **10 major events** including the crucifixion, resurrection appearances, and key moments
+- **Multiple source perspectives** for comparative analysis
 
-```text
-codex-azazel/
-  pyproject.toml
-  README.md
-  dev_cli.py
-  examples/
-    basic_usage.py
-  bce/
-    __init__.py
-    models.py          # Character, SourceProfile, Event, EventAccount dataclasses
-    storage.py         # JSON-backed loading and saving of characters/events
-    queries.py         # High-level query API (characters, events, listings)
-    contradictions.py  # Comparison and conflict helpers
-    export.py          # Aggregated JSON export helpers
-    data/
-      characters/
-        jesus.json
-        paul.json
-        peter.json
-        judas.json
-        pilate.json
-        ...
-      events/
-        crucifixion.json
-        damascus_road.json
-        betrayal.json
-        trial_before_pilate.json
-        resurrection_appearance.json
-        ...
-```
+## Installation
 
-## Quickstart: CLI
-
-From the repository root:
+### From Source
 
 ```bash
+# Clone the repository
+git clone https://github.com/dmedlin87/codex-azazel.git
+cd codex-azazel
+
+# Install in development mode
+pip install -e .[dev]
+
+# Run tests to verify installation
+pytest
+```
+
+### Requirements
+
+- Python 3.11 or higher
+- Dependencies: None (uses only Python standard library)
+- Dev dependencies: pytest, pytest-cov
+
+## Quick Start
+
+### CLI Usage
+
+After installation, use the `bce` command for quick inspections:
+
+```bash
+# View character dossier as Markdown
+bce character jesus --format markdown
+bce character paul --format markdown
+
+# View event dossier as Markdown
+bce event crucifixion --format markdown
+bce event resurrection_appearance --format markdown
+```
+
+#### Legacy CLI
+
+The original development CLI is still available:
+
+```bash
+# List all characters and events
 python dev_cli.py list-chars
-python dev_cli.py show-char jesus
 python dev_cli.py list-events
+
+# Show specific character or event
+python dev_cli.py show-char jesus
 python dev_cli.py show-event crucifixion
 
+# Export to JSON
 python dev_cli.py export-chars exports/all_characters.json
 python dev_cli.py export-events exports/all_events.json
 ```
 
-These commands read from the JSON data under `bce/data` and print or export structured representations.
+### Python API
 
-## Quickstart: Python
-
-Basic usage from a Python shell or script is via the high-level `bce.api` module:
+The recommended entry point for programmatic access is the **`bce.api`** module:
 
 ```python
 from bce import api
 
-# Load core objects
+# Load characters and events
 jesus = api.get_character("jesus")
 crucifixion = api.get_event("crucifixion")
 
-print(jesus.id, jesus.canonical_name)
-print(crucifixion.id, crucifixion.label)
+print(f"{jesus.canonical_name} appears in {len(jesus.source_profiles)} sources")
+print(f"{crucifixion.label} has {len(crucifixion.accounts)} accounts")
 
-# List IDs
-print(api.list_character_ids())
-print(api.list_event_ids())
+# List all available IDs
+char_ids = api.list_character_ids()
+event_ids = api.list_event_ids()
 
-# Build dossiers
+# Build comprehensive dossiers
 char_dossier = api.build_character_dossier("jesus")
 event_dossier = api.build_event_dossier("crucifixion")
 
-# Search traits and tags
-results = api.search_all("resurrection", scope=["traits", "tags"])
+# Find contradictions
+char_conflicts = api.summarize_character_conflicts("jesus")
+event_conflicts = api.summarize_event_conflicts("crucifixion")
 
-# Export data
+# Full-text search
+results = api.search_all("resurrection", scope=["traits", "tags"])
+for result in results:
+    print(f"{result['type']}: {result['id']} - matched in {result['match_in']}")
+
+# Tag-based queries
+resurrection_chars = api.list_characters_with_tag("resurrection")
+passion_events = api.list_events_with_tag("passion")
+
+# Export all data
 all_characters = api.export_all_characters()
 all_events = api.export_all_events()
 
-# Build a property-graph snapshot (for graph/DB tooling)
+# Export to files
+api.export_characters_csv("output/characters.csv")
+api.export_events_csv("output/events.csv")
+
+# Get academic citations
+citations = api.export_citations(format="bibtex")
+
+# Build property graph snapshot
 graph = api.build_graph_snapshot()
-print(len(graph.nodes), "nodes", len(graph.edges), "edges")
+print(f"Graph: {len(graph.nodes)} nodes, {len(graph.edges)} edges")
+
+# Bible text integration
+translations = api.list_bible_translations()
+verse = api.get_verse_text("John", 3, 16, translation="web")
+parallel = api.get_parallel_verse_text("John", 3, 16, translations=["web", "kjv"])
 ```
 
-Lower-level modules such as `bce.queries`, `bce.contradictions`, and `bce.search` remain available for advanced use, but `bce.api` is the recommended entry point for most consumers.
+For a complete walkthrough, see [`examples/basic_usage.py`](examples/basic_usage.py).
 
-For a more complete walkthrough, see `examples/basic_usage.py`.
+## Features
 
-## Development
-
-From a checkout of the repo:
-
-```bash
-pip install -e .[dev]
-pytest
-```
-
-This installs the package in editable mode with development dependencies (including the test runner) and runs the test suite.
-
-After installation, you can also use the installed CLI entry point instead of calling the module directly:
-
-```bash
-bce character jesus --format markdown
-bce event crucifixion --format markdown
-```
-
-## Dossiers & CLI
-
-Codex Azazel can build structured dossiers for characters and events and export them as Markdown.
-
-### Programmatic usage
-
-```python
-from bce.dossiers import build_character_dossier
-from bce.export import dossier_to_markdown
-
-dossier = build_character_dossier("jesus")
-md = dossier_to_markdown(dossier)
-print(md)
-```
-
-See `examples/print_dossier_markdown.py` for a runnable example.
-
-### CLI usage
-
-You can also inspect a single dossier from the command line:
-
-```bash
-# Character
-python -m bce.cli character jesus --format markdown
-
-# Event
-python -m bce.cli event crucifixion --format markdown
-```
-
-If you pass an unknown ID, the CLI returns a non-zero exit code and prints an error message to stderr.
-
-## Data model (brief)
+### Core Data Models
 
 BCE centers on a small set of JSON-backed dataclasses:
 
 - **Character**
-  - `id`, `canonical_name`, `aliases`, `roles`.
-  - `source_profiles: list[SourceProfile]`, one profile per source (Mark, Matthew, Luke, John, Paul, Acts, etc.).
+  - Unique ID, canonical name, aliases, roles
+  - Per-source `SourceProfile` objects (one per Gospel/source)
+  - Relationships to other characters
+  - Topical tags for thematic organization
+
 - **SourceProfile**
-  - `source_id: str` (e.g. `"mark"`, `"matthew"`).
-  - `traits: dict[str, str]` for narrative and theological features.
-  - `references: list[str]` of scripture references.
+  - Source identifier (e.g., "mark", "matthew", "paul_undisputed")
+  - Traits dictionary (narrative and theological features)
+  - Scripture references
+
 - **Event**
-  - `id`, `label`, `participants: list[str]` (character IDs).
-  - `accounts: list[EventAccount]`, one account per source.
+  - Unique ID, display label
+  - Participant character IDs
+  - Per-source `EventAccount` objects
+  - Parallel pericope records
+  - Topical tags
+
 - **EventAccount**
-  - `source_id: str`.
-  - `reference: str` (scripture range).
-  - `summary: str` and optional `notes: str | None`.
+  - Source identifier
+  - Scripture reference range
+  - Summary and optional notes
 
-All of these map directly to JSON objects and are safe to edit by hand.
+All models map directly to JSON files and are safe to edit by hand.
 
-## Status and next steps
+### Contradiction Analysis
 
-BCE is an early-stage engine focused on New Testament characters and a core set of events. Planned directions include:
+Detect and analyze differences between source accounts:
 
-- **More coverage**
-  - Additional characters, events, and per-source traits.
-- **Richer trait vocabulary**
-  - More structured keys for Christology, narrative roles, and event features.
-- **Integration layers**
-  - Optional read-only HTTP API (e.g. FastAPI/Flask) over the existing query and export functions.
-  - Lightweight frontend or visualization tools built on aggregated JSON exports.
+```python
+from bce import contradictions
 
-The core design goal is to keep the data model and API small, explicit, and friendly to both human readers and AI tools.
+# Compare all traits across sources
+comparison = contradictions.compare_character_sources("jesus")
+
+# Get only the conflicting traits
+conflicts = contradictions.find_trait_conflicts("jesus")
+
+# Find conflicting event accounts
+event_conflicts = contradictions.find_events_with_conflicting_accounts("crucifixion")
+```
+
+### Export Formats
+
+Export data in multiple formats for different use cases:
+
+- **JSON**: Structured data for web apps and tools
+- **Markdown**: Human-readable dossiers and reports
+- **CSV**: Tabular data for spreadsheets and analysis
+- **BibTeX**: Academic citations for sources
+- **Graph**: Property graph snapshots for graph databases
+
+```python
+from bce import api
+
+# Export to different formats
+api.export_characters_csv("characters.csv")
+api.export_events_csv("events.csv")
+citations = api.export_citations(format="bibtex")
+graph = api.build_graph_snapshot()  # For Neo4j, RDF, etc.
+```
+
+### Search and Discovery
+
+Full-text search across all data:
+
+```python
+from bce import api
+
+# Search everything
+all_results = api.search_all("messiah")
+
+# Scoped searches
+trait_results = api.search_all("teacher", scope=["traits"])
+ref_results = api.search_all("John 3", scope=["references"])
+tag_results = api.search_all("apocalyptic", scope=["tags"])
+
+# Tag-based queries
+messiah_chars = api.list_characters_with_tag("messiah")
+passion_events = api.list_events_with_tag("passion")
+```
+
+### Configuration
+
+Customize BCE behavior with configuration:
+
+```python
+from pathlib import Path
+from bce.config import BceConfig, set_default_config
+
+# Custom configuration
+config = BceConfig(
+    data_root=Path("/custom/data/path"),
+    cache_size=256,
+    enable_validation=True,
+    log_level="INFO"
+)
+set_default_config(config)
+
+# Or use environment variables
+# export BCE_DATA_ROOT=/custom/data/path
+# export BCE_CACHE_SIZE=256
+# export BCE_ENABLE_VALIDATION=true
+# export BCE_LOG_LEVEL=INFO
+```
+
+## Repository Structure
+
+```text
+codex-azazel/
+├── bce/                          # Main package (23 modules)
+│   ├── __init__.py              # Package exports
+│   ├── api.py                   # HIGH-LEVEL API (recommended entry point)
+│   ├── models.py                # Core dataclasses
+│   ├── storage.py               # JSON loading/saving
+│   ├── queries.py               # Query API with caching
+│   ├── contradictions.py        # Comparison and conflict detection
+│   ├── dossiers.py              # Dossier builders
+│   ├── dossier_types.py         # TypedDict definitions
+│   ├── search.py                # Full-text search
+│   ├── export.py                # Main export facade
+│   ├── export_json.py           # JSON export
+│   ├── export_markdown.py       # Markdown export
+│   ├── export_csv.py            # CSV export
+│   ├── export_citations.py      # Citation export (BibTeX)
+│   ├── export_graph.py          # Graph/network export
+│   ├── validation.py            # Data validation
+│   ├── config.py                # Configuration management
+│   ├── cache.py                 # Cache registry
+│   ├── exceptions.py            # Exception hierarchy
+│   ├── sources.py               # Source metadata
+│   ├── services.py              # Service layer
+│   ├── bibles.py                # Bible text integration
+│   ├── cli.py                   # Main CLI entry point
+│   └── data/
+│       ├── characters/          # 63 character JSON files
+│       ├── events/              # 10 event JSON files
+│       └── sources.json         # Source metadata
+├── tests/                       # Comprehensive test suite (24 files)
+├── examples/                    # Usage examples
+│   ├── basic_usage.py
+│   └── print_dossier_markdown.py
+├── docs/
+│   ├── ROADMAP.md              # Project roadmap and phases
+│   ├── SCHEMA.md               # API schema documentation
+│   ├── DATA_ENTRY_GUIDE.md     # Guide for adding data
+│   └── features.md             # Feature documentation
+├── CLAUDE.md                   # AI assistant guide
+├── CHANGELOG.md                # Version history
+├── pyproject.toml              # Package configuration
+└── README.md                   # This file
+```
+
+## Documentation
+
+Comprehensive documentation is available:
+
+- **[ROADMAP.md](docs/ROADMAP.md)** - Project roadmap with implementation status for all phases
+- **[SCHEMA.md](docs/SCHEMA.md)** - Detailed API schema documentation for consumers
+- **[DATA_ENTRY_GUIDE.md](docs/DATA_ENTRY_GUIDE.md)** - Step-by-step guide for adding new data
+- **[CLAUDE.md](CLAUDE.md)** - Comprehensive guide for AI assistants working with this codebase
+- **[features.md](docs/features.md)** - Detailed feature documentation
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes
+
+## Development
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=bce
+
+# Run specific test file
+pytest tests/test_api.py
+
+# Verbose output
+pytest -v
+```
+
+### Data Validation
+
+Always validate data after making changes:
+
+```python
+from bce.validation import validate_all
+
+errors = validate_all()
+if errors:
+    for error in errors:
+        print(f"ERROR: {error}")
+else:
+    print("All validation checks passed!")
+```
+
+Or from the command line:
+
+```bash
+python -c "from bce.validation import validate_all; print(validate_all() or 'All checks passed!')"
+```
+
+### Adding New Data
+
+See **[DATA_ENTRY_GUIDE.md](docs/DATA_ENTRY_GUIDE.md)** for detailed instructions on adding new characters and events.
+
+Quick example:
+
+```json
+{
+  "id": "new_character",
+  "canonical_name": "New Character",
+  "aliases": ["Alternative Name"],
+  "roles": ["role1", "role2"],
+  "tags": ["relevant_tag"],
+  "relationships": [],
+  "source_profiles": [
+    {
+      "source_id": "mark",
+      "traits": {
+        "portrayal": "Brief description"
+      },
+      "references": ["Mark 1:1"]
+    }
+  ]
+}
+```
+
+## Architecture
+
+### Module Layers
+
+BCE follows a clean layered architecture:
+
+1. **Data Layer**: JSON files in `bce/data/`
+2. **Storage Layer**: `storage.py` handles JSON I/O
+3. **Query Layer**: `queries.py` provides cached lookups
+4. **Analysis Layer**: `contradictions.py`, `search.py`, `dossiers.py`
+5. **Export Layer**: Various `export_*.py` modules
+6. **API Layer**: `api.py` provides the stable public interface
+
+### Design Principles
+
+- **Simple and explicit**: No magic, clear data structures
+- **AI-friendly**: Easy to parse and generate programmatically
+- **Human-readable**: JSON and Markdown formats for easy inspection
+- **Source-aware**: Every data point tracks its source
+- **Contradiction-forward**: Conflicts are features, not bugs
+- **Export-oriented**: Easy to get data out in multiple formats
+
+### Non-Goals
+
+This project explicitly does **NOT** include:
+
+- Frontend/UI or web application
+- Debate engine or apologetics logic
+- General-purpose Bible study app features
+- LLM prompt logic or AI pipelines
+
+It is a **data and analysis engine** designed to be consumed by other tools.
+
+## Project Status
+
+**Current Version**: 0.1.0
+**Status**: Phases 0-4 Complete
+
+BCE has completed the foundational phases of development:
+
+- ✅ **Phase 0**: Core engine, dossiers, exports, and examples
+- ✅ **Phase 1**: Data coverage (63 characters, 10 events) and validation
+- ✅ **Phase 2**: Thematic tagging and query helpers
+- ✅ **Phase 3**: Conflict objects and ergonomics improvements
+- ✅ **Phase 4**: Stable API surface for external tools
+
+### Future Directions
+
+Potential future enhancements (proposals, not yet implemented):
+
+- **More coverage**: Additional characters, events, and source perspectives
+- **Richer trait vocabulary**: More structured keys for theological and narrative features
+- **Integration layers**: Optional HTTP API (FastAPI/Flask) for web services
+- **Visualization tools**: Graph visualizations and relationship diagrams
+- **Extended source coverage**: Pre-canonical texts, apocrypha, church fathers
+
+See **[ROADMAP.md](docs/ROADMAP.md)** for detailed phase information.
+
+## Contributing
+
+Contributions are welcome! When contributing:
+
+1. Run tests: `pytest`
+2. Validate data: `python -c "from bce.validation import validate_all; print(validate_all())"`
+3. Follow existing code style (type hints, dataclasses, docstrings)
+4. Add tests for new features
+5. Update documentation as needed
+
+See **[CLAUDE.md](CLAUDE.md)** for comprehensive development guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+Codex Azazel is designed to support rigorous historical-critical analysis of New Testament texts. The engine surfaces contradictions and differences as valuable data points for scholarship, not as problems to be solved.
+
+---
+
+**Built with**: Python 3.11+ | **Data Format**: JSON | **Philosophy**: Simple, explicit, and AI-friendly
