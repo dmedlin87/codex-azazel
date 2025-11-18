@@ -198,5 +198,10 @@ BCE is an early-stage engine focused on New Testament characters and a core set 
 - **Integration layers**
   - Optional read-only HTTP API (e.g. FastAPI/Flask) over the existing query and export functions.
   - Lightweight frontend or visualization tools built on aggregated JSON exports.
+- **AI-powered enhancements** (Proposal stage)
+  - Semantic search and contradiction detection
+  - Data quality auditing and completeness checking
+  - Automated trait extraction and relationship inference
+  - See [AI Features Proposal](docs/AI_FEATURES_PROPOSAL.md) and [Quick Reference](docs/AI_FEATURES_QUICK_REF.md)
 
 The core design goal is to keep the data model and API small, explicit, and friendly to both human readers and AI tools.
