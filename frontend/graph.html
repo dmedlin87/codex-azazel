@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Graph - Biblical Character Engine</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body class="bg-slate-50 min-h-screen overflow-hidden">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">BCE</h1>
+                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
+                    <a href="characters.html" class="hover:text-blue-200 transition">Characters</a>
+                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
+                    <a href="graph.html" class="hover:text-blue-200 transition font-semibold border-b-2 border-white pb-1">Graph</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Controls -->
+    <div class="bg-white border-b shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-wrap gap-4 items-center justify-between">
+                <div class="flex gap-3 flex-wrap">
+                    <button id="show-all" class="graph-filter-btn active">All</button>
+                    <button id="show-characters" class="graph-filter-btn">Characters</button>
+                    <button id="show-events" class="graph-filter-btn">Events</button>
+                    <button id="show-sources" class="graph-filter-btn">Sources</button>
+                </div>
+                <div class="flex gap-3">
+                    <button id="reset-zoom" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-sm transition">Reset Zoom</button>
+                    <button id="pause-simulation" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-sm transition">Pause</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graph Container -->
+    <div id="graph-container" class="relative bg-slate-50" style="height: calc(100vh - 140px);">
+        <svg id="graph"></svg>
+
+        <!-- Loading -->
+        <div id="loading" class="absolute inset-0 flex items-center justify-center bg-white">
+            <div class="text-center">
+                <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mb-4"></div>
+                <p class="text-gray-600 text-lg">Building network graph...</p>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="absolute top-4 right-4 bg-white p-4 rounded-lg shadow-lg max-w-xs">
+            <h3 class="font-bold text-gray-900 mb-3">Legend</h3>
+            <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+                    <span>Character</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 rounded-full bg-purple-500"></div>
+                    <span>Event</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                    <span>Source</span>
+                </div>
+            </div>
+            <div class="mt-4 pt-4 border-t text-xs text-gray-600">
+                <p><strong>Tip:</strong> Click and drag nodes to reposition them. Use scroll to zoom in/out.</p>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div id="info-panel" class="absolute bottom-4 left-4 bg-white p-4 rounded-lg shadow-lg max-w-md hidden">
+            <div id="info-content"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/graph.js"></script>
+</body>
+</html>

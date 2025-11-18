@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblical Character Engine - Explore New Testament Data</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mark': '#10b981',
+                        'matthew': '#3b82f6',
+                        'luke': '#8b5cf6',
+                        'john': '#ef4444',
+                        'paul': '#f97316',
+                        'acts': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">BCE</h1>
+                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition font-semibold border-b-2 border-white pb-1">Home</a>
+                    <a href="characters.html" class="hover:text-blue-200 transition">Characters</a>
+                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
+                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-bold mb-4">Explore the New Testament</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                A contradiction-aware Biblical character and event engine for scholarly research and analysis.
+                Compare sources, discover conflicts, and explore relationships.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto">
+                <div class="relative">
+                    <input
+                        type="text"
+                        id="hero-search"
+                        placeholder="Search characters, events, or scripture references..."
+                        class="w-full px-6 py-4 pr-12 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-xl"
+                    >
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                        Search
+                    </button>
+                </div>
+                <div id="search-results" class="mt-4 bg-white rounded-lg shadow-lg hidden max-h-96 overflow-y-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Dashboard -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-md text-center">
+                    <div class="text-4xl font-bold text-blue-900 mb-2" id="stat-characters">-</div>
+                    <div class="text-gray-600 font-medium">Characters</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl shadow-md text-center">
+                    <div class="text-4xl font-bold text-purple-900 mb-2" id="stat-events">-</div>
+                    <div class="text-gray-600 font-medium">Events</div>
+                </div>
+                <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-xl shadow-md text-center">
+                    <div class="text-4xl font-bold text-amber-900 mb-2" id="stat-conflicts">-</div>
+                    <div class="text-gray-600 font-medium">Conflicts Found</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-md text-center">
+                    <div class="text-4xl font-bold text-green-900 mb-2" id="stat-tags">-</div>
+                    <div class="text-gray-600 font-medium">Topic Tags</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Characters -->
+    <section class="py-16 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Characters</h3>
+            <div id="featured-characters" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Loading placeholder -->
+                <div class="bg-white p-6 rounded-xl shadow-md animate-pulse">
+                    <div class="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md animate-pulse">
+                    <div class="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md animate-pulse">
+                    <div class="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                    <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tag Cloud -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Explore by Topic</h3>
+            <div id="tag-cloud" class="flex flex-wrap gap-3 justify-center max-w-4xl mx-auto">
+                <!-- Tags will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="py-16 bg-gradient-to-br from-slate-100 to-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <a href="characters.html" class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="text-blue-600 text-5xl mb-4">👤</div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition">Browse Characters</h4>
+                    <p class="text-gray-600">Explore 60+ New Testament figures with per-source profiles and conflict analysis.</p>
+                </a>
+
+                <a href="events.html" class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="text-purple-600 text-5xl mb-4">📖</div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition">Browse Events</h4>
+                    <p class="text-gray-600">Compare parallel accounts of key events across different Gospel sources.</p>
+                </a>
+
+                <a href="graph.html" class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="text-green-600 text-5xl mb-4">🕸️</div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition">Network Graph</h4>
+                    <p class="text-gray-600">Visualize relationships between characters, events, and biblical sources.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-2">Biblical Character Engine (BCE) v0.1.0</p>
+            <p class="text-sm text-gray-500">A contradiction-aware data engine for New Testament research</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

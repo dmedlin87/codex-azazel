@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Biblical Character Engine</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-blue-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">BCE</h1>
+                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
+                    <a href="characters.html" class="hover:text-blue-200 transition">Characters</a>
+                    <a href="events.html" class="hover:text-blue-200 transition font-semibold border-b-2 border-white pb-1">Events</a>
+                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="bg-purple-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-4">New Testament Events</h2>
+            <p class="text-purple-100 text-lg">Compare parallel accounts across different biblical sources</p>
+        </div>
+    </section>
+
+    <!-- Filters and Search -->
+    <section class="bg-white py-6 shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Search -->
+                <div class="w-full md:w-1/2">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Search events..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    >
+                </div>
+
+                <!-- Filters -->
+                <div class="flex gap-3 flex-wrap">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="conflicts">Has Conflicts</button>
+                    <button class="filter-btn" data-filter="parallels">Has Parallels</button>
+                </div>
+            </div>
+
+            <!-- Tag Filter -->
+            <div class="mt-4">
+                <div class="text-sm text-gray-600 mb-2">Filter by tag:</div>
+                <div id="tag-filters" class="flex flex-wrap gap-2">
+                    <!-- Tags loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-gray-600">
+                    <span id="event-count">0</span> events
+                </div>
+                <div class="flex gap-2">
+                    <button id="sort-label" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition text-sm">Sort by Label</button>
+                    <button id="sort-accounts" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition text-sm">Sort by Accounts</button>
+                </div>
+            </div>
+
+            <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Event cards loaded dynamically -->
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-500 border-t-transparent"></div>
+                <p class="mt-4 text-gray-600">Loading events...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-12">
+                <div class="text-6xl mb-4">🔍</div>
+                <p class="text-xl text-gray-600">No events found</p>
+                <p class="text-gray-500 mt-2">Try adjusting your filters or search query</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 mb-2">Biblical Character Engine (BCE) v0.1.0</p>
+            <p class="text-sm text-gray-500">A contradiction-aware data engine for New Testament research</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        let allEvents = [];
+        let currentFilter = 'all';
+        let currentTag = null;
+        let searchQuery = '';
+
+        async function loadEvents() {
+            try {
+                const eventIds = await API.getEvents();
+                const promises = eventIds.map(id => API.getEvent(id));
+                const dossiers = await Promise.all(promises);
+                allEvents = dossiers;
+                renderEvents();
+                loadTags();
+            } catch (error) {
+                console.error('Error loading events:', error);
+                document.getElementById('loading').innerHTML = '<p class="text-red-600">Error loading events</p>';
+            }
+        }
+
+        function loadTags() {
+            const tags = new Set();
+            allEvents.forEach(event => {
+                if (event.identity.tags) {
+                    event.identity.tags.forEach(tag => tags.add(tag));
+                }
+            });
+
+            const tagFilters = document.getElementById('tag-filters');
+            tagFilters.innerHTML = Array.from(tags).sort().map(tag =>
+                `<button class="tag-filter-btn px-3 py-1 bg-gray-100 hover:bg-purple-100 rounded-full text-sm transition" data-tag="${tag}">${tag}</button>`
+            ).join('');
+
+            document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active-tag'));
+                    if (currentTag === btn.dataset.tag) {
+                        currentTag = null;
+                    } else {
+                        currentTag = btn.dataset.tag;
+                        btn.classList.add('active-tag');
+                    }
+                    renderEvents();
+                });
+            });
+        }
+
+        function renderEvents() {
+            document.getElementById('loading').classList.add('hidden');
+            const grid = document.getElementById('events-grid');
+
+            let filtered = allEvents.filter(event => {
+                if (currentFilter === 'conflicts') {
+                    if (!event.conflicts || Object.keys(event.conflicts).length === 0) return false;
+                }
+                if (currentFilter === 'parallels') {
+                    if (!event.parallels || event.parallels.length === 0) return false;
+                }
+
+                if (currentTag && !event.identity.tags?.includes(currentTag)) return false;
+
+                if (searchQuery) {
+                    const label = event.identity.label.toLowerCase();
+                    const query = searchQuery.toLowerCase();
+                    if (!label.includes(query)) return false;
+                }
+
+                return true;
+            });
+
+            document.getElementById('event-count').textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                document.getElementById('empty-state').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('empty-state').classList.add('hidden');
+            grid.innerHTML = filtered.map(event => Components.eventCard(event)).join('');
+        }
+
+        // Event listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderEvents();
+            });
+        });
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderEvents();
+        });
+
+        document.getElementById('sort-label').addEventListener('click', () => {
+            allEvents.sort((a, b) => a.identity.label.localeCompare(b.identity.label));
+            renderEvents();
+        });
+
+        document.getElementById('sort-accounts').addEventListener('click', () => {
+            allEvents.sort((a, b) => b.accounts.length - a.accounts.length);
+            renderEvents();
+        });
+
+        loadEvents();
+    </script>
+</body>
+</html>

@@ -13,6 +13,10 @@ license = { text = "MIT" }
 
 [project.optional-dependencies]
 dev = ["pytest", "pytest-cov"]
+web = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+]
 ai = [
     "sentence-transformers>=2.0.0",
     "numpy>=1.20.0",
@@ -23,6 +27,7 @@ ai-anthropic = ["anthropic>=0.20.0"]
 
 [project.scripts]
 bce = "bce.cli:main"
+bce-server = "bce.server:run_server"
 
 [tool.hatch.build]
 packages = ["bce"]
