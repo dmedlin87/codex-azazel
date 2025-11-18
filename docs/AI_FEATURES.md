@@ -1,6 +1,6 @@
 # AI Features Documentation
 
-**Status**: Implemented (Phases 6.1-6.3)
+**Status**: **Fully Implemented** (Phases 6.1-6.5 Complete)
 **Last Updated**: 2025-11-18
 
 ## Overview
@@ -18,17 +18,27 @@ Codex Azazel includes optional AI-powered features for data quality improvement,
 ## Table of Contents
 
 1. [Setup and Configuration](#setup-and-configuration)
-2. [Data Quality Features](#data-quality-features)
+2. [Data Quality Features](#data-quality-features) (Phase 6.2)
    - [Semantic Contradiction Detection](#semantic-contradiction-detection)
    - [Completeness Auditing](#completeness-auditing)
    - [Validation Suggestions](#validation-suggestions)
-3. [Enhanced Search](#enhanced-search)
+3. [Enhanced Search](#enhanced-search) (Phase 6.3)
    - [Semantic Search](#semantic-search)
    - [Finding Similar Characters](#finding-similar-characters)
    - [Thematic Clustering](#thematic-clustering)
-4. [API Reference](#api-reference)
-5. [Performance and Caching](#performance-and-caching)
-6. [Troubleshooting](#troubleshooting)
+   - [Question Answering](#question-answering) **NEW**
+4. [Data Extraction Tools](#data-extraction-tools) (Phase 6.4) **NEW**
+   - [Trait Extraction](#trait-extraction)
+   - [Parallel Passage Detection](#parallel-passage-detection)
+   - [Relationship Inference](#relationship-inference)
+5. [Export & Analytics](#export-and-analytics) (Phase 6.5) **NEW**
+   - [Natural Language Summaries](#natural-language-summaries)
+   - [Source Tendency Analysis](#source-tendency-analysis)
+   - [Advanced Conflict Analysis](#advanced-conflict-analysis)
+   - [Event Timeline Reconstruction](#event-timeline-reconstruction)
+6. [API Reference](#api-reference)
+7. [Performance and Caching](#performance-and-caching)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -371,6 +381,273 @@ print(f"Suggested tags for paul: {suggestions['paul']}")
     "size": 3
 }
 ```
+
+### Question Answering
+
+**Purpose**: Answer natural language questions about BCE data using semantic search.
+
+**How it works**: Classifies question type and routes to appropriate handler, then uses semantic search to find relevant data and structures a response with evidence.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Ask a question
+answer = api.ask_question("Which gospels portray Jesus as most divine?")
+
+print(f"Answer: {answer['answer']}")
+print(f"Confidence: {answer['confidence']}")
+
+# Examine evidence
+for evidence in answer["evidence"]:
+    print(f"  - {evidence}")
+```
+
+**Question types supported**:
+- Character comparisons ("Which source portrays X as...")
+- Source analysis ("How does Mark depict...")
+- Trait queries ("Who has the trait...")
+- Relationship queries ("How are X and Y related...")
+- Event queries ("What happened at...")
+
+---
+
+## Data Extraction Tools
+
+### Trait Extraction
+
+**Purpose**: Extract character traits from scripture passages to accelerate data entry.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Extract traits from a passage
+bible_text = """
+John 3:1-2 Now there was a Pharisee, a man named Nicodemus who was a member of
+the Jewish ruling council. He came to Jesus at night and said, "Rabbi, we know
+that you are a teacher who has come from God."
+"""
+
+traits = api.extract_character_traits(
+    character_id="nicodemus",
+    source="john",
+    passage="John 3:1-21",
+    bible_text=bible_text
+)
+
+# Review suggested traits
+for trait in traits["suggested_traits"]:
+    print(f"{trait['trait_key']}: {trait['trait_value']}")
+    print(f"  Confidence: {trait['confidence']}")
+    print(f"  Evidence: {trait['evidence']}")
+```
+
+**Extraction patterns**:
+- Social status (Pharisee, priest, ruler, etc.)
+- Occupations (fisherman, tax collector, etc.)
+- Actions that reveal character
+- Dialogue content
+- Emotional/attitudinal markers
+
+**Important**: All extractions require human review before being added to data.
+
+### Parallel Passage Detection
+
+**Purpose**: Automatically identify synoptic parallels and variant accounts.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Detect parallels for an event
+parallels = api.detect_parallel_passages("crucifixion")
+
+for parallel in parallels["parallels"]:
+    print(f"Type: {parallel['type']}")
+    print(f"Sources: {parallel['sources']}")
+    print(f"Similarity: {parallel['similarity_score']}")
+    print(f"References: {parallel['references']}")
+    print(f"Summary: {parallel['suggested_summary']}")
+```
+
+**Parallel types detected**:
+- `triple_tradition`: All three synoptics
+- `synoptic_parallel`: Two synoptic gospels with Mark
+- `q_material_candidate`: Matthew-Luke without Mark
+- `synoptic_johannine_parallel`: Synoptic + John
+- `johannine_unique`: John only
+
+### Relationship Inference
+
+**Purpose**: Suggest potential character relationships based on co-occurrence and textual evidence.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Infer relationships
+suggestions = api.infer_character_relationships("martha_of_bethany")
+
+for sugg in suggestions:
+    if not sugg["already_exists"]:
+        print(f"New relationship with {sugg['character_id']}")
+        print(f"  Type: {sugg['suggested_type']}")
+        print(f"  Confidence: {sugg['confidence']}")
+        print(f"  Evidence: {sugg['evidence']}")
+```
+
+**Inference methods**:
+- Co-occurrence in events
+- Mentions in trait contexts
+- Role-based inference (apostles, teachers, etc.)
+
+**Relationship types**:
+- `fellow_disciple`, `teacher_student`, `family`, `sibling`, `associate`, etc.
+
+---
+
+## Export and Analytics
+
+### Natural Language Summaries
+
+**Purpose**: Generate readable narrative summaries from structured dossiers.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Generate character summary
+summary = api.generate_character_summary("paul", style="academic", max_words=200)
+print(summary)
+
+# Generate event summary
+summary = api.generate_event_summary("crucifixion", style="accessible", max_words=150)
+print(summary)
+```
+
+**Summary styles**:
+- `academic`: Scholarly language with source citations and conflict analysis
+- `accessible`: Simple, clear language for general audiences
+- `technical`: Data-focused with statistics and IDs
+
+**Output**:
+
+Example academic summary:
+```
+Paul of Tarsus appears in Acts and the Pauline epistles as apostle and teacher.
+Sources present 3 significant contradictions regarding conversion_timeline (Acts vs Galatians)
+and torah_observance (Acts 21:20-26 vs Galatians 3:23-29). Documented relationships
+include connections with Barnabas and Timothy.
+```
+
+### Source Tendency Analysis
+
+**Purpose**: Identify systematic patterns in how sources portray characters and events.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Analyze source patterns
+patterns = api.analyze_source_patterns("mark")
+
+print(f"Character count: {patterns['statistics']['character_count']}")
+
+# View portrayal patterns
+for pattern in patterns["character_portrayal_patterns"]:
+    print(f"{pattern['pattern']}: {pattern['frequency']}")
+    print(f"  Characters affected: {pattern['characters_affected']}")
+    print(f"  Evidence: {pattern['evidence']}")
+
+# View narrative priorities
+print(f"Priorities: {patterns['narrative_priorities']}")
+```
+
+**Pattern types detected**:
+- `messianic_secrecy` (Mark)
+- `disciple_misunderstanding`
+- `divine_christology` (John)
+- `torah_observance`
+- `suffering_emphasis`
+
+**Narrative priorities**:
+- Suffering christology
+- Divine christology
+- Kingdom theology
+- Apocalyptic urgency
+- Discipleship failure
+- Gentile inclusion
+
+### Advanced Conflict Analysis
+
+**Purpose**: Assess theological, historical, and narrative significance of conflicts.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Assess a specific conflict
+assessment = api.assess_conflict_significance("judas", "death_method")
+
+print(f"Basic severity: {assessment['basic_severity']}")
+
+ai = assessment["ai_assessment"]
+print(f"Theological significance: {ai['theological_significance']}")
+print(f"Historical significance: {ai['historical_significance']}")
+print(f"Narrative impact: {ai['narrative_coherence_impact']}")
+print(f"Explanation: {ai['explanation']}")
+print(f"Scholarly consensus: {ai['scholarly_consensus']}")
+print(f"Implications: {ai['implications']}")
+```
+
+**Assessment dimensions**:
+- **Theological significance**: high/medium/low based on doctrinal importance
+- **Historical significance**: importance for historical reconstruction
+- **Narrative coherence impact**: effect on story consistency
+- **Scholarly consensus**: level of academic discussion
+- **Implications**: what the conflict suggests (independent traditions, oral variants, etc.)
+
+### Event Timeline Reconstruction
+
+**Purpose**: Build comparative timeline reconstructions showing how sources describe events differently.
+
+**Usage**:
+
+```python
+from bce import api
+
+# Build event timeline
+timeline = api.build_event_timeline("crucifixion")
+
+print(f"Event: {timeline['event_label']}")
+print(f"Sources: {timeline['sources']}")
+print(f"Synthesis: {timeline['synthesis']}")
+
+# Examine timeline elements
+for element in timeline["timeline_elements"]:
+    print(f"\nElement: {element['element']}")
+    print(f"Conflict: {element['conflict']}")
+    if element["conflict"]:
+        print(f"  Sources: {element['sources']}")
+        print(f"  Analysis: {element['ai_analysis']}")
+```
+
+**Timeline elements extracted**:
+- Time of day/timing
+- Location
+- Participants
+- Sequence of events
+- Duration
+- Final words
+- Actions performed
 
 ---
 
