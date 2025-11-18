@@ -9,6 +9,7 @@
 This document proposes AI-powered features that enhance Codex Azazel's core mission as a **data and analysis engine** for New Testament characters and events. All proposals respect the project's explicit non-goals: no UI, no debate engine, no apologetics, and no baked-in LLM prompt logic.
 
 Instead, these features focus on:
+
 - **Data quality improvement** - Help maintain accurate, consistent, and complete data
 - **Enhanced analysis** - Surface deeper insights from existing data
 - **Discovery and exploration** - Help users find patterns and connections
@@ -35,6 +36,7 @@ Instead, these features focus on:
 **Enhancement**: Use semantic similarity to detect contradictions that differ in wording but align in meaning, and flag genuine conflicts vs. complementary details.
 
 **API Design**:
+
 ```python
 from bce.ai import semantic_contradictions
 
@@ -62,6 +64,7 @@ results = semantic_contradictions.analyze_character_traits(
 ```
 
 **Implementation Notes**:
+
 - Use sentence embeddings (e.g., all-MiniLM-L6-v2) for local/offline analysis
 - Optional: Support API-based models (Claude, GPT-4) for deeper analysis
 - Store results in a separate `ai_analysis/` directory, not in core data
@@ -74,6 +77,7 @@ results = semantic_contradictions.analyze_character_traits(
 **Purpose**: Identify gaps, inconsistencies, and areas needing expansion.
 
 **API Design**:
+
 ```python
 from bce.ai import completeness
 
@@ -109,6 +113,7 @@ report = completeness.audit_characters()
 ```
 
 **Benefits**:
+
 - Systematic quality improvement
 - Prioritized data entry tasks
 - Consistency across the dataset
@@ -120,6 +125,7 @@ report = completeness.audit_characters()
 **Purpose**: Use AI to suggest fixes for validation errors.
 
 **API Design**:
+
 ```python
 from bce.ai import validation_assistant
 
@@ -149,6 +155,7 @@ suggestions = validation_assistant.suggest_fixes(errors)
 **Enhancement**: Enable conceptual queries that understand meaning, not just keywords.
 
 **API Design**:
+
 ```python
 from bce.ai import semantic_search
 
@@ -179,6 +186,7 @@ results = semantic_search.query(
 ```
 
 **Implementation**:
+
 - Build searchable index using sentence embeddings
 - Cache embeddings to avoid recomputation
 - Update index automatically when data changes
@@ -191,6 +199,7 @@ results = semantic_search.query(
 **Purpose**: Automatically discover thematic groupings across characters and events.
 
 **API Design**:
+
 ```python
 from bce.ai import clustering
 
@@ -217,6 +226,7 @@ clusters = clustering.find_character_clusters(
 ```
 
 **Use Cases**:
+
 - Auto-generate tag suggestions
 - Discover unexpected connections
 - Export clusters for visualization tools
@@ -228,6 +238,7 @@ clusters = clustering.find_character_clusters(
 **Purpose**: Answer structured questions about the dataset.
 
 **API Design**:
+
 ```python
 from bce.ai import qa
 
@@ -267,6 +278,7 @@ answer = qa.ask("Which gospels portray Jesus as most divine?")
 **Purpose**: Extract character traits and event details from scripture references.
 
 **API Design**:
+
 ```python
 from bce.ai import extraction
 
@@ -302,6 +314,7 @@ traits = extraction.extract_character_traits(
 ```
 
 **Workflow**:
+
 1. AI extracts suggested traits
 2. Human reviewer approves/edits
 3. Approved traits added to character JSON
@@ -314,6 +327,7 @@ traits = extraction.extract_character_traits(
 **Purpose**: Automatically identify synoptic parallels and variant accounts.
 
 **API Design**:
+
 ```python
 from bce.ai import parallels
 
@@ -351,6 +365,7 @@ parallel_set = parallels.detect_event_parallels(
 ```
 
 **Benefits**:
+
 - Faster population of `parallels` field in event JSON
 - Discover parallels not immediately obvious
 - Suggest updates to existing parallel records
@@ -362,6 +377,7 @@ parallel_set = parallels.detect_event_parallels(
 **Purpose**: Suggest potential relationships based on co-occurrence and textual evidence.
 
 **API Design**:
+
 ```python
 from bce.ai import relationships
 
@@ -400,6 +416,7 @@ suggestions = relationships.infer_for_character("martha_of_bethany")
 **Purpose**: Generate readable narrative summaries from structured dossiers.
 
 **API Design**:
+
 ```python
 from bce.ai import summaries
 
@@ -426,6 +443,7 @@ apostolic credentials.
 ```
 
 **Use Cases**:
+
 - Quick overviews for external tools
 - Export to documentation
 - Generate README snippets
@@ -437,6 +455,7 @@ apostolic credentials.
 **Purpose**: Auto-generate academic citations for characters and events.
 
 **API Design**:
+
 ```python
 from bce.ai import citations
 
@@ -465,6 +484,7 @@ epistles. https://github.com/dmedlin87/codex-azazel/blob/main/bce/data/character
 **Purpose**: Identify systematic patterns in how sources portray characters/events.
 
 **API Design**:
+
 ```python
 from bce.ai import source_analysis
 
@@ -498,6 +518,7 @@ tendencies = source_analysis.analyze_source_patterns("mark")
 ```
 
 **Benefits**:
+
 - Understand source-level theological tendencies
 - Guide trait vocabulary development
 - Export for historical-critical analysis tools
@@ -511,6 +532,7 @@ tendencies = source_analysis.analyze_source_patterns("mark")
 **Enhancement**: Use AI to assess theological, historical, and narrative significance of conflicts.
 
 **API Design**:
+
 ```python
 from bce.ai import conflict_analysis
 
@@ -546,6 +568,7 @@ analysis = conflict_analysis.assess_conflict(
 **Purpose**: Synthesize multi-source event accounts into comparative timeline.
 
 **API Design**:
+
 ```python
 from bce.ai import reconstruction
 
@@ -587,13 +610,15 @@ timeline = reconstruction.build_event_timeline("crucifixion")
 ### Phase 6.1: Foundation (Core AI Infrastructure)
 
 **Goals**:
+
 - Establish AI module structure under `bce/ai/`
 - Implement local/offline-first models (sentence embeddings)
 - Create caching and index management
 - Add configuration for optional AI features
 
 **Deliverables**:
-```
+
+```text
 bce/ai/
   __init__.py
   config.py          # AI feature configuration
@@ -603,6 +628,7 @@ bce/ai/
 ```
 
 **Configuration**:
+
 ```python
 # bce.config.BceConfig additions
 class BceConfig:
@@ -617,11 +643,13 @@ class BceConfig:
 ### Phase 6.2: Data Quality Features
 
 **Implement**:
+
 - AI-assisted contradiction detection (1.1)
 - Data completeness auditor (1.2)
 - Smart validation suggestions (1.3)
 
 **API Surface** (`bce.api` additions):
+
 ```python
 def analyze_semantic_contradictions(char_id: str) -> Dict[str, Any]
 def audit_character_completeness(char_id: Optional[str] = None) -> Dict[str, Any]
@@ -633,11 +661,13 @@ def get_validation_suggestions(errors: List[str]) -> List[Dict[str, Any]]
 ### Phase 6.3: Enhanced Search
 
 **Implement**:
+
 - Semantic search (2.1)
 - Thematic clustering (2.2)
 - Question answering (2.3)
 
 **API Surface**:
+
 ```python
 def semantic_search(query: str, top_k: int = 10) -> List[Dict[str, Any]]
 def find_thematic_clusters(num_clusters: int = 8) -> List[Dict[str, Any]]
@@ -649,11 +679,13 @@ def ask_question(question: str) -> Dict[str, Any]
 ### Phase 6.4: Data Extraction Tools
 
 **Implement**:
+
 - Automated trait extraction (3.1)
 - Parallel passage detection (3.2)
 - Relationship inference (3.3)
 
 **Usage Pattern**:
+
 ```bash
 # CLI for data entry assistance
 bce ai extract-traits --character nicodemus --source john --reference "John 3:1-21" --review
@@ -667,6 +699,7 @@ bce ai extract-traits --character nicodemus --source john --reference "John 3:1-
 ### Phase 6.5: Export & Analytics
 
 **Implement**:
+
 - Natural language summaries (4.1)
 - Enhanced citations (4.2)
 - Source tendency analysis (5.1)
@@ -679,11 +712,13 @@ bce ai extract-traits --character nicodemus --source john --reference "John 3:1-
 ### Model Selection
 
 **Local/Offline Options** (Recommended for core features):
+
 - **Sentence embeddings**: `all-MiniLM-L6-v2` (small, fast, good quality)
 - **Text generation**: `Llama 3.1 8B` or `Phi-3` (via Ollama)
 - **Classification**: Fine-tuned BERT models for specific tasks
 
 **API-Based Options** (Optional, for advanced features):
+
 - **OpenAI**: GPT-4 for complex reasoning tasks
 - **Anthropic**: Claude for long-context analysis
 - **Configurable per feature**: Allow users to choose backend
@@ -818,6 +853,7 @@ def test_semantic_contradiction_detection():
 These AI features enhance Codex Azazel's core mission as a data and analysis engine without compromising its focused scope. By prioritizing data quality, transparency, and tool-friendliness, we can leverage AI to improve the dataset while maintaining human oversight and scholarly rigor.
 
 **Next Steps**:
+
 1. Community feedback on this proposal
 2. Prioritize features for Phase 6.1 implementation
 3. Create detailed technical design documents for chosen features
