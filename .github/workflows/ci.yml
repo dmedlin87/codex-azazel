@@ -1,0 +1,46 @@
+name: CI - Tests and Validation
+
+on:
+  push:
+    branches: [ main, master, develop, feature/** ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Run pytest
+        run: |
+          pytest --verbose
+
+      - name: Run data validation
+        run: |
+          python -c "from bce.validation import validate_all, validate_cross_references; \
+            errors = validate_all(); \
+            xref_errors = validate_cross_references(); \
+            all_errors = errors + xref_errors; \
+            print('=' * 60); \
+            print('BCE Data Validation'); \
+            print('=' * 60); \
+            if all_errors: \
+              print(f'\n❌ {len(all_errors)} validation error(s):'); \
+              for err in all_errors: print(f'  - {err}'); \
+              exit(1); \
+            else: \
+              print('\n✅ All validation checks passed'); \
+              exit(0)"
