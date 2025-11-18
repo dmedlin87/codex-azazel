@@ -5,6 +5,94 @@ All notable changes to this project will be documented in this file.
 The format is inspired by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to semantic versioning in `pyproject.toml`.
 
+## [Unreleased]
+
+### Added - AI Features (Phase 6.1-6.3)
+
+**Foundation (Phase 6.1)**:
+- New `bce/ai/` module with AI-powered features:
+  - `config.py`: AI configuration helpers (`ensure_ai_enabled`, `get_ai_cache_dir`, etc.)
+  - `embeddings.py`: Sentence embedding utilities with lazy-loading (`embed_text`, `embed_texts`, `EmbeddingCache`)
+  - `cache.py`: AI-specific result caching with TTL (`AIResultCache`, cache invalidation helpers)
+  - `models.py`: Model loading and management (`ModelManager`, backend support)
+- Extended `BceConfig` with AI parameters:
+  - `enable_ai_features`: Toggle AI features (default: False)
+  - `ai_model_backend`: Backend selection ("local", "openai", "anthropic")
+  - `ai_cache_dir`: Custom cache directory
+  - `embedding_model`: Embedding model name (default: "all-MiniLM-L6-v2")
+- Environment variables for AI configuration:
+  - `BCE_ENABLE_AI_FEATURES`, `BCE_AI_MODEL_BACKEND`, `BCE_AI_CACHE_DIR`, `BCE_EMBEDDING_MODEL`
+- Optional dependency groups in `pyproject.toml`:
+  - `[ai]`: Core AI features (sentence-transformers, numpy, scikit-learn)
+  - `[ai-openai]`: OpenAI backend support
+  - `[ai-anthropic]`: Anthropic backend support
+- Test suite for AI foundation (30 tests in `tests/test_ai_foundation.py`)
+
+**Data Quality Features (Phase 6.2)**:
+- `bce/ai/semantic_contradictions.py`: Semantic contradiction detection
+  - `analyze_character_traits()`: Distinguish genuine conflicts from complementary details
+  - `analyze_event_conflicts()`: Semantic analysis of event account conflicts
+  - Classifies conflicts as: genuine_contradiction, different_emphasis, or complementary_details
+  - Includes similarity scores, severity ratings, and explanations
+- `bce/ai/completeness.py`: Data completeness auditing
+  - `audit_characters()`, `audit_character()`: Character completeness audits
+  - `audit_events()`, `audit_event()`: Event completeness audits
+  - Identifies: missing source profiles, sparse traits, missing tags/references
+  - Calculates completeness scores (0.0-1.0) with component breakdown
+  - Prioritizes gaps (critical/high/medium/low)
+- `bce/ai/validation_assistant.py`: AI-powered validation suggestions
+  - `suggest_fixes()`: Generate fix suggestions for validation errors
+  - Handles: missing references, invalid references, JSON syntax errors, missing fields
+  - Uses string similarity to suggest existing IDs
+  - Returns suggestions with confidence scores
+
+**Enhanced Search (Phase 6.3)**:
+- `bce/ai/semantic_search.py`: Semantic search using embeddings
+  - `query()`: Search by concept, not keywords (e.g., "doubting disciples" → thomas)
+  - `find_similar_characters()`: Find conceptually similar characters
+  - `find_similar_events()`: Find conceptually similar events
+  - Builds searchable index with 1-hour cache
+  - Returns ranked results with relevance scores and explanations
+- `bce/ai/clustering.py`: Thematic clustering
+  - `find_character_clusters()`: K-means clustering on character embeddings
+  - `find_event_clusters()`: K-means clustering on event embeddings
+  - `suggest_tags_from_clusters()`: Suggest tags based on cluster membership
+  - Auto-generates interpretable cluster labels
+  - Returns clusters with confidence scores (coherence metrics)
+
+**API Integration**:
+- Added 6 new functions to `bce.api` for AI features:
+  - `analyze_semantic_contradictions()`: Semantic contradiction analysis
+  - `audit_character_completeness()`: Data completeness auditing
+  - `get_validation_suggestions()`: Validation fix suggestions
+  - `semantic_search()`: Conceptual search across characters/events
+  - `find_similar_characters()`: Find similar characters by traits/roles/tags
+  - `find_thematic_clusters()`: Discover thematic groupings
+- All AI functions use lazy imports and require `enable_ai_features=True`
+- Comprehensive docstrings with usage examples
+
+**Documentation**:
+- New `docs/AI_FEATURES.md`: Complete AI features user guide
+  - Setup and configuration instructions
+  - Feature documentation with examples
+  - API reference
+  - Performance and caching details
+  - Troubleshooting guide
+- Updated `docs/AI_FEATURES_PROPOSAL.md`: Technical specification
+- Updated `docs/AI_FEATURES_QUICK_REF.md`: Quick reference guide
+
+### Changed
+- `bce/config.py`: Extended with AI configuration parameters
+- `bce/ai/__init__.py`: Exports all AI submodules
+
+### Design Principles
+All AI features follow core principles:
+- **Optional**: Disabled by default, require explicit enablement
+- **Offline-first**: Work with local embeddings, no API calls required
+- **Transparent**: All outputs include confidence scores and explanations
+- **Data-centric**: Focus on data quality, not theology or apologetics
+- **Cached**: Aggressive caching to minimize recomputation
+
 ## [0.1.0] - 2025-11-17
 
 ### Added
