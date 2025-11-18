@@ -7,26 +7,39 @@
   "roles": [
     "follower"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "resource_patronage",
-      "sources": ["luke"],
-      "references": ["Luke 8:1-3"],
+      "sources": [
+        "luke"
+      ],
+      "references": [
+        "Luke 8:1-3"
+      ],
       "notes": "Provides financial and logistical support to Jesus and the Twelve, illustrating how healed women of means underwrite the itinerant mission."
     },
     {
       "character_id": "susanna",
       "type": "co-benefactor",
-      "sources": ["luke"],
-      "references": ["Luke 8:1-3"],
+      "sources": [
+        "luke"
+      ],
+      "references": [
+        "Luke 8:1-3"
+      ],
       "notes": "Listed alongside Susanna and others, showing that the women formed a patronage network that pooled resources for Jesus’s ministry."
     },
     {
       "character_id": "peter",
       "type": "delivers_resurrection_testimony_to",
-      "sources": ["luke"],
-      "references": ["Luke 24:9-12"],
+      "sources": [
+        "luke"
+      ],
+      "references": [
+        "Luke 24:9-12"
+      ],
       "notes": "Returns from the empty tomb to report the angelic message to the apostles, prompting Peter’s own investigation despite initial disbelief."
     }
   ],

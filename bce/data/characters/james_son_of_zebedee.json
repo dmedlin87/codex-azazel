@@ -9,11 +9,16 @@
     "disciple",
     "apostle"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "inner_circle_disciple",
-      "sources": ["mark", "matthew", "luke"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke"
+      ],
       "references": [
         "Mark 1:19-20",
         "Mark 5:37",
@@ -27,7 +32,11 @@
     {
       "character_id": "john",
       "type": "brother_and_ministry_partner",
-      "sources": ["mark", "matthew", "luke"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke"
+      ],
       "references": [
         "Mark 1:19-20",
         "Mark 10:35-41",
@@ -39,7 +48,10 @@
     {
       "character_id": "peter",
       "type": "inner_circle_colleague",
-      "sources": ["mark", "luke"],
+      "sources": [
+        "mark",
+        "luke"
+      ],
       "references": [
         "Mark 5:37",
         "Mark 9:2",
@@ -50,7 +62,9 @@
     {
       "character_id": "herod_agrippa_i",
       "type": "martyrdom_at_hands_of",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 12:1-2"
       ],
@@ -80,7 +94,7 @@
       "traits": {
         "call_and_role": "Called with John from the boat of Zebedee and listed among the Twelve, paired with his brother.",
         "family_request_for_honor": "In Matthew’s version, their mother (the mother of the sons of Zebedee) asks that they sit at Jesus’s right and left in his kingdom, revealing family ambition and misunderstanding of greatness.",
-        "presence_in_key_scenes": "Included with Peter and John at the transfiguration and at Gethsemane, marking him as part of Jesus’s closest circle." 
+        "presence_in_key_scenes": "Included with Peter and John at the transfiguration and at Gethsemane, marking him as part of Jesus’s closest circle."
       },
       "references": [
         "Matthew 4:21-22",

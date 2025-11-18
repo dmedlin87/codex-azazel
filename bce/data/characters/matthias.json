@@ -7,11 +7,14 @@
   "roles": [
     "apostle"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "witness_of_public_ministry",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 1:21-22"
       ],
@@ -20,7 +23,9 @@
     {
       "character_id": "peter",
       "type": "commissioned_through_apostolic_discernment",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 1:15-26"
       ],
@@ -29,7 +34,9 @@
     {
       "character_id": "judas",
       "type": "successor_to",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 1:16-20"
       ],

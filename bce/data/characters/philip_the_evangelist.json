@@ -8,11 +8,14 @@
     "deacon",
     "evangelist"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "peter",
       "type": "mission_collaboration",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 8:14-25"
       ],
@@ -21,7 +24,9 @@
     {
       "character_id": "john",
       "type": "mission_collaboration",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 8:14-25"
       ],
@@ -30,7 +35,9 @@
     {
       "character_id": "paul",
       "type": "host_and_supporter",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 21:8-9"
       ],

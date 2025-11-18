@@ -7,19 +7,33 @@
   "roles": [
     "family_group"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "sibling_relationship",
-      "sources": ["mark_matthew", "john"],
-      "references": ["Mark 3:31-35", "Mark 6:3", "John 7:3-5"],
+      "sources": [
+        "mark_matthew",
+        "john"
+      ],
+      "references": [
+        "Mark 3:31-35",
+        "Mark 6:3",
+        "John 7:3-5"
+      ],
       "notes": "Their attempts to intervene in his ministry and later skepticism frame Jesus’s teaching about true kinship and highlight the tension within his own household."
     },
     {
       "character_id": "mary_mother_of_jesus",
       "type": "shared_family_mission",
-      "sources": ["mark_matthew", "acts"],
-      "references": ["Mark 3:31", "Acts 1:14"],
+      "sources": [
+        "mark_matthew",
+        "acts"
+      ],
+      "references": [
+        "Mark 3:31",
+        "Acts 1:14"
+      ],
       "notes": "Appear alongside Mary both when seeking Jesus during his ministry and later when praying with her after the ascension, charting their movement from misunderstanding to solidarity."
     }
   ],
@@ -31,7 +45,7 @@
         "initial_misunderstanding": "Appear in contexts where Jesus’s family fails to understand his mission; in Mark some relatives think he is 'out of his mind' and seek to restrain him.",
         "redefinition_of_kinship": "Their arrival outside while Jesus is teaching becomes the setting for Jesus’s saying that whoever does God’s will is his brother, sister, and mother, relativizing biological ties.",
         "hometown_rejection": "References to his brothers and sisters occur in the scene where the people of Nazareth take offense at Jesus, emphasizing familiarity and skepticism.",
-        "narrative_function": "Serve as representatives of Jesus’s natural family whose relationship to his mission is initially ambiguous or resistant." 
+        "narrative_function": "Serve as representatives of Jesus’s natural family whose relationship to his mission is initially ambiguous or resistant."
       },
       "references": [
         "Mark 3:20-21",
@@ -56,7 +70,7 @@
       "source_id": "luke_acts",
       "traits": {
         "post_easter_presence": "After the ascension, Jesus’s brothers are listed among those gathered with the apostles, the women, and Mary his mother in prayer in Jerusalem.",
-        "shift_in_stance": "Their presence in the praying community suggests a transition from earlier misunderstanding to participation in the fledgling church." 
+        "shift_in_stance": "Their presence in the praying community suggests a transition from earlier misunderstanding to participation in the fledgling church."
       },
       "references": [
         "Acts 1:13-14"

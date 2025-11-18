@@ -7,26 +7,40 @@
   "roles": [
     "religious_leader"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "nighttime_inquirer_and_burial_honorer",
-      "sources": ["john"],
-      "references": ["John 3:1-21", "John 19:39-42"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 3:1-21",
+        "John 19:39-42"
+      ],
       "notes": "Visits Jesus under cover of darkness to discuss rebirth and later joins Joseph in preparing Jesus’s body with an extravagant mixture of spices."
     },
     {
       "character_id": "sanhedrin",
       "type": "council_member_advocating_due_process",
-      "sources": ["john"],
-      "references": ["John 7:45-52"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 7:45-52"
+      ],
       "notes": "Raises a legal objection during the council’s attempt to arrest Jesus, insisting that the law hear a person before judgment."
     },
     {
       "character_id": "joseph_of_arimathea",
       "type": "burial_collaborator",
-      "sources": ["john"],
-      "references": ["John 19:38-42"],
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 19:38-42"
+      ],
       "notes": "Partners with Joseph of Arimathea to claim and bury Jesus’s body, providing spices while Joseph supplies the tomb."
     }
   ],

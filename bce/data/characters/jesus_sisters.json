@@ -7,19 +7,30 @@
   "roles": [
     "family_group"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "sibling_relationship",
-      "sources": ["mark_matthew"],
-      "references": ["Mark 6:3", "Matthew 13:55-56"],
+      "sources": [
+        "mark_matthew"
+      ],
+      "references": [
+        "Mark 6:3",
+        "Matthew 13:55-56"
+      ],
       "notes": "Their presence in Nazareth anchors perceptions of Jesus’s ordinary family roots, which fuel hometown skepticism about his authority."
     },
     {
       "character_id": "mary_mother_of_jesus",
       "type": "household_connection",
-      "sources": ["mark_matthew"],
-      "references": ["Mark 6:3", "Matthew 13:55"],
+      "sources": [
+        "mark_matthew"
+      ],
+      "references": [
+        "Mark 6:3",
+        "Matthew 13:55"
+      ],
       "notes": "Mentioned alongside Mary and the brothers, indicating that the wider sibling group belongs to the same Nazareth household that shaped Jesus’s upbringing."
     }
   ],
@@ -29,7 +40,7 @@
       "traits": {
         "mention_in_hometown_scene": "Referred to collectively when the people of Nazareth identify Jesus by his family, noting that his sisters are present among them.",
         "implied_presence": "Their mention suggests an extended family network in Nazareth but provides no individual names or stories.",
-        "function_in_narrative": "Contributes to the portrayal of Jesus as someone known in ordinary family terms whose claims and deeds provoke offense in his hometown." 
+        "function_in_narrative": "Contributes to the portrayal of Jesus as someone known in ordinary family terms whose claims and deeds provoke offense in his hometown."
       },
       "references": [
         "Mark 6:3-4",

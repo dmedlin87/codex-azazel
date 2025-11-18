@@ -1,7 +1,12 @@
 {
   "id": "trial_before_pilate",
   "label": "Trial of Jesus before Pontius Pilate",
-  "participants": ["jesus", "pilate"],
+  "participants": [
+    "jesus",
+    "pilate"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "mark",

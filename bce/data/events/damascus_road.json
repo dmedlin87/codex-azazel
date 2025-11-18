@@ -1,7 +1,12 @@
 {
   "id": "damascus_road",
   "label": "Paul's Damascus Road Experience",
-  "participants": ["paul", "jesus"],
+  "participants": [
+    "paul",
+    "jesus"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "acts",
