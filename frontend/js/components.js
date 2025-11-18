@@ -214,6 +214,68 @@ const Components = {
             timeout = setTimeout(later, wait);
         };
     },
+
+    /**
+     * Render navigation bar with mobile menu support
+     */
+    renderNavigation(currentPage = 'home') {
+        return `
+            <nav class="bg-blue-900 text-white shadow-lg">
+                <div class="container mx-auto px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <h1 class="text-2xl font-bold">BCE</h1>
+                            <span class="text-sm text-blue-200">Biblical Character Engine</span>
+                        </div>
+
+                        <!-- Desktop Navigation -->
+                        <div class="hidden md:flex space-x-6">
+                            <a href="index.html" class="hover:text-blue-200 transition ${currentPage === 'home' ? 'font-semibold border-b-2 border-white pb-1' : ''}">Home</a>
+                            <a href="characters.html" class="hover:text-blue-200 transition ${currentPage === 'characters' ? 'font-semibold border-b-2 border-white pb-1' : ''}">Characters</a>
+                            <a href="events.html" class="hover:text-blue-200 transition ${currentPage === 'events' ? 'font-semibold border-b-2 border-white pb-1' : ''}">Events</a>
+                            <a href="graph.html" class="hover:text-blue-200 transition ${currentPage === 'graph' ? 'font-semibold border-b-2 border-white pb-1' : ''}">Graph</a>
+                        </div>
+
+                        <!-- Mobile Menu Button -->
+                        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Toggle menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Navigation Menu -->
+                    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+                        <a href="index.html" class="block py-2 px-4 hover:bg-blue-800 rounded transition ${currentPage === 'home' ? 'bg-blue-800' : ''}">Home</a>
+                        <a href="characters.html" class="block py-2 px-4 hover:bg-blue-800 rounded transition ${currentPage === 'characters' ? 'bg-blue-800' : ''}">Characters</a>
+                        <a href="events.html" class="block py-2 px-4 hover:bg-blue-800 rounded transition ${currentPage === 'events' ? 'bg-blue-800' : ''}">Events</a>
+                        <a href="graph.html" class="block py-2 px-4 hover:bg-blue-800 rounded transition ${currentPage === 'graph' ? 'bg-blue-800' : ''}">Graph</a>
+                    </div>
+                </div>
+            </nav>
+        `;
+    },
+
+    /**
+     * Initialize mobile menu toggle functionality
+     */
+    initMobileMenu() {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (iconOpen && iconClose) {
+                    iconOpen.classList.toggle('hidden');
+                    iconClose.classList.toggle('hidden');
+                }
+            });
+        }
+    },
 };
 
 // Make Components available globally

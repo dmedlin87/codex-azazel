@@ -24,23 +24,13 @@
     </script>
 </head>
 <body class="bg-slate-50 min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-blue-900 text-white shadow-lg">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <h1 class="text-2xl font-bold">BCE</h1>
-                    <span class="text-sm text-blue-200">Biblical Character Engine</span>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="index.html" class="hover:text-blue-200 transition">Home</a>
-                    <a href="characters.html" class="hover:text-blue-200 transition font-semibold border-b-2 border-white pb-1">Characters</a>
-                    <a href="events.html" class="hover:text-blue-200 transition">Events</a>
-                    <a href="graph.html" class="hover:text-blue-200 transition">Graph</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigation (rendered dynamically) -->
+    <div id="nav-container"></div>
+    <script>
+        // Render navigation immediately
+        document.getElementById('nav-container').innerHTML = Components.renderNavigation('characters');
+        Components.initMobileMenu();
+    </script>
 
     <!-- Header -->
     <section class="bg-blue-900 text-white py-12">
@@ -135,11 +125,54 @@
         let currentTag = null;
         let searchQuery = '';
 
+        // Read URL parameters on page load
+        function loadFiltersFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const filter = urlParams.get('filter');
+            const tag = urlParams.get('tag');
+            const search = urlParams.get('search');
+
+            if (filter) {
+                currentFilter = filter;
+            }
+            if (tag) {
+                currentTag = tag;
+            }
+            if (search) {
+                searchQuery = search;
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) searchInput.value = search;
+            }
+        }
+
+        // Update URL with current filter state
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (currentFilter && currentFilter !== 'all') {
+                params.set('filter', currentFilter);
+            }
+            if (currentTag) {
+                params.set('tag', currentTag);
+            }
+            if (searchQuery) {
+                params.set('search', searchQuery);
+            }
+
+            const newURL = params.toString()
+                ? `${window.location.pathname}?${params.toString()}`
+                : window.location.pathname;
+
+            window.history.pushState({}, '', newURL);
+        }
+
+        // Load filters from URL before loading data
+        loadFiltersFromURL();
+
         async function loadCharacters() {
             try {
                 const charIds = await API.getCharacters();
-                const promises = charIds.map(id => API.getCharacter(id));
-                const dossiers = await Promise.all(promises);
+                // Use batch endpoint to load all characters in one request
+                const dossiers = await API.getCharactersBatch(charIds);
                 allCharacters = dossiers;
                 renderCharacters();
                 loadTags();
@@ -159,7 +192,7 @@
 
             const tagFilters = document.getElementById('tag-filters');
             tagFilters.innerHTML = Array.from(tags).sort().map(tag =>
-                `<button class="tag-filter-btn px-3 py-1 bg-gray-100 hover:bg-blue-100 rounded-full text-sm transition" data-tag="${tag}">${tag}</button>`
+                `<button class="tag-filter-btn px-3 py-1 bg-gray-100 hover:bg-blue-100 rounded-full text-sm transition ${tag === currentTag ? 'active-tag' : ''}" data-tag="${tag}">${tag}</button>`
             ).join('');
 
             // Add event listeners
@@ -172,6 +205,7 @@
                         currentTag = btn.dataset.tag;
                         btn.classList.add('active-tag');
                     }
+                    updateURL();
                     renderCharacters();
                 });
             });
@@ -221,18 +255,23 @@
             grid.innerHTML = filtered.map(char => Components.characterCard(char)).join('');
         }
 
-        // Event listeners
+        // Event listeners - set active state based on current filter
         document.querySelectorAll('.filter-btn').forEach(btn => {
+            if (btn.dataset.filter === currentFilter) {
+                btn.classList.add('active');
+            }
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentFilter = btn.dataset.filter;
+                updateURL();
                 renderCharacters();
             });
         });
 
         document.getElementById('search-input').addEventListener('input', (e) => {
             searchQuery = e.target.value;
+            updateURL();
             renderCharacters();
         });
 

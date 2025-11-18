@@ -75,6 +75,19 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         if meta_dict:
             source_metadata[source_id] = meta_dict
 
+    # Enrich relationships with canonical names
+    enriched_relationships = []
+    for rel in character.relationships:
+        enriched_rel = dict(rel) if isinstance(rel, dict) else asdict(rel)
+        # Try to get the canonical name of the related character
+        try:
+            related_char = queries.get_character(enriched_rel.get('to', ''))
+            enriched_rel['to_name'] = related_char.canonical_name
+        except Exception:
+            # If character not found, just use the ID
+            enriched_rel['to_name'] = enriched_rel.get('to', '')
+        enriched_relationships.append(enriched_rel)
+
     dossier: CharacterDossier = {
         DOSSIER_KEY_ID: character.id,
         DOSSIER_KEY_CANONICAL_NAME: character.canonical_name,
@@ -87,7 +100,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_TRAIT_COMPARISON: trait_comparison,
         DOSSIER_KEY_TRAIT_CONFLICTS: trait_conflicts,
         DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES: trait_conflict_summaries,
-        DOSSIER_KEY_RELATIONSHIPS: list(character.relationships),
+        DOSSIER_KEY_RELATIONSHIPS: enriched_relationships,
         DOSSIER_KEY_PARALLELS: [],
     }
     return dossier

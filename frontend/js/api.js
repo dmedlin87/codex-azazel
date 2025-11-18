@@ -5,7 +5,15 @@
  */
 
 const API = {
-    baseURL: 'http://localhost:8000/api',
+    // Auto-detect API URL based on environment
+    baseURL: (() => {
+        // Check if we're in development (localhost)
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            return 'http://localhost:8000/api';
+        }
+        // Production: use relative URL
+        return '/api';
+    })(),
 
     /**
      * Generic fetch wrapper with error handling
@@ -61,6 +69,17 @@ const API = {
     },
 
     /**
+     * Get multiple character dossiers in a single request (batch)
+     */
+    async getCharactersBatch(charIds) {
+        if (!Array.isArray(charIds) || charIds.length === 0) {
+            return [];
+        }
+        const ids = charIds.join(',');
+        return this.fetch(`/characters/batch/dossiers?ids=${encodeURIComponent(ids)}`);
+    },
+
+    /**
      * List all event IDs
      */
     async getEvents() {
@@ -72,6 +91,17 @@ const API = {
      */
     async getEvent(eventId) {
         return this.fetch(`/events/${eventId}`);
+    },
+
+    /**
+     * Get multiple event dossiers in a single request (batch)
+     */
+    async getEventsBatch(eventIds) {
+        if (!Array.isArray(eventIds) || eventIds.length === 0) {
+            return [];
+        }
+        const ids = eventIds.join(',');
+        return this.fetch(`/events/batch/dossiers?ids=${encodeURIComponent(ids)}`);
     },
 
     /**
