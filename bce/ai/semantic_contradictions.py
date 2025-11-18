@@ -89,15 +89,16 @@ def analyze_character_traits(
 
     # Generate summary statistics
     genuine_count = sum(
-        1 for a in analyzed_conflicts.values() if a["is_genuine_conflict"]
+        1 for a in analyzed_conflicts.values()
+        if a["semantic_analysis"]["is_genuine_conflict"]
     )
     complementary_count = sum(
         1 for a in analyzed_conflicts.values()
-        if a["conflict_type"] == "complementary_details"
+        if a["semantic_analysis"]["conflict_type"] == "complementary_details"
     )
     emphasis_count = sum(
         1 for a in analyzed_conflicts.values()
-        if a["conflict_type"] == "different_emphasis"
+        if a["semantic_analysis"]["conflict_type"] == "different_emphasis"
     )
 
     result = {
@@ -262,15 +263,16 @@ def analyze_event_conflicts(
 
     # Generate summary statistics
     genuine_count = sum(
-        1 for a in analyzed_conflicts.values() if a["is_genuine_conflict"]
+        1 for a in analyzed_conflicts.values()
+        if a["semantic_analysis"]["is_genuine_conflict"]
     )
     complementary_count = sum(
         1 for a in analyzed_conflicts.values()
-        if a["conflict_type"] == "complementary_details"
+        if a["semantic_analysis"]["conflict_type"] == "complementary_details"
     )
     emphasis_count = sum(
         1 for a in analyzed_conflicts.values()
-        if a["conflict_type"] == "different_emphasis"
+        if a["semantic_analysis"]["conflict_type"] == "different_emphasis"
     )
 
     result = {
