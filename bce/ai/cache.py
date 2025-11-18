@@ -34,7 +34,7 @@ class CachedResult:
             True if expired, False otherwise
         """
         age = time.time() - self.timestamp
-        return age > max_age_seconds
+        return age >= max_age_seconds
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
