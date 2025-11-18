@@ -49,6 +49,11 @@ def list_event_ids() -> List[str]:
     return storage.list_event_ids()
 
 
+def list_all_events() -> List[Event]:
+    """Return all events as a list of Event objects."""
+    return list(storage.iter_events())
+
+
 def list_events_for_character(char_id: str) -> List[Event]:
     return [event for event in storage.iter_events() if char_id in event.participants]
 

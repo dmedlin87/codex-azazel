@@ -330,12 +330,11 @@ class TestAICache:
 class TestEmbeddingCache:
     """Tests for embedding cache (requires sentence-transformers)."""
 
-    @pytest.mark.skipif(
-        os.getenv("SKIP_AI_TESTS") == "1",
-        reason="Skipping AI tests (SKIP_AI_TESTS=1)",
-    )
     def test_embedding_cache_basic(self):
         """Test basic embedding cache operations."""
+        # Skip if numpy is not available
+        pytest.importorskip("numpy")
+
         from bce.ai.embeddings import EmbeddingCache
         import numpy as np
 
