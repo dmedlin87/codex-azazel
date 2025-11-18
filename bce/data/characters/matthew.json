@@ -14,26 +14,49 @@
     "tax_collector",
     "evangelist"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "disciple_of",
-      "sources": ["mark", "matthew", "luke"],
-      "references": ["Mark 2:13-17", "Matthew 9:9-13", "Luke 5:27-32"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Mark 2:13-17",
+        "Matthew 9:9-13",
+        "Luke 5:27-32"
+      ],
       "notes": "Called directly by Jesus from the tax booth and immediately follows him, entering Jesus’s itinerant circle."
     },
     {
       "character_id": "pharisees",
       "type": "conflict_over_association",
-      "sources": ["mark", "matthew", "luke"],
-      "references": ["Mark 2:16", "Matthew 9:11", "Luke 5:30"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Mark 2:16",
+        "Matthew 9:11",
+        "Luke 5:30"
+      ],
       "notes": "Matthew’s banquet with tax collectors and sinners sparks Pharisaic criticism about Jesus’s table fellowship."
     },
     {
       "character_id": "peter",
       "type": "colleague_apostle",
-      "sources": ["matthew", "acts"],
-      "references": ["Matthew 10:2-4", "Acts 1:13-14"],
+      "sources": [
+        "matthew",
+        "acts"
+      ],
+      "references": [
+        "Matthew 10:2-4",
+        "Acts 1:13-14"
+      ],
       "notes": "Serves alongside Peter within the Twelve and the Jerusalem prayer gathering prior to Matthias’s selection."
     }
   ],
@@ -94,4 +117,3 @@
     }
   ]
 }
-  

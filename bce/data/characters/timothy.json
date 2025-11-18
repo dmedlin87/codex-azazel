@@ -10,11 +10,16 @@
     "missionary",
     "delegate"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "paul",
       "type": "mentor_and_delegate",
-      "sources": ["acts", "paul_undisputed", "paul_pastoral"],
+      "sources": [
+        "acts",
+        "paul_undisputed",
+        "paul_pastoral"
+      ],
       "references": [
         "Acts 16:1-3",
         "Acts 17:14-15",
@@ -30,7 +35,10 @@
     {
       "character_id": "silas_silvanus",
       "type": "co_sender_and_envoy",
-      "sources": ["acts", "paul_undisputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
       "references": [
         "Acts 17:14-15",
         "Acts 18:5",

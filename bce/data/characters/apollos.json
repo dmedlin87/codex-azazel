@@ -8,11 +8,14 @@
     "teacher",
     "missionary"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "priscilla",
       "type": "mentored_by",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 18:26"
       ],
@@ -21,7 +24,9 @@
     {
       "character_id": "aquila",
       "type": "mentored_by",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 18:26"
       ],
@@ -30,7 +35,9 @@
     {
       "character_id": "paul",
       "type": "fellow_worker",
-      "sources": ["paul_undisputed"],
+      "sources": [
+        "paul_undisputed"
+      ],
       "references": [
         "1 Corinthians 1:12",
         "1 Corinthians 3:4-9",
@@ -43,7 +50,9 @@
     {
       "character_id": "titus",
       "type": "itinerant_colleague",
-      "sources": ["paul_disputed"],
+      "sources": [
+        "paul_disputed"
+      ],
       "references": [
         "Titus 3:13"
       ],

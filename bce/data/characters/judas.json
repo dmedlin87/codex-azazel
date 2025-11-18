@@ -2,119 +2,141 @@
   "id": "judas",
   "canonical_name": "Judas Iscariot",
   "aliases": [
-  "Judas Iscariot",
-  "Judas",
-  "Judas son of Simon Iscariot"
+    "Judas Iscariot",
+    "Judas",
+    "Judas son of Simon Iscariot"
   ],
   "roles": [
-  "disciple",
-  "apostle",
-  "betrayer"
+    "disciple",
+    "apostle",
+    "betrayer"
   ],
+  "tags": [],
   "relationships": [
-  {
-  "character_id": "jesus",
-  "type": "disciple_and_betrayer",
-  "sources": ["mark", "matthew", "luke", "john"],
-  "references": ["Mark 14:17-21", "Matthew 26:20-25", "Luke 22:47-48", "John 13:21-30"],
-  "notes": "Shares intimate meals with Jesus before handing him over, fulfilling the predicted betrayal through a kiss and departure into the night."
-  },
-  {
-  "character_id": "sanhedrin",
-  "type": "conspires_with_chief_priests",
-  "sources": ["mark", "matthew", "luke"],
-  "references": ["Mark 14:10-11", "Matthew 26:14-16", "Luke 22:3-6"],
-  "notes": "Negotiates payment with the chief priests and temple officers, seeking an opportune moment to hand Jesus over away from the crowd."
-  },
-  {
-  "character_id": "matthias",
-  "type": "apostolic_office_replaced",
-  "sources": ["acts"],
-  "references": ["Acts 1:15-26"],
-  "notes": "His vacated place among the Twelve is filled by Matthias after Peter recounts Judas’s death and cites Psalms about his office."
-  }
+    {
+      "character_id": "jesus",
+      "type": "disciple_and_betrayer",
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 14:17-21",
+        "Matthew 26:20-25",
+        "Luke 22:47-48",
+        "John 13:21-30"
+      ],
+      "notes": "Shares intimate meals with Jesus before handing him over, fulfilling the predicted betrayal through a kiss and departure into the night."
+    },
+    {
+      "character_id": "sanhedrin",
+      "type": "conspires_with_chief_priests",
+      "sources": [
+        "mark",
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Mark 14:10-11",
+        "Matthew 26:14-16",
+        "Luke 22:3-6"
+      ],
+      "notes": "Negotiates payment with the chief priests and temple officers, seeking an opportune moment to hand Jesus over away from the crowd."
+    },
+    {
+      "character_id": "matthias",
+      "type": "apostolic_office_replaced",
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 1:15-26"
+      ],
+      "notes": "His vacated place among the Twelve is filled by Matthias after Peter recounts Judas’s death and cites Psalms about his office."
+    }
   ],
   "source_profiles": [
-  {
-  "source_id": "mark",
-  "traits": {
-  "role_among_twelve": "Listed among the Twelve and later singled out as the one who hands Jesus over to the authorities.",
-  "betrayal_motive": "Goes to the chief priests to betray Jesus in exchange for money; the narrative does not probe his inner motivations.",
-  "relationship_to_jesus": "Appears as an insider who shares meals and intimate space with Jesus before becoming the instrument of his arrest.",
-  "characterization": "Portrayed with minimal psychological detail, functioning mainly as a narrative agent of betrayal and fulfillment of Jesus’s predictions.",
-  "death_account": "Mark does not narrate his death, leaving his ultimate fate unmentioned."
-  },
-  "references": [
-  "Mark 3:13-19",
-  "Mark 14:10-11",
-  "Mark 14:17-21",
-  "Mark 14:43-46"
+    {
+      "source_id": "mark",
+      "traits": {
+        "role_among_twelve": "Listed among the Twelve and later singled out as the one who hands Jesus over to the authorities.",
+        "betrayal_motive": "Goes to the chief priests to betray Jesus in exchange for money; the narrative does not probe his inner motivations.",
+        "relationship_to_jesus": "Appears as an insider who shares meals and intimate space with Jesus before becoming the instrument of his arrest.",
+        "characterization": "Portrayed with minimal psychological detail, functioning mainly as a narrative agent of betrayal and fulfillment of Jesus’s predictions.",
+        "death_account": "Mark does not narrate his death, leaving his ultimate fate unmentioned."
+      },
+      "references": [
+        "Mark 3:13-19",
+        "Mark 14:10-11",
+        "Mark 14:17-21",
+        "Mark 14:43-46"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "role_among_twelve": "Named among the Twelve and explicitly identified as the one who betrays Jesus.",
+        "betrayal_motive": "Initiates contact with the chief priests asking what they will give him, accepting thirty pieces of silver.",
+        "relationship_to_jesus": "Shares the last meal with Jesus, who predicts that one of those eating with him will betray him.",
+        "remorse_and_death": "After seeing Jesus condemned, he feels remorse, returns the silver, confesses that he has betrayed innocent blood, and then hangs himself.",
+        "field_of_blood_tradition": "The priests use the returned money to buy the potter’s field, which becomes known as the Field of Blood, framed as fulfillment of prophetic scripture."
+      },
+      "references": [
+        "Matthew 10:2-4",
+        "Matthew 26:14-16",
+        "Matthew 26:20-25",
+        "Matthew 26:47-50",
+        "Matthew 27:3-10"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "role_among_twelve": "Listed among the Twelve with the note that he became a traitor.",
+        "betrayal_motive": "Luke attributes his action to Satan entering into him before he consults with the chief priests and officers about how to betray Jesus.",
+        "relationship_to_jesus": "Leads the crowd to Jesus on the Mount of Olives and marks him out with a kiss, which Jesus pointedly questions.",
+        "characterization": "His betrayal is embedded in a larger motif of satanic opposition to Jesus’s mission rather than in explicit financial motives.",
+        "death_account": "Luke’s Gospel alludes only to his betrayal and does not narrate his death; that is deferred to Acts."
+      },
+      "references": [
+        "Luke 6:12-16",
+        "Luke 22:3-6",
+        "Luke 22:21-23",
+        "Luke 22:47-48"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "role_among_twelve": "Introduced as one of the Twelve, repeatedly identified as the one who would betray Jesus.",
+        "betrayal_motive": "Depicted as keeper of the common purse and labeled a thief who steals from it; Satan enters him at the meal when he receives the morsel from Jesus.",
+        "relationship_to_jesus": "Shares close table fellowship but is set in contrast to the beloved disciple; Jesus hands him the dipped morsel as a sign to the inner circle.",
+        "theological_role": "Functions as a dark counterpart within the disciple group, exemplifying unbelief and satanic influence inside the community.",
+        "narrative_exit": "After Satan enters him, he departs into the night, and his later death is not narrated; the emphasis falls on his departure and betrayal."
+      },
+      "references": [
+        "John 6:70-71",
+        "John 12:4-6",
+        "John 13:2",
+        "John 13:21-30",
+        "John 18:2-5"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "role_among_twelve": "Referred to as one of the number of the apostles whose place must be taken by another.",
+        "betrayal_motive": "His deed is described as a lawless act that led to Jesus’s arrest, with emphasis on scriptural fulfillment rather than psychological motivation.",
+        "death_account": "Said to have acquired a field with the reward of his wickedness and to have fallen headlong so that his body burst open and his bowels gushed out.",
+        "field_of_blood_tradition": "The gruesome death and the naming of the field as Akeldama (Field of Blood) are tied to local knowledge and interpreted through Psalms as prophecy.",
+        "theological_role": "Serves as a negative figure whose vacated office is filled by Matthias, underscoring divine oversight of the apostolic witness."
+      },
+      "references": [
+        "Acts 1:16-20",
+        "Acts 1:24-26"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "matthew",
-  "traits": {
-  "role_among_twelve": "Named among the Twelve and explicitly identified as the one who betrays Jesus.",
-  "betrayal_motive": "Initiates contact with the chief priests asking what they will give him, accepting thirty pieces of silver.",
-  "relationship_to_jesus": "Shares the last meal with Jesus, who predicts that one of those eating with him will betray him.",
-  "remorse_and_death": "After seeing Jesus condemned, he feels remorse, returns the silver, confesses that he has betrayed innocent blood, and then hangs himself.",
-  "field_of_blood_tradition": "The priests use the returned money to buy the potter’s field, which becomes known as the Field of Blood, framed as fulfillment of prophetic scripture."
-  },
-  "references": [
-  "Matthew 10:2-4",
-  "Matthew 26:14-16",
-  "Matthew 26:20-25",
-  "Matthew 26:47-50",
-  "Matthew 27:3-10"
-  ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "role_among_twelve": "Listed among the Twelve with the note that he became a traitor.",
-  "betrayal_motive": "Luke attributes his action to Satan entering into him before he consults with the chief priests and officers about how to betray Jesus.",
-  "relationship_to_jesus": "Leads the crowd to Jesus on the Mount of Olives and marks him out with a kiss, which Jesus pointedly questions.",
-  "characterization": "His betrayal is embedded in a larger motif of satanic opposition to Jesus’s mission rather than in explicit financial motives.",
-  "death_account": "Luke’s Gospel alludes only to his betrayal and does not narrate his death; that is deferred to Acts."
-  },
-  "references": [
-  "Luke 6:12-16",
-  "Luke 22:3-6",
-  "Luke 22:21-23",
-  "Luke 22:47-48"
-  ]
-  },
-  {
-  "source_id": "john",
-  "traits": {
-  "role_among_twelve": "Introduced as one of the Twelve, repeatedly identified as the one who would betray Jesus.",
-  "betrayal_motive": "Depicted as keeper of the common purse and labeled a thief who steals from it; Satan enters him at the meal when he receives the morsel from Jesus.",
-  "relationship_to_jesus": "Shares close table fellowship but is set in contrast to the beloved disciple; Jesus hands him the dipped morsel as a sign to the inner circle.",
-  "theological_role": "Functions as a dark counterpart within the disciple group, exemplifying unbelief and satanic influence inside the community.",
-  "narrative_exit": "After Satan enters him, he departs into the night, and his later death is not narrated; the emphasis falls on his departure and betrayal."
-  },
-  "references": [
-  "John 6:70-71",
-  "John 12:4-6",
-  "John 13:2",
-  "John 13:21-30",
-  "John 18:2-5"
-  ]
-  },
-  {
-  "source_id": "acts",
-  "traits": {
-  "role_among_twelve": "Referred to as one of the number of the apostles whose place must be taken by another.",
-  "betrayal_motive": "His deed is described as a lawless act that led to Jesus’s arrest, with emphasis on scriptural fulfillment rather than psychological motivation.",
-  "death_account": "Said to have acquired a field with the reward of his wickedness and to have fallen headlong so that his body burst open and his bowels gushed out.",
-  "field_of_blood_tradition": "The gruesome death and the naming of the field as Akeldama (Field of Blood) are tied to local knowledge and interpreted through Psalms as prophecy.",
-  "theological_role": "Serves as a negative figure whose vacated office is filled by Matthias, underscoring divine oversight of the apostolic witness."
-  },
-  "references": [
-  "Acts 1:16-20",
-  "Acts 1:24-26"
-  ]
-  }
-  ]
-  }
-  
+}

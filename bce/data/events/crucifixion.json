@@ -1,7 +1,10 @@
 {
   "id": "crucifixion",
   "label": "Crucifixion of Jesus",
-  "participants": ["jesus"],
+  "participants": [
+    "jesus"
+  ],
+  "tags": [],
   "accounts": [
     {
       "source_id": "mark",
@@ -18,7 +21,12 @@
   ],
   "parallels": [
     {
-      "sources": ["mark", "matthew", "luke", "john"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
       "references": {
         "mark": "Mark 15:22-37",
         "matthew": "Matthew 27:33-50",

@@ -2,134 +2,168 @@
   "id": "john",
   "canonical_name": "John son of Zebedee",
   "aliases": [
-  "John",
-  "John son of Zebedee",
-  "John the Apostle",
-  "John the son of Zebedee"
+    "John",
+    "John son of Zebedee",
+    "John the Apostle",
+    "John the son of Zebedee"
   ],
   "roles": [
-  "disciple",
-  "apostle",
-  "fisherman",
-  "pillar"
+    "disciple",
+    "apostle",
+    "fisherman",
+    "pillar"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "inner_circle_disciple",
-      "sources": ["mark", "matthew", "luke", "john"],
-      "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "John 21:2"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 5:37",
+        "Matthew 17:1",
+        "Luke 9:28",
+        "John 21:2"
+      ],
       "notes": "Consistently accompanies Jesus at pivotal healings, the transfiguration, and resurrection appearances as part of the closest disciple circle."
     },
     {
       "character_id": "james_son_of_zebedee",
       "type": "brother_and_coworker",
-      "sources": ["mark", "matthew", "luke", "acts"],
-      "references": ["Mark 1:19-20", "Matthew 4:21-22", "Luke 5:10", "Acts 12:2"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "acts"
+      ],
+      "references": [
+        "Mark 1:19-20",
+        "Matthew 4:21-22",
+        "Luke 5:10",
+        "Acts 12:2"
+      ],
       "notes": "The two sons of Zebedee leave their fishing business together to follow Jesus and remain paired in ministry until James’s martyrdom."
     },
     {
       "character_id": "peter",
       "type": "inner_circle_peer_and_colleague",
-      "sources": ["mark", "matthew", "luke", "john", "acts", "paul_undisputed"],
-      "references": ["Mark 5:37", "Matthew 26:37", "Luke 8:51", "John 20:2-8", "Acts 3:1", "Galatians 2:9"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john",
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Mark 5:37",
+        "Matthew 26:37",
+        "Luke 8:51",
+        "John 20:2-8",
+        "Acts 3:1",
+        "Galatians 2:9"
+      ],
       "notes": "Frequently paired with Peter during Jesus’s ministry, in resurrection narratives, and in Jerusalem leadership, culminating in Paul’s recognition of both as pillars."
     }
   ],
   "source_profiles": [
-  {
-  "source_id": "mark",
-  "traits": {
-  "calling_and_background": "Presented as a Galilean fisherman, son of Zebedee and brother of James, called by Jesus while working in the family boat.",
-  "inner_circle_status": "Belongs to the small inner circle with Peter and James who witness key revelatory moments like the raising of Jairus’s daughter, the transfiguration, and Gethsemane.",
-  "temperament_and_nickname": "Together with James he is given the nickname Boanerges, 'sons of thunder', suggesting a forceful or volatile temperament.",
-  "role_in_ministry": "Appears as a close associate of Jesus who accompanies him at crucial moments but has little individual speech or distinct theological profile.",
-  "apocalyptic_and_eschatological_context": "Present on the Mount of Olives when Jesus delivers the apocalyptic discourse, marking him as a recipient of Jesus’s private eschatological teaching.",
-  "passion_presence": "Accompanies Jesus into Gethsemane with Peter and James, sharing in the failure to stay awake during Jesus’s distress before arrest."
-  },
-  "references": [
-  "Mark 1:19-20",
-  "Mark 1:29",
-  "Mark 3:17",
-  "Mark 5:37",
-  "Mark 9:2",
-  "Mark 10:35-41",
-  "Mark 13:3",
-  "Mark 14:33"
+    {
+      "source_id": "mark",
+      "traits": {
+        "calling_and_background": "Presented as a Galilean fisherman, son of Zebedee and brother of James, called by Jesus while working in the family boat.",
+        "inner_circle_status": "Belongs to the small inner circle with Peter and James who witness key revelatory moments like the raising of Jairus’s daughter, the transfiguration, and Gethsemane.",
+        "temperament_and_nickname": "Together with James he is given the nickname Boanerges, 'sons of thunder', suggesting a forceful or volatile temperament.",
+        "role_in_ministry": "Appears as a close associate of Jesus who accompanies him at crucial moments but has little individual speech or distinct theological profile.",
+        "apocalyptic_and_eschatological_context": "Present on the Mount of Olives when Jesus delivers the apocalyptic discourse, marking him as a recipient of Jesus’s private eschatological teaching.",
+        "passion_presence": "Accompanies Jesus into Gethsemane with Peter and James, sharing in the failure to stay awake during Jesus’s distress before arrest."
+      },
+      "references": [
+        "Mark 1:19-20",
+        "Mark 1:29",
+        "Mark 3:17",
+        "Mark 5:37",
+        "Mark 9:2",
+        "Mark 10:35-41",
+        "Mark 13:3",
+        "Mark 14:33"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "calling_and_background": "Named among the first disciples called from fishing in Galilee as the son of Zebedee and brother of James.",
+        "inner_circle_status": "Like Mark, Matthew places him in the inner trio with Peter and James at the transfiguration and in Gethsemane.",
+        "ambition_and_status_request": "Via the request of their mother, John and James are associated with a bid for privileged seats in Jesus’s kingdom, revealing concerns with status and honor.",
+        "instruction_on_greatness": "Jesus uses this episode to teach about servant leadership and suffering, implicitly correcting the ambitions of John and his brother.",
+        "passion_presence": "Appears among the closest companions who accompany Jesus during the final hours before his arrest, again without an individual speaking role."
+      },
+      "references": [
+        "Matthew 4:21-22",
+        "Matthew 10:2",
+        "Matthew 17:1",
+        "Matthew 20:20-24",
+        "Matthew 26:37"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "calling_and_background": "Identified as a partner of Simon Peter in the fishing business and as son of Zebedee, called after the miraculous catch of fish.",
+        "inner_circle_status": "Included with Peter and James at the raising of Jairus’s daughter and the transfiguration, marking him as one of Jesus’s closest companions.",
+        "zeal_and_sectarian_impulses": "Portrayed as quick to defend group boundaries, wanting to forbid an outsider exorcist and, with James, proposing to call down fire on an inhospitable Samaritan village.",
+        "correction_by_jesus": "Jesus rebukes these exclusionary and violent impulses, using John’s missteps to articulate a more generous or nonviolent mission posture.",
+        "name_in_apostolic_lists": "Appears in the list of the Twelve with no added title beyond apostolic designation."
+      },
+      "references": [
+        "Luke 5:10",
+        "Luke 6:14",
+        "Luke 8:51",
+        "Luke 9:28",
+        "Luke 9:49-56"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "narrative_presence": "Not individually foregrounded by name in the main body of the gospel; the focus falls instead on an unnamed 'disciple whom Jesus loved'.",
+        "sons_of_zebedee_reference": "Mentioned only collectively as one of the 'sons of Zebedee' present at the post-resurrection fishing scene by the Sea of Tiberias.",
+        "relationship_to_beloved_disciple_tradition": "Later Christian tradition often identified the beloved disciple with John son of Zebedee, but the gospel itself keeps that disciple anonymous, leaving any identification unstated within the text."
+      },
+      "references": [
+        "John 21:2"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "leadership_with_peter": "Appears as Peter’s close associate in the early Jerusalem community, going with him to the temple and participating in the healing of the lame man.",
+        "boldness_before_authorities": "Stands with Peter before the Sanhedrin, noted for boldness despite being seen as uneducated and ordinary.",
+        "role_in_samaria_mission": "Sent with Peter to Samaria to confirm and extend the mission there, laying hands on new believers so they receive the Holy Spirit.",
+        "gradual_fading_from_narrative": "After the early Jerusalem episodes his presence recedes, with later references to him mainly in relation to James, who is martyred as 'the brother of John'."
+      },
+      "references": [
+        "Acts 1:13",
+        "Acts 3:1-11",
+        "Acts 4:13-20",
+        "Acts 8:14-17",
+        "Acts 12:2"
+      ]
+    },
+    {
+      "source_id": "paul_undisputed",
+      "traits": {
+        "leadership_in_jerusalem": "Named by Paul as one of the reputed 'pillars' of the Jerusalem community alongside James and Cephas.",
+        "agreement_with_pauline_mission": "Participates in the recognition of Paul and Barnabas’s mission to the Gentiles, extending the right hand of fellowship as a sign of agreement on differentiated mission fields.",
+        "symbolic_role": "Functions in Paul’s narrative as a representative of the Jerusalem leadership who, at least at this point in the story, affirms Paul’s Gentile-focused gospel."
+      },
+      "references": [
+        "Galatians 2:9"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "matthew",
-  "traits": {
-  "calling_and_background": "Named among the first disciples called from fishing in Galilee as the son of Zebedee and brother of James.",
-  "inner_circle_status": "Like Mark, Matthew places him in the inner trio with Peter and James at the transfiguration and in Gethsemane.",
-  "ambition_and_status_request": "Via the request of their mother, John and James are associated with a bid for privileged seats in Jesus’s kingdom, revealing concerns with status and honor.",
-  "instruction_on_greatness": "Jesus uses this episode to teach about servant leadership and suffering, implicitly correcting the ambitions of John and his brother.",
-  "passion_presence": "Appears among the closest companions who accompany Jesus during the final hours before his arrest, again without an individual speaking role."
-  },
-  "references": [
-  "Matthew 4:21-22",
-  "Matthew 10:2",
-  "Matthew 17:1",
-  "Matthew 20:20-24",
-  "Matthew 26:37"
-  ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "calling_and_background": "Identified as a partner of Simon Peter in the fishing business and as son of Zebedee, called after the miraculous catch of fish.",
-  "inner_circle_status": "Included with Peter and James at the raising of Jairus’s daughter and the transfiguration, marking him as one of Jesus’s closest companions.",
-  "zeal_and_sectarian_impulses": "Portrayed as quick to defend group boundaries, wanting to forbid an outsider exorcist and, with James, proposing to call down fire on an inhospitable Samaritan village.",
-  "correction_by_jesus": "Jesus rebukes these exclusionary and violent impulses, using John’s missteps to articulate a more generous or nonviolent mission posture.",
-  "name_in_apostolic_lists": "Appears in the list of the Twelve with no added title beyond apostolic designation."
-  },
-  "references": [
-  "Luke 5:10",
-  "Luke 6:14",
-  "Luke 8:51",
-  "Luke 9:28",
-  "Luke 9:49-56"
-  ]
-  },
-  {
-  "source_id": "john",
-  "traits": {
-  "narrative_presence": "Not individually foregrounded by name in the main body of the gospel; the focus falls instead on an unnamed 'disciple whom Jesus loved'.",
-  "sons_of_zebedee_reference": "Mentioned only collectively as one of the 'sons of Zebedee' present at the post-resurrection fishing scene by the Sea of Tiberias.",
-  "relationship_to_beloved_disciple_tradition": "Later Christian tradition often identified the beloved disciple with John son of Zebedee, but the gospel itself keeps that disciple anonymous, leaving any identification unstated within the text."
-  },
-  "references": [
-  "John 21:2"
-  ]
-  },
-  {
-  "source_id": "acts",
-  "traits": {
-  "leadership_with_peter": "Appears as Peter’s close associate in the early Jerusalem community, going with him to the temple and participating in the healing of the lame man.",
-  "boldness_before_authorities": "Stands with Peter before the Sanhedrin, noted for boldness despite being seen as uneducated and ordinary.",
-  "role_in_samaria_mission": "Sent with Peter to Samaria to confirm and extend the mission there, laying hands on new believers so they receive the Holy Spirit.",
-  "gradual_fading_from_narrative": "After the early Jerusalem episodes his presence recedes, with later references to him mainly in relation to James, who is martyred as 'the brother of John'."
-  },
-  "references": [
-  "Acts 1:13",
-  "Acts 3:1-11",
-  "Acts 4:13-20",
-  "Acts 8:14-17",
-  "Acts 12:2"
-  ]
-  },
-  {
-  "source_id": "paul_undisputed",
-  "traits": {
-  "leadership_in_jerusalem": "Named by Paul as one of the reputed 'pillars' of the Jerusalem community alongside James and Cephas.",
-  "agreement_with_pauline_mission": "Participates in the recognition of Paul and Barnabas’s mission to the Gentiles, extending the right hand of fellowship as a sign of agreement on differentiated mission fields.",
-  "symbolic_role": "Functions in Paul’s narrative as a representative of the Jerusalem leadership who, at least at this point in the story, affirms Paul’s Gentile-focused gospel."
-  },
-  "references": [
-  "Galatians 2:9"
-  ]
-  }
-  ]
-  }
-  
+}

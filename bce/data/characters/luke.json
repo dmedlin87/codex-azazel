@@ -9,19 +9,34 @@
     "physician",
     "evangelist"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "paul",
       "type": "coworker_and_confidant",
-      "sources": ["paul_undisputed", "paul_disputed", "paul_pastoral"],
-      "references": ["Philemon 1:24", "Colossians 4:14", "2 Timothy 4:11"],
+      "sources": [
+        "paul_undisputed",
+        "paul_disputed",
+        "paul_pastoral"
+      ],
+      "references": [
+        "Philemon 1:24",
+        "Colossians 4:14",
+        "2 Timothy 4:11"
+      ],
       "notes": "Appears in Paul’s greeting lists as a trusted coworker, praised as the beloved physician, and remembered as the sole companion who stayed with Paul near the end."
     },
     {
       "character_id": "mark",
       "type": "coworker_network_associate",
-      "sources": ["paul_undisputed", "paul_disputed"],
-      "references": ["Philemon 1:24", "Colossians 4:10-14"],
+      "sources": [
+        "paul_undisputed",
+        "paul_disputed"
+      ],
+      "references": [
+        "Philemon 1:24",
+        "Colossians 4:10-14"
+      ],
       "notes": "Named alongside Mark within Paul’s circle of coworkers, indicating overlapping mission networks and shared travel plans."
     }
   ],

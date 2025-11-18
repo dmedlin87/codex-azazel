@@ -11,11 +11,16 @@
     "apostle",
     "family_member"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "brother_and_resurrection_witness",
-      "sources": ["mark", "matthew", "paul_undisputed"],
+      "sources": [
+        "mark",
+        "matthew",
+        "paul_undisputed"
+      ],
       "references": [
         "Mark 6:3",
         "Matthew 13:55",
@@ -26,7 +31,10 @@
     {
       "character_id": "mary_mother_of_jesus",
       "type": "son_of",
-      "sources": ["mark", "matthew"],
+      "sources": [
+        "mark",
+        "matthew"
+      ],
       "references": [
         "Mark 6:3",
         "Matthew 13:55"
@@ -36,7 +44,10 @@
     {
       "character_id": "paul",
       "type": "jerusalem_leader_engaging_gentile_mission",
-      "sources": ["paul_undisputed", "acts"],
+      "sources": [
+        "paul_undisputed",
+        "acts"
+      ],
       "references": [
         "Galatians 1:18-19",
         "Galatians 2:9-10",
@@ -48,7 +59,10 @@
     {
       "character_id": "peter",
       "type": "colleague_in_jerusalem_leadership",
-      "sources": ["acts", "paul_undisputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
       "references": [
         "Acts 12:17",
         "Acts 15:6-21",
@@ -59,7 +73,9 @@
     {
       "character_id": "john",
       "type": "fellow_pillar",
-      "sources": ["paul_undisputed"],
+      "sources": [
+        "paul_undisputed"
+      ],
       "references": [
         "Galatians 2:9"
       ],

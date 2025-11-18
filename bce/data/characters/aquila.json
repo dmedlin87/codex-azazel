@@ -8,11 +8,16 @@
     "coworker",
     "teacher"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "priscilla",
       "type": "spouse_and_coworker",
-      "sources": ["acts", "paul_undisputed", "paul_disputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed",
+        "paul_disputed"
+      ],
       "references": [
         "Acts 18:2-3",
         "Acts 18:18-19",
@@ -26,7 +31,10 @@
     {
       "character_id": "paul",
       "type": "mission_partner",
-      "sources": ["acts", "paul_undisputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
       "references": [
         "Acts 18:2-3",
         "Acts 18:18",
@@ -37,7 +45,9 @@
     {
       "character_id": "apollos",
       "type": "mentor_teacher",
-      "sources": ["acts"],
+      "sources": [
+        "acts"
+      ],
       "references": [
         "Acts 18:26"
       ],

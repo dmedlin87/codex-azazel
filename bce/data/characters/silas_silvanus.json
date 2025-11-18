@@ -9,11 +9,15 @@
     "coworker",
     "missionary"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "paul",
       "type": "mission_partner",
-      "sources": ["acts", "paul_undisputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
       "references": [
         "Acts 15:40-41",
         "Acts 16:16-40",
@@ -26,7 +30,10 @@
     {
       "character_id": "timothy",
       "type": "co_sender_and_delegate",
-      "sources": ["acts", "paul_undisputed"],
+      "sources": [
+        "acts",
+        "paul_undisputed"
+      ],
       "references": [
         "Acts 17:14-15",
         "Acts 18:5",
@@ -39,7 +46,9 @@
     {
       "character_id": "peter",
       "type": "trusted_emissary",
-      "sources": ["other_nt"],
+      "sources": [
+        "other_nt"
+      ],
       "references": [
         "1 Peter 5:12"
       ],
@@ -55,7 +64,7 @@
         "companion_of_paul": "Becomes Paul’s chief companion on the second missionary journey after the split with Barnabas, traveling through Syria, Cilicia, and into Macedonia and Achaia.",
         "imprisonment_and_witness": "Imprisoned with Paul in Philippi, prays and sings hymns at midnight before the earthquake that leads to the jailer’s conversion.",
         "missionary_activity": "Participates in founding and strengthening communities in cities such as Philippi, Thessalonica, and Berea, later remaining behind while Paul moves on.",
-        "narrative_profile": "Embodies a Spirit-led coworker whose suffering, encouragement, and mobility support Paul’s wider Gentile mission." 
+        "narrative_profile": "Embodies a Spirit-led coworker whose suffering, encouragement, and mobility support Paul’s wider Gentile mission."
       },
       "references": [
         "Acts 15:22-35",

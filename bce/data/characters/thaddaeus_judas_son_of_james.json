@@ -9,11 +9,17 @@
     "disciple",
     "apostle"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "commissioned_disciple_and_dialogue_partner",
-      "sources": ["matthew", "mark", "luke", "john"],
+      "sources": [
+        "matthew",
+        "mark",
+        "luke",
+        "john"
+      ],
       "references": [
         "Matthew 10:3",
         "Mark 3:18",
@@ -25,7 +31,9 @@
     {
       "character_id": "judas",
       "type": "namesake_contrasted_with_betrayer",
-      "sources": ["luke"],
+      "sources": [
+        "luke"
+      ],
       "references": [
         "Luke 6:16"
       ],
@@ -39,7 +47,7 @@
         "name_variation": "Appears in the apostolic lists under different names: Thaddaeus in Matthew and Mark, and Judas son of James in Luke and Acts, reflecting variant traditions.",
         "listing_among_twelve": "Included among the Twelve appointed by Jesus, but without individual stories or sayings recorded.",
         "distinction_from_judas_iscariot": "Differentiated from Judas Iscariot in Luke–Acts, ensuring that the name Judas in the circle of apostles is not exclusively associated with the betrayer.",
-        "narrative_silence": "The lack of further narrative detail has encouraged later hagiographical development, but the canonical texts present him simply as a lesser-known apostle." 
+        "narrative_silence": "The lack of further narrative detail has encouraged later hagiographical development, but the canonical texts present him simply as a lesser-known apostle."
       },
       "references": [
         "Matthew 10:3",

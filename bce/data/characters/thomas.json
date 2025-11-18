@@ -2,94 +2,104 @@
   "id": "thomas",
   "canonical_name": "Thomas (the Twin)",
   "aliases": [
-  "Thomas",
-  "Thomas called Didymus",
-  "Didymus",
-  "Thomas the Twin"
+    "Thomas",
+    "Thomas called Didymus",
+    "Didymus",
+    "Thomas the Twin"
   ],
   "roles": [
-  "disciple",
-  "apostle",
-  "member_of_the_twelve"
+    "disciple",
+    "apostle",
+    "member_of_the_twelve"
   ],
+  "tags": [],
   "relationships": [
-  {
-  "character_id": "jesus",
-  "type": "teacher_who_addresses_doubt",
-  "sources": ["john"],
-  "references": ["John 11:16", "John 14:5", "John 20:24-29"],
-  "notes": "Voices loyalty about dying with Jesus, questions his destination, and finally confesses him as Lord and God when the risen Jesus meets his conditions for belief."
-  },
-  {
-  "character_id": "peter",
-  "type": "jerusalem_colleague",
-  "sources": ["acts"],
-  "references": ["Acts 1:13-14"],
-  "notes": "Remains in prayer with Peter and the other apostles in Jerusalem after the ascension, sharing responsibility for the community's leadership."
-  }
+    {
+      "character_id": "jesus",
+      "type": "teacher_who_addresses_doubt",
+      "sources": [
+        "john"
+      ],
+      "references": [
+        "John 11:16",
+        "John 14:5",
+        "John 20:24-29"
+      ],
+      "notes": "Voices loyalty about dying with Jesus, questions his destination, and finally confesses him as Lord and God when the risen Jesus meets his conditions for belief."
+    },
+    {
+      "character_id": "peter",
+      "type": "jerusalem_colleague",
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 1:13-14"
+      ],
+      "notes": "Remains in prayer with Peter and the other apostles in Jerusalem after the ascension, sharing responsibility for the community's leadership."
+    }
   ],
   "source_profiles": [
-  {
-  "source_id": "mark",
-  "traits": {
-  "role_among_twelve": "Listed among the Twelve appointed by Jesus, without individual actions or dialogue.",
-  "narrative_profile": "Remains a name in the apostolic list with no distinctive characterization or story.",
-  "function_in_gospel": "Serves to round out the formal roster of authorized followers commissioned by Jesus."
-  },
-  "references": [
-  "Mark 3:16-19"
+    {
+      "source_id": "mark",
+      "traits": {
+        "role_among_twelve": "Listed among the Twelve appointed by Jesus, without individual actions or dialogue.",
+        "narrative_profile": "Remains a name in the apostolic list with no distinctive characterization or story.",
+        "function_in_gospel": "Serves to round out the formal roster of authorized followers commissioned by Jesus."
+      },
+      "references": [
+        "Mark 3:16-19"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "role_among_twelve": "Named among the Twelve whom Jesus authorizes and sends out with exorcistic and healing authority.",
+        "narrative_profile": "Receives no speeches or separate scenes; his identity is confined to the apostolic catalog.",
+        "function_in_gospel": "Embodies one of the commissioned insiders whose presence undergirds the authority and mission of the Matthean community."
+      },
+      "references": [
+        "Matthew 10:2-4"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "role_among_twelve": "Appears in the list of the Twelve whom Jesus designates 'apostles'.",
+        "narrative_profile": "Like several others in the list, he is not given any individual dialogue or story.",
+        "function_in_gospel": "Represents one of the foundational witnesses around whom the early Jesus movement is structured."
+      },
+      "references": [
+        "Luke 6:14-16"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "role_among_disciples": "One of the Twelve whose questions and responses frame major Christological discourses.",
+        "nickname_and_identity": "Repeatedly identified as 'Thomas, called Didymus (Twin)', giving him a distinctive epithet within the group.",
+        "loyalty_and_courage": "Proposes that the disciples go to Judea to die with Jesus, showing grim loyalty in the face of danger.",
+        "misunderstanding_and_questions": "Voices confusion about Jesus' destination and the 'way', prompting Jesus' self-revelation as the way, truth, and life.",
+        "resurrection_reaction": "Initially refuses to accept the others' resurrection testimony without physical proof, then responds to the risen Jesus with the climactic confession 'My Lord and my God'.",
+        "theological_function": "Personifies both skeptical refusal and ultimate, high Christological confession, modeling a move from doubt to belief in Jesus' exalted status."
+      },
+      "references": [
+        "John 11:16",
+        "John 14:5",
+        "John 20:24-29",
+        "John 21:2"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "post_easter_status": "Named among the apostles gathered in Jerusalem after Jesus' ascension.",
+        "community_role": "Counts as one of the core witnesses and leaders who devote themselves to prayer while awaiting the Spirit.",
+        "narrative_profile": "Does not speak or act individually; his significance is as a member of the Jerusalem apostolic circle."
+      },
+      "references": [
+        "Acts 1:13"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "matthew",
-  "traits": {
-  "role_among_twelve": "Named among the Twelve whom Jesus authorizes and sends out with exorcistic and healing authority.",
-  "narrative_profile": "Receives no speeches or separate scenes; his identity is confined to the apostolic catalog.",
-  "function_in_gospel": "Embodies one of the commissioned insiders whose presence undergirds the authority and mission of the Matthean community."
-  },
-  "references": [
-  "Matthew 10:2-4"
-  ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "role_among_twelve": "Appears in the list of the Twelve whom Jesus designates 'apostles'.",
-  "narrative_profile": "Like several others in the list, he is not given any individual dialogue or story.",
-  "function_in_gospel": "Represents one of the foundational witnesses around whom the early Jesus movement is structured."
-  },
-  "references": [
-  "Luke 6:14-16"
-  ]
-  },
-  {
-  "source_id": "john",
-  "traits": {
-  "role_among_disciples": "One of the Twelve whose questions and responses frame major Christological discourses.",
-  "nickname_and_identity": "Repeatedly identified as 'Thomas, called Didymus (Twin)', giving him a distinctive epithet within the group.",
-  "loyalty_and_courage": "Proposes that the disciples go to Judea to die with Jesus, showing grim loyalty in the face of danger.",
-  "misunderstanding_and_questions": "Voices confusion about Jesus' destination and the 'way', prompting Jesus' self-revelation as the way, truth, and life.",
-  "resurrection_reaction": "Initially refuses to accept the others' resurrection testimony without physical proof, then responds to the risen Jesus with the climactic confession 'My Lord and my God'.",
-  "theological_function": "Personifies both skeptical refusal and ultimate, high Christological confession, modeling a move from doubt to belief in Jesus' exalted status."
-  },
-  "references": [
-  "John 11:16",
-  "John 14:5",
-  "John 20:24-29",
-  "John 21:2"
-  ]
-  },
-  {
-  "source_id": "acts",
-  "traits": {
-  "post_easter_status": "Named among the apostles gathered in Jerusalem after Jesus' ascension.",
-  "community_role": "Counts as one of the core witnesses and leaders who devote themselves to prayer while awaiting the Spirit.",
-  "narrative_profile": "Does not speak or act individually; his significance is as a member of the Jerusalem apostolic circle."
-  },
-  "references": [
-  "Acts 1:13"
-  ]
-  }
-  ]
-  }
-  
+}

@@ -1,7 +1,11 @@
 {
   "id": "post_birth_events",
   "label": "Events Following Jesus' Birth",
-  "participants": ["jesus"],
+  "participants": [
+    "jesus"
+  ],
+  "tags": [],
+  "parallels": [],
   "accounts": [
     {
       "source_id": "matthew",

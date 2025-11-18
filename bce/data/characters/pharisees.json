@@ -2,156 +2,194 @@
   "id": "pharisees",
   "canonical_name": "Pharisees",
   "aliases": [
-  "Pharisees",
-  "the Pharisees",
-  "Pharisaic party"
+    "Pharisees",
+    "the Pharisees",
+    "Pharisaic party"
   ],
   "roles": [
-  "group",
-  "religious_leaders",
-  "teachers_of_law"
+    "group",
+    "religious_leaders",
+    "teachers_of_law"
   ],
+  "tags": [],
   "relationships": [
     {
       "character_id": "jesus",
       "type": "debates_and_opposes",
-      "sources": ["mark", "matthew", "luke", "john"],
-      "references": ["Mark 2:15-28", "Matthew 23:1-36", "Luke 11:37-54", "John 9:13-34"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 2:15-28",
+        "Matthew 23:1-36",
+        "Luke 11:37-54",
+        "John 9:13-34"
+      ],
       "notes": "Pharisees question Jesus’s table fellowship, Sabbath practices, and authority, becoming key antagonists whose disputes highlight Jesus’s interpretation of Torah and prophetic critique of hypocrisy."
     },
     {
       "character_id": "john_the_baptist",
       "type": "rejects_message_of",
-      "sources": ["matthew", "luke", "john"],
-      "references": ["Matthew 3:7-10", "Luke 7:29-30", "John 1:24"],
+      "sources": [
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Matthew 3:7-10",
+        "Luke 7:29-30",
+        "John 1:24"
+      ],
       "notes": "Pharisees send envoys to question John and, according to Luke, refuse his baptism, illustrating their skepticism toward the repentance movement that prepared Jesus’s way."
     },
     {
       "character_id": "peter",
       "type": "opponents_of_apostolic_message",
-      "sources": ["acts"],
-      "references": ["Acts 4:5", "Acts 5:34-40"],
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 4:5",
+        "Acts 5:34-40"
+      ],
       "notes": "Pharisaic scribes participate in Sanhedrin hearings over Peter and the apostles, with figures like Gamaliel urging caution even while the party remains wary of the movement."
     },
     {
       "character_id": "paul",
       "type": "former_member_and_strategic_identifier",
-      "sources": ["acts"],
-      "references": ["Acts 23:6", "Acts 26:5"],
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 23:6",
+        "Acts 26:5"
+      ],
       "notes": "Paul testifies that he was a Pharisee and uses that identity before the council to divide Pharisees from Sadducees over the resurrection hope."
     },
     {
       "character_id": "sanhedrin",
       "type": "faction_within",
-      "sources": ["acts"],
-      "references": ["Acts 23:6-9"],
+      "sources": [
+        "acts"
+      ],
+      "references": [
+        "Acts 23:6-9"
+      ],
       "notes": "Luke depicts Pharisees as one bloc inside the Sanhedrin that can sway deliberations when theological issues such as angels or resurrection arise."
     },
     {
       "character_id": "herod_antipas",
       "type": "plots_with",
-      "sources": ["mark", "matthew"],
-      "references": ["Mark 3:6", "Matthew 22:15-22"],
+      "sources": [
+        "mark",
+        "matthew"
+      ],
+      "references": [
+        "Mark 3:6",
+        "Matthew 22:15-22"
+      ],
       "notes": "The Pharisees conspire with the Herodians to destroy Jesus and later send disciples with Herod’s party to trap him about paying taxes to Caesar, showing their willingness to leverage Roman-aligned allies."
     }
   ],
   "source_profiles": [
-  {
-  "source_id": "mark",
-  "traits": {
-  "identity_and_status": "Presented as a recognized group of Jewish religious authorities concerned with purity, tradition, and correct observance of Torah.",
-  "relationship_to_jesus": "Frequently confront Jesus over his table fellowship, fasting practices, and Sabbath behavior, moving from curiosity and questioning to hostility.",
-  "halakhic_conflicts": "Debate Jesus on issues such as eating with tax collectors and sinners, fasting, and Sabbath work, and criticize his disciples for breaking the traditions of the elders.",
-  "tradition_and_commandment": "Accused by Jesus of elevating human traditions above the commandment of God, with specific examples involving purity and honoring parents.",
-  "role_in_plot": "Collaborate with the Herodians to plot Jesus’s destruction and participate in testing him with questions designed to trap him."
-  },
-  "references": [
-  "Mark 2:15-28",
-  "Mark 3:1-6",
-  "Mark 7:1-13",
-  "Mark 8:11-15",
-  "Mark 10:2",
-  "Mark 12:13"
+    {
+      "source_id": "mark",
+      "traits": {
+        "identity_and_status": "Presented as a recognized group of Jewish religious authorities concerned with purity, tradition, and correct observance of Torah.",
+        "relationship_to_jesus": "Frequently confront Jesus over his table fellowship, fasting practices, and Sabbath behavior, moving from curiosity and questioning to hostility.",
+        "halakhic_conflicts": "Debate Jesus on issues such as eating with tax collectors and sinners, fasting, and Sabbath work, and criticize his disciples for breaking the traditions of the elders.",
+        "tradition_and_commandment": "Accused by Jesus of elevating human traditions above the commandment of God, with specific examples involving purity and honoring parents.",
+        "role_in_plot": "Collaborate with the Herodians to plot Jesus’s destruction and participate in testing him with questions designed to trap him."
+      },
+      "references": [
+        "Mark 2:15-28",
+        "Mark 3:1-6",
+        "Mark 7:1-13",
+        "Mark 8:11-15",
+        "Mark 10:2",
+        "Mark 12:13"
+      ]
+    },
+    {
+      "source_id": "matthew",
+      "traits": {
+        "identity_and_status": "Depicted along with the scribes as those who sit on Moses’s seat, exercising teaching authority over Israel.",
+        "relationship_to_jesus": "Repeatedly oppose Jesus, questioning his associations and actions and eventually taking part in the plots that lead to his death.",
+        "righteousness_and_law": "Serve as the negative foil for true righteousness; Jesus declares that the disciples’ righteousness must exceed that of the scribes and Pharisees.",
+        "hypocrisy_and_woes": "Subject of extended woes in which they are charged with hypocrisy, ostentatious piety, neglect of justice, mercy, and faithfulness, and being blind guides.",
+        "post_easter_polemic": "Appear in scenes related to the guarding of the tomb and the rumor about the stolen body, reflecting ongoing conflict between Matthew’s community and Pharisaic opponents."
+      },
+      "references": [
+        "Matthew 5:17-20",
+        "Matthew 9:10-13",
+        "Matthew 12:1-14",
+        "Matthew 15:1-14",
+        "Matthew 16:1-12",
+        "Matthew 23:1-36",
+        "Matthew 27:62-66",
+        "Matthew 28:11-15"
+      ]
+    },
+    {
+      "source_id": "luke",
+      "traits": {
+        "identity_and_status": "Portrayed as a respected religious group with influence among the people and interest in Jesus’s teaching.",
+        "ambivalent_relationship_to_jesus": "Some Pharisees host Jesus at meals and even warn him about Herod, while others criticize his association with sinners and question his observance practices.",
+        "halakhic_and_social_conflicts": "Engage Jesus over Sabbath healing, fasting, ritual purity, and table fellowship, prompting parables and sayings about humility, repentance, and inclusion.",
+        "moral_and_social_critique": "Criticized for loving money, seeking honor, and neglecting justice and the love of God despite meticulous tithing and attention to minor regulations.",
+        "narrative_function": "Serve as both conversation partners and opponents, allowing Luke to stage debates over repentance, wealth, and the proper interpretation of the law."
+      },
+      "references": [
+        "Luke 5:17-39",
+        "Luke 6:1-11",
+        "Luke 7:36-50",
+        "Luke 11:37-54",
+        "Luke 13:31",
+        "Luke 14:1-24",
+        "Luke 15:1-2",
+        "Luke 16:14-15",
+        "Luke 18:9-14"
+      ]
+    },
+    {
+      "source_id": "john",
+      "traits": {
+        "identity_and_status": "Introduced as an identifiable group within the broader category of “the Jews,” associated with religious investigation and authority.",
+        "relationship_to_jesus": "Appear as interrogators of John the Baptist and Jesus, sending envoys and questioning Jesus’s origins, signs, and authority.",
+        "conflict_over_signs_and_Sabbath": "Involved in disputes over Sabbath healings and the legitimacy of Jesus’s works, often portrayed as resistant to his claims.",
+        "role_in_social_exclusion": "Some Pharisees participate in or support the threat of expelling confessors of Jesus from the synagogue, contributing to social pressure on believers.",
+        "internal_division_and_belief": "While many Pharisees oppose Jesus, the narrative also notes figures like Nicodemus and others who believe or are sympathetic but fear public acknowledgment."
+      },
+      "references": [
+        "John 1:24",
+        "John 3:1-10",
+        "John 7:32",
+        "John 7:45-52",
+        "John 8:13",
+        "John 9:13-34",
+        "John 11:46-57",
+        "John 12:19",
+        "John 12:42"
+      ]
+    },
+    {
+      "source_id": "acts",
+      "traits": {
+        "movement_within_judaism": "Portrayed as a party within Judaism known for strict adherence to the law and belief in the resurrection of the dead.",
+        "interaction_with_early_church": "Some Pharisees become believers in Jesus and argue that Gentile converts should keep the law of Moses, reflecting intra-Christian disputes over Torah observance.",
+        "gamaliel_and_council": "Gamaliel the Pharisee counsels restraint toward the apostles, providing a relatively moderating voice within the Sanhedrin.",
+        "pauline_background_and_strategy": "Paul identifies himself as having been a Pharisee, and he exploits the Pharisee–Sadducee divide over resurrection to create dissension in the council.",
+        "narrative_role": "Serve as both former allies and ongoing interlocutors, showing continuity and tension between the Jesus movement and Pharisaic Judaism."
+      },
+      "references": [
+        "Acts 5:34-39",
+        "Acts 15:5",
+        "Acts 23:6-9",
+        "Acts 26:5"
+      ]
+    }
   ]
-  },
-  {
-  "source_id": "matthew",
-  "traits": {
-  "identity_and_status": "Depicted along with the scribes as those who sit on Moses’s seat, exercising teaching authority over Israel.",
-  "relationship_to_jesus": "Repeatedly oppose Jesus, questioning his associations and actions and eventually taking part in the plots that lead to his death.",
-  "righteousness_and_law": "Serve as the negative foil for true righteousness; Jesus declares that the disciples’ righteousness must exceed that of the scribes and Pharisees.",
-  "hypocrisy_and_woes": "Subject of extended woes in which they are charged with hypocrisy, ostentatious piety, neglect of justice, mercy, and faithfulness, and being blind guides.",
-  "post_easter_polemic": "Appear in scenes related to the guarding of the tomb and the rumor about the stolen body, reflecting ongoing conflict between Matthew’s community and Pharisaic opponents."
-  },
-  "references": [
-  "Matthew 5:17-20",
-  "Matthew 9:10-13",
-  "Matthew 12:1-14",
-  "Matthew 15:1-14",
-  "Matthew 16:1-12",
-  "Matthew 23:1-36",
-  "Matthew 27:62-66",
-  "Matthew 28:11-15"
-  ]
-  },
-  {
-  "source_id": "luke",
-  "traits": {
-  "identity_and_status": "Portrayed as a respected religious group with influence among the people and interest in Jesus’s teaching.",
-  "ambivalent_relationship_to_jesus": "Some Pharisees host Jesus at meals and even warn him about Herod, while others criticize his association with sinners and question his observance practices.",
-  "halakhic_and_social_conflicts": "Engage Jesus over Sabbath healing, fasting, ritual purity, and table fellowship, prompting parables and sayings about humility, repentance, and inclusion.",
-  "moral_and_social_critique": "Criticized for loving money, seeking honor, and neglecting justice and the love of God despite meticulous tithing and attention to minor regulations.",
-  "narrative_function": "Serve as both conversation partners and opponents, allowing Luke to stage debates over repentance, wealth, and the proper interpretation of the law."
-  },
-  "references": [
-  "Luke 5:17-39",
-  "Luke 6:1-11",
-  "Luke 7:36-50",
-  "Luke 11:37-54",
-  "Luke 13:31",
-  "Luke 14:1-24",
-  "Luke 15:1-2",
-  "Luke 16:14-15",
-  "Luke 18:9-14"
-  ]
-  },
-  {
-  "source_id": "john",
-  "traits": {
-  "identity_and_status": "Introduced as an identifiable group within the broader category of “the Jews,” associated with religious investigation and authority.",
-  "relationship_to_jesus": "Appear as interrogators of John the Baptist and Jesus, sending envoys and questioning Jesus’s origins, signs, and authority.",
-  "conflict_over_signs_and_Sabbath": "Involved in disputes over Sabbath healings and the legitimacy of Jesus’s works, often portrayed as resistant to his claims.",
-  "role_in_social_exclusion": "Some Pharisees participate in or support the threat of expelling confessors of Jesus from the synagogue, contributing to social pressure on believers.",
-  "internal_division_and_belief": "While many Pharisees oppose Jesus, the narrative also notes figures like Nicodemus and others who believe or are sympathetic but fear public acknowledgment."
-  },
-  "references": [
-  "John 1:24",
-  "John 3:1-10",
-  "John 7:32",
-  "John 7:45-52",
-  "John 8:13",
-  "John 9:13-34",
-  "John 11:46-57",
-  "John 12:19",
-  "John 12:42"
-  ]
-  },
-  {
-  "source_id": "acts",
-  "traits": {
-  "movement_within_judaism": "Portrayed as a party within Judaism known for strict adherence to the law and belief in the resurrection of the dead.",
-  "interaction_with_early_church": "Some Pharisees become believers in Jesus and argue that Gentile converts should keep the law of Moses, reflecting intra-Christian disputes over Torah observance.",
-  "gamaliel_and_council": "Gamaliel the Pharisee counsels restraint toward the apostles, providing a relatively moderating voice within the Sanhedrin.",
-  "pauline_background_and_strategy": "Paul identifies himself as having been a Pharisee, and he exploits the Pharisee–Sadducee divide over resurrection to create dissension in the council.",
-  "narrative_role": "Serve as both former allies and ongoing interlocutors, showing continuity and tension between the Jesus movement and Pharisaic Judaism."
-  },
-  "references": [
-  "Acts 5:34-39",
-  "Acts 15:5",
-  "Acts 23:6-9",
-  "Acts 26:5"
-  ]
-  }
-  ]
-  }
-  
+}
