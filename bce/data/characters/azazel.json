@@ -1,0 +1,163 @@
+{
+  "id": "azazel",
+  "canonical_name": "Azazel",
+  "aliases": [
+    "Azaz'el",
+    "Azazyel",
+    "Azazil",
+    "Scapegoat",
+    "The Strong One of God",
+    "The Rough One",
+    "Desert Demon"
+  ],
+  "roles": [
+    "ritual_destination",
+    "fallen_watcher",
+    "primordial_corrupter",
+    "wilderness_power",
+    "lot_holder_of_the_wicked",
+    "teacher_of_forbidden_arts",
+    "symbolic_accuser"
+  ],
+  "tags": [
+    "azazel",
+    "demonology",
+    "wilderness",
+    "elimination_ritual",
+    "fallen_angels",
+    "origin_of_evil",
+    "day_of_atonement",
+    "scapegoat",
+    "contested_figure",
+    "diachronic_layers"
+  ],
+  "relationships": [],
+  "source_profiles": [
+    {
+      "source_id": "torah_priestly",
+      "traits": {
+        "identity": "Opaque ritual term in Leviticus 16; recipient or destination of the scapegoat bearing Israel's sins on Yom Kippur.",
+        "ritual_function": "One goat is 'for YHWH' (sacrificed), one goat is 'for Azazel' (sent alive into the wilderness with confessed sins laid upon it).",
+        "syntactic_role": "Parallel construction la-YHWH :: la-Azazel suggests two recipients or destinations, not a simple functional label.",
+        "wilderness_location": "The goat is sent 'to Azazel' into 'an inaccessible land' (Lev 16:22), implying a distinct domain or power rather than mere wilderness as such.",
+        "demythologization": "Priestly editors appear to mute any overt demonological narrative, preserving ritual logic while suppressing explicit mention of wilderness powers.",
+        "lexical_uncertainty": "Etymology contested: possibly from ʿēz (goat) + ʾāzal (go away) = 'goat that goes away'; or from ʿzz (strong/harsh) + ʾēl (god) = 'fierce god'; or a geographical term meaning 'rough ground'."
+      },
+      "references": [
+        "Leviticus 16:8",
+        "Leviticus 16:10",
+        "Leviticus 16:21-22",
+        "Leviticus 16:26"
+      ]
+    },
+    {
+      "source_id": "enochic_watchers",
+      "traits": {
+        "identity": "Chief among the fallen Watchers; a personal angelic rebel bound in the desert as punishment for corrupting humanity.",
+        "origin_of_sin": "To Azazel 'ascribe all sin' (1 Enoch 10:8); positioned as the fountainhead of human corruption through forbidden knowledge.",
+        "forbidden_technologies": "Taught men to make weapons of war (swords, knives, shields, breastplates) and women to use cosmetics and ornaments, leading to violence and vanity.",
+        "wilderness_binding": "Bound hand and foot, cast into the darkness of Dudael (a desert location with jagged rocks), to remain until the final judgment.",
+        "eschatological_fate": "On the great day of judgment, Azazel will be thrown into the fire and consumed, fully eradicating the corruption he introduced.",
+        "remythologization": "1 Enoch re-mythologizes the Leviticus 16 ritual term into a full-blown arch-demon with biography and cosmic backstory."
+      },
+      "references": [
+        "1 Enoch 6:7",
+        "1 Enoch 8:1-2",
+        "1 Enoch 9:6",
+        "1 Enoch 10:4-8",
+        "1 Enoch 13:1",
+        "1 Enoch 54:5-6"
+      ]
+    },
+    {
+      "source_id": "qumran",
+      "traits": {
+        "identity": "Primordial corrupter associated with the lot of Belial; linked to the origin of impurity and sin before the emergence of the current Prince of Darkness.",
+        "dualistic_framework": "Fits within Qumran's two-spirits theology but as a specialist figure tied to ancient corruption rather than the chief eschatological adversary (that role belongs to Belial/Melchiresha).",
+        "ritual_memory": "Echoes of the Leviticus 16 scapegoat ritual may inform the community's understanding of impurity expulsion and desert isolation.",
+        "textual_evidence": "References are indirect; the name Azazel appears in fragmentary contexts, but the figure's role is inferred from parallels with Enochic tradition and ritual language.",
+        "theological_function": "Represents the archaic origins of evil that must be isolated and expelled, prefiguring the final victory over Belial's kingdom."
+      },
+      "references": [
+        "4Q180 (Ages of Creation)",
+        "4Q203 (Book of Giants)",
+        "4Q204-212 (Enoch fragments)",
+        "11Q13 (Melchizedek)"
+      ]
+    },
+    {
+      "source_id": "apocalypse_abraham",
+      "traits": {
+        "identity": "Lot-holder of the wicked; a fallen angel with authority over the unclean and impure, presented as anti-kavod (anti-glory) figure.",
+        "visual_depiction": "Described with striking physical imagery: impure bird-like form, multiple heads, corrupted garment contrasting with divine glory.",
+        "cosmic_geography": "Associated with the left-hand lot in Abraham's vision; rules over the domain of impurity and those assigned to judgment.",
+        "temptation_role": "Attempts to dissuade Abraham from worship and revelation, functioning as tempter and accuser.",
+        "eschatological_defeat": "Destined for final destruction along with all who belong to his lot; his rule is temporary and will be overturned.",
+        "ritual_connection": "Clear echoes of Leviticus 16 dual-lot imagery (for YHWH vs for Azazel) reinterpreted as cosmic division of humanity."
+      },
+      "references": [
+        "Apocalypse of Abraham 13:3-14",
+        "Apocalypse of Abraham 20:5-7",
+        "Apocalypse of Abraham 22:5",
+        "Apocalypse of Abraham 23:11",
+        "Apocalypse of Abraham 29:4-7",
+        "Apocalypse of Abraham 31:3-8"
+      ]
+    },
+    {
+      "source_id": "rabbinic_rationalist",
+      "traits": {
+        "identity": "Demythologized into a symbolic or geographical term; not a personal demon but a functional element of the Yom Kippur ritual.",
+        "maimonides_interpretation": "Treats Azazel as a pedagogical device: the goat sent to a 'rough, hard place' demonstrates the physical removal of sin, teaching the people that their transgressions are utterly banished.",
+        "anti_idolatry": "Explicitly denies any worship or power attributed to demons; the ritual does not involve offering to Azazel as if he were a deity.",
+        "rationalist_framing": "All ritual is for educational and moral purposes; Azazel is a name for the place or process, not an entity to be feared or placated.",
+        "monotheistic_scruple": "Preserves strict monotheism by refusing to grant independent power or personality to wilderness forces.",
+        "lexical_preference": "Favors etymologies that yield abstract or geographical meanings: 'rugged place,' 'precipice,' or 'goat that departs.'"
+      },
+      "references": [
+        "Mishnah Yoma 6:1-8",
+        "Tosefta Yoma 4:6-8",
+        "Babylonian Talmud Yoma 67b",
+        "Maimonides, Guide for the Perplexed 3:46",
+        "Maimonides, Mishneh Torah, Hilkhot Avodat Yom HaKippurim 1-5"
+      ]
+    },
+    {
+      "source_id": "rabbinic_mystical",
+      "traits": {
+        "identity": "Azazel as a controlled demon or as Samael, the heavenly accuser; the scapegoat is a 'bribe' to prevent him from accusing Israel on Yom Kippur.",
+        "nachmanides_interpretation": "Suggests Azazel is a name for the domain of the 'strong and harsh' powers, and the goat is sent to appease or neutralize this realm.",
+        "zohar_elaboration": "Azazel and Samael are closely linked or identified; the goat sent to the wilderness temporarily satisfies the accusatory forces, allowing Israel's prayers to ascend.",
+        "cosmic_negotiation": "The ritual is not worship but strategic management: YHWH permits a controlled release to the 'other side' to maintain cosmic order and prevent disruption of divine service.",
+        "esoteric_symbolism": "The scapegoat becomes a symbol of exile, impurity, and the 'left side' of the sefirotic tree, representing divine justice and strict judgment.",
+        "angelological_complexity": "Azazel occupies an ambiguous space—neither fully independent deity nor mere symbol, but a subordinate spiritual force under YHWH's ultimate authority."
+      },
+      "references": [
+        "Nachmanides (Ramban) on Leviticus 16:8",
+        "Zohar, Leviticus (Acharei Mot)",
+        "Pirke de-Rabbi Eliezer 46",
+        "Targum Pseudo-Jonathan on Leviticus 16:8",
+        "Midrash Tanhuma, Acharei Mot"
+      ]
+    },
+    {
+      "source_id": "christian_typological",
+      "traits": {
+        "identity": "Contested figure in Christian interpretation: either a type of Satan (recipient of sin and judgment) or a type of Christ (sin-bearer sent away).",
+        "patristic_dual_reading": "Early Church Fathers like Origen and Tertullian debated whether the two goats represent Christ's dual nature (sacrifice and resurrection) or Christ vs. Satan (atonement vs. condemnation).",
+        "christ_typology": "One stream interprets the scapegoat as prefiguring Christ bearing sin 'outside the camp' (Hebrews 13:11-13), sent into desolation for the people's sake.",
+        "satan_typology": "Another stream sees Azazel as Satan: the goat 'for Azazel' symbolizes sin being returned to its source, the devil, who will bear final judgment.",
+        "medieval_elaboration": "Medieval commentators often merged Azazel with Satan/Belial, treating the ritual as a cosmic drama of sin's expulsion to the demonic realm.",
+        "theological_tension": "The dual-goat ritual presents interpretive ambiguity: does the scapegoat represent salvation (Christ) or damnation (Satan)? Both readings persist."
+      },
+      "references": [
+        "Epistle of Barnabas 7:6-11",
+        "Origen, Homilies on Leviticus 9",
+        "Tertullian, Against Marcion 3.7",
+        "Jerome, Commentary on Isaiah 13:21",
+        "Hebrews 9:7-14",
+        "Hebrews 13:11-13"
+      ]
+    }
+  ]
+}

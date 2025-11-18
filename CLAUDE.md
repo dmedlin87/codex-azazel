@@ -25,6 +25,36 @@ This project explicitly does NOT include:
 
 It is a **data and analysis engine** designed to be consumed by other tools.
 
+### Flagship Character: Azazel
+
+**Azazel** is the namesake and methodological exemplar for this project. The character demonstrates all core BCE capabilities:
+
+- **Diachronic layering**: A single Hebrew word (עֲזָאזֵל) in Leviticus 16 evolves through seven distinct interpretive traditions spanning 2,000 years
+- **Source-aware profiles**: Seven `source_profiles` in one character file (Torah, Enochic, Qumran, Apocalypse of Abraham, Rabbinic Rationalist, Rabbinic Mystical, Christian Typological)
+- **Contested semantics**: No scholarly consensus on etymology—demon? place? functional term?
+- **Contradiction-forward**: Conflicts between profiles (Azazel as symbol vs. demon vs. Christ-type) are the point, not bugs
+- **Honest uncertainty**: Demonstrates how to model figures when the data is ambiguous
+
+**Key Documentation**:
+- **Character JSON**: `bce/data/characters/azazel.json` (7 source profiles, 63 lines of traits)
+- **Case Study**: `docs/azazel_case_study.md` (comprehensive diachronic analysis)
+- **Evidence Card**: `docs/evidence_card_azazel.md` (compact lexical reference)
+- **README Section**: "Why Codex Azazel?" explains the name choice
+
+**Use Azazel as your running example** when:
+- Demonstrating multi-profile architecture
+- Teaching diachronic analysis
+- Showing how to handle contested figures
+- Illustrating honest uncertainty (PROBABLE vs SPECULATIVE flags)
+- Onboarding contributors to the methodology
+
+**CLI Demo**:
+```bash
+bce character azazel --format markdown
+```
+
+See **[docs/azazel_case_study.md](docs/azazel_case_study.md)** for full analysis.
+
 ## Repository Structure
 
 ```text
@@ -54,12 +84,13 @@ codex-azazel/
 │   ├── bibles.py                # Bible text integration
 │   ├── cli.py                   # Main CLI entry point
 │   └── data/
-│       ├── characters/          # Character JSON files (62 total)
+│       ├── characters/          # Character JSON files (63 total)
 │       │   ├── jesus.json
 │       │   ├── paul.json
 │       │   ├── peter.json
 │       │   ├── judas.json
 │       │   ├── pilate.json
+│       │   ├── azazel.json     # ★ FLAGSHIP CHARACTER
 │       │   └── ... (57 more characters)
 │       ├── events/              # Event JSON files (10 total)
 │       │   ├── crucifixion.json
