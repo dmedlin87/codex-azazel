@@ -226,10 +226,44 @@ def clear_all_ai_caches() -> None:
             cache_file.unlink()
 
 
+def cached_analysis(ttl_hours: float = 24, namespace: str = "default"):
+    """Decorator for caching AI analysis results.
+
+    Args:
+        ttl_hours: Time-to-live in hours (default: 24)
+        namespace: Cache namespace (default: "default")
+
+    Returns:
+        Decorated function that caches results
+    """
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            # Create cache key from function name and args
+            cache_key = f"{func.__name__}_{str(args)}_{str(kwargs)}"
+
+            # Check cache
+            cache = AIResultCache(namespace, max_age_seconds=ttl_hours * 3600)
+            cached_result = cache.get(cache_key)
+            if cached_result is not None:
+                return cached_result
+
+            # Call function
+            result = func(*args, **kwargs)
+
+            # Cache result
+            cache.set(cache_key, result, model_name=func.__name__)
+
+            return result
+
+        return wrapper
+    return decorator
+
+
 __all__ = [
     "CachedResult",
     "AIResultCache",
     "invalidate_character_caches",
     "invalidate_event_caches",
     "clear_all_ai_caches",
+    "cached_analysis",
 ]
