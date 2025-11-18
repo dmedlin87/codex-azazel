@@ -147,6 +147,9 @@ def _validate_characters(errors: List[str]) -> None:
         joined = ", ".join(sorted(duplicates))
         errors.append(f"Duplicate character IDs found: {joined}")
 
+    # Build set of valid character IDs for cross-reference validation
+    valid_char_ids = set(ids)
+
     # Validate that each character can be loaded and has a sane id field.
     for char_id in ids:
         try:
@@ -162,6 +165,41 @@ def _validate_characters(errors: List[str]) -> None:
             errors.append(
                 f"Character object id '{obj_id}' does not match key '{char_id}'"
             )
+
+        # Validate relationships
+        relationships = getattr(character, "relationships", [])
+        if relationships:
+            for i, rel in enumerate(relationships):
+                if not isinstance(rel, dict):
+                    errors.append(
+                        f"Character '{char_id}': relationship at index {i} is not a dict"
+                    )
+                    continue
+
+                # Validate character_id reference
+                target_id = rel.get("character_id")
+                if not target_id:
+                    errors.append(
+                        f"Character '{char_id}': relationship at index {i} missing 'character_id'"
+                    )
+                elif target_id not in valid_char_ids:
+                    errors.append(
+                        f"Character '{char_id}': relationship references unknown character '{target_id}'"
+                    )
+
+                # Validate required fields
+                if not rel.get("type"):
+                    errors.append(
+                        f"Character '{char_id}': relationship to '{target_id}' missing 'type' field"
+                    )
+                if not rel.get("sources"):
+                    errors.append(
+                        f"Character '{char_id}': relationship to '{target_id}' missing 'sources' field"
+                    )
+                if not rel.get("references"):
+                    errors.append(
+                        f"Character '{char_id}': relationship to '{target_id}' missing 'references' field"
+                    )
 
         # Best-effort validation of scripture references in source profiles.
         for profile in getattr(character, "source_profiles", []):

@@ -30,86 +30,85 @@
     "kingdom of god",
     "discipleship"
   ],
-  "relationships": {
-    "family": [
-      {
-        "name": "Mary",
-        "relationship": "mother",
-        "notes": "Primary familial bond; depicted as faithful witness from birth narratives through the cross.",
-        "sources": ["Mark", "Matthew", "Luke", "John"],
-        "references": ["Mark 3:31-35", "Matthew 1-2", "Luke 1-2", "John 19:25-27"]
-      },
-      {
-        "name": "Joseph",
-        "relationship": "legal father",
-        "notes": "Davidic descendant who protects the family in infancy narratives and models obedience.",
-        "sources": ["Matthew", "Luke"],
-        "references": ["Matthew 1:18-25", "Matthew 2:13-23", "Luke 2:1-52"]
-      },
-      {
-        "name": "James and siblings",
-        "relationship": "brothers",
-        "notes": "Skeptical during ministry yet key leaders in Jerusalem after the resurrection.",
-        "sources": ["Mark", "John", "Acts", "Paul"],
-        "references": ["Mark 6:3", "John 7:5", "Acts 15:13-21", "1 Corinthians 15:7"]
-      }
-    ],
-    "mentors": [
-      {
-        "name": "John the Baptist",
-        "relationship": "prophetic forerunner and baptizer",
-        "notes": "Commissioned Jesus into public ministry and framed his message in apocalyptic repentance.",
-        "sources": ["Mark", "Matthew", "Luke", "John"],
-        "references": ["Mark 1:2-11", "Matthew 3:1-17", "Luke 3:1-22", "John 1:19-34"]
-      }
-    ],
-    "close_disciples": [
-      {
-        "name": "Peter",
-        "relationship": "inner circle disciple",
-        "notes": "Confesses Jesus as messiah yet misunderstands suffering path; leader in early church.",
-        "sources": ["Mark", "Matthew", "Luke", "John", "Acts"],
-        "references": ["Mark 8:27-33", "Matthew 16:13-20", "Luke 5:1-11", "John 21:15-19", "Acts 2-5"]
-      },
-      {
-        "name": "James (son of Zebedee)",
-        "relationship": "inner circle disciple",
-        "notes": "Witness to key revelations and martyr referenced in Acts.",
-        "sources": ["Mark", "Matthew", "Luke", "Acts"],
-        "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "Acts 12:1-2"]
-      },
-      {
-        "name": "John (son of Zebedee)",
-        "relationship": "inner circle disciple",
-        "notes": "Traditionally associated with the beloved disciple and Johannine witness.",
-        "sources": ["Mark", "Matthew", "Luke", "John", "Revelation"],
-        "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "John 13:23", "Revelation 1:1-9"]
-      },
-      {
-        "name": "Mary Magdalene",
-        "relationship": "disciple and resurrection witness",
-        "notes": "Supports Jesus's ministry materially and becomes first witness in multiple gospels.",
-        "sources": ["Mark", "Matthew", "Luke", "John"],
-        "references": ["Mark 15:40-41", "Matthew 27:55-28:10", "Luke 8:1-3", "John 20:1-18"]
-      }
-    ],
-    "opponents": [
-      {
-        "name": "Pharisees and scribes",
-        "relationship": "religious critics",
-        "notes": "Debate purity, Sabbath, and authority claims; conflicts showcase interpretations of Torah.",
-        "sources": ["Mark", "Matthew", "Luke", "John"],
-        "references": ["Mark 2:1-3:6", "Matthew 23", "Luke 11:37-54", "John 7:45-52"]
-      },
-      {
-        "name": "Roman prefects and client rulers",
-        "relationship": "imperial authorities",
-        "notes": "Pontius Pilate and Herod Antipas interrogate and ultimately execute Jesus under treason charges.",
-        "sources": ["Mark", "Matthew", "Luke", "John", "Acts"],
-        "references": ["Mark 15:1-15", "Matthew 27:11-26", "Luke 23:6-25", "John 18:28-19:22", "Acts 4:26-28"]
-      }
-    ]
-  },
+  "relationships": [
+    {
+      "character_id": "mary_mother_of_jesus",
+      "type": "mother",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 3:31-35", "Matthew 1-2", "Luke 1-2", "John 19:25-27"],
+      "notes": "Primary familial bond; depicted as faithful witness from birth narratives through the cross."
+    },
+    {
+      "character_id": "joseph_husband_of_mary",
+      "type": "legal_father",
+      "sources": ["matthew", "luke"],
+      "references": ["Matthew 1:18-25", "Matthew 2:13-23", "Luke 2:1-52"],
+      "notes": "Davidic descendant who protects the family in infancy narratives and models obedience."
+    },
+    {
+      "character_id": "james_the_just",
+      "type": "brother",
+      "sources": ["mark", "john", "acts", "paul_undisputed"],
+      "references": ["Mark 6:3", "John 7:5", "Acts 15:13-21", "1 Corinthians 15:7"],
+      "notes": "Skeptical during ministry yet key leader in Jerusalem after the resurrection. Represents Jesus's siblings collectively."
+    },
+    {
+      "character_id": "john_the_baptist",
+      "type": "prophetic_forerunner_and_baptizer",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 1:2-11", "Matthew 3:1-17", "Luke 3:1-22", "John 1:19-34"],
+      "notes": "Commissioned Jesus into public ministry and framed his message in apocalyptic repentance."
+    },
+    {
+      "character_id": "peter",
+      "type": "inner_circle_disciple",
+      "sources": ["mark", "matthew", "luke", "john", "acts"],
+      "references": ["Mark 8:27-33", "Matthew 16:13-20", "Luke 5:1-11", "John 21:15-19", "Acts 2-5"],
+      "notes": "Confesses Jesus as messiah yet misunderstands suffering path; leader in early church."
+    },
+    {
+      "character_id": "james_son_of_zebedee",
+      "type": "inner_circle_disciple",
+      "sources": ["mark", "matthew", "luke", "acts"],
+      "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "Acts 12:1-2"],
+      "notes": "Witness to key revelations and martyr referenced in Acts."
+    },
+    {
+      "character_id": "john",
+      "type": "inner_circle_disciple",
+      "sources": ["mark", "matthew", "luke", "john", "revelation"],
+      "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "John 13:23", "Revelation 1:1-9"],
+      "notes": "Traditionally associated with the beloved disciple and Johannine witness."
+    },
+    {
+      "character_id": "mary_magdalene",
+      "type": "disciple_and_resurrection_witness",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 15:40-41", "Matthew 27:55-28:10", "Luke 8:1-3", "John 20:1-18"],
+      "notes": "Supports Jesus's ministry materially and becomes first witness in multiple gospels."
+    },
+    {
+      "character_id": "pharisees",
+      "type": "religious_critics",
+      "sources": ["mark", "matthew", "luke", "john"],
+      "references": ["Mark 2:1-3:6", "Matthew 23", "Luke 11:37-54", "John 7:45-52"],
+      "notes": "Debate purity, Sabbath, and authority claims; conflicts showcase interpretations of Torah."
+    },
+    {
+      "character_id": "pilate",
+      "type": "imperial_authority",
+      "sources": ["mark", "matthew", "luke", "john", "acts"],
+      "references": ["Mark 15:1-15", "Matthew 27:11-26", "Luke 23:6-25", "John 18:28-19:22", "Acts 4:26-28"],
+      "notes": "Roman prefect who interrogates and ultimately executes Jesus under treason charges."
+    },
+    {
+      "character_id": "herod_antipas",
+      "type": "imperial_authority",
+      "sources": ["luke", "acts"],
+      "references": ["Luke 23:6-25", "Acts 4:26-28"],
+      "notes": "Client ruler who participates in Jesus's trial and execution."
+    }
+  ],
   "source_profiles": [
     {
       "source_id": "mark",

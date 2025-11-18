@@ -8,15 +8,47 @@ This document describes the main JSON/data shapes exposed by the BCE (Biblical C
 
 Backed by `bce.models.Character` and JSON files in `bce/data/characters/*.json`.
 
-Fields:
+**Required fields:**
 
-- `id: str`
-- `canonical_name: str`
-- `aliases: list[str]`
-- `roles: list[str]`
-- `tags: list[str]` – optional topical tags (e.g. `"jesus"`, `"resurrection"`).
-- `source_profiles: list[SourceProfile]`
-- `relationships: list[dict]` – free-form relationship records between characters.
+- `id: str` – Unique identifier in `snake_case`, must match filename (without `.json`)
+- `canonical_name: str` – Display name (e.g., `"Jesus of Nazareth"`, `"Paul the Apostle"`)
+- `aliases: list[str]` – Alternative names and titles
+- `roles: list[str]` – Roles/occupations (e.g., `"apostle"`, `"prophet"`, `"teacher"`)
+- `source_profiles: list[SourceProfile]` – At least one source profile required
+
+**Optional fields:**
+
+- `tags: list[str]` – Topical tags for thematic queries (e.g., `"jesus"`, `"resurrection"`, `"apocalyptic"`)
+- `relationships: list[dict]` – Relationship records to other characters (see below)
+
+**Relationship structure (enforced):**
+
+Each relationship must be a dict with the following **required fields**:
+
+- `character_id: str` – Target character ID (must reference an existing character)
+- `type: str` – Relationship type (e.g., `"mother"`, `"brother"`, `"inner_circle_disciple"`)
+- `sources: list[str]` – Source IDs where this relationship appears (e.g., `["mark", "matthew", "luke"]`)
+- `references: list[str]` – Scripture references for this relationship (e.g., `["Mark 3:31-35", "John 19:25-27"]`)
+
+**Optional relationship fields:**
+
+- `notes: str` – Additional context or notes about the relationship
+
+**Example relationship:**
+
+```json
+{
+  "character_id": "peter",
+  "type": "inner_circle_disciple",
+  "sources": ["mark", "matthew", "luke", "john", "acts"],
+  "references": ["Mark 8:27-33", "Matthew 16:13-20", "Luke 5:1-11"],
+  "notes": "Confesses Jesus as messiah yet misunderstands suffering path."
+}
+```
+
+**⚠️ Breaking change from earlier versions:**
+
+The legacy nested format (grouping relationships by category like `{"family": [...], "disciples": [...]}`) is **no longer supported** and will raise a `StorageError`. All relationships must use the flat list format with `character_id` references.
 
 ### 1.2 SourceProfile
 

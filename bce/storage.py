@@ -130,7 +130,7 @@ class StorageManager:
         data = self._read_json(path)
 
         source_profiles = [SourceProfile(**sp) for sp in data.get("source_profiles", [])]
-        relationships = self._normalize_relationships(data.get("relationships"))
+        relationships = self._normalize_relationships(data.get("relationships"), char_id)
         data = {
             **data,
             "source_profiles": source_profiles,
@@ -206,28 +206,52 @@ class StorageManager:
         except ValueError as e:
             raise StorageError(f"Invalid event data in {path}: {e}")
 
-    def _normalize_relationships(self, value: Any) -> List[dict]:
-        """Convert relationships data to a list of dictionaries."""
+    def _normalize_relationships(self, value: Any, char_id: str) -> List[dict]:
+        """Convert relationships data to a list of dictionaries.
+
+        Only accepts the flat list format with character_id references.
+        Raises StorageError for legacy nested dict format to prevent silent data loss.
+
+        Args:
+            value: Raw relationships data from JSON
+            char_id: Character ID for error messages
+
+        Returns:
+            List of relationship dictionaries
+
+        Raises:
+            StorageError: If legacy nested format is detected
+        """
 
         if value is None:
             return []
-        if isinstance(value, list):
-            return [
-                rel
-                for rel in value
-                if isinstance(rel, dict) and rel.get("character_id")
-            ]
+
+        # Reject legacy nested dict format (Format A)
         if isinstance(value, dict):
-            flattened: List[dict] = []
-            for group in value.values():
-                if isinstance(group, list):
-                    flattened.extend(
-                        rel
-                        for rel in group
-                        if isinstance(rel, dict) and rel.get("character_id")
+            raise StorageError(
+                f"Character '{char_id}': relationships use deprecated nested dict format. "
+                f"Please migrate to flat list format with 'character_id' field. "
+                f"See docs/SCHEMA.md for the correct structure."
+            )
+
+        # Only accept flat list format (Format B)
+        if isinstance(value, list):
+            result: List[dict] = []
+            for i, rel in enumerate(value):
+                if not isinstance(rel, dict):
+                    raise StorageError(
+                        f"Character '{char_id}': relationship at index {i} is not a dict"
                     )
-            return flattened
-        return []
+                if "character_id" not in rel:
+                    raise StorageError(
+                        f"Character '{char_id}': relationship at index {i} missing required 'character_id' field"
+                    )
+                result.append(rel)
+            return result
+
+        raise StorageError(
+            f"Character '{char_id}': relationships must be a list, got {type(value).__name__}"
+        )
 
     def iter_events(self) -> Iterator[Event]:
         """Iterate over all events.
