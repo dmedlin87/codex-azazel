@@ -50,51 +50,112 @@ Each relationship must be a dict with the following **required fields**:
 
 The legacy nested format (grouping relationships by category like `{"family": [...], "disciples": [...]}`) is **no longer supported** and will raise a `StorageError`. All relationships must use the flat list format with `character_id` references.
 
-### 1.2 SourceProfile
+### 1.2 TextualVariant
+
+**NEW in this release.** Backed by `bce.models.TextualVariant` and embedded in SourceProfile or EventAccount.
+
+A structured representation of textual variants across manuscript families (MT, LXX, DSS, etc.).
+
+**Required fields:**
+
+- `manuscript_family: str` – Manuscript tradition identifier (e.g., `"MT"`, `"LXX"`, `"4QSamuel-a"`, `"P46"`, `"Codex Sinaiticus"`)
+- `reading: str` – The specific text or value in this manuscript tradition
+- `significance: str` – Why this variant matters for interpretation
+
+**Example:**
+
+```json
+{
+  "manuscript_family": "LXX",
+  "reading": "sons of God",
+  "significance": "Alters Deuteronomy 32:8 to reflect divine council imagery instead of ethnic boundaries"
+}
+```
+
+### 1.3 SourceProfile
 
 Backed by `bce.models.SourceProfile` and embedded in character JSON.
 
-Fields:
+**Required fields:**
 
 - `source_id: str` – e.g. `"mark"`, `"matthew"`, `"luke"`, `"john"`, `"paul_undisputed"`, `"acts"`.
-- `traits: dict[str, str]` – narrative/theological features keyed by trait name.
+- `traits: dict[str, str]` – narrative/theological features keyed by trait name (see §1.3.1 for standard vocabulary).
 - `references: list[str]` – scripture references.
 
-### 1.3 Event
+**Optional fields:**
+
+- `variants: list[TextualVariant]` – **NEW**: Textual variants relevant to this source profile (default: `[]`)
+- `citations: list[str]` – **NEW**: Bibliography keys linking to scholarly citations (default: `[]`)
+
+#### 1.3.1 Standard Trait Keys Vocabulary
+
+**NEW in this release.** The `bce.models.STANDARD_TRAIT_KEYS` constant defines a controlled vocabulary for trait keys to maintain consistency across source profiles. The validation system will warn (but not error) when trait keys fall outside this vocabulary.
+
+**Categories include:**
+
+- **Core theological**: `christology`, `eschatology`, `soteriology`, `pneumatology`, `ecclesiology`
+- **Mission and ministry**: `mission_focus`, `teaching_emphasis`, `ministry_location`, `ministry_duration`, `ministry_recipients`
+- **Miracles**: `miracles`, `signs`, `healings`, `exorcisms`, `nature_miracles`
+- **Conflict**: `conflicts`, `opponents`, `trial_details`, `accusations`
+- **Death and resurrection**: `death_resurrection`, `passion_narrative`, `crucifixion_details`, `resurrection_details`, `post_resurrection_appearances`
+- **Torah and law**: `torah_stance`, `halakha_interpretation`, `purity_laws`, `sabbath_observance`, `temple_attitude`
+- **Identity**: `messianic_claims`, `divine_sonship`, `prophetic_identity`, `authority_claims`
+- **Relationships**: `discipleship_model`, `family_relations`, `gender_inclusivity`, `social_justice`
+- **Literary features**: `parables`, `apocalyptic_discourse`, `wisdom_sayings`, `pronouncement_stories`, `controversy_stories`
+- **Context**: `jewish_context`, `greco_roman_context`, `political_stance`, `economic_teaching`
+- **Character**: `portrayal`, `character_development`, `emotions`, `virtues`, `vices`
+- **Eschatological themes**: `kingdom_of_god`, `future_hope`, `judgment_themes`, `imminent_expectation`, `realized_eschatology`
+- **Spirit and supernatural**: `spirit_activity`, `angelic_encounters`, `demonic_opposition`, `visions`, `revelations`
+- **Community and ethics**: `ethical_teaching`, `community_formation`, `ritual_practices`, `prayer_life`, `table_fellowship`
+
+**Usage:** While not enforced, using standard keys improves data consistency and queryability. Custom trait keys are allowed but will generate validation warnings.
+
+### 1.4 Event
 
 Backed by `bce.models.Event` and JSON files in `bce/data/events/*.json`.
 
-Fields:
+**Required fields:**
 
-- `id: str`
-- `label: str`
-- `participants: list[str]` – character IDs.
-- `accounts: list[EventAccount]`
-- `parallels: list[dict]` – normalized parallel-pericope records (e.g. gospel parallels).
-- `tags: list[str]` – optional topical tags (e.g. `"resurrection"`, `"empty_tomb"`).
+- `id: str` – Unique identifier
+- `label: str` – Display name
 
-### 1.4 EventAccount
+**Optional fields:**
+
+- `participants: list[str]` – character IDs (default: `[]`)
+- `accounts: list[EventAccount]` – per-source event accounts (default: `[]`)
+- `parallels: list[dict]` – normalized parallel-pericope records (e.g. gospel parallels) (default: `[]`)
+- `tags: list[str]` – topical tags (e.g. `"resurrection"`, `"empty_tomb"`) (default: `[]`)
+- `citations: list[str]` – **NEW**: Bibliography keys linking to scholarly citations (default: `[]`)
+
+### 1.5 EventAccount
 
 Backed by `bce.models.EventAccount` and embedded in event JSON.
 
-Fields:
+**Required fields:**
 
-- `source_id: str`
-- `reference: str` – scripture range.
-- `summary: str`
-- `notes: str | null` – optional free-form notes.
+- `source_id: str` – Source identifier
+- `reference: str` – Scripture range
+- `summary: str` – Account summary
 
-### 1.5 SourceMetadata
+**Optional fields:**
+
+- `notes: str | null` – Free-form notes (default: `null`)
+- `variants: list[TextualVariant]` – **NEW**: Textual variants in this account (default: `[]`)
+
+### 1.6 SourceMetadata
 
 Loaded from `bce/data/sources.json` via `bce.sources.load_source_metadata` and surfaced in dossiers.
 
-Fields:
+**Required fields:**
 
 - `source_id: str`
-- `date_range: str | null`
-- `provenance: str | null`
-- `audience: str | null`
-- `depends_on: list[str]` – other sources this one likely depends on.
+
+**Optional fields:**
+
+- `date_range: str | null` – Dating range (e.g., `"70-75 CE"`)
+- `provenance: str | null` – Geographic origin (e.g., `"Rome"`, `"Antioch"`)
+- `audience: str | null` – Intended audience (e.g., `"Gentile Christians"`)
+- `depends_on: list[str]` – Other sources this one likely depends on (default: `[]`)
 
 ## 2. Dossier schemas
 
@@ -114,6 +175,8 @@ Fields (keys are stable):
 - `source_metadata: dict[str, dict[str, str]]` – maps `source_id` to metadata fields (`date_range`, `provenance`, `audience`, `depends_on`).
 - `traits_by_source: dict[str, dict[str, str]]` – `source_id -> trait_name -> trait_value`.
 - `references_by_source: dict[str, list[str]]` – `source_id -> list[reference]`.
+- `variants_by_source: dict[str, list[dict]]` – **NEW**: `source_id -> list[TextualVariant]` (serialized as dicts)
+- `citations_by_source: dict[str, list[str]]` – **NEW**: `source_id -> list[citation_key]`
 - `trait_comparison: dict[str, dict[str, str]]` – full trait comparison across sources (`trait -> source_id -> value`).
 - `trait_conflicts: dict[str, dict[str, str]]` – only traits with differing non-empty values.
 - `trait_conflict_summaries: dict[str, dict]` – normalized conflict metadata per trait (see §3).
@@ -133,6 +196,7 @@ Fields:
 - `account_conflicts: dict[str, dict[str, str]]` – differing values across accounts (`field_name -> source_id -> value`).
 - `account_conflict_summaries: dict[str, dict]` – normalized conflict metadata per field (see §3).
 - `parallels: list[dict]` – normalized parallels copied from `Event.parallels`.
+- `citations: list[str]` – **NEW**: Bibliography keys for this event
 
 ### 2.3 EventAccountDossier
 
@@ -144,6 +208,7 @@ Fields:
 - `reference: str`
 - `summary: str`
 - `notes: str | null`
+- `variants: list[dict]` – **NEW**: List of TextualVariant objects (serialized as dicts)
 
 ## 3. Conflict summary schema
 

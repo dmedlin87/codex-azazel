@@ -167,19 +167,25 @@ class Character:
 
 ### SourceProfile
 
-Defined in `bce/models.py:8-18`:
+Defined in `bce/models.py` (updated):
 
 ```python
 @dataclass(slots=True)
 class SourceProfile:
-    source_id: str                  # e.g., "mark", "matthew", "paul_undisputed"
-    traits: Dict[str, str]          # Narrative/theological features
-    references: List[str]           # Scripture references
+    source_id: str                          # e.g., "mark", "matthew", "paul_undisputed"
+    traits: Dict[str, str]                  # Narrative/theological features (use STANDARD_TRAIT_KEYS)
+    references: List[str]                   # Scripture references
+    variants: List[TextualVariant]          # NEW: Textual variants (default: [])
+    citations: List[str]                    # NEW: Bibliography keys (default: [])
 
     # Helper methods
     def has_trait(self, trait: str) -> bool
     def get_trait(self, trait: str, default: Optional[str] = None) -> Optional[str]
 ```
+
+**New Features:**
+- **Textual Variants**: Capture manuscript-level differences (MT vs LXX vs DSS) with structured `TextualVariant` objects
+- **Citations**: Link source profiles to scholarly bibliography keys for academic rigor
 
 ### SourceMetadata
 
@@ -197,7 +203,7 @@ class SourceMetadata:
 
 ### Event
 
-Defined in `bce/models.py:83-90`:
+Defined in `bce/models.py` (updated):
 
 ```python
 @dataclass(slots=True)
@@ -208,20 +214,26 @@ class Event:
     accounts: List[EventAccount]    # Per-source accounts
     parallels: List[dict]           # Parallel pericope records (NEW in Phase 0.5)
     tags: List[str]                 # Topical tags (NEW in Phase 2)
+    citations: List[str]            # NEW: Bibliography keys for this event (default: [])
 ```
 
 ### EventAccount
 
-Defined in `bce/models.py:75-80`:
+Defined in `bce/models.py` (updated):
 
 ```python
 @dataclass(slots=True)
 class EventAccount:
-    source_id: str           # Source identifier
-    reference: str           # Scripture reference
-    summary: str             # Account summary
-    notes: Optional[str]     # Optional notes
+    source_id: str                  # Source identifier
+    reference: str                  # Scripture reference
+    summary: str                    # Account summary
+    notes: Optional[str]            # Optional notes
+    variants: List[TextualVariant]  # NEW: Textual variants in this account (default: [])
 ```
+
+**New Features:**
+- **Event Citations**: Link events to scholarly bibliography for academic research support
+- **Account Variants**: Capture manuscript differences in event descriptions across traditions
 
 ## Module Responsibilities
 
@@ -245,10 +257,12 @@ Key functions:
 
 Pure dataclass definitions with helper methods. Uses `slots=True` for efficiency. Now includes:
 
+- **`STANDARD_TRAIT_KEYS`** - (**NEW**) Controlled vocabulary (Set[str]) for standard trait keys across theological, narrative, and contextual categories. Promotes data consistency while allowing custom keys with validation warnings.
+- **`TextualVariant`** - (**NEW**) Dataclass for textual variants across manuscript families (MT, LXX, DSS, P46, etc.) with required fields: `manuscript_family`, `reading`, `significance`
 - `Character` with helper methods: `get_source_profile()`, `list_sources()`, `has_trait()`
-- `SourceProfile` with helper methods: `has_trait()`, `get_trait()`
-- `Event` with new fields: `parallels`, `tags`
-- `EventAccount` (unchanged)
+- `SourceProfile` with helper methods and **NEW fields**: `variants: List[TextualVariant]`, `citations: List[str]`
+- `Event` with new fields: `parallels`, `tags`, **`citations: List[str]`** (**NEW**)
+- `EventAccount` with **NEW field**: `variants: List[TextualVariant]`
 - `SourceMetadata` (new in Phase 0.5) for source-level metadata
 
 ### `bce/storage.py`
