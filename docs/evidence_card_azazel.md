@@ -20,6 +20,7 @@ The Hebrew term **עֲזָאזֵל** (*ʿăzāzēl*) appears **exactly 4 times**
 | **Lev 16:21-22** | ...וְשִׁלַּח בְּיַד־אִישׁ עִתִּי הַמִּדְבָּרָה. וְנָשָׂא הַשָּׂעִיר עָלָיו אֶת־כָּל־עֲוֺנֹתָם אֶל־אֶרֶץ גְּזֵרָה | "...and send [the goat] by the hand of a man who is ready into the wilderness. The goat shall bear all their iniquities to an inaccessible land" |
 
 **Key Observations**:
+
 - Always used with preposition ל (*la-*, "for" or "to")
 - Parallel structure: *la-YHWH* :: *la-ʿăzāzēl* strongly suggests two **recipients** or **destinations**
 - The goat is sent *to* Azazel into the wilderness, not simply "sent away"
@@ -50,11 +51,13 @@ The Hebrew term **עֲזָאזֵל** (*ʿăzāzēl*) appears **exactly 4 times**
 **Proposal**: עֵז (*ʿēz*, "goat") + אָזַל (*ʾāzal*, "go away") = **"goat that goes away"** or **"scapegoat"**
 
 **Arguments For**:
+
 - Fits ritual function: goat literally goes away into wilderness
 - Simple, non-mythological reading
 - Aligns with LXX/Vulgate functional translations
 
 **Arguments Against**:
+
 - Morphology awkward: expected form would be *ʿēz ʾōzelet* or similar, not *ʿăzāzēl*
 - Parallel syntax (*la-YHWH* :: *la-ʿăzāzēl*) suggests proper name, not description
 - If merely functional, why not use clear term like *midbār* ("wilderness") or *gērāʾ* ("sent away")?
@@ -68,11 +71,13 @@ The Hebrew term **עֲזָאזֵל** (*ʿăzāzēl*) appears **exactly 4 times**
 **Proposal**: From root עָזַז (*ʿāzaz*, "strong," "harsh," "rugged") = **"rough ground,"** **"precipice,"** or **"rocky wilderness"**
 
 **Arguments For**:
+
 - Fits wilderness setting in Lev 16:21-22 ("inaccessible land")
 - Avoids demonology, preserving P's monotheistic scruples
 - Some Targumic and rabbinic support (e.g., "hard/rough place")
 
 **Arguments Against**:
+
 - No other biblical use of *ʿzz* root in this geographic sense
 - Why use obscure term instead of common *midbār*, *ṣiyyāh*, or *ʾereṣ gězērāh*?
 - Doesn't explain why goat is sent *to* (ל) Azazel rather than *toward* (אֶל) or *into* (בְּ) a place
@@ -86,6 +91,7 @@ The Hebrew term **עֲזָאזֵל** (*ʿăzāzēl*) appears **exactly 4 times**
 **Proposal**: עָזַז (*ʿāzaz*, "strong," "fierce") + אֵל (*ʾēl*, "god" or "power") = **"fierce god,"** **"strong power,"** or **"god of strength"**
 
 **Arguments For**:
+
 - Morphologically plausible theophoric pattern (cf. *ʿAzāzʾēl* in 1 Enoch)
 - Parallel syntax (*la-YHWH* :: *la-ʿăzāzēl*) strongly suggests two personal recipients
 - Goat sent *to Azazel* in wilderness implies **destination with agency**, not mere geography
@@ -93,6 +99,7 @@ The Hebrew term **עֲזָאזֵל** (*ʿăzāzēl*) appears **exactly 4 times**
 - Fits ANE elimination ritual pattern where impurity is sent to **wilderness powers** or **netherworld**
 
 **Arguments Against**:
+
 - P's monotheistic theology typically avoids naming or empowering demons
 - Why would P tolerate dual recipients (YHWH and demon) in sacred ritual?
 - Could be later re-mythologization: Torah term is neutral, Second Temple texts impose demonology
@@ -155,6 +162,7 @@ Similar rituals in other cultures involve sending impurity to wilderness or neth
 | **Olyan** (*Rites and Rank*) | Sees **non-theistic power**, not personal demon |
 
 **Current Scholarly Distribution** (rough estimate):
+
 - **Demonological/Wilderness Power**: ~50-60% (most common in technical commentaries)
 - **Geographical/Functional**: ~30-40% (more common in popularizing works)
 - **Explicitly Agnostic**: ~10-20% (scholars who flag it as unresolvable)
@@ -166,6 +174,7 @@ Similar rituals in other cultures involve sending impurity to wilderness or neth
 ### Certainty Level: ⚠️ **CONTESTED**
 
 **What We Know**:
+
 - עֲזָאזֵל is hapax legomenon in MT
 - Appears 4x in Lev 16 in ritual context
 - Parallel syntax (*la-YHWH* :: *la-ʿăzāzēl*) favors proper name or personal destination
@@ -173,6 +182,7 @@ Similar rituals in other cultures involve sending impurity to wilderness or neth
 - Post-Torah reception overwhelmingly treats Azazel as personal entity
 
 **What We Don't Know**:
+
 - **Etymology is genuinely uncertain**
 - Original meaning in pre-P ritual (if any) is lost
 - Whether P intended personal name, place name, or functional term
@@ -201,6 +211,7 @@ https://github.com/dmedlin87/codex-azazel/docs/evidence_card_azazel.md
 ## 9. Further Reading
 
 ### Essential Technical Resources
+
 - Milgrom, Jacob. *Leviticus 1-16* (Anchor Bible Commentary, 1991), 1020-1021, 1079-1084
 - Wright, David P. *The Disposal of Impurity* (SBL Dissertation Series, 1987), 15-74
 - Tawil, Hayim. "Azazel the Prince of the Steppe: A Comparative Study," *ZAW* 92 (1980): 43-59
@@ -208,6 +219,7 @@ https://github.com/dmedlin87/codex-azazel/docs/evidence_card_azazel.md
 - Olyan, Saul M. "Azazel," in *Dictionary of Deities and Demons in the Bible* (2nd ed., 1999), 128-131
 
 ### Lexical Entries
+
 - *HALOT* (Hebrew and Aramaic Lexicon of the Old Testament), s.v. עֲזָאזֵל
 - *TDOT* (Theological Dictionary of the Old Testament), vol. 11, s.v. עָזַז and עֲזָאזֵל
 - *BDB* (Brown-Driver-Briggs Hebrew Lexicon), s.v. עֲזָאזֵל

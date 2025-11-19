@@ -926,6 +926,7 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 ### Overall Test Results
 
 **Full Test Suite** (excluding test_ai_semantic_search.py):
+
 - **Total Tests**: 1,147
 - **Passed**: 1,018 ✓
 - **Failed**: 82 ✗
@@ -936,11 +937,13 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 ### Test Suite Breakdown
 
 #### ✓ test_ai_cache_and_embeddings.py
+
 - **Status**: PASSING
 - **Results**: 43 passed, 23 skipped
 - **Notes**: Core caching and embedding infrastructure is fully functional
 
 #### ⚠️ test_ai_conflict_analysis.py
+
 - **Status**: PARTIAL FAILURES
 - **Results**: 39 passed, 17 failed, 2 errors
 - **Issue**: Missing optional dependency `sentence-transformers`
@@ -948,6 +951,7 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 - **Resolution**: Install with `pip install 'codex-azazel[ai]'`
 
 #### ⚠️ test_ai_models_core.py
+
 - **Status**: PARTIAL FAILURES
 - **Results**: 24 passed, 15 failed
 - **Issue**: Test patching issues with lazy imports
@@ -955,6 +959,7 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 - **Notes**: Core functionality works, but some tests need refactoring for lazy import patterns
 
 #### ⚠️ test_ai_parallel_detection.py
+
 - **Status**: PARTIAL FAILURES
 - **Results**: 42 passed, 27 failed
 - **Issue**: Missing optional dependency `sentence-transformers`
@@ -962,6 +967,7 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 - **Resolution**: Install with `pip install 'codex-azazel[ai]'`
 
 #### ⚠️ test_ai_semantic_contradictions.py
+
 - **Status**: PARTIAL FAILURES
 - **Results**: 13 passed, 23 failed
 - **Issue**: Missing optional dependencies `numpy` and `sentence-transformers`
@@ -969,6 +975,7 @@ A: No. AI features analyze data structure and semantics, not theology. No apolog
 - **Resolution**: Install with `pip install 'codex-azazel[ai]'`
 
 #### ✗ test_ai_semantic_search.py
+
 - **Status**: COLLECTION ERROR
 - **Issue**: Direct `import numpy` at module level causes collection failure
 - **Impact**: Prevents test suite from running if numpy is not installed
@@ -1002,17 +1009,20 @@ pip install numpy sentence-transformers
 ### Testing Recommendations
 
 1. **For Core Features**: Run tests without AI dependencies to verify core BCE functionality
+
    ```bash
    python -m pytest --ignore=tests/test_ai_*.py
    ```
 
 2. **For AI Features**: Install AI dependencies first, then run AI tests
+
    ```bash
    pip install 'codex-azazel[ai]'
    python -m pytest tests/test_ai_*.py
    ```
 
 3. **For Full Suite**: Install all dependencies
+
    ```bash
    pip install -e '.[dev,ai,ai-openai,ai-anthropic]'
    python -m pytest

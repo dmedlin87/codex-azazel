@@ -43,6 +43,7 @@ The Hebrew term עֲזָאזֵל (Azazel) appears exactly four times in this cha
 3. **Demonological/Theophoric**: "fierce god" or "strong power" (from ʿzz "strong" + ʾēl "god"), a proper name for a wilderness entity
 
 Ancient translations reflect this confusion:
+
 - **LXX** (Greek): ἀποπομπαῖος (apopompaios) - "sender-away," functional reading
 - **Vulgate** (Latin): *caper emissarius* - "emissary goat," functional reading
 - **Peshitta** (Syriac): *Zazel* or *Azazel* - transliteration, preserving proper name
@@ -73,6 +74,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: Leviticus 16:8, 10, 21-22, 26
 
 **Characteristics**:
+
 - Azazel as **ritual destination** or recipient in elimination rite
 - Parallel structure: one goat for YHWH (sacrifice), one for Azazel (expulsion)
 - Goat sent "to Azazel" in "inaccessible land" with sins laid upon it
@@ -82,6 +84,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Interpretive Strategy**: P editors appear to tolerate an older ritual structure that implies wilderness powers while refusing to elaborate on Azazel's nature or status.
 
 **Uncertainty Markers**:
+
 - Etymology genuinely unclear
 - Relationship to Lev 17:7's *se'irim* (goat-demons) banned immediately afterward is suggestive but not explicit
 - May represent pre-Israelite elimination rite adapted and sanitized
@@ -95,6 +98,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: 1 Enoch 6:7, 8:1-2, 9:6, 10:4-8, 13:1, 54:5-6
 
 **Characteristics**:
+
 - Azazel as **fallen Watcher**, chief among angelic rebels
 - **Origin of all sin**: "To Azazel ascribe all sin" (10:8)
 - **Forbidden technologies**: Taught men weapons of war (swords, shields), women cosmetics and jewelry, leading to violence and vanity
@@ -114,6 +118,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: 4Q180 (Ages of Creation), 4Q203 (Book of Giants), 4Q204-212 (Enoch fragments), 11Q13 (Melchizedek)
 
 **Characteristics**:
+
 - Azazel as **primordial corrupter** within dualistic framework
 - **Not the chief adversary**: That role belongs to Belial/Melchiresha (Prince of Darkness)
 - Azazel is **specialist villain**: archaic origin of impurity, now largely bound or neutralized
@@ -133,6 +138,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: Apoc. Abr. 13:3-14, 20:5-7, 22:5, 23:11, 29:4-7, 31:3-8
 
 **Characteristics**:
+
 - Azazel as **lot-holder of the wicked**, ruler of the impure
 - **Visual depiction**: Impure bird-like form, multiple heads, corrupted garment (anti-kavod imagery)
 - **Cosmic geography**: Left-hand lot in Abraham's vision; domain of those assigned to judgment
@@ -152,6 +158,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: Mishnah Yoma 6:1-8, Tosefta Yoma 4:6-8, Talmud Yoma 67b, Maimonides' *Guide for the Perplexed* 3:46, *Mishneh Torah* Hilkhot Avodat Yom HaKippurim
 
 **Characteristics**:
+
 - Azazel **demythologized**: Not a personal demon, but a **symbolic/geographical term**
 - **Maimonides' interpretation**: Goat sent to "rough, hard place" demonstrates physical removal of sin for pedagogical purposes
 - **Anti-idolatry stance**: Explicitly denies any power or worship attributed to demons; ritual is not offering to Azazel as deity
@@ -171,6 +178,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: Nachmanides on Lev 16:8, Zohar on Acharei Mot, Pirke de-Rabbi Eliezer 46, Targum Pseudo-Jonathan, Midrash Tanhuma
 
 **Characteristics**:
+
 - Azazel as **controlled demon** or identified with **Samael** (heavenly accuser)
 - **"Bribe" theology**: Scapegoat is sent to prevent accusation of Israel on Yom Kippur
 - **Cosmic negotiation**: Not worship, but strategic management of "other side" (sitra achra) to maintain order
@@ -190,6 +198,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Key Texts**: Epistle of Barnabas 7:6-11, Origen *Homilies on Leviticus* 9, Tertullian *Against Marcion* 3.7, Jerome on Isaiah 13:21, Hebrews 9:7-14, 13:11-13
 
 **Characteristics**:
+
 - **Dual typology**: Azazel interpreted as type of **Satan** OR type of **Christ** (contested!)
 - **Christ typology**: Scapegoat prefigures Christ bearing sin "outside the camp" (Heb 13:11-13), sent into desolation for redemption
 - **Satan typology**: Goat "for Azazel" symbolizes sin returned to its demonic source; devil will bear final judgment
@@ -248,6 +257,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Claim**: In Leviticus 16, עֲזָאזֵל most plausibly functions as proper name for wilderness power or its domain.
 
 **Evidence**:
+
 - Parallel syntax (la-YHWH :: la-Azazel) suggests two recipients
 - Goat sent "to Azazel" into "inaccessible land" implies Azazel ≠ wilderness itself
 - Theophoric pattern (ʿzz + ʾēl) linguistically plausible
@@ -261,6 +271,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Claim**: P preserves very old elimination rite where impurity goes to wilderness/demonic realm, but recasts recipient in muted way.
 
 **Evidence**:
+
 - Close structural parallels with ANE elimination rites
 - P's general reluctance to name demons elsewhere
 - Lev 17's immediate ban on se'irim sacrifices looks like editorial fence
@@ -273,6 +284,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Claim**: Second Temple texts (1 Enoch, Apoc. Abraham) re-mythologize a largely demythologized ritual term into full arch-demon using Lev 16 as anchor.
 
 **Evidence**:
+
 - 1 Enoch's Azazel clearly interacts with Lev 16 imagery (desert binding, sin ascription, lot-casting)
 - Apocalypse of Abraham's dual-lot theology directly echoes two-goat ritual
 - Thematic resonance too strong to be coincidental
@@ -285,6 +297,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Claim**: Across Jewish and Christian demonology, Azazel functions as specialist villain (origin-of-evil, wilderness waste-dump, lot-holder) rather than singular adversary.
 
 **Evidence**:
+
 - Qumran: Belial is chief opponent, not Azazel
 - Rabbinic: Satan/Samael more prominent than Azazel
 - NT: Satan/Devil is primary; Azazel rare
@@ -297,6 +310,7 @@ However, **this remains contested**. Honest scholarship requires holding multipl
 **Claim**: If Lev 16 is Persian-period, explicit naming of Azazel may reflect contact with dualistic frameworks (Angra Mainyu vs. Ahura Mazda).
 
 **Evidence**:
+
 - Persian-period dating for parts of P/H
 - Chronological overlap with rise of adversarial figures in Judaism
 - Conceptual parallels between dual-lot and dualism
