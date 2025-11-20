@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Set
 
 import re
 
 from . import queries
 from .exceptions import DataNotFoundError, StorageError, BceError
+from .models import STANDARD_TRAIT_KEYS
 
 
 _REF_RE = re.compile(
@@ -133,6 +134,37 @@ def _validate_reference_in_context(ref: str, context: str, errors: List[str]) ->
     errors.append(f"{context} has invalid reference '{ref}': {error}")
 
 
+def validate_trait_keys(errors: List[str], warnings: List[str]) -> None:
+    """Validate trait keys against the standard vocabulary.
+
+    This function checks all trait keys in character source profiles against
+    the STANDARD_TRAIT_KEYS vocabulary. Non-standard keys generate warnings
+    but not errors, to allow flexibility while encouraging consistency.
+
+    Parameters:
+        errors: List to append error messages to (currently unused)
+        warnings: List to append warning messages to
+    """
+    for char_id in queries.list_character_ids():
+        try:
+            character = queries.get_character(char_id)
+        except Exception:
+            # Character loading errors are caught elsewhere
+            continue
+
+        for profile in getattr(character, "source_profiles", []):
+            source_id = getattr(profile, "source_id", "unknown")
+            traits = getattr(profile, "traits", {})
+
+            for trait_key in traits.keys():
+                if trait_key not in STANDARD_TRAIT_KEYS:
+                    warnings.append(
+                        f"Character '{char_id}' source '{source_id}': "
+                        f"non-standard trait key '{trait_key}' "
+                        f"(consider using standard vocabulary from models.STANDARD_TRAIT_KEYS)"
+                    )
+
+
 def _validate_characters(errors: List[str]) -> None:
     ids = queries.list_character_ids()
 
@@ -256,16 +288,39 @@ def _validate_events(errors: List[str]) -> None:
 
 
 def validate_all() -> List[str]:
-    """Run basic validation over all characters and events.
+    """Run comprehensive validation over all characters and events.
 
-    Returns a list of human-readable error messages. An empty list means that
-    all checks passed.
+    Returns a list of human-readable error and warning messages. An empty list
+    means that all checks passed.
+
+    This now includes:
+    - Character and event loading validation
+    - Cross-reference validation (strict)
+    - Trait key vocabulary warnings
     """
 
     errors: List[str] = []
+    warnings: List[str] = []
+
+    # Run core validation
     _validate_characters(errors)
     _validate_events(errors)
-    return errors
+
+    # Run cross-reference validation (now integrated by default)
+    cross_ref_errors = validate_cross_references()
+    if cross_ref_errors:
+        errors.extend(cross_ref_errors)
+
+    # Run trait key validation (generates warnings)
+    validate_trait_keys(errors, warnings)
+
+    # Combine errors and warnings for output
+    # Prefix warnings with [WARNING] to distinguish them
+    result = errors.copy()
+    for warning in warnings:
+        result.append(f"[WARNING] {warning}")
+
+    return result
 
 
 def validate_cross_references() -> List[str]:

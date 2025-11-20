@@ -1,14 +1,159 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 
+# =============================================================================
+# STANDARD TRAIT KEYS - Controlled Vocabulary
+# =============================================================================
+# This vocabulary helps maintain consistency across source profiles.
+# Validators will warn when trait keys fall outside this set, but won't fail.
+
+STANDARD_TRAIT_KEYS: Set[str] = {
+    # Core theological categories
+    "christology",
+    "eschatology",
+    "soteriology",
+    "pneumatology",
+    "ecclesiology",
+
+    # Mission and ministry
+    "mission_focus",
+    "teaching_emphasis",
+    "ministry_location",
+    "ministry_duration",
+    "ministry_recipients",
+
+    # Miracles and signs
+    "miracles",
+    "signs",
+    "healings",
+    "exorcisms",
+    "nature_miracles",
+
+    # Conflict and opposition
+    "conflicts",
+    "opponents",
+    "trial_details",
+    "accusations",
+
+    # Death and resurrection
+    "death_resurrection",
+    "passion_narrative",
+    "crucifixion_details",
+    "resurrection_details",
+    "post_resurrection_appearances",
+
+    # Torah and law
+    "torah_stance",
+    "halakha_interpretation",
+    "purity_laws",
+    "sabbath_observance",
+    "temple_attitude",
+
+    # Identity and titles
+    "messianic_claims",
+    "divine_sonship",
+    "prophetic_identity",
+    "authority_claims",
+
+    # Relationship dynamics
+    "discipleship_model",
+    "family_relations",
+    "gender_inclusivity",
+    "social_justice",
+
+    # Literary and rhetorical features
+    "parables",
+    "apocalyptic_discourse",
+    "wisdom_sayings",
+    "pronouncement_stories",
+    "controversy_stories",
+
+    # Contextual positioning
+    "jewish_context",
+    "greco_roman_context",
+    "political_stance",
+    "economic_teaching",
+
+    # Character traits
+    "portrayal",
+    "character_development",
+    "emotions",
+    "virtues",
+    "vices",
+
+    # Eschatological themes
+    "kingdom_of_god",
+    "future_hope",
+    "judgment_themes",
+    "imminent_expectation",
+    "realized_eschatology",
+
+    # Spirit and supernatural
+    "spirit_activity",
+    "angelic_encounters",
+    "demonic_opposition",
+    "visions",
+    "revelations",
+
+    # Community and ethics
+    "ethical_teaching",
+    "community_formation",
+    "ritual_practices",
+    "prayer_life",
+    "table_fellowship",
+}
+
+
+# =============================================================================
+# TEXTUAL VARIANT MODEL
+# =============================================================================
+
+@dataclass(slots=True)
+class TextualVariant:
+    """Represents a textual variant reading from different manuscript families.
+
+    This model captures differences between manuscript traditions (MT, LXX, DSS, etc.)
+    that are significant for understanding character portrayals or event details.
+
+    Examples:
+        - Goliath's height: MT "six cubits" vs LXX "four cubits"
+        - Deuteronomy 32:8: MT "sons of Israel" vs LXX/DSS "sons of God"
+        - P46 variant readings in Pauline epistles
+    """
+
+    manuscript_family: str  # e.g., "MT", "LXX", "4QSamuel-a", "P46", "Codex Sinaiticus"
+    reading: str  # The specific text or value in this tradition
+    significance: str  # Why this variant matters for interpretation
+
+    def __post_init__(self) -> None:
+        """Validate required fields are non-empty."""
+        if not self.manuscript_family:
+            raise ValueError("manuscript_family cannot be empty")
+        if not self.reading:
+            raise ValueError("reading cannot be empty")
+        if not self.significance:
+            raise ValueError("significance cannot be empty")
+
+
+# =============================================================================
+# SOURCE PROFILE MODEL
+# =============================================================================
 
 @dataclass(slots=True)
 class SourceProfile:
+    """Per-source character profile with traits, references, and optional variants/citations.
+
+    This is the core model for source-critical analysis, allowing each source
+    (Mark, Q, Paul, etc.) to present its own distinct portrayal of a character.
+    """
+
     source_id: str
     traits: Dict[str, str] = field(default_factory=dict)
     references: List[str] = field(default_factory=list)
+    variants: List[TextualVariant] = field(default_factory=list)  # NEW: Textual variants
+    citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys
 
     def has_trait(self, trait: str) -> bool:
         return trait in self.traits
@@ -73,17 +218,31 @@ class Character:
 
 @dataclass(slots=True)
 class EventAccount:
+    """Per-source event account with summary, references, and optional variants.
+
+    Each source may report the same event differently, with textual variants
+    capturing manuscript-level differences in how the event is described.
+    """
+
     source_id: str
     reference: str
     summary: str
     notes: Optional[str] = None
+    variants: List[TextualVariant] = field(default_factory=list)  # NEW: Textual variants
 
 
 @dataclass(slots=True)
 class Event:
+    """Biblical event with multiple source accounts and optional citations.
+
+    Events capture key moments in biblical narrative (crucifixion, resurrection,
+    Damascus road, etc.) with source-specific accounts and scholarly citations.
+    """
+
     id: str
     label: str
     participants: List[str] = field(default_factory=list)
     accounts: List[EventAccount] = field(default_factory=list)
     parallels: List[dict] = field(default_factory=list)
     tags: List[str] = field(default_factory=list)
+    citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys

@@ -8,7 +8,7 @@ from typing import Any, Dict, Iterator, List, Optional
 from .cache import CacheRegistry
 from .config import BceConfig, get_default_config
 from .exceptions import DataNotFoundError, StorageError
-from .models import Character, Event, EventAccount, SourceProfile
+from .models import Character, Event, EventAccount, SourceProfile, TextualVariant
 
 
 class StorageManager:
@@ -101,6 +101,30 @@ class StorageManager:
         except (TypeError, ValueError) as e:
             raise StorageError(f"Failed to serialize data for {path}: {e}")
 
+    @staticmethod
+    def _deserialize_variants(variants_data: Any) -> List[TextualVariant]:
+        """Deserialize textual variants from JSON data.
+
+        Parameters:
+            variants_data: Raw variants data from JSON (list of dicts or None)
+
+        Returns:
+            List of TextualVariant instances
+        """
+        if not variants_data:
+            return []
+
+        result: List[TextualVariant] = []
+        for variant_dict in variants_data:
+            if isinstance(variant_dict, dict):
+                try:
+                    result.append(TextualVariant(**variant_dict))
+                except (TypeError, ValueError) as e:
+                    # Log warning but continue - don't fail entire load for bad variant
+                    # TODO: Consider adding logging here
+                    continue
+        return result
+
     # Character operations
 
     def list_character_ids(self) -> List[str]:
@@ -129,7 +153,18 @@ class StorageManager:
         path = self._char_dir / f"{char_id}.json"
         data = self._read_json(path)
 
-        source_profiles = [SourceProfile(**sp) for sp in data.get("source_profiles", [])]
+        # Deserialize source profiles with variants and citations
+        source_profiles: List[SourceProfile] = []
+        for sp_data in data.get("source_profiles", []):
+            sp_dict = dict(sp_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(sp_dict.get("variants"))
+            sp_dict["variants"] = variants
+            # Ensure citations is a list
+            if "citations" not in sp_dict:
+                sp_dict["citations"] = []
+            source_profiles.append(SourceProfile(**sp_dict))
+
         relationships = self._normalize_relationships(data.get("relationships"), char_id)
         data = {
             **data,
@@ -199,7 +234,19 @@ class StorageManager:
         path = self._event_dir / f"{event_id}.json"
         data = self._read_json(path)
 
-        accounts = [EventAccount(**acc) for acc in data.get("accounts", [])]
+        # Deserialize event accounts with variants
+        accounts: List[EventAccount] = []
+        for acc_data in data.get("accounts", []):
+            acc_dict = dict(acc_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(acc_dict.get("variants"))
+            acc_dict["variants"] = variants
+            accounts.append(EventAccount(**acc_dict))
+
+        # Ensure citations is present
+        if "citations" not in data:
+            data["citations"] = []
+
         data = {**data, "accounts": accounts}
 
         try:

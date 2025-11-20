@@ -48,6 +48,29 @@
         "Leviticus 16:10",
         "Leviticus 16:21-22",
         "Leviticus 16:26"
+      ],
+      "variants": [
+        {
+          "manuscript_family": "LXX",
+          "reading": "ἀποπομπαῖος (apopompaios - 'one sent away')",
+          "significance": "Greek translation interprets Azazel as a functional term describing the scapegoat's purpose rather than preserving the Hebrew proper name, supporting demythologized reading"
+        },
+        {
+          "manuscript_family": "Symmachus",
+          "reading": "τράγος ἀπερχόμενος (tragos aperchomenos - 'departing goat')",
+          "significance": "Later Greek version explicitly renders as 'departing goat', fully rationalizing away any personal/demonic connotations"
+        },
+        {
+          "manuscript_family": "Vulgate",
+          "reading": "caper emissarius ('emissary goat')",
+          "significance": "Jerome's Latin follows demythologized interpretation, translating as 'scapegoat' rather than transliterating the name Azazel, influencing Western Christian exegesis"
+        }
+      ],
+      "citations": [
+        "Tawil1980",
+        "Grabbe1987",
+        "Wright1987",
+        "Stökl Ben Ezra2003"
       ]
     },
     {
@@ -67,6 +90,12 @@
         "1 Enoch 10:4-8",
         "1 Enoch 13:1",
         "1 Enoch 54:5-6"
+      ],
+      "citations": [
+        "Nickelsburg2001",
+        "Reed2005",
+        "Stuckenbruck2007",
+        "Bhayro2005"
       ]
     },
     {

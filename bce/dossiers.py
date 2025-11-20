@@ -52,9 +52,27 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
 
     traits_by_source: Dict[str, Dict[str, str]] = {}
     references_by_source: Dict[str, List[str]] = {}
+    variants_by_source: Dict[str, List[Dict[str, str]]] = {}
+    citations_by_source: Dict[str, List[str]] = {}
+
     for profile in character.source_profiles:
         traits_by_source[profile.source_id] = dict(profile.traits)
         references_by_source[profile.source_id] = list(profile.references)
+
+        # Include variants if present
+        if profile.variants:
+            variants_by_source[profile.source_id] = [
+                {
+                    "manuscript_family": v.manuscript_family,
+                    "reading": v.reading,
+                    "significance": v.significance,
+                }
+                for v in profile.variants
+            ]
+
+        # Include citations if present
+        if profile.citations:
+            citations_by_source[profile.source_id] = list(profile.citations)
 
     source_metadata: Dict[str, Dict[str, str]] = {}
     for source_id in _build_source_ids(character):
@@ -102,6 +120,8 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES: trait_conflict_summaries,
         DOSSIER_KEY_RELATIONSHIPS: enriched_relationships,
         DOSSIER_KEY_PARALLELS: [],
+        "variants_by_source": variants_by_source,  # NEW: Textual variants
+        "citations_by_source": citations_by_source,  # NEW: Bibliography citations
     }
     return dossier
 
@@ -122,6 +142,14 @@ def build_event_dossier(event_id: str) -> EventDossier:
             "reference": acc.reference,
             "summary": acc.summary,
             "notes": acc.notes,
+            "variants": [
+                {
+                    "manuscript_family": v.manuscript_family,
+                    "reading": v.reading,
+                    "significance": v.significance,
+                }
+                for v in acc.variants
+            ] if acc.variants else [],  # NEW: Include variants from accounts
         }
         for acc in event.accounts
     ]
@@ -134,6 +162,7 @@ def build_event_dossier(event_id: str) -> EventDossier:
         DOSSIER_KEY_ACCOUNT_CONFLICTS: account_conflicts,
         DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES: account_conflict_summaries,
         DOSSIER_KEY_PARALLELS: list(event.parallels),
+        "citations": list(event.citations) if event.citations else [],  # NEW: Event citations
     }
     return dossier
 

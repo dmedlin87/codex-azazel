@@ -145,6 +145,42 @@ def dossier_to_markdown(dossier: dict) -> str:
             for ref in cleaned_refs:
                 lines.append(f"  - {ref.strip()}")
 
+    # NEW: Variants by source
+    variants_by_source = dossier.get("variants_by_source")
+    if isinstance(variants_by_source, dict) and variants_by_source:
+        lines.append("")
+        lines.append("## Textual variants by source")
+        for source_id, variants in variants_by_source.items():
+            if not isinstance(source_id, str) or not isinstance(variants, list):
+                continue
+            if not variants:
+                continue
+            lines.append(f"- {source_id}:")
+            for variant in variants:
+                if not isinstance(variant, dict):
+                    continue
+                manuscript = variant.get("manuscript_family", "")
+                reading = variant.get("reading", "")
+                significance = variant.get("significance", "")
+                lines.append(f"  - **{manuscript}**: {reading}")
+                if significance:
+                    lines.append(f"    - Significance: {significance}")
+
+    # NEW: Citations by source
+    citations_by_source = dossier.get("citations_by_source")
+    if isinstance(citations_by_source, dict) and citations_by_source:
+        lines.append("")
+        lines.append("## Citations by source")
+        for source_id, citations in citations_by_source.items():
+            if not isinstance(source_id, str) or not isinstance(citations, list):
+                continue
+            cleaned_cites = [c for c in citations if isinstance(c, str) and c.strip()]
+            if not cleaned_cites:
+                continue
+            lines.append(f"- {source_id}:")
+            for citation in cleaned_cites:
+                lines.append(f"  - {citation.strip()}")
+
     trait_comparison = dossier.get(DOSSIER_KEY_TRAIT_COMPARISON)
     if isinstance(trait_comparison, dict):
         _add_nested_mapping_section("Trait comparison", trait_comparison)
@@ -216,6 +252,7 @@ def dossier_to_markdown(dossier: dict) -> str:
             reference = acc.get("reference")
             summary = acc.get("summary")
             notes = acc.get("notes")
+            variants = acc.get("variants", [])
             bullet_parts = []
             if source:
                 bullet_parts.append(f"source={source}")
@@ -228,6 +265,17 @@ def dossier_to_markdown(dossier: dict) -> str:
             if not bullet_parts:
                 bullet_parts = [f"{k}={v}" for k, v in acc.items()]
             lines.append(f"- {'; '.join(bullet_parts)}")
+            # NEW: Include variants in account if present
+            if isinstance(variants, list) and variants:
+                for variant in variants:
+                    if not isinstance(variant, dict):
+                        continue
+                    manuscript = variant.get("manuscript_family", "")
+                    reading = variant.get("reading", "")
+                    significance = variant.get("significance", "")
+                    lines.append(f"  - Variant ({manuscript}): {reading}")
+                    if significance:
+                        lines.append(f"    - {significance}")
 
     account_conflicts = dossier.get(DOSSIER_KEY_ACCOUNT_CONFLICTS)
     if isinstance(account_conflicts, dict):
@@ -275,6 +323,16 @@ def dossier_to_markdown(dossier: dict) -> str:
             if not bullet_parts:
                 bullet_parts = [f"{k}={v}" for k, v in para.items()]
             lines.append(f"- {'; '.join(bullet_parts)}")
+
+    # NEW: Event citations
+    citations = dossier.get("citations")
+    if isinstance(citations, list) and citations:
+        cleaned_cites = [c for c in citations if isinstance(c, str) and c.strip()]
+        if cleaned_cites:
+            lines.append("")
+            lines.append("## Citations")
+            for citation in cleaned_cites:
+                lines.append(f"- {citation.strip()}")
 
     return "\n".join(lines)
 
