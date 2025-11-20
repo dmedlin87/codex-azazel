@@ -6,7 +6,11 @@ through set operations on existing sources. Users can define "virtual sources"
 via query logic rather than manual JSON entry.
 
 Example:
+<<<<<<< HEAD
     Q_source = (Matthew ??? Luke) - Mark
+=======
+    Q_source = (Matthew ∩ Luke) - Mark
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     proto_mark = Mark - later_additions
 """
 

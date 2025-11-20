@@ -64,6 +64,7 @@ class CorpusSearchResult:
     relevance_explanation: Optional[str] = None
 
 
+<<<<<<< HEAD
 def _serialize_embedding(embedding: Any) -> List[float]:
     """Convert embeddings (np.array or list) to a JSON-serializable list."""
     if hasattr(embedding, "tolist"):
@@ -85,6 +86,8 @@ def _generate_embedding(text: str) -> List[float]:
     return _serialize_embedding(raw_embedding)
 
 
+=======
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
 # Pre-defined external corpora
 KNOWN_CORPORA: Dict[str, ExternalCorpus] = {
     "1_enoch": ExternalCorpus(
@@ -325,7 +328,11 @@ class CorpusStore:
             self._chunks[chunk_id] = chunk
 
             # Generate embedding
+<<<<<<< HEAD
             embedding = _generate_embedding(chunk_text)
+=======
+            embedding = embed_text(chunk_text)
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
             self._embeddings[chunk_id] = embedding
 
             chunk_ids.append(chunk_id)
@@ -439,7 +446,11 @@ class CorpusStore:
         if not self._chunks:
             return []
 
+<<<<<<< HEAD
         query_embedding = _generate_embedding(query)
+=======
+        query_embedding = embed_text(query)
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
 
         results = []
 
@@ -453,7 +464,14 @@ class CorpusStore:
                 continue
 
             # Compute similarity
+<<<<<<< HEAD
             score = cosine_similarity(query_embedding, self._embeddings[chunk_id])
+=======
+            score = cosine_similarity(
+                query_embedding,
+                self._embeddings[chunk_id]
+            )
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
 
             if score >= min_score:
                 corpus_info = KNOWN_CORPORA.get(chunk.corpus_id)

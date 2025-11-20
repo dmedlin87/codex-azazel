@@ -13,6 +13,16 @@ import pytest
 
 from bce import api
 
+<<<<<<< HEAD
+=======
+# Check if numpy is available for embedding tests
+try:
+    import numpy
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
+
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
 
 # =============================================================================
 # Feature 1: Virtual Source Hypothesis Modeling
@@ -249,6 +259,10 @@ class TestExternalCorpusIngestion:
         thomas = next((c for c in corpora if c["corpus_id"] == "gospel_thomas"), None)
         assert thomas is not None
 
+<<<<<<< HEAD
+=======
+    @pytest.mark.skipif(not HAS_NUMPY, reason="Requires numpy for embeddings")
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     def test_ingest_external_text(self):
         """Test ingesting external text."""
         text = "And Azazel taught men to make swords and knives and shields."
@@ -271,6 +285,10 @@ class TestExternalCorpusIngestion:
                 "Some text"
             )
 
+<<<<<<< HEAD
+=======
+    @pytest.mark.skipif(not HAS_NUMPY, reason="Requires numpy for embeddings")
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     def test_search_external_corpus(self):
         """Test searching external corpus."""
         # First ingest some text
@@ -294,6 +312,10 @@ class TestExternalCorpusIngestion:
             assert "text" in r
             assert "similarity_score" in r
 
+<<<<<<< HEAD
+=======
+    @pytest.mark.skipif(not HAS_NUMPY, reason="Requires numpy for embeddings")
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     def test_search_empty_corpus_returns_empty(self):
         """Test searching with no matches returns empty list."""
         results = api.search_external_corpus(
@@ -304,6 +326,10 @@ class TestExternalCorpusIngestion:
 
         assert isinstance(results, list)
 
+<<<<<<< HEAD
+=======
+    @pytest.mark.skipif(not HAS_NUMPY, reason="Requires numpy for embeddings")
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     def test_compare_character_to_external(self):
         """Test comparing character to external corpus."""
         cmp = api.compare_character_to_external("azazel", ["1_enoch"])
@@ -320,6 +346,10 @@ class TestExternalCorpusIngestion:
             assert "text" in p
             assert "similarity" in p
 
+<<<<<<< HEAD
+=======
+    @pytest.mark.skipif(not HAS_NUMPY, reason="Requires numpy for embeddings")
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     def test_find_azazel_traditions(self):
         """Test finding Azazel traditions."""
         traditions = api.find_azazel_traditions()
@@ -364,6 +394,10 @@ class TestAdvancedFeaturesIntegration:
         assert q_results["hypothesis"]["source_id"] == "q_source"
         assert len(paths["paths"]) == 3
 
+<<<<<<< HEAD
+=======
+    @pytest.mark.skipif(not HAS_NUMPY, reason="Requires numpy for embeddings")
+>>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
     def test_azazel_full_analysis(self):
         """Test comprehensive Azazel analysis using all features."""
         # 1. Synoptic layers (even though Azazel is OT)
