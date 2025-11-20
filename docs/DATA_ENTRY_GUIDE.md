@@ -29,6 +29,8 @@ Schemas for these files are documented in `docs/SCHEMA.md`.
      - `"orientation": "apocalyptic"`
    - Add `references` as a list of scripture references, e.g.
      - `"Mark 1:9-11"`, `"John 3:22-26"`.
+   - Optional `variants`: list of textual variants (see SCHEMA.md).
+   - Optional `citations`: list of bibliography keys (e.g. `"Meier 1991:123"`).
 
 4. Optional: relationships
    - Add `relationships` as a list of objects of the form:
@@ -39,7 +41,10 @@ Schemas for these files are documented in `docs/SCHEMA.md`.
    - Add `tags` to support thematic search, e.g.
      - `"resurrection"`, `"apocalyptic"`, `"violence"`.
 
-6. Run validation and tests
+6. Optional: citations
+   - Add `citations` at the character level for scholarly references.
+
+7. Run validation and tests
    - `pytest tests/test_validation.py tests/test_data_integrity.py`
    - Fix any reported issues (missing references, unknown sources, etc.).
 
@@ -61,6 +66,7 @@ Schemas for these files are documented in `docs/SCHEMA.md`.
      - `reference`: scripture range (e.g., `"Mark 15:22-37"`).
      - `summary`: short prose summary of the account.
      - Optional `notes`: commentary or important nuances.
+     - Optional `variants`: list of textual variants (see SCHEMA.md).
 
 5. Optional: parallels
    - For events with gospel parallels, add a `parallels` list:
@@ -72,7 +78,13 @@ Schemas for these files are documented in `docs/SCHEMA.md`.
 6. Optional: tags
    - Add thematic tags similar to characters.
 
-7. Run validation and tests
+7. Optional: citations
+   - Add `citations` at the event level for scholarly references.
+
+8. Optional: textual_variants
+   - Add `textual_variants` for major textual variants (see SCHEMA.md for detailed structure).
+
+9. Run validation and tests
    - `pytest tests/test_validation.py tests/test_data_integrity.py`
    - Ensure conflicts and cross-references still pass.
 

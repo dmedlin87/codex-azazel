@@ -163,6 +163,7 @@ def build_event_dossier(event_id: str) -> EventDossier:
         DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES: account_conflict_summaries,
         DOSSIER_KEY_PARALLELS: list(event.parallels),
         "citations": list(event.citations) if event.citations else [],  # NEW: Event citations
+        "textual_variants": list(event.textual_variants) if event.textual_variants else [],  # NEW: Major textual variants
     }
     return dossier
 

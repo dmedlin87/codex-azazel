@@ -17,6 +17,8 @@ class CharacterDossier(TypedDict):
     trait_conflict_summaries: Dict[str, Dict[str, object]]
     relationships: List[dict]
     parallels: List[dict]
+    variants_by_source: Dict[str, List[Dict[str, str]]]
+    citations_by_source: Dict[str, List[str]]
 
 
 class EventAccountDossier(TypedDict):
@@ -24,6 +26,7 @@ class EventAccountDossier(TypedDict):
     reference: str
     summary: str
     notes: str | None
+    variants: List[Dict[str, str]]
 
 
 class EventDossier(TypedDict):
@@ -34,6 +37,8 @@ class EventDossier(TypedDict):
     account_conflicts: Dict[str, Dict[str, str]]
     account_conflict_summaries: Dict[str, Dict[str, object]]
     parallels: List[dict]
+    citations: List[str]
+    textual_variants: List[dict]
 
 
 DOSSIER_KEY_ID = "id"
@@ -45,6 +50,8 @@ DOSSIER_KEY_SOURCE_IDS = "source_ids"
 DOSSIER_KEY_SOURCE_METADATA = "source_metadata"
 DOSSIER_KEY_TRAITS_BY_SOURCE = "traits_by_source"
 DOSSIER_KEY_REFERENCES_BY_SOURCE = "references_by_source"
+DOSSIER_KEY_VARIANTS_BY_SOURCE = "variants_by_source"
+DOSSIER_KEY_CITATIONS_BY_SOURCE = "citations_by_source"
 DOSSIER_KEY_TRAIT_COMPARISON = "trait_comparison"
 DOSSIER_KEY_TRAIT_CONFLICTS = "trait_conflicts"
 DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES = "trait_conflict_summaries"
@@ -56,3 +63,5 @@ DOSSIER_KEY_SUMMARY = "summary"
 DOSSIER_KEY_DESCRIPTION = "description"
 DOSSIER_KEY_RELATIONSHIPS = "relationships"
 DOSSIER_KEY_PARALLELS = "parallels"
+DOSSIER_KEY_CITATIONS = "citations"
+DOSSIER_KEY_TEXTUAL_VARIANTS = "textual_variants"

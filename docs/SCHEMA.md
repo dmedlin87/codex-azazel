@@ -126,6 +126,19 @@ Backed by `bce.models.Event` and JSON files in `bce/data/events/*.json`.
 - `parallels: list[dict]` – normalized parallel-pericope records (e.g. gospel parallels) (default: `[]`)
 - `tags: list[str]` – topical tags (e.g. `"resurrection"`, `"empty_tomb"`) (default: `[]`)
 - `citations: list[str]` – **NEW**: Bibliography keys linking to scholarly citations (default: `[]`)
+- `textual_variants: list[dict]` – **NEW**: Major textual variants (default: `[]`)
+
+**Textual Variant structure (Event):**
+
+The `textual_variants` list on an Event object uses a more detailed schema than the `TextualVariant` model used in accounts:
+
+- `source_id: str`
+- `reference: str`
+- `variant_type: str` – e.g. `"addition"`, `"omission"`, `"alteration"`
+- `description: str`
+- `manuscript_support: str`
+- `manuscript_lack: str`
+- `significance: str`
 
 ### 1.5 EventAccount
 
@@ -197,6 +210,7 @@ Fields:
 - `account_conflict_summaries: dict[str, dict]` – normalized conflict metadata per field (see §3).
 - `parallels: list[dict]` – normalized parallels copied from `Event.parallels`.
 - `citations: list[str]` – **NEW**: Bibliography keys for this event
+- `textual_variants: list[dict]` – **NEW**: Major textual variants (list of dicts)
 
 ### 2.3 EventAccountDossier
 
