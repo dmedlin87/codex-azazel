@@ -14,9 +14,11 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 from unittest.mock import MagicMock, patch
-import numpy as np
 
 import pytest
+
+# Skip entire module if numpy is not available
+np = pytest.importorskip("numpy", reason="numpy required for semantic search tests")
 
 from bce.config import BceConfig, set_default_config, reset_default_config
 from bce.exceptions import ConfigurationError
