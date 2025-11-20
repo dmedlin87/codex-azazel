@@ -17,8 +17,6 @@ class CharacterDossier(TypedDict):
     trait_conflict_summaries: Dict[str, Dict[str, object]]
     relationships: List[dict]
     parallels: List[dict]
-    variants_by_source: Dict[str, List[Dict[str, str]]]
-    citations_by_source: Dict[str, List[str]]
 
 
 class EventAccountDossier(TypedDict):
@@ -26,7 +24,6 @@ class EventAccountDossier(TypedDict):
     reference: str
     summary: str
     notes: str | None
-    variants: List[Dict[str, str]]
 
 
 class EventDossier(TypedDict):
@@ -37,8 +34,6 @@ class EventDossier(TypedDict):
     account_conflicts: Dict[str, Dict[str, str]]
     account_conflict_summaries: Dict[str, Dict[str, object]]
     parallels: List[dict]
-    citations: List[str]
-    textual_variants: List[dict]
 
 
 DOSSIER_KEY_ID = "id"
