@@ -1070,3 +1070,512 @@ def build_event_timeline(event_id: str) -> Dict[str, Any]:
     """
     from .ai import event_reconstruction
     return event_reconstruction.build_event_timeline(event_id)
+
+
+# =============================================================================
+# Phase 7: Advanced Features
+# =============================================================================
+
+
+# Virtual Source Hypothesis Modeling
+
+def list_source_hypotheses() -> List[Dict[str, Any]]:
+    """List all predefined source hypotheses (Q, Triple Tradition, etc.).
+
+    Returns
+    -------
+    list of dict
+        Each dict contains: source_id, label, description, operation,
+        base_sources, exclude_sources, confidence
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> hypotheses = api.list_source_hypotheses()
+    >>> for h in hypotheses:
+    ...     print(f"{h['label']}: {h['description']}")
+    Q Source: Hypothetical sayings source shared by Matthew and Luke...
+    """
+    from .ai import virtual_sources
+    return virtual_sources.list_predefined_hypotheses()
+
+
+def query_virtual_source(
+    hypothesis_id: str,
+    char_ids: Optional[List[str]] = None,
+) -> Dict[str, Any]:
+    """Query a virtual source hypothesis across characters.
+
+    Applies set operations (intersection, union, difference) on existing
+    sources to model hypothetical sources like Q or proto-Mark.
+
+    Parameters
+    ----------
+    hypothesis_id : str
+        Hypothesis identifier (e.g., "q_source", "triple_tradition")
+    char_ids : list of str, optional
+        Characters to analyze. If None, analyzes all.
+
+    Returns
+    -------
+    dict
+        Query results with hypothesis info, per-character results, and summary
+
+    Raises
+    ------
+    ValueError
+        If hypothesis_id is unknown
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> results = api.query_virtual_source("q_source", ["jesus"])
+    >>> print(results["summary"]["total_traits"])
+    >>> for r in results["results"]:
+    ...     print(f"{r['character_id']}: {len(r['traits'])} Q traits")
+    """
+    from .ai import virtual_sources
+    return virtual_sources.query_virtual_source(hypothesis_id, char_ids)
+
+
+def analyze_synoptic_layers(char_id: str) -> Dict[str, Any]:
+    """Analyze how a character appears across Synoptic source layers.
+
+    Shows the character's portrayal in:
+    - Triple tradition (all Synoptics)
+    - Q material (Matthew + Luke - Mark)
+    - Special Matthew (M source)
+    - Special Luke (L source)
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+
+    Returns
+    -------
+    dict
+        Layered analysis with trait counts per hypothetical source
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> layers = api.analyze_synoptic_layers("jesus")
+    >>> print(layers["summary"]["q_material_count"])
+    >>> print(layers["layers"]["triple_tradition"]["traits"])
+    """
+    from .ai import virtual_sources
+    return virtual_sources.analyze_synoptic_layers(char_id)
+
+
+def compare_hypothesis_to_source(
+    hypothesis_id: str,
+    char_id: str,
+    compare_source: str,
+) -> Dict[str, Any]:
+    """Compare a virtual source's portrayal to an actual source.
+
+    Tests hypotheses by showing overlap and differences between
+    reconstructed and attested sources.
+
+    Parameters
+    ----------
+    hypothesis_id : str
+        Virtual source hypothesis ID
+    char_id : str
+        Character to analyze
+    compare_source : str
+        Actual source to compare against (e.g., "john")
+
+    Returns
+    -------
+    dict
+        Comparison with shared/unique traits and overlap ratio
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> cmp = api.compare_hypothesis_to_source("q_source", "jesus", "john")
+    >>> print(f"Overlap: {cmp['overlap_ratio']:.2%}")
+    """
+    from .ai import virtual_sources
+    return virtual_sources.compare_hypothetical_to_actual(
+        hypothesis_id, char_id, compare_source
+    )
+
+
+# Narrative Trajectory Mapping
+
+def build_character_trajectory(
+    char_id: str,
+    source_id: str,
+) -> Dict[str, Any]:
+    """Build a geographic trajectory for a character in a source.
+
+    Traces the character's journey through locations based on
+    scripture references.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+    source_id : str
+        Source to analyze
+
+    Returns
+    -------
+    dict
+        Trajectory with waypoints, total distance, unique locations
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> traj = api.build_character_trajectory("jesus", "mark")
+    >>> print(f"Total distance: {traj['total_distance_km']} km")
+    >>> for wp in traj["waypoints"]:
+    ...     print(f"{wp['sequence']}: {wp['location_id']}")
+    """
+    from .ai import trajectory
+    result = trajectory.build_character_trajectory(char_id, source_id)
+    return {
+        "character_id": result.character_id,
+        "source_id": result.source_id,
+        "waypoints": [
+            {
+                "sequence": wp.sequence,
+                "location_id": wp.location_id,
+                "reference": wp.reference,
+            }
+            for wp in result.waypoints
+        ],
+        "total_distance_km": result.total_distance_km,
+        "unique_locations": result.unique_locations,
+    }
+
+
+def compare_trajectories(
+    char_id: str,
+    source_ids: List[str],
+) -> Dict[str, Any]:
+    """Compare a character's geographic trajectory across sources.
+
+    Identifies where sources diverge and converge in their
+    portrayal of the character's movements.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+    source_ids : list of str
+        Sources to compare
+
+    Returns
+    -------
+    dict
+        Comparison with divergence/convergence points and score
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> cmp = api.compare_trajectories("jesus", ["mark", "john"])
+    >>> print(f"Divergence score: {cmp['total_divergence_score']}")
+    >>> for dp in cmp["divergence_points"]:
+    ...     print(f"{dp['location_name']}: present in {dp['present_in']}")
+    """
+    from .ai import trajectory
+    result = trajectory.compare_trajectories(char_id, source_ids)
+    return {
+        "character_id": result.character_id,
+        "sources": result.sources,
+        "divergence_points": result.divergence_points,
+        "convergence_points": result.convergence_points,
+        "total_divergence_score": result.total_divergence_score,
+    }
+
+
+def generate_trajectory_geojson(
+    char_id: str,
+    source_id: str,
+) -> Dict[str, Any]:
+    """Generate GeoJSON for a character's trajectory.
+
+    Creates data suitable for map visualization with Leaflet, D3.js, etc.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+    source_id : str
+        Source to visualize
+
+    Returns
+    -------
+    dict
+        GeoJSON FeatureCollection with points and path
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> geojson = api.generate_trajectory_geojson("paul", "acts")
+    >>> print(f"Features: {len(geojson['features'])}")
+    """
+    from .ai import trajectory
+    return trajectory.generate_trajectory_geojson(char_id, source_id)
+
+
+def get_divergent_paths(
+    char_id: str,
+    source_ids: Optional[List[str]] = None,
+) -> Dict[str, Any]:
+    """Get data for visualizing divergent narrative paths.
+
+    Shows how different sources trace different geographic paths
+    for the same character.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier
+    source_ids : list of str, optional
+        Sources to compare. Defaults to Synoptics + John.
+
+    Returns
+    -------
+    dict
+        Paths per source with coordinates for visualization
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> paths = api.get_divergent_paths("jesus")
+    >>> # Visualize: Mark in green, John in red
+    >>> for src, points in paths["paths"].items():
+    ...     print(f"{src}: {len(points)} waypoints")
+    """
+    from .ai import trajectory
+    return trajectory.generate_divergent_paths_data(char_id, source_ids)
+
+
+def analyze_jerusalem_visits(char_id: str = "jesus") -> Dict[str, Any]:
+    """Analyze Jerusalem visits across sources.
+
+    Classic synoptic problem example: Synoptics show one visit,
+    John shows multiple.
+
+    Parameters
+    ----------
+    char_id : str
+        Character identifier (default: "jesus")
+
+    Returns
+    -------
+    dict
+        Visits per source with analysis
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> visits = api.analyze_jerusalem_visits()
+    >>> print(visits["visits_per_source"])
+    {'mark': 1, 'matthew': 1, 'luke': 1, 'john': 3}
+    """
+    from .ai import trajectory
+    return trajectory.analyze_jerusalem_visits(char_id)
+
+
+def list_biblical_locations() -> List[Dict[str, Any]]:
+    """List all available biblical locations with coordinates.
+
+    Returns
+    -------
+    list of dict
+        Locations with id, name, lat/lng, region
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> locs = api.list_biblical_locations()
+    >>> for loc in locs[:5]:
+    ...     print(f"{loc['name']}: {loc['latitude']}, {loc['longitude']}")
+    """
+    from .ai import trajectory
+    return trajectory.list_locations()
+
+
+# External Corpus Ingestion
+
+def list_external_corpora() -> List[Dict[str, Any]]:
+    """List all known external corpora for ingestion.
+
+    Returns
+    -------
+    list of dict
+        Corpora metadata (id, name, description, date_range, tradition)
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> corpora = api.list_external_corpora()
+    >>> for c in corpora:
+    ...     print(f"{c['name']} ({c['date_range']})")
+    """
+    from .ai import corpus_ingestion
+    return corpus_ingestion.list_known_corpora()
+
+
+def ingest_external_text(
+    corpus_id: str,
+    text: str,
+    reference: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Ingest external text into the corpus store.
+
+    Chunks and embeds text for semantic search without
+    requiring full BCE data structuring.
+
+    Parameters
+    ----------
+    corpus_id : str
+        Corpus identifier (e.g., "1_enoch", "josephus_antiquities")
+    text : str
+        Text to ingest
+    reference : str, optional
+        Reference for this text section
+
+    Returns
+    -------
+    dict
+        Ingestion result with chunk count
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> result = api.ingest_external_text(
+    ...     "1_enoch",
+    ...     "And Azazel taught men to make swords...",
+    ...     reference="1 Enoch 8:1"
+    ... )
+    >>> print(f"Created {result['chunks_created']} chunks")
+    """
+    from .ai import corpus_ingestion
+    return corpus_ingestion.ingest_external_text(corpus_id, text, reference)
+
+
+def search_external_corpus(
+    query: str,
+    corpus_ids: Optional[List[str]] = None,
+    top_k: int = 10,
+    min_score: float = 0.3,
+) -> List[Dict[str, Any]]:
+    """Search external corpora semantically.
+
+    Find relevant passages across ingested texts using
+    natural language queries.
+
+    Parameters
+    ----------
+    query : str
+        Natural language search query
+    corpus_ids : list of str, optional
+        Corpora to search. If None, searches all.
+    top_k : int
+        Maximum results to return
+    min_score : float
+        Minimum similarity score
+
+    Returns
+    -------
+    list of dict
+        Results with text, reference, corpus, similarity score
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> results = api.search_external_corpus(
+    ...     "fallen angels binding chains",
+    ...     corpus_ids=["1_enoch"]
+    ... )
+    >>> for r in results:
+    ...     print(f"{r['reference']}: {r['similarity_score']:.2f}")
+    """
+    from .ai import corpus_ingestion
+    return corpus_ingestion.search_external_corpus(
+        query, corpus_ids, top_k, min_score
+    )
+
+
+def compare_character_to_external(
+    char_id: str,
+    corpus_ids: Optional[List[str]] = None,
+    top_k: int = 5,
+) -> Dict[str, Any]:
+    """Compare a BCE character to external corpus material.
+
+    Finds passages in external corpora semantically similar
+    to the character's BCE portrayal.
+
+    Parameters
+    ----------
+    char_id : str
+        BCE character identifier
+    corpus_ids : list of str, optional
+        Corpora to search
+    top_k : int
+        Results per source
+
+    Returns
+    -------
+    dict
+        Comparison with relevant external parallels
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> cmp = api.compare_character_to_external("azazel", ["1_enoch"])
+    >>> for p in cmp["external_parallels"]:
+    ...     print(f"{p['corpus']}: {p['similarity']:.2f}")
+    """
+    from .ai import corpus_ingestion
+    return corpus_ingestion.compare_character_to_corpus(
+        char_id, corpus_ids, top_k
+    )
+
+
+def find_azazel_traditions() -> Dict[str, Any]:
+    """Find Azazel-related material across external corpora.
+
+    Convenience function for the project's flagship character,
+    demonstrating diachronic tradition tracking.
+
+    Returns
+    -------
+    dict
+        Azazel material from Second Temple apocalyptic sources
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> traditions = api.find_azazel_traditions()
+    >>> print(f"Found {traditions['traditions_found']} passages")
+    """
+    from .ai import corpus_ingestion
+    return corpus_ingestion.find_azazel_traditions()
+
+
+def get_corpus_status() -> Dict[str, Any]:
+    """Get ingestion status for all external corpora.
+
+    Returns
+    -------
+    dict
+        Status per corpus with chunk counts
+
+    Examples
+    --------
+    >>> from bce import api
+    >>> status = api.get_corpus_status()
+    >>> for corpus_id, info in status["corpora"].items():
+    ...     print(f"{info['name']}: {info['chunks']} chunks")
+    """
+    from .ai import corpus_ingestion
+    return corpus_ingestion.get_corpus_ingestion_status()

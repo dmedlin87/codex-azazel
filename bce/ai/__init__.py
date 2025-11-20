@@ -26,6 +26,8 @@ from . import clustering, semantic_search, question_answering
 from . import trait_extraction, parallel_detection, relationship_inference
 # Phase 6.5: Export & Analytics
 from . import summaries, source_analysis, conflict_analysis, event_reconstruction
+# Phase 7: Advanced Features
+from . import virtual_sources, trajectory, corpus_ingestion
 
 __all__ = [
     # Foundation (Phase 6.1)
@@ -50,4 +52,8 @@ __all__ = [
     "source_analysis",
     "conflict_analysis",
     "event_reconstruction",
+    # Advanced Features (Phase 7)
+    "virtual_sources",
+    "trajectory",
+    "corpus_ingestion",
 ]
