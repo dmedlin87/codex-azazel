@@ -22,8 +22,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from .config import get_ai_config
-from .embeddings import get_embedding, compute_similarity
+from ..config import get_default_config
+from .embeddings import embed_text, cosine_similarity
 
 
 @dataclass
@@ -172,8 +172,8 @@ class CorpusStore:
             Defaults to BCE AI cache directory.
         """
         if cache_dir is None:
-            config = get_ai_config()
-            cache_dir = config.cache_dir / "corpus_store"
+            config = get_default_config()
+            cache_dir = config.ai_cache_dir / "corpus_store"
 
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -304,7 +304,7 @@ class CorpusStore:
             self._chunks[chunk_id] = chunk
 
             # Generate embedding
-            embedding = get_embedding(chunk_text)
+            embedding = embed_text(chunk_text)
             self._embeddings[chunk_id] = embedding
 
             chunk_ids.append(chunk_id)
@@ -418,7 +418,7 @@ class CorpusStore:
         if not self._chunks:
             return []
 
-        query_embedding = get_embedding(query)
+        query_embedding = embed_text(query)
 
         results = []
 
@@ -432,7 +432,7 @@ class CorpusStore:
                 continue
 
             # Compute similarity
-            score = compute_similarity(
+            score = cosine_similarity(
                 query_embedding,
                 self._embeddings[chunk_id]
             )
