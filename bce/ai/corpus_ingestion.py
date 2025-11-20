@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from .config import get_ai_config
+from ..config import get_default_config
 from .embeddings import get_embedding, compute_similarity
 
 
@@ -172,8 +172,8 @@ class CorpusStore:
             Defaults to BCE AI cache directory.
         """
         if cache_dir is None:
-            config = get_ai_config()
-            cache_dir = config.cache_dir / "corpus_store"
+            config = get_default_config()
+            cache_dir = config.ai_cache_dir / "corpus_store"
 
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
