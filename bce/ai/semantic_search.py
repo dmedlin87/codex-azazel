@@ -135,7 +135,10 @@ def _build_search_index(
             # Index relationships
             if "relationships" in scope and char.relationships:
                 for rel in char.relationships:
-                    text = f"{rel.get('type', 'relationship')} with {rel.get('to', 'unknown')}: {rel.get('description', '')}"
+                    rel_type = getattr(rel, "type", None) or "relationship"
+                    target = getattr(rel, "target_id", None) or getattr(rel, "character_id", None) or "unknown"
+                    desc = getattr(rel, "description", None) or getattr(rel, "notes", "") or ""
+                    text = f"{rel_type} with {target}: {desc}"
                     embedding = embedding_cache.get_or_compute(text)
                     index.append({
                         "type": "character",
@@ -283,13 +286,12 @@ def _collect_character_texts(character, basis: List[str]) -> List[str]:
 
     if "relationships" in basis and character.relationships:
         for rel in character.relationships:
-            desc = rel.get("description", "")
+            desc = getattr(rel, "description", None) or getattr(rel, "notes", "")
             if desc:
                 texts.append(desc)
             else:
-                # Fall back to combining type/target when description is missing
-                rel_type = rel.get("type") or rel.get("relationship_type")
-                target = rel.get("to") or rel.get("character_id")
+                rel_type = getattr(rel, "type", None)
+                target = getattr(rel, "target_id", None)
                 parts = [str(v) for v in (rel_type, target) if v]
                 if parts:
                     texts.append(" ".join(parts))

@@ -8,8 +8,9 @@ from typing import Any, Dict, Iterator, List, Optional
 
 from .cache import CacheRegistry
 from .config import BceConfig, get_default_config
-from .exceptions import DataNotFoundError, StorageError
-from .models import Character, Event, EventAccount, SourceProfile, TextualVariant
+from .exceptions import DataNotFoundError, StorageError, ValidationError
+from .models import Character, Event, EventAccount, SourceProfile, TextualVariant, Relationship
+from . import schema
 
 logger = logging.getLogger(__name__)
 
@@ -155,6 +156,10 @@ class StorageManager:
         """
         path = self._char_dir / f"{char_id}.json"
         data = self._read_json(path)
+        try:
+            schema.validate_character_raw(data, path=path)
+        except ValidationError as exc:
+            raise StorageError(f"Schema validation failed for character '{char_id}': {exc}") from exc
 
         # Deserialize source profiles with variants and citations
         source_profiles: List[SourceProfile] = []
@@ -236,6 +241,10 @@ class StorageManager:
         """
         path = self._event_dir / f"{event_id}.json"
         data = self._read_json(path)
+        try:
+            schema.validate_event_raw(data, path=path)
+        except ValidationError as exc:
+            raise StorageError(f"Schema validation failed for event '{event_id}': {exc}") from exc
 
         # Deserialize event accounts with variants
         accounts: List[EventAccount] = []
@@ -264,52 +273,34 @@ class StorageManager:
         except ValueError as e:
             raise StorageError(f"Invalid event data in {path}: {e}") from e
 
-    def _normalize_relationships(self, value: Any, char_id: str) -> List[dict]:
-        """Convert relationships data to a list of dictionaries.
-
-        Only accepts the flat list format with character_id references.
-        Raises StorageError for legacy nested dict format to prevent silent data loss.
-
-        Args:
-            value: Raw relationships data from JSON
-            char_id: Character ID for error messages
-
-        Returns:
-            List of relationship dictionaries
-
-        Raises:
-            StorageError: If legacy nested format is detected
-        """
+    def _normalize_relationships(self, value: Any, char_id: str) -> List[Relationship]:
+        """Convert raw relationship records into Relationship objects."""
 
         if value is None:
             return []
 
-        # Reject legacy nested dict format (Format A)
         if isinstance(value, dict):
             raise StorageError(
                 f"Character '{char_id}': relationships use deprecated nested dict format. "
-                f"Please migrate to flat list format with 'character_id' field. "
-                f"See docs/SCHEMA.md for the correct structure."
+                f"Please migrate to flat list format with 'character_id'/'target_id'."
             )
 
-        # Only accept flat list format (Format B)
         if isinstance(value, list):
-            result: List[dict] = []
+            relationships: List[Relationship] = []
             for i, rel in enumerate(value):
                 if not isinstance(rel, dict):
                     raise StorageError(
                         f"Character '{char_id}': relationship at index {i} is not a dict"
                     )
-                if "character_id" not in rel:
+                try:
+                    relationships.append(Relationship.from_raw(rel, owner_id=char_id))
+                except Exception as exc:
                     raise StorageError(
-                        f"Character '{char_id}': relationship at index {i} missing required 'character_id' field"
-                    )
-                result.append(rel)
-            return result
+                        f"Character '{char_id}': invalid relationship at index {i}: {exc}"
+                    ) from exc
+            return relationships
 
-        raise StorageError(
-            f"Character '{char_id}': relationships must be a list, got {type(value).__name__}"
-        )
+        raise StorageError(f"Character '{char_id}': relationships must be a list, got {type(value).__name__}")
 
     def iter_events(self) -> Iterator[Event]:
         """Iterate over all events.

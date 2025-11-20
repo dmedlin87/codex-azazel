@@ -171,6 +171,40 @@ class TestFindCharacterClusters:
                     assert clusters2 == clusters1
                     assert not mock_result_cache.set.called  # Should not save again
 
+    def test_cache_hit_short_circuits_work(self):
+        """Test that a cache hit returns early and avoids extra work."""
+        pytest.importorskip("numpy")
+        pytest.importorskip("sklearn")
+
+        from bce.ai.clustering import find_character_clusters
+
+        cached_clusters = [
+            {
+                "cluster_id": "cluster_0",
+                "label": "Cached Cluster",
+                "members": ["cached_char"],
+                "member_names": ["Cached Character"],
+                "representative_traits": ["cached_trait"],
+                "confidence": 0.75,
+                "size": 1,
+            }
+        ]
+
+        with patch("bce.ai.clustering.AIResultCache") as mock_result_cache_class, \
+             patch("bce.ai.clustering.list_all_characters") as mock_list_characters, \
+             patch("bce.ai.clustering.EmbeddingCache") as mock_embedding_cache_class:
+            mock_result_cache = Mock()
+            mock_result_cache.get.return_value = cached_clusters
+            mock_result_cache_class.return_value = mock_result_cache
+
+            result = find_character_clusters(basis=["roles", "traits"], use_cache=True)
+
+            assert result == cached_clusters
+            mock_result_cache.get.assert_called_once_with("char_clusters_8_roles_traits")
+            mock_list_characters.assert_not_called()
+            mock_embedding_cache_class.assert_not_called()
+            mock_result_cache.set.assert_not_called()
+
     def test_insufficient_characters_adjusts_clusters(self):
         """Test that num_clusters is adjusted when there are too few characters."""
         pytest.importorskip("numpy")
@@ -437,6 +471,40 @@ class TestFindEventClusters:
                 # Should have fewer clusters than requested
                 assert len(clusters) < 5
 
+    def test_cache_hit_short_circuits_event_work(self):
+        """Test that event cache hit bypasses clustering work."""
+        pytest.importorskip("numpy")
+        pytest.importorskip("sklearn")
+
+        from bce.ai.clustering import find_event_clusters
+
+        cached_clusters = [
+            {
+                "cluster_id": "event_cluster_0",
+                "label": "Cached Events",
+                "members": ["event_1"],
+                "member_labels": ["Event 1"],
+                "representative_traits": ["cached_tag"],
+                "confidence": 0.66,
+                "size": 1,
+            }
+        ]
+
+        with patch("bce.ai.clustering.AIResultCache") as mock_result_cache_class, \
+             patch("bce.ai.clustering.list_all_events") as mock_list_events, \
+             patch("bce.ai.clustering.EmbeddingCache") as mock_embedding_cache_class:
+            mock_result_cache = Mock()
+            mock_result_cache.get.return_value = cached_clusters
+            mock_result_cache_class.return_value = mock_result_cache
+
+            result = find_event_clusters(num_clusters=3, use_cache=True)
+
+            assert result == cached_clusters
+            mock_result_cache.get.assert_called_once_with("event_clusters_3")
+            mock_list_events.assert_not_called()
+            mock_embedding_cache_class.assert_not_called()
+            mock_result_cache.set.assert_not_called()
+
     def test_clusters_sorted_by_size(self):
         """Test that event clusters are sorted by size."""
         pytest.importorskip("numpy")
@@ -685,6 +753,21 @@ class TestClusteringHelpers:
 
         assert isinstance(coherence, float)
         assert 0.0 <= coherence <= 1.0
+
+    def test_calculate_cluster_coherence_known_average(self):
+        """Test coherence returns the mean cosine similarity of members."""
+        np = pytest.importorskip("numpy")
+        from bce.ai.clustering import _calculate_cluster_coherence
+
+        embeddings = np.array([
+            [1.0, 0.0],
+            [0.0, 1.0],
+        ])
+        centroid = np.array([1.0, 0.0])
+
+        coherence = _calculate_cluster_coherence(embeddings, [0, 1], centroid)
+
+        assert coherence == pytest.approx(0.5)
 
     def test_calculate_cluster_coherence_empty_cluster(self):
         """Test coherence calculation with empty cluster."""

@@ -8,7 +8,7 @@ from pathlib import Path
 from . import queries
 from .config import get_default_config
 from .exceptions import DataNotFoundError, StorageError, BceError
-from .models import STANDARD_TRAIT_KEYS
+from .models import STANDARD_TRAIT_KEYS, Relationship
 
 
 _REF_RE = re.compile(
@@ -216,35 +216,32 @@ def _validate_characters(errors: List[str]) -> None:
         relationships = getattr(character, "relationships", [])
         if relationships:
             for i, rel in enumerate(relationships):
-                if not isinstance(rel, dict):
+                if not isinstance(rel, Relationship):
                     errors.append(
-                        f"Character '{char_id}': relationship at index {i} is not a dict"
+                        f"Character '{char_id}': relationship at index {i} is not a Relationship"
                     )
                     continue
 
-                # Validate character_id reference
-                target_id = rel.get("character_id")
+                target_id = getattr(rel, "target_id", "")
                 if not target_id:
                     errors.append(
-                        f"Character '{char_id}': relationship at index {i} missing 'character_id'"
+                        f"Character '{char_id}': relationship at index {i} missing target_id"
                     )
                 elif target_id not in valid_char_ids:
                     errors.append(
                         f"Character '{char_id}': relationship references unknown character '{target_id}'"
                     )
 
-                # Validate required fields
-                if not rel.get("type"):
+                rel_type = getattr(rel, "type", "")
+                if not rel_type:
                     errors.append(
-                        f"Character '{char_id}': relationship to '{target_id}' missing 'type' field"
+                        f"Character '{char_id}': relationship to '{target_id}' missing type"
                     )
-                if not rel.get("sources"):
+
+                attestation = getattr(rel, "attestation", [])
+                if not attestation:
                     errors.append(
-                        f"Character '{char_id}': relationship to '{target_id}' missing 'sources' field"
-                    )
-                if not rel.get("references"):
-                    errors.append(
-                        f"Character '{char_id}': relationship to '{target_id}' missing 'references' field"
+                        f"Character '{char_id}': relationship to '{target_id}' missing attestation"
                     )
 
         # Best-effort validation of scripture references in source profiles.

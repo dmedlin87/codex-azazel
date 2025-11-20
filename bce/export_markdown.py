@@ -221,19 +221,29 @@ def dossier_to_markdown(dossier: dict) -> str:
         for rel in relationships:
             if not isinstance(rel, dict):
                 continue
-            character_id = rel.get("character_id")
+            target_id = rel.get("target_id") or rel.get("character_id") or rel.get("to")
             rel_type = rel.get("type")
-            sources_val = rel.get("sources")
-            references_val = rel.get("references")
-            notes = rel.get("notes")
+            notes = rel.get("notes") or rel.get("description")
+            attestation = rel.get("attestation") or []
+            sources_val = []
+            if isinstance(attestation, list):
+                for att in attestation:
+                    if isinstance(att, dict) and att.get("source_id"):
+                        sources_val.append(att.get("source_id"))
+            references_val = []
+            if isinstance(attestation, list):
+                for att in attestation:
+                    if isinstance(att, dict):
+                        references_val.extend(att.get("references") or [])
+
             bullet_parts = []
             if rel_type:
                 bullet_parts.append(f"type={rel_type}")
-            if character_id:
-                bullet_parts.append(f"character_id={character_id}")
-            if isinstance(sources_val, list) and sources_val:
+            if target_id:
+                bullet_parts.append(f"target={target_id}")
+            if sources_val:
                 bullet_parts.append("sources=" + ", ".join(str(s) for s in sources_val))
-            if isinstance(references_val, list) and references_val:
+            if references_val:
                 bullet_parts.append("references=" + ", ".join(str(r) for r in references_val))
             if isinstance(notes, str) and notes.strip():
                 bullet_parts.append(f"notes={notes.strip()}")

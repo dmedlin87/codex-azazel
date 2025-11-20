@@ -230,8 +230,8 @@ def build_graph_snapshot() -> GraphSnapshot:
             character_id=character.id,
         )
         for rel in character.relationships:
-            other_id = rel.get("character_id")
-            if not isinstance(other_id, str):
+            other_id = getattr(rel, "target_id", None)
+            if not isinstance(other_id, str) or not other_id:
                 continue
             other_node_id = f"character:{other_id}"
             _get_or_create_node(
@@ -241,7 +241,7 @@ def build_graph_snapshot() -> GraphSnapshot:
                 node_type=NODE_TYPE_CHARACTER,
                 character_id=other_id,
             )
-            rel_type = rel.get("type") or "relationship"
+            rel_type = getattr(rel, "type", None) or "relationship"
             edge_id = f"char_rel:{character.id}:{other_id}:{rel_type}"
             edges.append(
                 GraphEdge(
@@ -251,9 +251,11 @@ def build_graph_snapshot() -> GraphSnapshot:
                     type=EDGE_TYPE_CHARACTER_RELATIONSHIP,
                     properties={
                         "relationship_type": rel_type,
-                        "sources": list(rel.get("sources") or []),
-                        "references": list(rel.get("references") or []),
-                        "notes": rel.get("notes"),
+                        "sources": [att.source_id for att in getattr(rel, "attestation", [])],
+                        "references": [
+                            ref for att in getattr(rel, "attestation", []) for ref in getattr(att, "references", [])
+                        ],
+                        "notes": getattr(rel, "notes", None),
                     },
                 )
             )

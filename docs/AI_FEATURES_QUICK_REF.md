@@ -1,219 +1,53 @@
 # AI Features Quick Reference
 
-**Full Proposal**: See [AI_FEATURES_PROPOSAL.md](./AI_FEATURES_PROPOSAL.md)
+**Full context**: [AI_FEATURES_PROPOSAL.md](./AI_FEATURES_PROPOSAL.md)
 
-## Feature Summary
+## Engine Reframe: Claim Graph With Hooks
 
-### 🔍 Data Quality (Phase 6.2)
+- BCE is a claim graph engine with strongly typed core models (characters, events, relationships, claims).
+- Storage is pluggable: JSON today; database/graph backends later.
+- Hooks wrap the canonical integration points (storage, validation, search, dossiers, export).
+- Dossier and export schemas are the stable, versioned API surface.
 
-| Feature | Purpose | Priority |
-|---------|---------|----------|
-| Semantic Contradiction Detection | Detect conflicts beyond string matching | HIGH |
-| Data Completeness Auditor | Identify gaps and inconsistencies | HIGH |
-| Smart Validation Suggestions | AI-powered fix suggestions for errors | MEDIUM |
+## Phase A: Core Hardening (Schema, Relationships, Traits)
 
-### 🔎 Enhanced Search (Phase 6.3)
+- Add `bce.schema` as the gate between raw JSON and `bce.models` (Pydantic or TypedDict + explicit checks).
+- Run schema validation inside `storage.load_character/load_event` and `validation.validate_all()`.
+- Replace `relationships: List[dict]` with a typed `Relationship` model:
+  `source_id`, `target_id`, `type` (enum), `attestation` (source_ids + refs), optional `strength/notes`; validate cross-refs and allowed types.
+- Split traits into `structured_traits` (controlled vocabulary using `STANDARD_TRAIT_KEYS`, enum/bool/number where possible) and `trait_notes` (prose). Unknown or untyped keys become errors, not warnings.
+- Dossiers expose a `relationships_by_type`/`relationship_graph` section built from the new model.
 
-| Feature | Purpose | Priority |
-|---------|---------|----------|
-| Semantic Search | Concept-based search vs keyword matching | HIGH |
-| Thematic Clustering | Auto-discover character/event groupings | MEDIUM |
-| Question Answering | Natural language queries over data | LOW |
+## Phase B: Claim Graph Layer
 
-### 📝 Data Entry Assistance (Phase 6.4)
+- Introduce a `Claim` model: `subject_id`, `predicate`, `object` (typed value or target id), `source_id`, `reference`, optional `variant_id`, `confidence`, `note`.
+- Build the claim set during `build_character_dossier` / `build_event_dossier` (or a shared `build_claim_graph()` that dossiers call).
+- Run contradiction detection over claims: conflicting `(subject, predicate)` with incompatible objects and attestation metadata.
+- Graph exports become straightforward: nodes = entities; relationships/traits/events = typed claims/edges.
 
-| Feature | Purpose | Priority |
-|---------|---------|----------|
-| Automated Trait Extraction | Extract traits from scripture text | HIGH |
-| Parallel Passage Detection | Auto-identify synoptic parallels | MEDIUM |
-| Relationship Inference | Suggest character relationships | MEDIUM |
+## Phase C: Storage Abstraction and Indexing
 
-### 📊 Export & Analytics (Phase 6.5)
+- Define a `StorageBackend` protocol/ABC with `list_character_ids`, `get_character_raw`, `save_character_raw`, plus event analogs.
+- Refactor `bce.storage.StorageManager` to delegate to a backend instance: start with `JsonStorageBackend`; keep room for `SqliteStorageBackend` or `GraphStorageBackend`.
+- Build lightweight in-memory indexes on load (or on demand) for characters (roles/tags/source) and events (participants/location). Optionally persist `_index.json` to skip recomputation.
+- `search_all` first hits indexes for pre-filtering, then falls back to full scans.
 
-| Feature | Purpose | Priority |
-|---------|---------|----------|
-| Natural Language Summaries | Generate readable dossier summaries | MEDIUM |
-| Enhanced Citations | Auto-generate academic citations | LOW |
-| Source Tendency Analysis | Identify systematic source patterns | MEDIUM |
-| Advanced Conflict Analysis | Deep assessment of contradiction significance | MEDIUM |
-| Event Reconstruction | Synthesize multi-source timelines | LOW |
+## Phase D: Hooks and Plugins
 
-## Implementation Status
+- Hook points: BEFORE/AFTER_CHARACTER_LOAD/SAVE, BEFORE/AFTER_EVENT_LOAD/SAVE, BEFORE_VALIDATION/AFTER_VALIDATION, BEFORE_SEARCH/SEARCH_RESULT_FILTER/SEARCH_RESULT_RANK/AFTER_SEARCH, BEFORE_DOSSIER_BUILD/DOSSIER_ENRICH/AFTER_DOSSIER_BUILD, BEFORE_EXPORT/EXPORT_FORMAT_RESOLVE/AFTER_EXPORT.
+- Plugins ride these hooks for storage side-effects (indexing/changelog), validation extensions, search ranking/filters, dossier enrichment, and export format additions.
+- AI lives behind plugins: embedding ranking at `SEARCH_RESULT_RANK`, LLM summaries at `DOSSIER_ENRICH`, validation suggestions via `AFTER_VALIDATION`.
 
-1. **Phase 6.1 - Foundation** ✅ COMPLETE
-   - Set up `bce/ai/` module structure
-   - Implement local embedding support
-   - Add AI feature configuration
+## Stable, Versioned Dossier and Export API
 
-2. **Phase 6.2 - Data Quality** ✅ COMPLETE
-   - Semantic contradiction detection
-   - Completeness auditor
-   - Validation suggestions
+- Treat dossier/output schemas as the public contract; include `schema_version` (e.g., `"1.0"`) in every dossier.
+- Maintain a dossier schema doc + changelog; exports flow through hooks so new formats (Obsidian, LaTeX tables, RDF) stay out of core.
 
-3. **Phase 6.3 - Enhanced Search** ✅ COMPLETE
-   - Semantic search with embeddings
-   - Character clustering
-   - Question answering
+## Short Roadmap (Pragmatic)
 
-4. **Phase 6.4 - Data Entry Tools** ✅ COMPLETE
-   - Trait extraction
-   - Parallel detection
-   - Relationship inference
+1) Lock core: add `bce.schema` gate, enforce typed `Relationship`, split traits into structured vs prose, make validation strict.  
+2) Claim graph: implement `Claim`, build graph during dossier construction, refactor contradictions to operate on claims.  
+3) Storage/index: introduce `StorageBackend`, keep JSON as default, add in-memory (optional persisted) indexes feeding search.  
+4) Hooks/plugins: ship hook skeleton, move AI and advanced exports into plugins wired at the integration points.
 
-5. **Phase 6.5 - Analytics** ✅ COMPLETE
-   - Natural language summaries
-   - Source tendency analysis
-   - Advanced conflict analysis
-   - Event reconstruction
-
-**Status**: All phases (6.1-6.5) fully implemented!
-
-## Quick Start for Contributors
-
-### Using AI Features (once implemented)
-
-```python
-from bce import api
-from bce.ai import semantic_search, completeness
-
-# Enable AI features in config
-from bce.config import BceConfig, set_default_config
-config = BceConfig(enable_ai_features=True)
-set_default_config(config)
-
-# Semantic search
-results = semantic_search.query("doubting disciples")
-
-# Check data quality
-audit = completeness.audit_characters()
-```
-
-### Configuration Options
-
-```python
-# Local models only (no API calls)
-config = BceConfig(
-    enable_ai_features=True,
-    ai_model_backend="local",
-    embedding_model="all-MiniLM-L6-v2"
-)
-
-# Use OpenAI for advanced features
-config = BceConfig(
-    enable_ai_features=True,
-    ai_model_backend="openai",
-    openai_api_key="sk-..."
-)
-```
-
-## Model Requirements
-
-### Local/Offline (Recommended)
-
-- **Storage**: ~100MB for embeddings model
-- **RAM**: ~500MB during indexing
-- **CPU**: Any modern CPU (no GPU required)
-- **Performance**: 50-200ms per query
-
-### API-Based (Optional)
-
-- **OpenAI**: Requires API key and internet connection
-- **Anthropic**: Requires API key and internet connection
-- **Cost**: Pay-per-use (varies by feature)
-
-## Key Design Principles
-
-1. **Offline-First**: All core features work without internet
-2. **Optional**: AI features never block core functionality
-3. **Transparent**: AI outputs clearly marked and explainable
-4. **Human-in-the-Loop**: Critical updates require approval
-5. **Data-Centric**: Focus on data quality, not debate or apologetics
-
-## Example Use Cases
-
-### Use Case 1: Data Entry Acceleration
-
-```bash
-# Extract traits from a passage
-bce ai extract-traits \
-  --character nicodemus \
-  --source john \
-  --reference "John 3:1-21" \
-  --review
-
-# Review suggestions, approve/edit, auto-add to JSON
-```
-
-### Use Case 2: Quality Audit
-
-```python
-from bce.ai import completeness
-
-# Audit all characters for gaps
-report = completeness.audit_characters()
-
-# Get prioritized list of data entry tasks
-for char_id, audit in report.items():
-    if audit["completeness_score"] < 0.7:
-        print(f"{char_id}: {audit['gaps']}")
-```
-
-### Use Case 3: Discover Hidden Patterns
-
-```python
-from bce.ai import clustering
-
-# Find thematic clusters
-clusters = clustering.find_character_clusters(num_clusters=8)
-
-# Use for tag suggestions
-for cluster in clusters:
-    print(f"{cluster['label']}: {cluster['members']}")
-```
-
-### Use Case 4: Enhanced Search for External Tools
-
-```python
-from bce.ai import semantic_search
-
-# Tool queries BCE for conceptual matches
-results = semantic_search.query(
-    "characters who experience transformation",
-    top_k=5
-)
-
-# Export results with explanations
-for result in results:
-    print(f"{result['id']}: {result['explanation']}")
-```
-
-## Testing AI Features
-
-```bash
-# Run AI feature tests
-pytest tests/test_ai_*.py
-
-# Test with local models only
-pytest tests/test_ai_*.py --local-only
-
-# Benchmark performance
-pytest tests/test_ai_performance.py --benchmark
-```
-
-## Feedback & Contribution
-
-- **Questions**: Open an issue with `[AI Features]` prefix
-- **Feature Requests**: Comment on AI_FEATURES_PROPOSAL.md
-- **Implementation PRs**: Reference proposal section in PR description
-
-## Related Documentation
-
-- [Full Proposal](./AI_FEATURES_PROPOSAL.md) - Complete technical specification
-- [ROADMAP.md](./ROADMAP.md) - Project roadmap (Phases 0-5 complete)
-- [SCHEMA.md](./SCHEMA.md) - API schema documentation
-- [CLAUDE.md](../CLAUDE.md) - AI assistant guide for development
-
----
-
-**Status**: **IMPLEMENTED** (Phases 6.1-6.5 Complete)
-**Last Updated**: 2025-11-18
+**Status**: Planning/in design to align core with claim graph + hook architecture. Implementation details live in `AI_FEATURES_PROPOSAL.md`; this page is the quick navigation aid.

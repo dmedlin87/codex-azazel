@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 # =============================================================================
 # STANDARD TRAIT KEYS - Controlled Vocabulary
@@ -151,9 +151,20 @@ class SourceProfile:
 
     source_id: str
     traits: Dict[str, str] = field(default_factory=dict)
+    structured_traits: Dict[str, Any] = field(default_factory=dict)
+    trait_notes: Dict[str, str] = field(default_factory=dict)
     references: List[str] = field(default_factory=list)
     variants: List[TextualVariant] = field(default_factory=list)  # NEW: Textual variants
     citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys
+
+    def __post_init__(self) -> None:
+        """Keep legacy and new trait fields in sync."""
+        # If callers provide only traits, reflect them into trait_notes for prose.
+        if self.traits and not self.trait_notes:
+            self.trait_notes = dict(self.traits)
+        # If callers provide only trait_notes, keep traits for backward compatibility.
+        if self.trait_notes and not self.traits:
+            self.traits = dict(self.trait_notes)
 
     def has_trait(self, trait: str) -> bool:
         return trait in self.traits
@@ -172,13 +183,89 @@ class SourceMetadata:
 
 
 @dataclass(slots=True)
+class RelationshipAttestation:
+    """Attestation for a relationship from a specific source."""
+
+    source_id: str
+    references: List[str] = field(default_factory=list)
+
+
+@dataclass(slots=True)
+class Relationship:
+    """First-class relationship between two characters."""
+
+    source_id: str  # owner/subject of the relationship
+    target_id: str  # other character
+    type: str
+    attestation: List[RelationshipAttestation] = field(default_factory=list)
+    strength: Optional[float] = None
+    notes: Optional[str] = None
+    description: Optional[str] = None
+
+    @classmethod
+    def from_raw(cls, raw: dict, owner_id: str) -> "Relationship":
+        """Build from legacy or new-form dict data."""
+        if not isinstance(raw, dict):
+            raise ValueError("Relationship raw value must be a dict")
+
+        # Legacy format: character_id + sources/references/notes
+        target = raw.get("target_id") or raw.get("character_id") or raw.get("to")
+        rel_type = raw.get("type") or raw.get("relationship_type") or "relationship"
+        notes = raw.get("notes") or raw.get("description")
+        strength = raw.get("strength")
+
+        attestation: List[RelationshipAttestation] = []
+
+        if "attestation" in raw and isinstance(raw.get("attestation"), list):
+            for att in raw["attestation"]:
+                if not isinstance(att, dict):
+                    continue
+                src = att.get("source_id")
+                if not isinstance(src, str) or not src:
+                    continue
+                refs = att.get("references") if isinstance(att.get("references"), list) else []
+                attestation.append(RelationshipAttestation(src, list(refs)))
+        else:
+            sources = raw.get("sources") if isinstance(raw.get("sources"), list) else []
+            references = raw.get("references") if isinstance(raw.get("references"), list) else []
+            for src in sources:
+                if isinstance(src, str) and src:
+                    attestation.append(RelationshipAttestation(src, list(references)))
+
+        return cls(
+            source_id=owner_id,
+            target_id=str(target) if target is not None else "",
+            type=str(rel_type) if rel_type is not None else "",
+            attestation=attestation,
+            strength=strength if isinstance(strength, (int, float)) else None,
+            notes=notes if isinstance(notes, str) else None,
+            description=notes if isinstance(notes, str) else raw.get("description"),
+        )
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return a JSON-serializable representation."""
+        return {
+            "source_id": self.source_id,
+            "target_id": self.target_id,
+            "type": self.type,
+            "attestation": [
+                {"source_id": att.source_id, "references": list(att.references)}
+                for att in self.attestation
+            ],
+            "strength": self.strength,
+            "notes": self.notes,
+            "description": self.description,
+        }
+
+
+@dataclass(slots=True)
 class Character:
     id: str
     canonical_name: str
     aliases: List[str] = field(default_factory=list)
     roles: List[str] = field(default_factory=list)
     source_profiles: List[SourceProfile] = field(default_factory=list)
-    relationships: List[dict] = field(default_factory=list)
+    relationships: List[Relationship] = field(default_factory=list)
     tags: List[str] = field(default_factory=list)
     citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys
 

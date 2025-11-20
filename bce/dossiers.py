@@ -6,7 +6,7 @@ from typing import Dict, List
 from . import queries
 from . import contradictions
 from . import sources
-from .models import Character, Event
+from .models import Character, Event, Relationship
 from .dossier_types import (
     CharacterDossier,
     EventDossier,
@@ -93,18 +93,31 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         if meta_dict:
             source_metadata[source_id] = meta_dict
 
-    # Enrich relationships with canonical names
+    # Enrich relationships with canonical names and group by type
     enriched_relationships = []
+    relationships_by_type: Dict[str, List[Dict[str, object]]] = {}
     for rel in character.relationships:
-        enriched_rel = dict(rel) if isinstance(rel, dict) else asdict(rel)
+        rel_dict = rel.to_dict() if isinstance(rel, Relationship) else asdict(rel)
+        target_id = rel_dict.get("target_id") or rel_dict.get("character_id") or rel_dict.get("to", "")
+
         # Try to get the canonical name of the related character
         try:
-            related_char = queries.get_character(enriched_rel.get('to', ''))
-            enriched_rel['to_name'] = related_char.canonical_name
+            related_char = queries.get_character(str(target_id))
+            rel_dict["target_name"] = related_char.canonical_name
         except Exception:
-            # If character not found, just use the ID
-            enriched_rel['to_name'] = enriched_rel.get('to', '')
-        enriched_relationships.append(enriched_rel)
+            rel_dict["target_name"] = target_id
+
+        # Flatten attestation for dossier readability
+        attestation = rel_dict.get("attestation") or []
+        if isinstance(attestation, list):
+            rel_dict["attestation_sources"] = [
+                att.get("source_id") for att in attestation if isinstance(att, dict)
+            ]
+
+        enriched_relationships.append(rel_dict)
+
+        rel_type = rel_dict.get("type", "relationship")
+        relationships_by_type.setdefault(rel_type, []).append(rel_dict)
 
     dossier: CharacterDossier = {
         DOSSIER_KEY_ID: character.id,
@@ -119,6 +132,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_TRAIT_CONFLICTS: trait_conflicts,
         DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES: trait_conflict_summaries,
         DOSSIER_KEY_RELATIONSHIPS: enriched_relationships,
+        "relationships_by_type": relationships_by_type,
         DOSSIER_KEY_PARALLELS: [],
         "variants_by_source": variants_by_source,  # NEW: Textual variants
         "citations_by_source": citations_by_source,  # NEW: Bibliography citations

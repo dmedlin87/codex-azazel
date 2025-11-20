@@ -53,7 +53,7 @@ def infer_relationships_for_character(
     char = queries.get_character(character_id)
 
     # Get existing relationships
-    existing = {rel.get("to") for rel in char.relationships if "to" in rel}
+    existing = {getattr(rel, "target_id", None) for rel in char.relationships}
 
     # Find potential relationships
     suggestions = []
@@ -93,13 +93,13 @@ def infer_relationships_for_character(
 
     # 3. Check existing relationships (mark them as already_exists=True)
     for rel in char.relationships:
-        other_id = rel.get("to")
+        other_id = getattr(rel, "target_id", None)
         if other_id:
             suggestions.append({
                 "character_id": other_id,
-                "suggested_type": rel.get("type", "unknown"),
+                "suggested_type": getattr(rel, "type", None) or "unknown",
                 "confidence": 1.0,
-                "evidence": [rel.get("description", "Existing relationship")],
+                "evidence": [getattr(rel, "description", None) or getattr(rel, "notes", "Existing relationship")],
                 "already_exists": True,
             })
 

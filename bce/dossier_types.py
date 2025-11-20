@@ -16,6 +16,7 @@ class CharacterDossier(TypedDict):
     trait_conflicts: Dict[str, Dict[str, str]]
     trait_conflict_summaries: Dict[str, Dict[str, object]]
     relationships: List[dict]
+    relationships_by_type: Dict[str, List[dict]]
     parallels: List[dict]
 
 
@@ -57,6 +58,7 @@ DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES = "account_conflict_summaries"
 DOSSIER_KEY_SUMMARY = "summary"
 DOSSIER_KEY_DESCRIPTION = "description"
 DOSSIER_KEY_RELATIONSHIPS = "relationships"
+DOSSIER_KEY_RELATIONSHIPS_BY_TYPE = "relationships_by_type"
 DOSSIER_KEY_PARALLELS = "parallels"
 DOSSIER_KEY_CITATIONS = "citations"
 DOSSIER_KEY_TEXTUAL_VARIANTS = "textual_variants"

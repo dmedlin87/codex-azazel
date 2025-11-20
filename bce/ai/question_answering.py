@@ -262,9 +262,9 @@ def _answer_relationship_query(question: str) -> Dict[str, Any]:
             for rel in char.relationships:
                 evidence.append({
                     "character": char.id,
-                    "relationship_type": rel.get("type", "unknown"),
-                    "to": rel.get("to", "unknown"),
-                    "description": rel.get("description", ""),
+                    "relationship_type": getattr(rel, "type", None) or "unknown",
+                    "to": getattr(rel, "target_id", None) or "unknown",
+                    "description": getattr(rel, "description", None) or getattr(rel, "notes", ""),
                 })
 
     if evidence:
