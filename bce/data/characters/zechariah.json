@@ -1,0 +1,58 @@
+{
+    "id": "zechariah",
+    "canonical_name": "Zechariah",
+    "aliases": [
+        "Zacharias"
+    ],
+    "roles": [
+        "priest",
+        "prophet",
+        "father_of_john_baptist"
+    ],
+    "tags": [
+        "priest",
+        "temple",
+        "vision",
+        "mute",
+        "benedictus"
+    ],
+    "relationships": [
+        {
+            "character_id": "elizabeth",
+            "type": "spouse",
+            "sources": [
+                "luke"
+            ],
+            "references": [
+                "Luke 1:5-25"
+            ],
+            "notes": "His wife, also of priestly descent, who shares in the miraculous birth."
+        },
+        {
+            "character_id": "john_the_baptist",
+            "type": "father",
+            "sources": [
+                "luke"
+            ],
+            "references": [
+                "Luke 1:57-80"
+            ],
+            "notes": "Prophesies over his infant son in the Benedictus."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "luke",
+            "traits": {
+                "piety": "Righteous before God, walking blamelessly in all commandments.",
+                "priestly_service": "Serving in the temple division of Abijah when he receives the vision.",
+                "doubt_and_sign": "Questions the angel Gabriel and is struck mute until the birth.",
+                "prophecy": "Filled with the Holy Spirit, he utters the Benedictus, praising God for redemption."
+            },
+            "references": [
+                "Luke 1:5-25",
+                "Luke 1:57-80"
+            ]
+        }
+    ]
+}

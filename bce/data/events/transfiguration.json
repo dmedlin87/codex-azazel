@@ -1,0 +1,60 @@
+{
+    "id": "transfiguration",
+    "label": "Transfiguration of Jesus",
+    "participants": [
+        "jesus",
+        "peter",
+        "james_son_of_zebedee",
+        "john",
+        "moses",
+        "elijah"
+    ],
+    "tags": [
+        "transfiguration",
+        "theophany",
+        "moses",
+        "elijah",
+        "glory"
+    ],
+    "accounts": [
+        {
+            "source_id": "mark",
+            "reference": "Mark 9:2-8",
+            "summary": "Jesus takes Peter, James, and John up a mountain. He is transfigured, his clothes becoming dazzling white. Elijah and Moses appear. Peter suggests building tents. A cloud overshadows them, and a voice says, 'This is my beloved Son; listen to him.'",
+            "notes": "Connects Jesus with the Law and Prophets but elevates him above them. Follows the first passion prediction."
+        },
+        {
+            "source_id": "matthew",
+            "reference": "Matthew 17:1-8",
+            "summary": "Similar to Mark, but adds that Jesus' face shone like the sun. When the disciples hear the voice, they fall on their faces in fear. Jesus touches them and tells them not to be afraid.",
+            "notes": "Heightens the apocalyptic glory (face like sun) and emphasizes Jesus' authority and comfort."
+        },
+        {
+            "source_id": "luke",
+            "reference": "Luke 9:28-36",
+            "summary": "Jesus goes up to pray. Moses and Elijah appear in glory and speak of his 'departure' (exodus) in Jerusalem. The disciples are sleepy but wake to see his glory. The voice speaks as they depart.",
+            "notes": "Explicitly mentions the topic of conversation (his death/departure). Emphasizes prayer."
+        },
+        {
+            "source_id": "2_peter",
+            "reference": "2 Peter 1:16-18",
+            "summary": "The author claims eyewitness testimony of the majesty on the holy mountain, hearing the voice from the Majestic Glory.",
+            "notes": "Apostolic confirmation of the event as historical basis for the parousia hope."
+        }
+    ],
+    "parallels": [
+        {
+            "sources": [
+                "mark",
+                "matthew",
+                "luke"
+            ],
+            "references": {
+                "mark": "Mark 9:2-8",
+                "matthew": "Matthew 17:1-8",
+                "luke": "Luke 9:28-36"
+            },
+            "relationship": "gospel_parallel"
+        }
+    ]
+}

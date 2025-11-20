@@ -1,0 +1,40 @@
+{
+    "id": "simeon",
+    "canonical_name": "Simeon",
+    "aliases": [],
+    "roles": [
+        "prophet",
+        "witness"
+    ],
+    "tags": [
+        "temple",
+        "nunc_dimittis",
+        "consolation_of_israel"
+    ],
+    "relationships": [
+        {
+            "character_id": "jesus",
+            "type": "witness_to_messiah",
+            "sources": [
+                "luke"
+            ],
+            "references": [
+                "Luke 2:25-35"
+            ],
+            "notes": "Recognizes the infant Jesus as the Lord's Messiah."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "luke",
+            "traits": {
+                "piety": "Righteous and devout, looking for the consolation of Israel.",
+                "spirit_led": "The Holy Spirit was upon him and revealed he would not die before seeing the Christ.",
+                "prophecy": "Utters the Nunc Dimittis and prophesies a sword piercing Mary's soul."
+            },
+            "references": [
+                "Luke 2:25-35"
+            ]
+        }
+    ]
+}

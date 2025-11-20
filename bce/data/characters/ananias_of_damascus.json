@@ -1,0 +1,45 @@
+{
+    "id": "ananias_of_damascus",
+    "canonical_name": "Ananias of Damascus",
+    "aliases": [
+        "Ananias"
+    ],
+    "roles": [
+        "disciple",
+        "healer"
+    ],
+    "tags": [
+        "damascus",
+        "vision",
+        "healing",
+        "baptism"
+    ],
+    "relationships": [
+        {
+            "character_id": "paul",
+            "type": "healer_and_baptizer",
+            "sources": [
+                "acts"
+            ],
+            "references": [
+                "Acts 9:10-19",
+                "Acts 22:12-16"
+            ],
+            "notes": "Restores Saul's sight and baptizes him."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "acts",
+            "traits": {
+                "piety": "A devout man according to the law, well spoken of by all the Jews.",
+                "obedience": "Obeys the Lord's vision despite fear of Saul's reputation.",
+                "ministry": "Lays hands on Saul for healing and filling of the Spirit."
+            },
+            "references": [
+                "Acts 9:10-19",
+                "Acts 22:12-16"
+            ]
+        }
+    ]
+}

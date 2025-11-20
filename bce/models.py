@@ -180,6 +180,7 @@ class Character:
     source_profiles: List[SourceProfile] = field(default_factory=list)
     relationships: List[dict] = field(default_factory=list)
     tags: List[str] = field(default_factory=list)
+    citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys
 
     def get_source_profile(self, source_id: str) -> Optional[SourceProfile]:
         for profile in self.source_profiles:
@@ -246,3 +247,4 @@ class Event:
     parallels: List[dict] = field(default_factory=list)
     tags: List[str] = field(default_factory=list)
     citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys
+    textual_variants: List[dict] = field(default_factory=list)  # NEW: Major textual variants

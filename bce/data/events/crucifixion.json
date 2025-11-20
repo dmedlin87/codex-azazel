@@ -4,13 +4,31 @@
   "participants": [
     "jesus"
   ],
-  "tags": [],
+  "tags": [
+    "crucifixion",
+    "passion",
+    "death_of_jesus",
+    "golgotha",
+    "cross"
+  ],
   "accounts": [
     {
       "source_id": "mark",
       "reference": "Mark 15:21-41",
       "summary": "Jesus is crucified under Pilate, mocked, and dies with a loud cry as the temple curtain is torn.",
       "notes": "Strong emphasis on suffering and abandonment; centurion confesses Jesus as Son of God."
+    },
+    {
+      "source_id": "matthew",
+      "reference": "Matthew 27:32-56",
+      "summary": "Jesus is crucified, mocked, cries out in despair, and dies. Accompanied by an earthquake and the raising of saints.",
+      "notes": "Follows Mark closely but adds apocalyptic signs (earthquake, raised saints) and guards at the tomb."
+    },
+    {
+      "source_id": "luke",
+      "reference": "Luke 23:26-49",
+      "summary": "Jesus is crucified, asks forgiveness for his executioners, speaks with the penitent thief, and commits his spirit to the Father.",
+      "notes": "Highlights Jesus' innocence, compassion, and control; includes 'Father, forgive them' and the promise of Paradise to the thief."
     },
     {
       "source_id": "john",

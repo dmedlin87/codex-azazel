@@ -188,6 +188,21 @@
         "1 Corinthians 9:5",
         "1 Corinthians 15:5"
       ]
+    },
+    {
+      "source_id": "2_peter",
+      "traits": {
+        "eyewitness": "Claims to have been an eyewitness of the transfiguration on the holy mountain.",
+        "legacy": "Writes as a farewell testament, anticipating imminent death as predicted by Jesus."
+      },
+      "references": [
+        "2 Peter 1:13-18"
+      ]
     }
+  ],
+  "citations": [
+    "Brown, Raymond E., Karl P. Donfried, and John Reumann, eds. Peter in the New Testament. Augsburg, 1973. (Collaborative ecumenical study of Peter's role in the NT writings.)",
+    "Bockmuehl, Markus. Simon Peter in Scripture and Memory. Baker Academic, 2012. (Examines Peter's legacy in the NT and early church tradition.)",
+    "Hengel, Martin. Saint Peter: The Underestimated Apostle. Eerdmans, 2010. (Argues for Peter's central role as the bridge between Jesus and Paul and the leader of the early mission.)"
   ]
 }

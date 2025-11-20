@@ -1,44 +1,61 @@
 {
   "mark": {
+    "source_id": "mark",
     "date_range": "66-70 CE",
     "provenance": "Rome (traditional)",
     "audience": "Gentile Christians",
     "depends_on": []
   },
   "matthew": {
+    "source_id": "matthew",
     "date_range": "80-90 CE",
     "provenance": "Syrian Antioch (probable)",
     "audience": "Jewish Christians",
-    "depends_on": ["mark", "q"]
+    "depends_on": [
+      "mark",
+      "q"
+    ]
   },
   "luke": {
+    "source_id": "luke",
     "date_range": "80-90 CE",
     "provenance": "Greece or Asia Minor (traditional)",
     "audience": "Mixed Gentile/Jewish Christians",
-    "depends_on": ["mark", "q"]
+    "depends_on": [
+      "mark",
+      "q"
+    ]
   },
   "john": {
+    "source_id": "john",
     "date_range": "90-110 CE",
     "provenance": "Ephesus (traditional)",
     "audience": "Mixed Christian communities",
     "depends_on": []
   },
   "paul_undisputed": {
+    "source_id": "paul_undisputed",
     "date_range": "49-62 CE",
     "provenance": "Various (Corinth, Ephesus, Rome, etc.)",
     "audience": "Early Gentile and Jewish-Christian assemblies",
     "depends_on": []
   },
   "acts": {
+    "source_id": "acts",
     "date_range": "80-90 CE",
     "provenance": "Greece or Asia Minor (traditional)",
     "audience": "Mixed Gentile/Jewish Christians",
-    "depends_on": ["luke"]
+    "depends_on": [
+      "luke"
+    ]
   },
   "paul_pastoral": {
+    "source_id": "paul_pastoral",
     "date_range": "80-120 CE",
     "provenance": "Asia Minor (probable)",
     "audience": "Church leaders and communities associated with Paul",
-    "depends_on": ["paul_undisputed"]
+    "depends_on": [
+      "paul_undisputed"
+    ]
   }
 }

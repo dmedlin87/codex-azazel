@@ -1,0 +1,497 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-8.4.2, pluggy-1.5.0 -- C:\Python312\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'default' -> database=DirectoryBasedExampleDatabase(WindowsPath('C:/Users/dmedl/Projects/codex azazel/.hypothesis/examples'))
+rootdir: C:\Users\dmedl\Projects\codex azazel
+configfile: pyproject.toml
+plugins: anyio-4.11.0, Faker-25.9.2, hypothesis-6.124.6, cov-5.0.0, flask-1.3.0, subtests-0.14.2, timeout-2.3.1, schemathesis-3.39.16
+collecting ... collected 34 items
+
+tests/test_storage.py::test_configure_data_root PASSED                   [  2%]
+tests/test_storage.py::test_save_character_invalidates_query_cache PASSED [  5%]
+tests/test_storage.py::test_save_event_invalidates_query_cache PASSED    [  8%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_character_nonexistent_file PASSED [ 11%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_event_nonexistent_file PASSED [ 14%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_character_malformed_json PASSED [ 17%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_event_malformed_json PASSED [ 20%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_character_missing_required_fields PASSED [ 23%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_event_missing_required_fields PASSED [ 26%]
+tests/test_storage.py::TestStorageErrorHandling::test_load_character_with_empty_source_profiles PASSED [ 29%]
+tests/test_storage.py::TestStorageErrorHandling::test_save_character_creates_directories PASSED [ 32%]
+tests/test_storage.py::TestStorageErrorHandling::test_save_event_creates_directories PASSED [ 35%]
+tests/test_storage.py::TestIterators::test_iter_characters_yields_all FAILED [ 38%]
+tests/test_storage.py::TestIterators::test_iter_events_yields_all FAILED [ 41%]
+tests/test_storage.py::TestIterators::test_iter_characters_yields_character_objects PASSED [ 44%]
+tests/test_storage.py::TestIterators::test_iter_events_yields_event_objects PASSED [ 47%]
+tests/test_storage.py::TestIterators::test_iter_characters_with_empty_directory PASSED [ 50%]
+tests/test_storage.py::TestIterators::test_iter_events_with_empty_directory PASSED [ 52%]
+tests/test_storage.py::TestIterators::test_iter_characters_yields_correct_ids FAILED [ 55%]
+tests/test_storage.py::TestIterators::test_iter_events_yields_correct_ids FAILED [ 58%]
+tests/test_storage.py::TestIterators::test_iter_characters_is_lazy PASSED [ 61%]
+tests/test_storage.py::TestIterators::test_iter_events_is_lazy PASSED    [ 64%]
+tests/test_storage.py::TestListFunctions::test_list_character_ids_returns_sorted_list PASSED [ 67%]
+tests/test_storage.py::TestListFunctions::test_list_event_ids_returns_sorted_list PASSED [ 70%]
+tests/test_storage.py::TestListFunctions::test_list_character_ids_no_duplicates PASSED [ 73%]
+tests/test_storage.py::TestListFunctions::test_list_event_ids_no_duplicates PASSED [ 76%]
+tests/test_storage.py::TestListFunctions::test_list_character_ids_nonexistent_directory PASSED [ 79%]
+tests/test_storage.py::TestListFunctions::test_list_event_ids_nonexistent_directory PASSED [ 82%]
+tests/test_storage.py::TestSaveAndLoad::test_save_and_load_character_preserves_data PASSED [ 85%]
+tests/test_storage.py::TestSaveAndLoad::test_save_and_load_event_preserves_data PASSED [ 88%]
+tests/test_storage.py::TestSaveAndLoad::test_save_character_overwrites_existing PASSED [ 91%]
+tests/test_storage.py::TestSaveAndLoad::test_save_event_overwrites_existing PASSED [ 94%]
+tests/test_storage.py::TestUnicodeHandling::test_save_and_load_character_with_unicode PASSED [ 97%]
+tests/test_storage.py::TestUnicodeHandling::test_save_and_load_event_with_unicode PASSED [100%]
+
+================================== FAILURES ===================================
+________________ TestIterators.test_iter_characters_yields_all ________________
+
+self = <bce.storage.StorageManager object at 0x000001BACCA234D0>
+char_id = 'jesus'
+
+    def load_character(self, char_id: str) -> Character:
+        """Load a character by ID.
+    
+        Parameters:
+            char_id: Character identifier
+    
+        Returns:
+            Character instance
+    
+        Raises:
+            DataNotFoundError: If character doesn't exist
+            StorageError: If character cannot be loaded
+        """
+        path = self._char_dir / f"{char_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize source profiles with variants and citations
+        source_profiles: List[SourceProfile] = []
+        for sp_data in data.get("source_profiles", []):
+            sp_dict = dict(sp_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(sp_dict.get("variants"))
+            sp_dict["variants"] = variants
+            # Ensure citations is a list
+            if "citations" not in sp_dict:
+                sp_dict["citations"] = []
+            source_profiles.append(SourceProfile(**sp_dict))
+    
+        relationships = self._normalize_relationships(data.get("relationships"), char_id)
+        data = {
+            **data,
+            "source_profiles": source_profiles,
+            "relationships": relationships,
+        }
+    
+        try:
+>           return Character(**data)
+                   ^^^^^^^^^^^^^^^^^
+E           TypeError: Character.__init__() got an unexpected keyword argument 'citations'
+
+bce\storage.py:179: TypeError
+
+The above exception was the direct cause of the following exception:
+
+self = <test_storage.TestIterators object at 0x000001BACC939E50>
+
+    def test_iter_characters_yields_all(self):
+        """iter_characters should yield same count as list_character_ids."""
+        char_ids = storage.list_character_ids()
+>       chars_list = list(storage.iter_characters())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_storage.py:228: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+bce\storage.py:197: in iter_characters
+    yield self.load_character(char_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <bce.storage.StorageManager object at 0x000001BACCA234D0>
+char_id = 'jesus'
+
+    def load_character(self, char_id: str) -> Character:
+        """Load a character by ID.
+    
+        Parameters:
+            char_id: Character identifier
+    
+        Returns:
+            Character instance
+    
+        Raises:
+            DataNotFoundError: If character doesn't exist
+            StorageError: If character cannot be loaded
+        """
+        path = self._char_dir / f"{char_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize source profiles with variants and citations
+        source_profiles: List[SourceProfile] = []
+        for sp_data in data.get("source_profiles", []):
+            sp_dict = dict(sp_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(sp_dict.get("variants"))
+            sp_dict["variants"] = variants
+            # Ensure citations is a list
+            if "citations" not in sp_dict:
+                sp_dict["citations"] = []
+            source_profiles.append(SourceProfile(**sp_dict))
+    
+        relationships = self._normalize_relationships(data.get("relationships"), char_id)
+        data = {
+            **data,
+            "source_profiles": source_profiles,
+            "relationships": relationships,
+        }
+    
+        try:
+            return Character(**data)
+        except TypeError as e:
+            # Wrap TypeError with context about which file failed
+>           raise StorageError(
+                f"Failed to load character from {path}: {e}. "
+                f"The JSON data may be missing required fields (id, canonical_name) "
+                f"or have incorrect field types."
+            ) from e
+E           bce.exceptions.StorageError: Failed to load character from C:\Users\dmedl\Projects\codex azazel\bce\data\characters\jesus.json: Character.__init__() got an unexpected keyword argument 'citations'. The JSON data may be missing required fields (id, canonical_name) or have incorrect field types.
+
+bce\storage.py:182: StorageError
+__________________ TestIterators.test_iter_events_yields_all __________________
+
+self = <bce.storage.StorageManager object at 0x000001BACCA234D0>
+event_id = 'empty_tomb'
+
+    def load_event(self, event_id: str) -> Event:
+        """Load an event by ID.
+    
+        Parameters:
+            event_id: Event identifier
+    
+        Returns:
+            Event instance
+    
+        Raises:
+            DataNotFoundError: If event doesn't exist
+            StorageError: If event cannot be loaded
+        """
+        path = self._event_dir / f"{event_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize event accounts with variants
+        accounts: List[EventAccount] = []
+        for acc_data in data.get("accounts", []):
+            acc_dict = dict(acc_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(acc_dict.get("variants"))
+            acc_dict["variants"] = variants
+            accounts.append(EventAccount(**acc_dict))
+    
+        # Ensure citations is present
+        if "citations" not in data:
+            data["citations"] = []
+    
+        data = {**data, "accounts": accounts}
+    
+        try:
+>           return Event(**data)
+                   ^^^^^^^^^^^^^
+E           TypeError: Event.__init__() got an unexpected keyword argument 'textual_variants'
+
+bce\storage.py:256: TypeError
+
+The above exception was the direct cause of the following exception:
+
+self = <test_storage.TestIterators object at 0x000001BACC93A0C0>
+
+    def test_iter_events_yields_all(self):
+        """iter_events should yield same count as list_event_ids."""
+        event_ids = storage.list_event_ids()
+>       events_list = list(storage.iter_events())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_storage.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+bce\storage.py:321: in iter_events
+    yield self.load_event(event_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <bce.storage.StorageManager object at 0x000001BACCA234D0>
+event_id = 'empty_tomb'
+
+    def load_event(self, event_id: str) -> Event:
+        """Load an event by ID.
+    
+        Parameters:
+            event_id: Event identifier
+    
+        Returns:
+            Event instance
+    
+        Raises:
+            DataNotFoundError: If event doesn't exist
+            StorageError: If event cannot be loaded
+        """
+        path = self._event_dir / f"{event_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize event accounts with variants
+        accounts: List[EventAccount] = []
+        for acc_data in data.get("accounts", []):
+            acc_dict = dict(acc_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(acc_dict.get("variants"))
+            acc_dict["variants"] = variants
+            accounts.append(EventAccount(**acc_dict))
+    
+        # Ensure citations is present
+        if "citations" not in data:
+            data["citations"] = []
+    
+        data = {**data, "accounts": accounts}
+    
+        try:
+            return Event(**data)
+        except TypeError as e:
+            # Wrap TypeError with context about which file failed
+>           raise StorageError(
+                f"Failed to load event from {path}: {e}. "
+                f"The JSON data may be missing required fields (id, label) "
+                f"or have incorrect field types."
+            ) from e
+E           bce.exceptions.StorageError: Failed to load event from C:\Users\dmedl\Projects\codex azazel\bce\data\events\empty_tomb.json: Event.__init__() got an unexpected keyword argument 'textual_variants'. The JSON data may be missing required fields (id, label) or have incorrect field types.
+
+bce\storage.py:259: StorageError
+____________ TestIterators.test_iter_characters_yields_correct_ids ____________
+
+self = <bce.storage.StorageManager object at 0x000001BACCA3B890>
+char_id = 'jesus'
+
+    def load_character(self, char_id: str) -> Character:
+        """Load a character by ID.
+    
+        Parameters:
+            char_id: Character identifier
+    
+        Returns:
+            Character instance
+    
+        Raises:
+            DataNotFoundError: If character doesn't exist
+            StorageError: If character cannot be loaded
+        """
+        path = self._char_dir / f"{char_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize source profiles with variants and citations
+        source_profiles: List[SourceProfile] = []
+        for sp_data in data.get("source_profiles", []):
+            sp_dict = dict(sp_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(sp_dict.get("variants"))
+            sp_dict["variants"] = variants
+            # Ensure citations is a list
+            if "citations" not in sp_dict:
+                sp_dict["citations"] = []
+            source_profiles.append(SourceProfile(**sp_dict))
+    
+        relationships = self._normalize_relationships(data.get("relationships"), char_id)
+        data = {
+            **data,
+            "source_profiles": source_profiles,
+            "relationships": relationships,
+        }
+    
+        try:
+>           return Character(**data)
+                   ^^^^^^^^^^^^^^^^^
+E           TypeError: Character.__init__() got an unexpected keyword argument 'citations'
+
+bce\storage.py:179: TypeError
+
+The above exception was the direct cause of the following exception:
+
+self = <test_storage.TestIterators object at 0x000001BACC93AD50>
+
+    def test_iter_characters_yields_correct_ids(self):
+        """iter_characters should yield characters with correct IDs."""
+        expected_ids = set(storage.list_character_ids())
+>       actual_ids = {char.id for char in storage.iter_characters()}
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_storage.py:280: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+bce\storage.py:197: in iter_characters
+    yield self.load_character(char_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <bce.storage.StorageManager object at 0x000001BACCA3B890>
+char_id = 'jesus'
+
+    def load_character(self, char_id: str) -> Character:
+        """Load a character by ID.
+    
+        Parameters:
+            char_id: Character identifier
+    
+        Returns:
+            Character instance
+    
+        Raises:
+            DataNotFoundError: If character doesn't exist
+            StorageError: If character cannot be loaded
+        """
+        path = self._char_dir / f"{char_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize source profiles with variants and citations
+        source_profiles: List[SourceProfile] = []
+        for sp_data in data.get("source_profiles", []):
+            sp_dict = dict(sp_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(sp_dict.get("variants"))
+            sp_dict["variants"] = variants
+            # Ensure citations is a list
+            if "citations" not in sp_dict:
+                sp_dict["citations"] = []
+            source_profiles.append(SourceProfile(**sp_dict))
+    
+        relationships = self._normalize_relationships(data.get("relationships"), char_id)
+        data = {
+            **data,
+            "source_profiles": source_profiles,
+            "relationships": relationships,
+        }
+    
+        try:
+            return Character(**data)
+        except TypeError as e:
+            # Wrap TypeError with context about which file failed
+>           raise StorageError(
+                f"Failed to load character from {path}: {e}. "
+                f"The JSON data may be missing required fields (id, canonical_name) "
+                f"or have incorrect field types."
+            ) from e
+E           bce.exceptions.StorageError: Failed to load character from C:\Users\dmedl\Projects\codex azazel\bce\data\characters\jesus.json: Character.__init__() got an unexpected keyword argument 'citations'. The JSON data may be missing required fields (id, canonical_name) or have incorrect field types.
+
+bce\storage.py:182: StorageError
+______________ TestIterators.test_iter_events_yields_correct_ids ______________
+
+self = <bce.storage.StorageManager object at 0x000001BACCA3B890>
+event_id = 'empty_tomb'
+
+    def load_event(self, event_id: str) -> Event:
+        """Load an event by ID.
+    
+        Parameters:
+            event_id: Event identifier
+    
+        Returns:
+            Event instance
+    
+        Raises:
+            DataNotFoundError: If event doesn't exist
+            StorageError: If event cannot be loaded
+        """
+        path = self._event_dir / f"{event_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize event accounts with variants
+        accounts: List[EventAccount] = []
+        for acc_data in data.get("accounts", []):
+            acc_dict = dict(acc_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(acc_dict.get("variants"))
+            acc_dict["variants"] = variants
+            accounts.append(EventAccount(**acc_dict))
+    
+        # Ensure citations is present
+        if "citations" not in data:
+            data["citations"] = []
+    
+        data = {**data, "accounts": accounts}
+    
+        try:
+>           return Event(**data)
+                   ^^^^^^^^^^^^^
+E           TypeError: Event.__init__() got an unexpected keyword argument 'textual_variants'
+
+bce\storage.py:256: TypeError
+
+The above exception was the direct cause of the following exception:
+
+self = <test_storage.TestIterators object at 0x000001BACC93AFC0>
+
+    def test_iter_events_yields_correct_ids(self):
+        """iter_events should yield events with correct IDs."""
+        expected_ids = set(storage.list_event_ids())
+>       actual_ids = {event.id for event in storage.iter_events()}
+                                            ^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_storage.py:287: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+bce\storage.py:321: in iter_events
+    yield self.load_event(event_id)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <bce.storage.StorageManager object at 0x000001BACCA3B890>
+event_id = 'empty_tomb'
+
+    def load_event(self, event_id: str) -> Event:
+        """Load an event by ID.
+    
+        Parameters:
+            event_id: Event identifier
+    
+        Returns:
+            Event instance
+    
+        Raises:
+            DataNotFoundError: If event doesn't exist
+            StorageError: If event cannot be loaded
+        """
+        path = self._event_dir / f"{event_id}.json"
+        data = self._read_json(path)
+    
+        # Deserialize event accounts with variants
+        accounts: List[EventAccount] = []
+        for acc_data in data.get("accounts", []):
+            acc_dict = dict(acc_data)  # Make a copy to avoid mutating original
+            # Deserialize variants if present
+            variants = self._deserialize_variants(acc_dict.get("variants"))
+            acc_dict["variants"] = variants
+            accounts.append(EventAccount(**acc_dict))
+    
+        # Ensure citations is present
+        if "citations" not in data:
+            data["citations"] = []
+    
+        data = {**data, "accounts": accounts}
+    
+        try:
+            return Event(**data)
+        except TypeError as e:
+            # Wrap TypeError with context about which file failed
+>           raise StorageError(
+                f"Failed to load event from {path}: {e}. "
+                f"The JSON data may be missing required fields (id, label) "
+                f"or have incorrect field types."
+            ) from e
+E           bce.exceptions.StorageError: Failed to load event from C:\Users\dmedl\Projects\codex azazel\bce\data\events\empty_tomb.json: Event.__init__() got an unexpected keyword argument 'textual_variants'. The JSON data may be missing required fields (id, label) or have incorrect field types.
+
+bce\storage.py:259: StorageError
+============================== warnings summary ===============================
+..\..\AppData\Roaming\Python\Python312\site-packages\schemathesis\generation\coverage.py:305
+  C:\Users\dmedl\AppData\Roaming\Python\Python312\site-packages\schemathesis\generation\coverage.py:305: DeprecationWarning: jsonschema.exceptions.RefResolutionError is deprecated as of version 4.18.0. If you wish to catch potential reference resolution errors, directly catch referencing.exceptions.Unresolvable.
+    ref_error: type[Exception] = jsonschema.RefResolutionError,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_storage.py::TestIterators::test_iter_characters_yields_all - bce.exceptions.StorageError: Failed to load character from C:\Users\dmedl\Projects\codex azazel\bce\data\characters\jesus.json: Character.__init__() got an unexpected keyword argument 'citations'. The JSON data may be missing required fields (id, canonical_name) or have incorrect field types.
+FAILED tests/test_storage.py::TestIterators::test_iter_events_yields_all - bce.exceptions.StorageError: Failed to load event from C:\Users\dmedl\Projects\codex azazel\bce\data\events\empty_tomb.json: Event.__init__() got an unexpected keyword argument 'textual_variants'. The JSON data may be missing required fields (id, label) or have incorrect field types.
+FAILED tests/test_storage.py::TestIterators::test_iter_characters_yields_correct_ids - bce.exceptions.StorageError: Failed to load character from C:\Users\dmedl\Projects\codex azazel\bce\data\characters\jesus.json: Character.__init__() got an unexpected keyword argument 'citations'. The JSON data may be missing required fields (id, canonical_name) or have incorrect field types.
+FAILED tests/test_storage.py::TestIterators::test_iter_events_yields_correct_ids - bce.exceptions.StorageError: Failed to load event from C:\Users\dmedl\Projects\codex azazel\bce\data\events\empty_tomb.json: Event.__init__() got an unexpected keyword argument 'textual_variants'. The JSON data may be missing required fields (id, label) or have incorrect field types.
+=================== 4 failed, 30 passed, 1 warning in 0.66s ===================

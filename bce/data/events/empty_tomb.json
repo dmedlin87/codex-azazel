@@ -1,8 +1,15 @@
 {
   "id": "empty_tomb",
   "label": "Discovery of the Empty Tomb",
-  "participants": ["jesus", "mary_magdalene", "peter"],
-  "tags": ["resurrection", "empty_tomb"],
+  "participants": [
+    "jesus",
+    "mary_magdalene",
+    "peter"
+  ],
+  "tags": [
+    "resurrection",
+    "empty_tomb"
+  ],
   "accounts": [
     {
       "source_id": "mark",
@@ -29,9 +36,34 @@
       "notes": "Mary Magdalene goes alone initially. Two angels appear only after Peter and beloved disciple leave. Jesus appears to Mary alone at the tomb. Completely different sequence and participants than the synoptic accounts."
     }
   ],
+  "textual_variants": [
+    {
+      "source_id": "mark",
+      "reference": "Mark 16:9-20",
+      "variant_type": "addition",
+      "description": "The 'Longer Ending' of Mark, which includes appearances to Mary Magdalene, two disciples on the road, and the eleven, followed by the Great Commission and Ascension.",
+      "manuscript_support": "Found in most later manuscripts (A, C, D, W, Byzantine text).",
+      "manuscript_lack": "Absent from the earliest and most reliable manuscripts (Sinaiticus, Vaticanus), some Old Latin, Syriac, and Armenian versions. Eusebius and Jerome note its absence in most Greek copies.",
+      "significance": "Scholars widely agree this is a later addition to harmonize Mark with other Gospels and provide a more satisfactory conclusion than 16:8."
+    },
+    {
+      "source_id": "mark",
+      "reference": "Mark 16:after 8",
+      "variant_type": "addition",
+      "description": "The 'Shorter Ending' of Mark, a brief paragraph describing the women reporting to Peter and those with him, followed by Jesus sending out the message of salvation.",
+      "manuscript_support": "Found in some manuscripts (L, Psi, 099, 0112, some Coptic/Syriac versions), often combined with the Longer Ending.",
+      "manuscript_lack": "Absent from Sinaiticus, Vaticanus, and the majority of Byzantine manuscripts.",
+      "significance": "Clearly an attempt to smooth the abrupt ending at 16:8."
+    }
+  ],
   "parallels": [
     {
-      "sources": ["mark", "matthew", "luke", "john"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
       "references": {
         "mark": "Mark 16:1-8",
         "matthew": "Matthew 28:1-10",

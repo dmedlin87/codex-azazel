@@ -1,0 +1,68 @@
+{
+    "id": "last_supper",
+    "label": "The Last Supper",
+    "participants": [
+        "jesus",
+        "peter",
+        "john",
+        "judas_iscariot"
+    ],
+    "tags": [
+        "last_supper",
+        "eucharist",
+        "passover",
+        "betrayal",
+        "new_covenant"
+    ],
+    "accounts": [
+        {
+            "source_id": "mark",
+            "reference": "Mark 14:12-25",
+            "summary": "Jesus shares a Passover meal with the Twelve. He predicts the betrayal by one dipping bread with him. He institutes the Lord's Supper with bread and cup, interpreting them as his body and blood of the covenant.",
+            "notes": "Focuses on the betrayal and the institution of the meal. Ends with the vow of abstinence until the kingdom."
+        },
+        {
+            "source_id": "matthew",
+            "reference": "Matthew 26:17-29",
+            "summary": "Follows Mark closely. Adds 'for the forgiveness of sins' to the cup word. Judas asks, 'Is it I, Rabbi?' and Jesus confirms it.",
+            "notes": "Explicitly links the blood to forgiveness. Highlights Judas's responsibility."
+        },
+        {
+            "source_id": "luke",
+            "reference": "Luke 22:7-38",
+            "summary": "Jesus eagerly desires to eat this Passover. He institutes the meal (longer text includes two cups). A dispute about greatness follows. Jesus predicts Peter's denial and speaks of the two swords.",
+            "notes": "Places the dispute and denial prediction *during* the supper. Emphasizes service and the new covenant."
+        },
+        {
+            "source_id": "john",
+            "reference": "John 13:1-30",
+            "summary": "During supper (before Passover), Jesus washes the disciples' feet as an example of love. He predicts the betrayal, gives the morsel to Judas, who leaves into the night. No institution of bread/cup.",
+            "notes": "Replaces the eucharistic institution with the foot washing. Focuses on love and cleansing. Judas is possessed by Satan."
+        },
+        {
+            "source_id": "paul_undisputed",
+            "reference": "1 Corinthians 11:23-26",
+            "summary": "Paul recounts the tradition he received: on the night he was betrayed, Jesus took bread and the cup, identifying them as his body and the new covenant in his blood, commanding remembrance.",
+            "notes": "Earliest written account. Establishes the liturgical tradition 'until he comes'."
+        }
+    ],
+    "parallels": [
+        {
+            "sources": [
+                "mark",
+                "matthew",
+                "luke",
+                "john",
+                "paul_undisputed"
+            ],
+            "references": {
+                "mark": "Mark 14:12-25",
+                "matthew": "Matthew 26:17-29",
+                "luke": "Luke 22:7-38",
+                "john": "John 13:1-30",
+                "paul_undisputed": "1 Corinthians 11:23-26"
+            },
+            "relationship": "gospel_parallel"
+        }
+    ]
+}

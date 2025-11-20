@@ -1,0 +1,23 @@
+{
+    "id": "pentecost",
+    "label": "Day of Pentecost",
+    "participants": [
+        "peter"
+    ],
+    "tags": [
+        "pentecost",
+        "holy_spirit",
+        "church_birth",
+        "glossolalia",
+        "peter_speech"
+    ],
+    "accounts": [
+        {
+            "source_id": "acts",
+            "reference": "Acts 2:1-41",
+            "summary": "The disciples are gathered when a sound like a rushing wind fills the house and tongues of fire rest on them. They speak in other languages. Peter preaches to the crowd, interpreting the event as Joel's prophecy and proclaiming Jesus as Lord and Christ. About 3,000 are baptized.",
+            "notes": "Marks the outpouring of the Spirit and the birth of the church's public mission. Reverses Babel."
+        }
+    ],
+    "parallels": []
+}

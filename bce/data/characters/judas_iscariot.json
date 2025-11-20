@@ -1,0 +1,48 @@
+{
+    "id": "judas_iscariot",
+    "canonical_name": "Judas Iscariot",
+    "aliases": [
+        "Judas"
+    ],
+    "roles": [
+        "disciple",
+        "betrayer"
+    ],
+    "tags": [
+        "twelve",
+        "betrayal",
+        "money"
+    ],
+    "relationships": [
+        {
+            "character_id": "jesus",
+            "type": "teacher_and_victim",
+            "sources": [
+                "mark",
+                "matthew",
+                "luke",
+                "john"
+            ],
+            "references": [
+                "Mark 14:10-11",
+                "Matthew 26:14-16",
+                "Luke 22:3-6",
+                "John 13:21-30"
+            ],
+            "notes": "One of the Twelve who handed Jesus over to the authorities."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "mark",
+            "traits": {
+                "betrayal": "Goes to the chief priests to betray Jesus.",
+                "identification": "Identifies Jesus with a kiss."
+            },
+            "references": [
+                "Mark 14:10-11",
+                "Mark 14:43-45"
+            ]
+        }
+    ]
+}

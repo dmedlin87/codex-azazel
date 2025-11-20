@@ -1,0 +1,53 @@
+{
+    "id": "felix",
+    "canonical_name": "Antonius Felix",
+    "aliases": [
+        "Felix"
+    ],
+    "roles": [
+        "procurator",
+        "governor"
+    ],
+    "tags": [
+        "roman_official",
+        "trial",
+        "caesarea"
+    ],
+    "relationships": [
+        {
+            "character_id": "paul",
+            "type": "judge_and_captor",
+            "sources": [
+                "acts"
+            ],
+            "references": [
+                "Acts 23:24-24:27"
+            ],
+            "notes": "Keeps Paul in custody for two years, hoping for a bribe."
+        },
+        {
+            "character_id": "drusilla",
+            "type": "spouse",
+            "sources": [
+                "acts"
+            ],
+            "references": [
+                "Acts 24:24"
+            ],
+            "notes": "His Jewish wife who listens to Paul speak."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "acts",
+            "traits": {
+                "knowledge": "Had a rather accurate knowledge of the Way.",
+                "corruption": "Hoped for money to be given him by Paul.",
+                "procrastination": "Sent Paul away when convicted by his preaching on righteousness and judgment."
+            },
+            "references": [
+                "Acts 23:24-24:27"
+            ]
+        }
+    ]
+}

@@ -34,78 +34,187 @@
     {
       "character_id": "mary_mother_of_jesus",
       "type": "mother",
-      "sources": ["mark", "matthew", "luke", "john"],
-      "references": ["Mark 3:31-35", "Matthew 1-2", "Luke 1-2", "John 19:25-27"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 3:31-35",
+        "Matthew 1-2",
+        "Luke 1-2",
+        "John 19:25-27"
+      ],
       "notes": "Primary familial bond; depicted as faithful witness from birth narratives through the cross."
     },
     {
       "character_id": "joseph_husband_of_mary",
       "type": "legal_father",
-      "sources": ["matthew", "luke"],
-      "references": ["Matthew 1:18-25", "Matthew 2:13-23", "Luke 2:1-52"],
+      "sources": [
+        "matthew",
+        "luke"
+      ],
+      "references": [
+        "Matthew 1:18-25",
+        "Matthew 2:13-23",
+        "Luke 2:1-52"
+      ],
       "notes": "Davidic descendant who protects the family in infancy narratives and models obedience."
     },
     {
       "character_id": "james_the_just",
       "type": "brother",
-      "sources": ["mark", "john", "acts", "paul_undisputed"],
-      "references": ["Mark 6:3", "John 7:5", "Acts 15:13-21", "1 Corinthians 15:7"],
+      "sources": [
+        "mark",
+        "john",
+        "acts",
+        "paul_undisputed"
+      ],
+      "references": [
+        "Mark 6:3",
+        "John 7:5",
+        "Acts 15:13-21",
+        "1 Corinthians 15:7"
+      ],
       "notes": "Skeptical during ministry yet key leader in Jerusalem after the resurrection. Represents Jesus's siblings collectively."
     },
     {
       "character_id": "john_the_baptist",
       "type": "prophetic_forerunner_and_baptizer",
-      "sources": ["mark", "matthew", "luke", "john"],
-      "references": ["Mark 1:2-11", "Matthew 3:1-17", "Luke 3:1-22", "John 1:19-34"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 1:2-11",
+        "Matthew 3:1-17",
+        "Luke 3:1-22",
+        "John 1:19-34"
+      ],
       "notes": "Commissioned Jesus into public ministry and framed his message in apocalyptic repentance."
     },
     {
       "character_id": "peter",
       "type": "inner_circle_disciple",
-      "sources": ["mark", "matthew", "luke", "john", "acts"],
-      "references": ["Mark 8:27-33", "Matthew 16:13-20", "Luke 5:1-11", "John 21:15-19", "Acts 2-5"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john",
+        "acts"
+      ],
+      "references": [
+        "Mark 8:27-33",
+        "Matthew 16:13-20",
+        "Luke 5:1-11",
+        "John 21:15-19",
+        "Acts 2-5"
+      ],
       "notes": "Confesses Jesus as messiah yet misunderstands suffering path; leader in early church."
     },
     {
       "character_id": "james_son_of_zebedee",
       "type": "inner_circle_disciple",
-      "sources": ["mark", "matthew", "luke", "acts"],
-      "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "Acts 12:1-2"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "acts"
+      ],
+      "references": [
+        "Mark 5:37",
+        "Matthew 17:1",
+        "Luke 9:28",
+        "Acts 12:1-2"
+      ],
       "notes": "Witness to key revelations and martyr referenced in Acts."
     },
     {
       "character_id": "john",
       "type": "inner_circle_disciple",
-      "sources": ["mark", "matthew", "luke", "john", "revelation"],
-      "references": ["Mark 5:37", "Matthew 17:1", "Luke 9:28", "John 13:23", "Revelation 1:1-9"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john",
+        "revelation"
+      ],
+      "references": [
+        "Mark 5:37",
+        "Matthew 17:1",
+        "Luke 9:28",
+        "John 13:23",
+        "Revelation 1:1-9"
+      ],
       "notes": "Traditionally associated with the beloved disciple and Johannine witness."
     },
     {
       "character_id": "mary_magdalene",
       "type": "disciple_and_resurrection_witness",
-      "sources": ["mark", "matthew", "luke", "john"],
-      "references": ["Mark 15:40-41", "Matthew 27:55-28:10", "Luke 8:1-3", "John 20:1-18"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 15:40-41",
+        "Matthew 27:55-28:10",
+        "Luke 8:1-3",
+        "John 20:1-18"
+      ],
       "notes": "Supports Jesus's ministry materially and becomes first witness in multiple gospels."
     },
     {
       "character_id": "pharisees",
       "type": "religious_critics",
-      "sources": ["mark", "matthew", "luke", "john"],
-      "references": ["Mark 2:1-3:6", "Matthew 23", "Luke 11:37-54", "John 7:45-52"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john"
+      ],
+      "references": [
+        "Mark 2:1-3:6",
+        "Matthew 23",
+        "Luke 11:37-54",
+        "John 7:45-52"
+      ],
       "notes": "Debate purity, Sabbath, and authority claims; conflicts showcase interpretations of Torah."
     },
     {
       "character_id": "pilate",
       "type": "imperial_authority",
-      "sources": ["mark", "matthew", "luke", "john", "acts"],
-      "references": ["Mark 15:1-15", "Matthew 27:11-26", "Luke 23:6-25", "John 18:28-19:22", "Acts 4:26-28"],
+      "sources": [
+        "mark",
+        "matthew",
+        "luke",
+        "john",
+        "acts"
+      ],
+      "references": [
+        "Mark 15:1-15",
+        "Matthew 27:11-26",
+        "Luke 23:6-25",
+        "John 18:28-19:22",
+        "Acts 4:26-28"
+      ],
       "notes": "Roman prefect who interrogates and ultimately executes Jesus under treason charges."
     },
     {
       "character_id": "herod_antipas",
       "type": "imperial_authority",
-      "sources": ["luke", "acts"],
-      "references": ["Luke 23:6-25", "Acts 4:26-28"],
+      "sources": [
+        "luke",
+        "acts"
+      ],
+      "references": [
+        "Luke 23:6-25",
+        "Acts 4:26-28"
+      ],
       "notes": "Client ruler who participates in Jesus's trial and execution."
     }
   ],
@@ -119,7 +228,15 @@
         "death_resurrection": "Portrayed as the suffering Son of Man whose crucifixion reveals divine sonship and whose empty tomb prompts fearful proclamation.",
         "eschatology": "Apocalyptic discourse warns of tribulation, vigilance, and the Son of Man's imminent return."
       },
-      "references": ["Mark 1:14-15", "Mark 2:1-3:6", "Mark 5:1-43", "Mark 8:27-9:1", "Mark 13", "Mark 15:33-39", "Mark 16:1-8"]
+      "references": [
+        "Mark 1:14-15",
+        "Mark 2:1-3:6",
+        "Mark 5:1-43",
+        "Mark 8:27-9:1",
+        "Mark 13",
+        "Mark 15:33-39",
+        "Mark 16:1-8"
+      ]
     },
     {
       "source_id": "matthew",
@@ -130,7 +247,14 @@
         "death_resurrection": "Narrates cosmic portents at crucifixion and authoritative commissioning of disciples after resurrection appearances in Galilee.",
         "eschatology": "Parables and the Olivet Discourse stress readiness for judgment, inclusive mission to nations, and the Son of Man's glorious arrival."
       },
-      "references": ["Matthew 1-2", "Matthew 5-7", "Matthew 8-9", "Matthew 23", "Matthew 24-25", "Matthew 28:1-20"]
+      "references": [
+        "Matthew 1-2",
+        "Matthew 5-7",
+        "Matthew 8-9",
+        "Matthew 23",
+        "Matthew 24-25",
+        "Matthew 28:1-20"
+      ]
     },
     {
       "source_id": "luke",
@@ -141,7 +265,15 @@
         "death_resurrection": "Highlights Jesus's innocence, forgiveness from the cross, and appearances that ground witness and table fellowship.",
         "eschatology": "Balances imminence with patience, urging watchfulness amid persecution and hope for redemption."
       },
-      "references": ["Luke 1-4", "Luke 7:11-17", "Luke 9:51-62", "Luke 11:37-54", "Luke 13:34-35", "Luke 21", "Luke 22-24"]
+      "references": [
+        "Luke 1-4",
+        "Luke 7:11-17",
+        "Luke 9:51-62",
+        "Luke 11:37-54",
+        "Luke 13:34-35",
+        "Luke 21",
+        "Luke 22-24"
+      ]
     },
     {
       "source_id": "john",
@@ -152,7 +284,15 @@
         "death_resurrection": "Cross is enthronement where the Lamb completes mission; resurrection appearances recommission disciples with Spirit.",
         "eschatology": "Presents realized eternal life now while promising future resurrection and Spirit-paraclete guidance."
       },
-      "references": ["John 1:1-18", "John 2:1-11", "John 5", "John 8", "John 11", "John 13-17", "John 18-21"]
+      "references": [
+        "John 1:1-18",
+        "John 2:1-11",
+        "John 5",
+        "John 8",
+        "John 11",
+        "John 13-17",
+        "John 18-21"
+      ]
     },
     {
       "source_id": "acts",
@@ -163,7 +303,14 @@
         "death_resurrection": "Proclaimed boldly in apostolic speeches as God's vindication that enthrones Jesus as Lord and Christ.",
         "eschatology": "Ascension promises future return, motivating communal perseverance amid mission expansion."
       },
-      "references": ["Acts 1:1-11", "Acts 2:22-36", "Acts 3:11-26", "Acts 4:23-31", "Acts 5:27-32", "Acts 10:34-43"]
+      "references": [
+        "Acts 1:1-11",
+        "Acts 2:22-36",
+        "Acts 3:11-26",
+        "Acts 4:23-31",
+        "Acts 5:27-32",
+        "Acts 10:34-43"
+      ]
     },
     {
       "source_id": "revelation",
@@ -174,7 +321,13 @@
         "death_resurrection": "Slain-yet-standing Lamb's sacrifice ransoms multitudes and grounds final victory.",
         "eschatology": "Returns as warrior-king, ushers final judgment, and renews creation with New Jerusalem."
       },
-      "references": ["Revelation 1:12-20", "Revelation 5", "Revelation 12", "Revelation 19", "Revelation 21-22"]
+      "references": [
+        "Revelation 1:12-20",
+        "Revelation 5",
+        "Revelation 12",
+        "Revelation 19",
+        "Revelation 21-22"
+      ]
     },
     {
       "source_id": "paul_undisputed",
@@ -185,7 +338,14 @@
         "death_resurrection": "Centers gospel on atoning death and resurrection appearances that ground justification and hope.",
         "eschatology": "Anticipates imminent parousia while teaching resurrection bodies and transformative hope."
       },
-      "references": ["1 Corinthians 1:18-25", "1 Corinthians 2:1-5", "Romans 15:18-19", "Galatians 2:11-21", "1 Corinthians 15:3-28", "1 Thessalonians 4:13-18"]
+      "references": [
+        "1 Corinthians 1:18-25",
+        "1 Corinthians 2:1-5",
+        "Romans 15:18-19",
+        "Galatians 2:11-21",
+        "1 Corinthians 15:3-28",
+        "1 Thessalonians 4:13-18"
+      ]
     },
     {
       "source_id": "hebrews",
@@ -196,7 +356,21 @@
         "death_resurrection": "Highlights perfection through suffering, once-for-all sacrifice, and enthronement at God's right hand.",
         "eschatology": "Encourages persevering pilgrimage toward the unshakable kingdom and heavenly city."
       },
-      "references": ["Hebrews 1:1-4", "Hebrews 2:3-4", "Hebrews 3:1-19", "Hebrews 4:14-16", "Hebrews 7-10", "Hebrews 12:1-29"]
+      "references": [
+        "Hebrews 1:1-4",
+        "Hebrews 2:3-4",
+        "Hebrews 3:1-19",
+        "Hebrews 4:14-16",
+        "Hebrews 7-10",
+        "Hebrews 12:1-29"
+      ]
     }
+  ],
+  "citations": [
+    "Meier, John P. A Marginal Jew: Rethinking the Historical Jesus. 5 vols. Doubleday, 1991-2016. (Comprehensive historical-critical analysis of the life and ministry of Jesus.)",
+    "Brown, Raymond E. The Death of the Messiah. 2 vols. Doubleday, 1994. (Detailed commentary on the passion narratives in the four Gospels.)",
+    "Ehrman, Bart D. Jesus: Apocalyptic Prophet of the New Millennium. Oxford University Press, 1999. (Presents Jesus as an apocalyptic prophet expecting the imminent end of the age.)",
+    "Sanders, E. P. Jesus and Judaism. Fortress Press, 1985. (Places Jesus firmly within the context of Second Temple Judaism.)",
+    "Wright, N. T. Jesus and the Victory of God. Fortress Press, 1996. (Argues for Jesus' self-understanding as Messiah enacting the return of YHWH to Zion.)"
   ]
 }

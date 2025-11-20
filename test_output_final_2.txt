@@ -1,0 +1,100 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-8.4.2, pluggy-1.5.0
+rootdir: C:\Users\dmedl\Projects\codex azazel
+configfile: pyproject.toml
+plugins: anyio-4.11.0, Faker-25.9.2, hypothesis-6.124.6, cov-5.0.0, flask-1.3.0, subtests-0.14.2, timeout-2.3.1, schemathesis-3.39.16
+collected 1272 items
+
+tests\test_ai_api_disabled_behavior.py ...................               [  1%]
+tests\test_ai_cache_and_embeddings.py .................................. [  4%]
+................................                                         [  6%]
+tests\test_ai_clustering.py .............................                [  8%]
+tests\test_ai_completeness.py .......................................... [ 12%]
+...                                                                      [ 12%]
+tests\test_ai_conflict_analysis.py ..................................... [ 15%]
+.....................                                                    [ 17%]
+tests\test_ai_event_reconstruction.py ............................       [ 19%]
+tests\test_ai_extended_features.py ...........                           [ 20%]
+tests\test_ai_foundation.py ...............................              [ 22%]
+tests\test_ai_models_core.py .......................................     [ 25%]
+tests\test_ai_parallel_detection.py .................................... [ 28%]
+.................................                                        [ 31%]
+tests\test_ai_question_answering.py ............................         [ 33%]
+tests\test_ai_relationship_inference.py ..............................   [ 35%]
+tests\test_ai_semantic_contradictions.py ............................... [ 38%]
+.....                                                                    [ 38%]
+tests\test_ai_semantic_search.py ....................................... [ 41%]
+......                                                                   [ 41%]
+tests\test_ai_source_analysis.py ....................................... [ 45%]
+................                                                         [ 46%]
+tests\test_ai_summaries.py .................................             [ 48%]
+tests\test_ai_trait_extraction.py ...................................... [ 51%]
+.........                                                                [ 52%]
+tests\test_ai_validation_assistant.py .................................. [ 55%]
+...........                                                              [ 56%]
+tests\test_api.py ...........                                            [ 56%]
+tests\test_api_extended.py ...............                               [ 58%]
+tests\test_basic.py ......                                               [ 58%]
+tests\test_bibles.py ....                                                [ 58%]
+tests\test_cache.py .....                                                [ 59%]
+tests\test_cli.py ...........                                            [ 60%]
+tests\test_config.py ....................                                [ 61%]
+tests\test_contradictions.py ...................                         [ 63%]
+tests\test_data_integrity.py ........................                    [ 65%]
+tests\test_dossier_markdown.py ....                                      [ 65%]
+tests\test_dossier_types.py .......                                      [ 66%]
+tests\test_dossiers.py .................                                 [ 67%]
+tests\test_error_handling.py ......................                      [ 69%]
+tests\test_export.py ............................                        [ 71%]
+tests\test_export_citations.py ....                                      [ 71%]
+tests\test_export_csv.py ........                                        [ 72%]
+tests\test_export_graph.py .......                                       [ 72%]
+tests\test_export_json.py ..................                             [ 74%]
+tests\test_hydrate_missing_fields.py .....................               [ 75%]
+tests\test_integration.py ...........                                    [ 76%]
+tests\test_main_cli.py .................                                 [ 78%]
+tests\test_models.py ..............................                      [ 80%]
+tests\test_models_helpers.py ....                                        [ 80%]
+tests\test_queries.py ...........................                        [ 82%]
+tests\test_search.py ..                                                  [ 83%]
+tests\test_search_scopes.py .....                                        [ 83%]
+tests\test_server_behavior.py .......................................... [ 86%]
+.......................                                                  [ 88%]
+tests\test_services.py ........                                          [ 89%]
+tests\test_storage.py ..................................                 [ 91%]
+tests\test_storage_extended.py .........                                 [ 92%]
+tests\test_tags.py ..                                                    [ 92%]
+tests\test_validate_schema_hydration.py ................................ [ 95%]
+..............                                                           [ 96%]
+tests\test_validation.py F.....                                          [ 96%]
+tests\test_validation_extended.py .........................              [ 98%]
+tests\test_variants_and_citations.py ................                    [100%]
+
+================================== FAILURES ===================================
+_______________________ test_validate_all_has_no_errors _______________________
+
+    def test_validate_all_has_no_errors() -> None:
+        errors = validate_all()
+>       assert errors == [], f"Validation errors: {errors}"
+E       AssertionError: Validation errors: ["Event 'transfiguration' account from '2_peter' has no participant with matching source profile"]
+E       assert ["Event 'tran...urce profile"] == []
+E         
+E         Left contains one more item: "Event 'transfiguration' account from '2_peter' has no participant with matching source profile"
+E         Use -v to get more diff
+
+tests\test_validation.py:10: AssertionError
+============================== warnings summary ===============================
+..\..\AppData\Roaming\Python\Python312\site-packages\schemathesis\generation\coverage.py:305
+  C:\Users\dmedl\AppData\Roaming\Python\Python312\site-packages\schemathesis\generation\coverage.py:305: DeprecationWarning: jsonschema.exceptions.RefResolutionError is deprecated as of version 4.18.0. If you wish to catch potential reference resolution errors, directly catch referencing.exceptions.Unresolvable.
+    ref_error: type[Exception] = jsonschema.RefResolutionError,
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_validation.py::test_validate_all_has_no_errors - AssertionE...
+================= 1 failed, 1271 passed, 3 warnings in 18.09s =================

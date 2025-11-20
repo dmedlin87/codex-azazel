@@ -1,0 +1,53 @@
+{
+    "id": "festus",
+    "canonical_name": "Porcius Festus",
+    "aliases": [
+        "Festus"
+    ],
+    "roles": [
+        "procurator",
+        "governor"
+    ],
+    "tags": [
+        "roman_official",
+        "trial",
+        "caesarea"
+    ],
+    "relationships": [
+        {
+            "character_id": "paul",
+            "type": "judge",
+            "sources": [
+                "acts"
+            ],
+            "references": [
+                "Acts 25-26"
+            ],
+            "notes": "Hears Paul's defense and sends him to Caesar."
+        },
+        {
+            "character_id": "herod_agrippa_ii",
+            "type": "consultant",
+            "sources": [
+                "acts"
+            ],
+            "references": [
+                "Acts 25:13-26:32"
+            ],
+            "notes": "Consults with Agrippa regarding Paul's case."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "acts",
+            "traits": {
+                "perplexity": "At a loss how to investigate Paul's religious disputes.",
+                "skepticism": "Declares Paul is mad because of his great learning.",
+                "legal_procedure": "Adheres to Roman custom of facing accusers."
+            },
+            "references": [
+                "Acts 25-26"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "id": "drusilla",
+    "canonical_name": "Drusilla",
+    "aliases": [],
+    "roles": [
+        "wife_of_felix"
+    ],
+    "tags": [
+        "jewish"
+    ],
+    "relationships": [
+        {
+            "character_id": "felix",
+            "type": "spouse",
+            "sources": [
+                "acts"
+            ],
+            "references": [
+                "Acts 24:24"
+            ],
+            "notes": "Wife of Felix."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "acts",
+            "traits": {
+                "identity": "A Jewess who heard Paul speak."
+            },
+            "references": [
+                "Acts 24:24"
+            ]
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Optional
@@ -9,6 +10,8 @@ from .cache import CacheRegistry
 from .config import BceConfig, get_default_config
 from .exceptions import DataNotFoundError, StorageError
 from .models import Character, Event, EventAccount, SourceProfile, TextualVariant
+
+logger = logging.getLogger(__name__)
 
 
 class StorageManager:
@@ -121,7 +124,7 @@ class StorageManager:
                     result.append(TextualVariant(**variant_dict))
                 except (TypeError, ValueError) as e:
                     # Log warning but continue - don't fail entire load for bad variant
-                    # TODO: Consider adding logging here
+                    logger.warning(f"Failed to deserialize variant: {e}. Data: {variant_dict}")
                     continue
         return result
 

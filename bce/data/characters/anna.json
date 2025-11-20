@@ -1,0 +1,41 @@
+{
+    "id": "anna",
+    "canonical_name": "Anna",
+    "aliases": [],
+    "roles": [
+        "prophetess",
+        "widow"
+    ],
+    "tags": [
+        "temple",
+        "prophetess",
+        "fasting",
+        "prayer"
+    ],
+    "relationships": [
+        {
+            "character_id": "jesus",
+            "type": "witness_to_messiah",
+            "sources": [
+                "luke"
+            ],
+            "references": [
+                "Luke 2:36-38"
+            ],
+            "notes": "Speaks of the child to all who were looking for the redemption of Jerusalem."
+        }
+    ],
+    "source_profiles": [
+        {
+            "source_id": "luke",
+            "traits": {
+                "piety": "Worshipped with fasting and prayer night and day in the temple.",
+                "age_and_status": "A widow of great age (84) and a prophetess, daughter of Phanuel.",
+                "proclamation": "Gave thanks to God and spoke about the child."
+            },
+            "references": [
+                "Luke 2:36-38"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "id": "baptism",
+    "label": "Baptism of Jesus",
+    "participants": [
+        "jesus",
+        "john_the_baptist"
+    ],
+    "tags": [
+        "baptism",
+        "john_the_baptist",
+        "holy_spirit",
+        "voice_from_heaven"
+    ],
+    "accounts": [
+        {
+            "source_id": "mark",
+            "reference": "Mark 1:9-11",
+            "summary": "Jesus comes from Nazareth, is baptized by John in the Jordan. As he emerges, he sees the heavens torn open and the Spirit descending like a dove, and a voice declares him the beloved Son.",
+            "notes": "Theophany is private to Jesus ('he saw'). Marks the beginning of the gospel."
+        },
+        {
+            "source_id": "matthew",
+            "reference": "Matthew 3:13-17",
+            "summary": "Jesus comes to John, who tries to deter him. Jesus insists it is to 'fulfill all righteousness.' After baptism, the Spirit descends and a voice declares him the beloved Son.",
+            "notes": "Includes dialogue explaining why Jesus needs baptism (apologetic motif). Theophany is public ('This is my Son')."
+        },
+        {
+            "source_id": "luke",
+            "reference": "Luke 3:21-22",
+            "summary": "After all the people are baptized, and while Jesus is praying, heaven opens and the Spirit descends in bodily form like a dove. A voice speaks to him directly.",
+            "notes": "Baptism is mentioned in passing ('when Jesus also had been baptized'). Emphasizes prayer and the physical reality of the Spirit."
+        },
+        {
+            "source_id": "john",
+            "reference": "John 1:29-34",
+            "summary": "John the Baptist testifies that he saw the Spirit descend and remain on Jesus, identifying him as the one who will baptize with the Holy Spirit and as the Son of God.",
+            "notes": "No narrative of the baptism itself; only the Baptist's testimony. Focuses on Jesus as the Lamb of God."
+        }
+    ],
+    "parallels": [
+        {
+            "sources": [
+                "mark",
+                "matthew",
+                "luke",
+                "john"
+            ],
+            "references": {
+                "mark": "Mark 1:9-11",
+                "matthew": "Matthew 3:13-17",
+                "luke": "Luke 3:21-22",
+                "john": "John 1:29-34"
+            },
+            "relationship": "gospel_parallel"
+        }
+    ]
+}

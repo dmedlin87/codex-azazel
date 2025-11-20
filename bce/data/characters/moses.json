@@ -1,0 +1,26 @@
+{
+    "id": "moses",
+    "canonical_name": "Moses",
+    "aliases": [],
+    "roles": [
+        "prophet",
+        "lawgiver"
+    ],
+    "tags": [
+        "law",
+        "exodus",
+        "transfiguration"
+    ],
+    "relationships": [],
+    "source_profiles": [
+        {
+            "source_id": "mark",
+            "traits": {
+                "appearance": "Appears with Elijah at the transfiguration."
+            },
+            "references": [
+                "Mark 9:4"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "id": "elijah",
+    "canonical_name": "Elijah",
+    "aliases": [],
+    "roles": [
+        "prophet"
+    ],
+    "tags": [
+        "prophet",
+        "transfiguration"
+    ],
+    "relationships": [],
+    "source_profiles": [
+        {
+            "source_id": "mark",
+            "traits": {
+                "appearance": "Appears with Moses at the transfiguration."
+            },
+            "references": [
+                "Mark 9:4"
+            ]
+        }
+    ]
+}
