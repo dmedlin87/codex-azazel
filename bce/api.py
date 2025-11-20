@@ -2,7 +2,16 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from . import dossiers, queries, contradictions, search, export, export_graph, bibles
+from . import (
+    dossiers,
+    queries,
+    contradictions,
+    search,
+    export,
+    export_graph,
+    bibles,
+)
+from .analytics import network as graph_network
 
 
 # Core data access
@@ -378,6 +387,42 @@ def build_graph_snapshot() -> export_graph.GraphSnapshot:
     """
 
     return export_graph.build_graph_snapshot()
+
+
+def build_networkx_graph():
+    """Construct a NetworkX graph from the BCE graph snapshot."""
+
+    return graph_network.build_networkx_graph()
+
+
+def graph_degree_centrality() -> dict[str, float]:
+    """Compute degree centrality for the BCE graph."""
+
+    return graph_network.compute_degree_centrality()
+
+
+def graph_betweenness_centrality() -> dict[str, float]:
+    """Compute betweenness centrality for the BCE graph."""
+
+    return graph_network.compute_betweenness_centrality()
+
+
+def graph_eigenvector_centrality() -> dict[str, float]:
+    """Compute eigenvector centrality for the BCE graph."""
+
+    return graph_network.compute_eigenvector_centrality()
+
+
+def graph_communities() -> list[set[str]]:
+    """Detect communities within the BCE graph."""
+
+    return graph_network.detect_communities()
+
+
+def graph_shortest_path(source: str, target: str, weight: str | None = None) -> list[str]:
+    """Return a shortest path between two graph node IDs."""
+
+    return graph_network.shortest_path(source=source, target=target, weight=weight)
 
 
 # Bible text helpers

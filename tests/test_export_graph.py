@@ -9,6 +9,7 @@ from __future__ import annotations
 from typing import Dict
 
 from bce import storage
+from bce.analytics import network as graph_network
 from bce.export_graph import (
     EDGE_TYPE_CHARACTER_PARTICIPATED_IN_EVENT,
     EDGE_TYPE_CHARACTER_PROFILE_IN_SOURCE,
@@ -165,3 +166,33 @@ class TestParallelsAndRelationships:
                 f"Expected relationship edges originating from {node_id} "
                 "for character with relationships"
             )
+
+
+class TestGraphAnalytics:
+    """Ensure analytics utilities can operate on the graph snapshot."""
+
+    def test_build_networkx_graph_matches_snapshot_counts(self) -> None:
+        snapshot = build_graph_snapshot()
+        nx_graph = graph_network.build_networkx_graph(snapshot)
+
+        assert nx_graph.number_of_nodes() == len(snapshot.nodes)
+        assert nx_graph.number_of_edges() == len(snapshot.edges)
+
+    def test_centrality_includes_core_character(self) -> None:
+        degree_scores = graph_network.compute_degree_centrality()
+
+        assert "character:jesus" in degree_scores
+        assert degree_scores["character:jesus"] >= 0
+
+    def test_communities_include_core_character(self) -> None:
+        communities = graph_network.detect_communities()
+
+        assert communities, "expected at least one community"
+        assert any("character:jesus" in community for community in communities)
+
+    def test_shortest_path_between_character_and_event(self) -> None:
+        path = graph_network.shortest_path("character:jesus", "event:crucifixion")
+
+        assert path[0] == "character:jesus"
+        assert path[-1] == "event:crucifixion"
+        assert len(path) >= 2
