@@ -32,3 +32,7 @@ bce-server = "bce.server:run_server"
 
 [tool.hatch.build]
 packages = ["bce"]
+
+[tool.hatch.build.targets.wheel]
+# Ensure data (JSON corpus) and packaged frontend assets ship with the wheel
+force-include = { "bce/data" = "bce/data", "frontend" = "bce/frontend" }
