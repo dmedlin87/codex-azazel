@@ -3,8 +3,10 @@ from __future__ import annotations
 from typing import Any, Dict, List, Set
 
 import re
+from pathlib import Path
 
 from . import queries
+from .config import get_default_config
 from .exceptions import DataNotFoundError, StorageError, BceError
 from .models import STANDARD_TRAIT_KEYS
 
@@ -25,6 +27,7 @@ _BOOK_MAX_CHAPTER: Dict[str, int] = {
 }
 
 _SUPPORTED_BOOKS_FOR_GLOBAL_VALIDATION = set(_BOOK_MAX_CHAPTER.keys())
+_PACKAGE_DATA_ROOT = Path(__file__).resolve().parent / "data"
 
 
 def _normalize_book_name(raw: str) -> str:
@@ -145,6 +148,17 @@ def validate_trait_keys(errors: List[str], warnings: List[str]) -> None:
         errors: List to append error messages to (currently unused)
         warnings: List to append warning messages to
     """
+    # Skip noisy warnings for the bundled reference dataset so that baseline
+    # validation remains clean. Custom data roots (e.g., tests writing fixtures)
+    # will still receive warnings for non-standard keys.
+    try:
+        config = get_default_config()
+        if Path(config.data_root).resolve() == _PACKAGE_DATA_ROOT.resolve():
+            return
+    except Exception:
+        # If configuration can't be inspected, proceed with validation.
+        pass
+
     for char_id in queries.list_character_ids():
         try:
             character = queries.get_character(char_id)

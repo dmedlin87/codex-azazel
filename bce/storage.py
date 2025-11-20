@@ -338,20 +338,30 @@ class StorageManager:
 # the same API surface as the original implementation.
 
 _default_storage: Optional[StorageManager] = None
+_default_storage_config_root: Optional[Path] = None
 
 
 def _get_default_storage() -> StorageManager:
     """Get or create the default storage manager instance."""
-    global _default_storage
-    if _default_storage is None:
-        _default_storage = StorageManager()
+    global _default_storage, _default_storage_config_root
+
+    current_config = get_default_config()
+    current_root = current_config.data_root
+
+    # Recreate the storage manager if it doesn't exist or if the data root
+    # has changed since the last creation (e.g., in tests that swap configs).
+    if _default_storage is None or _default_storage_config_root != current_root:
+        _default_storage = StorageManager(current_config)
+        _default_storage_config_root = current_root
+
     return _default_storage
 
 
 def _reset_default_storage() -> None:
     """Reset the default storage manager (used after config changes)."""
-    global _default_storage
+    global _default_storage, _default_storage_config_root
     _default_storage = None
+    _default_storage_config_root = None
 
 
 def configure_data_root(path: Path | str | None) -> None:

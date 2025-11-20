@@ -25,6 +25,7 @@ ai = [
 ai-openai = ["openai>=1.0.0"]
 ai-anthropic = ["anthropic>=0.20.0"]
 
+
 [project.scripts]
 bce = "bce.cli:main"
 bce-server = "bce.server:run_server"

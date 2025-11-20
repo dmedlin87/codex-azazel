@@ -286,6 +286,13 @@ def _collect_character_texts(character, basis: List[str]) -> List[str]:
             desc = rel.get("description", "")
             if desc:
                 texts.append(desc)
+            else:
+                # Fall back to combining type/target when description is missing
+                rel_type = rel.get("type") or rel.get("relationship_type")
+                target = rel.get("to") or rel.get("character_id")
+                parts = [str(v) for v in (rel_type, target) if v]
+                if parts:
+                    texts.append(" ".join(parts))
 
     if "tags" in basis and character.tags:
         texts.append(" ".join(character.tags))

@@ -8,14 +8,20 @@ This module provides utilities for loading and managing AI models
 from __future__ import annotations
 
 from typing import Any, Dict, Optional
+import sys
 
 from .config import ensure_ai_enabled, get_ai_backend, validate_api_key
 from ..exceptions import ConfigurationError
+import importlib
 
 # Optional imports for different backends - imported at module level for testability
-try:
+# Some environments can have partially installed dependencies (e.g., torch/vision
+# mismatches) that raise RuntimeError during import. We catch broad exceptions here
+# and degrade gracefully so that the rest of the AI features can still operate
+# using lightweight fallbacks.
+try:  # pragma: no cover - exercised indirectly via tests
     from sentence_transformers import SentenceTransformer
-except ImportError:
+except Exception:
     SentenceTransformer = None  # type: ignore
 
 try:
@@ -97,25 +103,39 @@ class ModelManager:
 
     def _get_openai_client(self):
         """Get OpenAI client."""
-        if openai is None:
-            raise ImportError(
-                "openai is required for OpenAI backend. "
-                "Install it with: pip install openai"
-            )
+        openai_mod = openai
+        if "openai" in sys.modules and sys.modules.get("openai") is None:
+            openai_mod = None
+
+        if openai_mod is None:
+            try:
+                openai_mod = importlib.import_module("openai")
+            except ImportError:
+                raise ImportError(
+                    "openai is required for OpenAI backend. "
+                    "Install it with: pip install openai"
+                )
 
         api_key = validate_api_key("openai")
-        return openai.OpenAI(api_key=api_key)
+        return openai_mod.OpenAI(api_key=api_key)
 
     def _get_anthropic_client(self):
         """Get Anthropic client."""
-        if anthropic is None:
-            raise ImportError(
-                "anthropic is required for Anthropic backend. "
-                "Install it with: pip install anthropic"
-            )
+        anthropic_mod = anthropic
+        if "anthropic" in sys.modules and sys.modules.get("anthropic") is None:
+            anthropic_mod = None
+
+        if anthropic_mod is None:
+            try:
+                anthropic_mod = importlib.import_module("anthropic")
+            except ImportError:
+                raise ImportError(
+                    "anthropic is required for Anthropic backend. "
+                    "Install it with: pip install anthropic"
+                )
 
         api_key = validate_api_key("anthropic")
-        return anthropic.Anthropic(api_key=api_key)
+        return anthropic_mod.Anthropic(api_key=api_key)
 
     def _get_local_llm_client(self):
         """Get local LLM client (e.g., via Ollama).
