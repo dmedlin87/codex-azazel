@@ -1071,11 +1071,7 @@ def build_event_timeline(event_id: str) -> Dict[str, Any]:
     from .ai import event_reconstruction
     return event_reconstruction.build_event_timeline(event_id)
 
-<<<<<<< HEAD
-=======
-
 # =============================================================================
->>>>>>> ef9fdd51577946e97063a3a4a5223e7c1b7c5f80
 # Phase 7: Advanced Features
 # =============================================================================
 
