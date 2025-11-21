@@ -5,6 +5,8 @@ to test CLI behavior in a controlled way.
 """
 
 import json
+from types import SimpleNamespace
+
 import pytest
 from dev_cli import main
 
@@ -165,6 +167,44 @@ class TestAdditionalCommands:
         data = json.loads(captured.out)
         assert isinstance(data, dict)
         assert len(data) > 0
+
+
+class TestValidationCommand:
+    """Ensure validate-data command reports results clearly."""
+
+    def test_validate_data_success_with_warnings(self, monkeypatch, capsys):
+        report = SimpleNamespace(errors=[], warnings=["heads-up"], skipped=False, reason=None)
+        monkeypatch.setattr("bce.validation.run_validation", lambda: report)
+
+        exit_code = main(["validate-data"])
+        captured = capsys.readouterr()
+
+        assert exit_code == 0
+        assert "Validation warnings" in captured.out
+        assert "heads-up" in captured.out
+        assert "Validation succeeded" not in captured.out  # warnings path used
+
+    def test_validate_data_errors_exit_non_zero(self, monkeypatch, capsys):
+        report = SimpleNamespace(errors=["boom"], warnings=[], skipped=False, reason=None)
+        monkeypatch.setattr("bce.validation.run_validation", lambda: report)
+
+        exit_code = main(["validate-data"])
+        captured = capsys.readouterr()
+
+        assert exit_code == 1
+        assert "Validation errors detected" in captured.err
+        assert "boom" in captured.err
+
+    def test_validate_data_skipped(self, monkeypatch, capsys):
+        report = SimpleNamespace(errors=[], warnings=[], skipped=True, reason="disabled")
+        monkeypatch.setattr("bce.validation.run_validation", lambda: report)
+
+        exit_code = main(["validate-data"])
+        captured = capsys.readouterr()
+
+        assert exit_code == 0
+        assert "Validation skipped" in captured.out
+        assert "disabled" in captured.out
 
     def test_show_event_dossier(self, capsys):
         """show-event-dossier should work and return structured dossier."""

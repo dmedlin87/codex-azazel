@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import asdict
 from typing import Dict, List
 
 from . import queries
 from . import contradictions
 from . import sources
+from . import claim_graph
 from .models import Character, Event, Relationship
 from .dossier_types import (
     CharacterDossier,
@@ -28,6 +28,7 @@ from .dossier_types import (
     DOSSIER_KEY_RELATIONSHIPS,
     DOSSIER_KEY_PARALLELS,
     DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES,
+    DOSSIER_KEY_CLAIM_GRAPH,
 )
 
 
@@ -97,8 +98,12 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
     enriched_relationships = []
     relationships_by_type: Dict[str, List[Dict[str, object]]] = {}
     for rel in character.relationships:
-        rel_dict = rel.to_dict() if isinstance(rel, Relationship) else asdict(rel)
+        rel_dict = rel.to_dict() if isinstance(rel, Relationship) else dict(rel)
         target_id = rel_dict.get("target_id") or rel_dict.get("character_id") or rel_dict.get("to", "")
+        if target_id and "character_id" not in rel_dict:
+            rel_dict["character_id"] = target_id
+        rel_dict.setdefault("sources", [])
+        rel_dict.setdefault("references", [])
 
         # Try to get the canonical name of the related character
         try:
@@ -113,6 +118,16 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
             rel_dict["attestation_sources"] = [
                 att.get("source_id") for att in attestation if isinstance(att, dict)
             ]
+            if not rel_dict.get("sources"):
+                rel_dict["sources"] = [
+                    att.get("source_id") for att in attestation if isinstance(att, dict) and att.get("source_id")
+                ]
+            if not rel_dict.get("references"):
+                att_refs: list[str] = []
+                for att in attestation:
+                    if isinstance(att, dict):
+                        att_refs.extend(att.get("references") or [])
+                rel_dict["references"] = att_refs
 
         enriched_relationships.append(rel_dict)
 
@@ -136,6 +151,7 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         DOSSIER_KEY_PARALLELS: [],
         "variants_by_source": variants_by_source,  # NEW: Textual variants
         "citations_by_source": citations_by_source,  # NEW: Bibliography citations
+        DOSSIER_KEY_CLAIM_GRAPH: claim_graph.build_claim_graph_for_character(character),
     }
     return dossier
 
@@ -178,6 +194,7 @@ def build_event_dossier(event_id: str) -> EventDossier:
         DOSSIER_KEY_PARALLELS: list(event.parallels),
         "citations": list(event.citations) if event.citations else [],  # NEW: Event citations
         "textual_variants": list(event.textual_variants) if event.textual_variants else [],  # NEW: Major textual variants
+        DOSSIER_KEY_CLAIM_GRAPH: claim_graph.build_claim_graph_for_event(event),
     }
     return dossier
 

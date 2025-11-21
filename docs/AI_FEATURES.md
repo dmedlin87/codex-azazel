@@ -216,6 +216,15 @@ print(f"Need attention: {all_audits['summary']['attention_count']}")
 - `medium`: Missing source profiles, tags, single account
 - `low`: Sparse traits, missing relationships
 
+### Curation Workflow Automator
+
+**Purpose**: Direct curators to the highest-impact edits and keep clusters coherent.
+
+- **Prioritized review queue**: `api.build_curation_review_queue(entity_type="character", limit=10)` blends completeness gaps, conflict density, and semantic uncertainty. Each item includes a `priority_score`, drivers, and recommended actions.
+- **Cluster guardian**: `api.run_cluster_guardian(num_clusters=6, support_threshold=0.6)` inspects cluster-dominant tags/roles, signaling missing cluster tags, missing role-aligned tags, and outlier tags per character.
+- **Semantic diff reporter**: `api.summarize_json_edit_impact(before, after, entity_type="character")` narrates how JSON edits change completeness scores, gaps, and conflict density.
+- **CLI**: `python -m bce.curation_cli queue --entity character --limit 5`, `python -m bce.curation_cli guardian --clusters 5`, `python -m bce.curation_cli diff before.json after.json --entity event`.
+
 ### Validation Suggestions
 
 **Purpose**: AI-powered suggestions for fixing validation errors.

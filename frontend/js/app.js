@@ -134,6 +134,7 @@ function setupHeroSearch() {
             searchResults.innerHTML = results.slice(0, 10).map(result =>
                 Components.searchResultItem(result)
             ).join('');
+            updateGuidedWidgets(query);
         } catch (error) {
             console.error('Search error:', error);
             searchResults.innerHTML = Components.errorState(error);
@@ -199,3 +200,110 @@ function handleURLParameters() {
 
 // Call on page load
 handleURLParameters();
+
+let lastHeroQuery = '';
+
+/**
+ * Update guided widgets with semantic insights
+ */
+function updateGuidedWidgets(query) {
+    lastHeroQuery = query;
+    loadSemanticInsights(query);
+    loadContrastiveQA(query);
+}
+
+/**
+ * Load semantic insight panel for query
+ */
+async function loadSemanticInsights(query, options = {}) {
+    const planPanel = document.getElementById('semantic-plan');
+    const resultsPanel = document.getElementById('semantic-results');
+    if (!planPanel || !resultsPanel) return;
+
+    if (!query || query.length < 2) {
+        planPanel.innerHTML = '<p class="text-sm text-gray-500">Enter a longer query to see guided plans.</p>';
+        resultsPanel.innerHTML = '';
+        return;
+    }
+
+    planPanel.innerHTML = Components.loadingSpinner('Compiling semantic plan...');
+    resultsPanel.innerHTML = '';
+
+    try {
+        const payload = await API.semanticGuidedSearch(query, options);
+        const semanticResults = Array.isArray(payload.results) ? payload.results : [];
+        planPanel.innerHTML = Components.planSummary(payload.plan);
+        resultsPanel.innerHTML = semanticResults.slice(0, 3).map(result => `
+            <div class="border border-slate-200 rounded-lg p-3 bg-white shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm font-semibold text-gray-900">${result.id}</div>
+                    <span class="text-xs text-gray-500 uppercase">${result.type}</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-1">Match: ${result.match_in}</p>
+                <p class="text-sm text-gray-700 mb-2">${result.matching_context}</p>
+                <div class="text-xs text-slate-500">Score ${result.relevance_score}</div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Semantic insights error:', error);
+        planPanel.innerHTML = Components.errorState(error);
+        resultsPanel.innerHTML = '';
+    }
+}
+
+/**
+ * Load contrastive QA panel
+ */
+async function loadContrastiveQA(question) {
+    const answersPanel = document.getElementById('qa-answers');
+    const explanationPanel = document.getElementById('qa-explanation');
+    if (!answersPanel || !explanationPanel) return;
+
+    if (!question || question.length < 2) {
+        answersPanel.innerHTML = '<p class="text-sm text-gray-500">Ask a longer question to surface AI answers.</p>';
+        explanationPanel.innerHTML = '';
+        return;
+    }
+
+    answersPanel.innerHTML = Components.loadingSpinner('Composing answer...');
+    explanationPanel.innerHTML = '';
+
+    try {
+        const payload = await API.contrastiveQA(question);
+        const answers = Array.isArray(payload.answers) ? payload.answers : [];
+        answersPanel.innerHTML = answers.map(answer => Components.qaAnswerCard(answer)).join('') || '<p class="text-sm text-gray-500">No confident answers.</p>';
+        explanationPanel.innerHTML = Components.qaExplanation(payload.explanation);
+    } catch (error) {
+        console.error('Contrastive QA error:', error);
+        answersPanel.innerHTML = '';
+        explanationPanel.innerHTML = Components.errorState(error);
+    }
+}
+
+/**
+ * Handle what-if toggle actions
+ */
+function handleWhatIfAction(action) {
+    if (!lastHeroQuery) {
+        return;
+    }
+
+    switch (action) {
+        case 'broaden_scope':
+            loadSemanticInsights(lastHeroQuery, { scope: ['traits', 'relationships', 'accounts'] });
+            break;
+        case 'tighten_scope':
+            loadSemanticInsights(lastHeroQuery, { scope: ['relationships'] });
+            break;
+        default:
+            break;
+    }
+}
+
+document.addEventListener('click', (event) => {
+    const toggle = event.target.closest('.what-if-toggle');
+    if (toggle) {
+        event.preventDefault();
+        handleWhatIfAction(toggle.dataset.action);
+    }
+});

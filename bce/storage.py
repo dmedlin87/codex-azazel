@@ -292,6 +292,15 @@ class StorageManager:
                     raise StorageError(
                         f"Character '{char_id}': relationship at index {i} is not a dict"
                     )
+                target_candidate = (
+                    rel.get("target_id")
+                    or rel.get("character_id")
+                    or rel.get("to")
+                )
+                if not target_candidate:
+                    raise StorageError(
+                        f"Character '{char_id}': relationship at index {i} missing required 'character_id' field"
+                    )
                 try:
                     relationships.append(Relationship.from_raw(rel, owner_id=char_id))
                 except Exception as exc:

@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Optional, Set
 
 import re
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from . import queries
@@ -28,6 +29,33 @@ _BOOK_MAX_CHAPTER: Dict[str, int] = {
 
 _SUPPORTED_BOOKS_FOR_GLOBAL_VALIDATION = set(_BOOK_MAX_CHAPTER.keys())
 _PACKAGE_DATA_ROOT = Path(__file__).resolve().parent / "data"
+
+
+@dataclass(slots=True)
+class ValidationReport:
+    """Structured result for validation runs."""
+
+    errors: List[str] = field(default_factory=list)
+    warnings: List[str] = field(default_factory=list)
+    skipped: bool = False
+    reason: Optional[str] = None
+
+    @property
+    def success(self) -> bool:
+        """Return True when validation completed and no errors were found."""
+
+        return (not self.skipped) and (not self.errors)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return a JSON-serializable representation for reporting."""
+
+        return {
+            "errors": list(self.errors),
+            "warnings": list(self.warnings),
+            "skipped": self.skipped,
+            "reason": self.reason,
+            "success": self.success,
+        }
 
 
 def _normalize_book_name(raw: str) -> str:
@@ -216,29 +244,60 @@ def _validate_characters(errors: List[str]) -> None:
         relationships = getattr(character, "relationships", [])
         if relationships:
             for i, rel in enumerate(relationships):
-                if not isinstance(rel, Relationship):
+                is_dict_entry = False
+                target_id = ""
+                rel_type = ""
+                attestation = []
+                sources = None
+                references = None
+
+                if isinstance(rel, Relationship):
+                    target_id = getattr(rel, "target_id", "")
+                    rel_type = getattr(rel, "type", "")
+                    attestation = getattr(rel, "attestation", [])
+                elif isinstance(rel, dict):
+                    is_dict_entry = True
+                    target_id = (
+                        rel.get("target_id")
+                        or rel.get("character_id")
+                        or rel.get("to")
+                        or ""
+                    )
+                    rel_type = rel.get("type") or rel.get("relationship_type") or ""
+                    sources = rel.get("sources")
+                    references = rel.get("references")
+                else:
                     errors.append(
-                        f"Character '{char_id}': relationship at index {i} is not a Relationship"
+                        f"Character '{char_id}': relationship at index {i} is not a dict"
                     )
                     continue
 
-                target_id = getattr(rel, "target_id", "")
                 if not target_id:
                     errors.append(
-                        f"Character '{char_id}': relationship at index {i} missing target_id"
+                        f"Character '{char_id}': relationship at index {i} missing 'character_id'"
                     )
-                elif target_id not in valid_char_ids:
+                    continue
+                if target_id not in valid_char_ids:
                     errors.append(
                         f"Character '{char_id}': relationship references unknown character '{target_id}'"
                     )
 
-                rel_type = getattr(rel, "type", "")
                 if not rel_type:
                     errors.append(
-                        f"Character '{char_id}': relationship to '{target_id}' missing type"
+                        f"Character '{char_id}': relationship to '{target_id}' missing 'type' field"
                     )
 
-                attestation = getattr(rel, "attestation", [])
+                if is_dict_entry:
+                    if not isinstance(sources, list):
+                        errors.append(
+                            f"Character '{char_id}': relationship to '{target_id}' missing 'sources' field"
+                        )
+                    if not isinstance(references, list):
+                        errors.append(
+                            f"Character '{char_id}': relationship to '{target_id}' missing 'references' field"
+                        )
+                    continue
+
                 if not attestation:
                     errors.append(
                         f"Character '{char_id}': relationship to '{target_id}' missing attestation"
@@ -298,40 +357,58 @@ def _validate_events(errors: List[str]) -> None:
             )
 
 
-def validate_all() -> List[str]:
-    """Run comprehensive validation over all characters and events.
+def _collect_validation_messages() -> ValidationReport:
+    """Execute validators and return a structured report."""
 
-    Returns a list of human-readable error and warning messages. An empty list
-    means that all checks passed.
+    report = ValidationReport()
 
-    This now includes:
-    - Character and event loading validation
-    - Cross-reference validation (strict)
-    - Trait key vocabulary warnings
-    """
+    _validate_characters(report.errors)
+    _validate_events(report.errors)
 
-    errors: List[str] = []
-    warnings: List[str] = []
-
-    # Run core validation
-    _validate_characters(errors)
-    _validate_events(errors)
-
-    # Run cross-reference validation (now integrated by default)
     cross_ref_errors = validate_cross_references()
     if cross_ref_errors:
-        errors.extend(cross_ref_errors)
+        report.errors.extend(cross_ref_errors)
 
-    # Run trait key validation (generates warnings)
-    validate_trait_keys(errors, warnings)
+    validate_trait_keys(report.errors, report.warnings)
 
-    # Combine errors and warnings for output
-    # Prefix warnings with [WARNING] to distinguish them
-    result = errors.copy()
-    for warning in warnings:
-        result.append(f"[WARNING] {warning}")
+    return report
 
-    return result
+
+def run_validation(force: bool | None = None) -> ValidationReport:
+    """Run validation respecting configuration toggles.
+
+    Parameters:
+        force: When True/False explicitly enable or disable validation
+            regardless of configuration.
+
+    Returns:
+        ValidationReport describing the outcome.
+    """
+
+    config = get_default_config()
+    should_run = force if force is not None else getattr(config, "enable_validation", True)
+
+    if not should_run:
+        reason = "Validation disabled via configuration"
+        return ValidationReport(skipped=True, reason=reason)
+
+    report = _collect_validation_messages()
+
+    if report.success:
+        return report
+
+    return report
+
+
+def validate_all() -> List[str]:
+    """Backward-compatible helper returning combined error/warning list."""
+
+    report = run_validation(force=True)
+
+    combined: List[str] = list(report.errors)
+    combined.extend(f"[WARNING] {warning}" for warning in report.warnings)
+
+    return combined
 
 
 def validate_cross_references() -> List[str]:

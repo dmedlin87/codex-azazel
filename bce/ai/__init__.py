@@ -21,7 +21,7 @@ from . import cache, config, embeddings, models
 # Phase 6.2: Data Quality Features
 from . import completeness, semantic_contradictions, validation_assistant
 # Phase 6.3: Enhanced Search
-from . import clustering, semantic_search, question_answering
+from . import clustering, semantic_search, question_answering, qa
 # Phase 6.4: Data Extraction Tools
 from . import trait_extraction, parallel_detection, relationship_inference
 # Phase 6.5: Export & Analytics
@@ -43,6 +43,7 @@ __all__ = [
     "semantic_search",
     "clustering",
     "question_answering",
+    "qa",
     # Data Extraction (Phase 6.4)
     "trait_extraction",
     "parallel_detection",

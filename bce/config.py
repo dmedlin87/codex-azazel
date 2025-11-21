@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 from .exceptions import ConfigurationError
 
@@ -28,6 +28,8 @@ class BceConfig:
         BCE_AI_MODEL_BACKEND: AI model backend - "local", "openai", "anthropic" (default: local)
         BCE_AI_CACHE_DIR: Path to AI cache directory (default: data_root/ai_cache)
         BCE_EMBEDDING_MODEL: Embedding model name (default: all-MiniLM-L6-v2)
+        BCE_ENABLE_HOOKS: Enable hook registry execution for plugins (default: false)
+        BCE_AI_PLUGINS: Comma-separated list of hook plugins to auto-enable (default: empty)
 
     Examples:
         >>> config = BceConfig()
@@ -54,6 +56,8 @@ class BceConfig:
         ai_model_backend: Optional[str] = None,
         ai_cache_dir: Optional[Path] = None,
         embedding_model: Optional[str] = None,
+        enable_hooks: Optional[bool] = None,
+        ai_plugins: Optional[List[str]] = None,
     ):
         """Initialize configuration.
 
@@ -66,6 +70,7 @@ class BceConfig:
             ai_model_backend: AI model backend - "local", "openai", "anthropic" (default: from env or "local")
             ai_cache_dir: Path to AI cache directory (default: from env or data_root/ai_cache)
             embedding_model: Embedding model name (default: from env or "all-MiniLM-L6-v2")
+            enable_hooks: Enable hook registry execution (default: from env or False)
         """
         self.data_root = self._resolve_data_root(data_root)
         self.cache_size = self._resolve_cache_size(cache_size)
@@ -76,6 +81,8 @@ class BceConfig:
         self.embedding_model = self._resolve_embedding_model(embedding_model)
         # ai_cache_dir must be resolved after data_root
         self.ai_cache_dir = self._resolve_ai_cache_dir(ai_cache_dir)
+        self.enable_hooks = self._resolve_hooks(enable_hooks)
+        self.ai_plugins = self._resolve_ai_plugins(ai_plugins)
 
     def _resolve_data_root(self, override: Optional[Path]) -> Path:
         """Resolve data root from override, environment, or default."""
@@ -179,6 +186,29 @@ class BceConfig:
 
         return os.getenv("BCE_EMBEDDING_MODEL", "all-MiniLM-L6-v2")
 
+    def _resolve_hooks(self, override: Optional[bool]) -> bool:
+        """Resolve hook enable flag from override, environment, or default."""
+        if override is not None:
+            return override
+
+        env_hooks = os.getenv("BCE_ENABLE_HOOKS", "").lower()
+        if env_hooks in ("false", "0", "no", "off"):
+            return False
+        if env_hooks in ("true", "1", "yes", "on"):
+            return True
+
+        return False
+
+    def _resolve_ai_plugins(self, override: Optional[List[str]]) -> List[str]:
+        """Resolve plugin list from override or environment."""
+        if override is not None:
+            return override
+
+        env_plugins = os.getenv("BCE_AI_PLUGINS", "")
+        if env_plugins:
+            return [p.strip() for p in env_plugins.split(",") if p.strip()]
+        return []
+
     def _resolve_ai_cache_dir(self, override: Optional[Path]) -> Path:
         """Resolve AI cache directory from override, environment, or default."""
         if override is not None:
@@ -237,7 +267,9 @@ class BceConfig:
             f"enable_ai_features={self.enable_ai_features}, "
             f"ai_model_backend={self.ai_model_backend}, "
             f"ai_cache_dir={self.ai_cache_dir}, "
-            f"embedding_model={self.embedding_model})"
+            f"embedding_model={self.embedding_model}, "
+            f"enable_hooks={self.enable_hooks}, "
+            f"ai_plugins={self.ai_plugins})"
         )
 
 

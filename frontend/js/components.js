@@ -186,6 +186,92 @@ const Components = {
     },
 
     /**
+     * Render compiled plan summary for semantic search
+     */
+    planSummary(plan) {
+        if (!plan) return '';
+        const scopes = (plan.scope || []).map(s => `<span class="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">${s}</span>`).join(' ');
+        const clauses = (plan.clauses || []).map(c =>
+            `<div class="text-sm text-gray-700 flex items-center gap-2">
+                <span class="font-semibold">${c.field}</span>
+                <span class="text-xs text-gray-500">w=${c.weight}</span>
+                ${c.reason ? `<span class="text-xs text-gray-400">(${c.reason})</span>` : ''}
+            </div>`
+        ).join('');
+        return `
+            <div class="border border-blue-100 rounded-lg p-4 bg-white shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-semibold text-gray-800">Compiled plan</h4>
+                    ${plan.target_type ? `<span class="px-2 py-1 bg-slate-100 text-slate-700 rounded text-xs">${plan.target_type} focus</span>` : ''}
+                </div>
+                <div class="flex gap-2 flex-wrap mb-3">${scopes}</div>
+                <div class="space-y-1">${clauses}</div>
+                ${plan.hints && plan.hints.length ? `<div class="mt-3 text-xs text-gray-500">Hints: ${plan.hints.join(', ')}</div>` : ''}
+            </div>
+        `;
+    },
+
+    /**
+     * Render QA explanation with what-if toggles
+     */
+    qaExplanation(explanation) {
+        if (!explanation) return '';
+        const whatIf = (explanation.what_if || []).map(item =>
+            `<button class="what-if-toggle px-3 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs mr-2 mb-2" data-action="${item.toggle}">
+                ${item.description}
+            </button>`
+        ).join('');
+        const notes = explanation.notes ? `<div class="text-xs text-red-600 mt-2">${explanation.notes.join('; ')}</div>` : '';
+        return `
+            <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
+                <div class="font-semibold text-gray-800 mb-1">Explanation</div>
+                <p class="text-sm text-gray-700 mb-2">${explanation.summary || ''}</p>
+                <div class="text-xs text-gray-500 mb-2">Mode: ${explanation.reasoning?.mode || 'lookup'}</div>
+                ${whatIf ? `<div class="mt-2"><div class="text-xs font-semibold text-gray-600 mb-1">What if?</div>${whatIf}</div>` : ''}
+                ${notes}
+            </div>
+        `;
+    },
+
+    /**
+     * Render an answer card with evidence
+     */
+    qaAnswerCard(answer) {
+        if (!answer) return '';
+        const evidence = (answer.evidence || []).slice(0, 3).map(ev => {
+            if (ev.type === 'trait') {
+                return `<div class="text-xs text-gray-700"><strong>${ev.trait}</strong>: ${ev.value} <span class="text-gray-500">(${ev.source || 'unknown source'})</span></div>`;
+            }
+            if (ev.type === 'account') {
+                return `<div class="text-xs text-gray-700"><strong>${ev.reference}</strong>: ${ev.summary || ''}</div>`;
+            }
+            if (ev.type === 'roles') {
+                return `<div class="text-xs text-gray-700">Roles: ${(ev.roles || []).join(', ')}</div>`;
+            }
+            if (ev.type === 'relationship') {
+                return `<div class="text-xs text-gray-700">Rel: ${ev.relationship_type || 'relationship'} → ${ev.to || 'unknown'}</div>`;
+            }
+            if (ev.type === 'tags') {
+                return `<div class="text-xs text-gray-700">Tags: ${(ev.tags || []).join(', ')}</div>`;
+            }
+            return '';
+        }).join('');
+
+        return `
+            <div class="border border-slate-200 rounded-lg p-4 bg-white shadow-sm">
+                <div class="flex items-start justify-between mb-1">
+                    <div>
+                        <div class="text-sm text-gray-500 uppercase">${answer.type}</div>
+                        <div class="text-lg font-semibold text-gray-900">${answer.identity?.canonical_name || answer.identity?.label || answer.id}</div>
+                    </div>
+                    <span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs">score ${answer.relevance_score ?? '—'}</span>
+                </div>
+                ${answer.suggested_tags ? `<div class="text-xs text-indigo-600 mb-2">Suggested tags: ${answer.suggested_tags.join(', ')}</div>` : ''}
+                <div class="space-y-1">${evidence}</div>
+            </div>
+        `;
+    },
+    /**
      * Format a number with commas
      */
     formatNumber(num) {

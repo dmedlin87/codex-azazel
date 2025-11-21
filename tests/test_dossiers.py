@@ -15,6 +15,7 @@ def test_build_character_dossier_basic() -> None:
         "source_metadata",
         "traits_by_source",
         "trait_conflicts",
+        "claim_graph",
     ):
         assert key in d
 
@@ -41,6 +42,7 @@ def test_build_event_dossier_basic() -> None:
 
     for key in ("id", "label", "participants", "accounts", "account_conflicts"):
         assert key in d
+    assert "claim_graph" in d
 
     assert "jesus" in d["participants"]
     assert isinstance(d["accounts"], list)
@@ -143,6 +145,8 @@ class TestDossierEdgeCases:
                 assert dossier["source_ids"] == []
                 assert dossier["traits_by_source"] == {}
                 assert dossier["trait_conflicts"] == {}
+                assert dossier["claim_graph"]["claims"] == []
+                assert dossier["claim_graph"]["conflicts"] == []
 
             finally:
                 storage.reset_data_root()
@@ -210,6 +214,8 @@ class TestDossierEdgeCases:
                 assert dossier["participants"] == []
                 assert dossier["accounts"] == []
                 assert dossier["account_conflicts"] == {}
+                assert dossier["claim_graph"]["claims"] == []
+                assert dossier["claim_graph"]["conflicts"] == []
 
             finally:
                 storage.reset_data_root()

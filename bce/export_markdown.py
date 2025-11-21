@@ -25,6 +25,7 @@ from .dossier_types import (
     DOSSIER_KEY_DESCRIPTION,
     DOSSIER_KEY_RELATIONSHIPS,
     DOSSIER_KEY_PARALLELS,
+    DOSSIER_KEY_CLAIM_GRAPH,
 )
 
 
@@ -198,14 +199,26 @@ def dossier_to_markdown(dossier: dict) -> str:
                 continue
             severity = meta.get("severity")
             category = meta.get("category")
+            conflict_type = meta.get("conflict_type")
+            claim_type = meta.get("claim_type")
             distinct_values = meta.get("distinct_values")
             parts: list[str] = []
             if isinstance(severity, str) and severity:
                 parts.append(f"severity={severity}")
             if isinstance(category, str) and category:
                 parts.append(f"category={category}")
+            if isinstance(conflict_type, str) and conflict_type:
+                parts.append(f"conflict_type={conflict_type}")
+            if isinstance(claim_type, str) and claim_type:
+                parts.append(f"claim_type={claim_type}")
             if isinstance(distinct_values, list) and distinct_values:
                 parts.append(f"distinct_values={len(distinct_values)}")
+            harmonization_moves = meta.get("harmonization_moves")
+            if isinstance(harmonization_moves, list) and harmonization_moves:
+                first_move = harmonization_moves[0] if isinstance(harmonization_moves[0], dict) else None
+                move_label = first_move.get("move") if isinstance(first_move, dict) else None
+                if move_label:
+                    parts.append(f"harmonization={move_label}")
             if not parts:
                 parts = [f"{k}={v}" for k, v in meta.items()]
             lines.append(f"- {field}: {'; '.join(parts)}")
@@ -240,6 +253,7 @@ def dossier_to_markdown(dossier: dict) -> str:
             if rel_type:
                 bullet_parts.append(f"type={rel_type}")
             if target_id:
+                bullet_parts.append(f"character_id={target_id}")
                 bullet_parts.append(f"target={target_id}")
             if sources_val:
                 bullet_parts.append("sources=" + ", ".join(str(s) for s in sources_val))
@@ -300,17 +314,61 @@ def dossier_to_markdown(dossier: dict) -> str:
                 continue
             severity = meta.get("severity")
             category = meta.get("category")
+            conflict_type = meta.get("conflict_type")
+            claim_type = meta.get("claim_type")
             distinct_values = meta.get("distinct_values")
             parts: list[str] = []
             if isinstance(severity, str) and severity:
                 parts.append(f"severity={severity}")
             if isinstance(category, str) and category:
                 parts.append(f"category={category}")
+            if isinstance(conflict_type, str) and conflict_type:
+                parts.append(f"conflict_type={conflict_type}")
+            if isinstance(claim_type, str) and claim_type:
+                parts.append(f"claim_type={claim_type}")
             if isinstance(distinct_values, list) and distinct_values:
                 parts.append(f"distinct_values={len(distinct_values)}")
+            harmonization_moves = meta.get("harmonization_moves")
+            if isinstance(harmonization_moves, list) and harmonization_moves:
+                first_move = harmonization_moves[0] if isinstance(harmonization_moves[0], dict) else None
+                move_label = first_move.get("move") if isinstance(first_move, dict) else None
+                if move_label:
+                    parts.append(f"harmonization={move_label}")
             if not parts:
                 parts = [f"{k}={v}" for k, v in meta.items()]
             lines.append(f"- {field}: {'; '.join(parts)}")
+
+    claim_graph_block = dossier.get(DOSSIER_KEY_CLAIM_GRAPH)
+    if isinstance(claim_graph_block, dict):
+        claim_conflicts = claim_graph_block.get("conflicts")
+        if isinstance(claim_conflicts, list) and claim_conflicts:
+            lines.append("")
+            lines.append("## Claim conflicts")
+            for conflict in claim_conflicts:
+                if not isinstance(conflict, dict):
+                    continue
+                predicate = conflict.get("predicate")
+                conflict_type = conflict.get("conflict_type")
+                severity = conflict.get("severity")
+                claim_type = conflict.get("claim_type")
+                if not isinstance(predicate, str):
+                    continue
+                parts = []
+                if isinstance(claim_type, str):
+                    parts.append(f"claim_type={claim_type}")
+                if isinstance(conflict_type, str):
+                    parts.append(f"conflict_type={conflict_type}")
+                if isinstance(severity, str):
+                    parts.append(f"severity={severity}")
+                lines.append(f"- {predicate}: {', '.join(parts) if parts else ''}".rstrip(": "))
+                harmonization = conflict.get("harmonization_moves")
+                if isinstance(harmonization, list) and harmonization:
+                    first_move = harmonization[0] if isinstance(harmonization[0], dict) else None
+                    desc = first_move.get("description") if isinstance(first_move, dict) else None
+                    move_label = first_move.get("move") if isinstance(first_move, dict) else None
+                    detail = desc or move_label
+                    if detail:
+                        lines.append(f"  - Harmonization: {detail}")
 
     parallels = dossier.get(DOSSIER_KEY_PARALLELS)
     if isinstance(parallels, list) and parallels:

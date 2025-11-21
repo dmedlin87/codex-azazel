@@ -2,7 +2,13 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
-from bce.validation import validate_all, validate_cross_references, validate_reference
+from bce.validation import (
+    ValidationReport,
+    run_validation,
+    validate_all,
+    validate_cross_references,
+    validate_reference,
+)
 
 
 def test_validate_all_has_no_errors() -> None:
@@ -201,3 +207,40 @@ def test_validate_cross_references_no_errors_when_consistent(monkeypatch) -> Non
     errors = validate_cross_references()
 
     assert errors == []
+
+
+def test_run_validation_skips_when_disabled(monkeypatch) -> None:
+    """run_validation should skip when configuration disables validation."""
+
+    fake_config = SimpleNamespace(enable_validation=False)
+    monkeypatch.setattr("bce.validation.get_default_config", lambda: fake_config)
+
+    called = {"collect": False}
+
+    def boom():  # pragma: no cover - guard against execution when skipped
+        called["collect"] = True
+        return ValidationReport()
+
+    monkeypatch.setattr("bce.validation._collect_validation_messages", lambda: boom())
+
+    report = run_validation()
+
+    assert report.skipped is True
+    assert report.reason
+    assert called["collect"] is False
+
+
+def test_run_validation_force_true_runs_even_when_disabled(monkeypatch) -> None:
+    """force=True should override configuration and execute validators."""
+
+    fake_config = SimpleNamespace(enable_validation=False)
+    monkeypatch.setattr("bce.validation.get_default_config", lambda: fake_config)
+
+    expected = ValidationReport(errors=["boom"], warnings=["warn"])
+    monkeypatch.setattr("bce.validation._collect_validation_messages", lambda: expected)
+
+    report = run_validation(force=True)
+
+    assert report.errors == ["boom"]
+    assert report.warnings == ["warn"]
+    assert report.skipped is False

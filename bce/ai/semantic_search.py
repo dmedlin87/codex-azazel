@@ -3,16 +3,137 @@ Semantic search using sentence embeddings.
 
 This module enhances the basic keyword search with semantic understanding,
 enabling conceptual queries that match meaning rather than just keywords.
+
+The module now includes a lightweight, schema-aware query compiler that maps
+natural language to BCE search scopes (traits, relationships, accounts). It
+produces a small plan object that can be used for guided UI experiences and
+for hook-based ranking extensions without changing the legacy query shape.
 """
 
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+import re
 from typing import Any, Dict, List, Optional
 
 from ..queries import get_character, get_event, list_all_characters, list_all_events
+from ..hooks import HookPoint, HookRegistry
 from .cache import AIResultCache
 from .config import ensure_ai_enabled
 from .embeddings import cosine_similarity, EmbeddingCache
+from .plugins import ensure_ai_plugins_loaded
+
+FIELD_ROOTS = {"traits", "relationships", "accounts"}
+
+
+@dataclass
+class QueryClause:
+    """Single clause within a compiled semantic query."""
+
+    field: str
+    keywords: List[str] = field(default_factory=list)
+    weight: float = 1.0
+    reason: str = ""
+
+    def applies_to(self, field_name: str) -> bool:
+        root = field_name.split(".")[0]
+        return self.field == root
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "field": self.field,
+            "keywords": self.keywords,
+            "weight": self.weight,
+            "reason": self.reason,
+        }
+
+
+@dataclass
+class CompiledQuery:
+    """Structured representation of a semantic search request."""
+
+    raw: str
+    normalized: str
+    scope: List[str]
+    target_type: Optional[str] = None
+    clauses: List[QueryClause] = field(default_factory=list)
+    tags: List[str] = field(default_factory=list)
+    hints: List[str] = field(default_factory=list)
+    min_score: float = 0.3
+
+    def get_field_weight(self, field_name: str) -> float:
+        for clause in self.clauses:
+            if clause.applies_to(field_name):
+                return clause.weight
+        return 1.0
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "raw": self.raw,
+            "normalized": self.normalized,
+            "scope": self.scope,
+            "target_type": self.target_type,
+            "clauses": [c.to_dict() for c in self.clauses],
+            "tags": self.tags,
+            "hints": self.hints,
+            "min_score": self.min_score,
+        }
+
+
+def compile_semantic_query(search_query: str, scope: Optional[List[str]] = None) -> CompiledQuery:
+    """Compile a natural language query into a structured search plan.
+
+    The compiler inspects the query for schema-aligned hints such as
+    "relationship", "trait", or "event timeline" and boosts the corresponding
+    scopes while leaving the default behavior intact for legacy callers.
+    """
+    normalized = search_query.strip()
+    lowered = normalized.lower()
+
+    inferred_scope = scope or ["traits", "relationships", "accounts"]
+    clauses: List[QueryClause] = []
+    hints: List[str] = []
+    tags = re.findall(r"#([a-z0-9_\-]+)", lowered)
+    target_type: Optional[str] = None
+
+    # Detect intent for specific fields
+    if re.search(r"relationship|connected|related", lowered):
+        clauses.append(QueryClause(field="relationships", weight=1.2, reason="relationship intent"))
+        if "relationships" not in inferred_scope:
+            inferred_scope.append("relationships")
+        target_type = target_type or "character"
+    if re.search(r"trait|characteristic|quality", lowered):
+        clauses.append(QueryClause(field="traits", weight=1.15, reason="trait intent"))
+    if re.search(r"event|account|timeline|when|where", lowered):
+        clauses.append(QueryClause(field="accounts", weight=1.1, reason="event intent"))
+
+    # Default clauses to keep weights predictable when no hints exist
+    if not clauses:
+        for field in inferred_scope:
+            if field in FIELD_ROOTS:
+                clauses.append(QueryClause(field=field, weight=1.0, reason="default scope weight"))
+
+    # Target type inference
+    if "character" in lowered or "who" in lowered:
+        target_type = "character"
+    if "event" in lowered or "where" in lowered or "when" in lowered:
+        target_type = target_type or "event"
+
+    # Extract lightweight keywords for later highlighting
+    keyword_tokens = [t for t in re.findall(r"[a-z0-9_]+", lowered) if len(t) > 3]
+    if keyword_tokens:
+        clauses[0].keywords.extend(keyword_tokens[:5])
+        hints.append("keyword_seeded")
+
+    return CompiledQuery(
+        raw=search_query,
+        normalized=lowered,
+        scope=inferred_scope,
+        target_type=target_type,
+        clauses=clauses,
+        tags=tags,
+        hints=hints,
+    )
 
 
 def query(
@@ -58,12 +179,25 @@ def query(
         mary_magdalene: 0.68
     """
     ensure_ai_enabled()
+    ensure_ai_plugins_loaded()
 
     if scope is None:
         scope = ["traits", "relationships", "accounts"]
 
+    # Compile a schema-aware plan. The plan keeps default weights at 1.0 so
+    # existing behavior is preserved unless the query contains explicit hints.
+    compiled = compile_semantic_query(search_query, scope=scope)
+    compiled.min_score = max(min_score, compiled.min_score)
+
+    # Allow plugins to adjust plan or injected metadata
+    HookRegistry.trigger(
+        HookPoint.BEFORE_SEARCH,
+        {"query": search_query},
+        plan=compiled.to_dict(),
+    )
+
     # Build or retrieve search index
-    index = _build_search_index(scope, use_cache=use_cache)
+    index = _build_search_index(compiled.scope, use_cache=use_cache)
 
     # Embed the query
     embedding_cache = EmbeddingCache("semantic_search_queries")
@@ -73,22 +207,47 @@ def query(
     results = []
     for item in index:
         similarity = cosine_similarity(query_embedding, item["embedding"])
+        field_root = item["field"].split(".")[0]
+        field_weight = compiled.get_field_weight(field_root)
+        weighted_score = similarity * field_weight
 
-        if similarity >= min_score:
+        if weighted_score >= compiled.min_score:
             results.append({
                 "type": item["type"],
                 "id": item["id"],
-                "relevance_score": round(similarity, 3),
+                "relevance_score": round(weighted_score, 3),
                 "matching_context": item["text"][:200],  # Truncate for display
                 "match_in": item["field"],
                 "explanation": _explain_match(
                     search_query, item["text"], similarity, item["type"], item["id"]
                 ),
+                "score_details": {
+                    "similarity": round(float(similarity), 4),
+                    "field_weight": field_weight,
+                },
+                "plan": compiled.to_dict(),
             })
 
-    # Sort by relevance and return top-k
+    # Sort by relevance
     results.sort(key=lambda x: x["relevance_score"], reverse=True)
-    return results[:top_k]
+
+    # Hook for custom ranking
+    rank_ctx = HookRegistry.trigger(
+        HookPoint.SEARCH_RESULT_RANK,
+        results,
+        plan=compiled.to_dict(),
+        query=search_query,
+    )
+    ranked_results = rank_ctx.data or results
+
+    final_ctx = HookRegistry.trigger(
+        HookPoint.AFTER_SEARCH,
+        ranked_results,
+        plan=compiled.to_dict(),
+        query=search_query,
+    )
+
+    return (final_ctx.data or ranked_results)[:top_k]
 
 
 def _build_search_index(
@@ -363,4 +522,7 @@ __all__ = [
     "query",
     "find_similar_characters",
     "find_similar_events",
+    "compile_semantic_query",
+    "CompiledQuery",
+    "QueryClause",
 ]

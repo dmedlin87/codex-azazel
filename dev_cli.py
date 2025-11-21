@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from dataclasses import asdict
 
-from bce import queries, storage
-from bce import export as export_mod
 from bce import dossiers
+from bce import export as export_mod
+from bce import queries, storage
+from bce import validation
 
 
 def _print_json(obj) -> None:
@@ -47,8 +49,12 @@ def main(argv=None) -> int:
     )
     export_events.add_argument("output_path")
 
-    check_data = subparsers.add_parser(
+    subparsers.add_parser(
         "check-data", help="Validate that all data files are loadable",
+    )
+
+    subparsers.add_parser(
+        "validate-data", help="Run full BCE validation pipeline",
     )
 
     try:
@@ -89,8 +95,32 @@ def main(argv=None) -> int:
             for eid in storage.list_event_ids():
                 storage.load_event(eid)
             print("All character and event data files loaded successfully.")
+        elif args.command == "validate-data":
+            report = validation.run_validation()
+            if report.skipped:
+                reason = report.reason or "No reason provided"
+                print(f"Validation skipped: {reason}")
+                return 0
+
+            if report.errors:
+                print("Validation errors detected:", file=sys.stderr)
+                for message in report.errors:
+                    print(f"- {message}", file=sys.stderr)
+
+            if report.warnings:
+                print("Validation warnings:")
+                for message in report.warnings:
+                    print(f"- {message}")
+
+            if report.errors:
+                return 1
+
+            if report.warnings:
+                print("Validation completed with warnings but no errors.")
+            else:
+                print("Validation succeeded with no errors.")
     except Exception as e:
-        print(f"Error: {e}", file=__import__("sys").stderr)
+        print(f"Error: {e}", file=sys.stderr)
         return 1
 
     return 0

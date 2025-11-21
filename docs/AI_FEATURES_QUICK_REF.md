@@ -23,6 +23,7 @@
 - Introduce a `Claim` model: `subject_id`, `predicate`, `object` (typed value or target id), `source_id`, `reference`, optional `variant_id`, `confidence`, `note`.
 - Build the claim set during `build_character_dossier` / `build_event_dossier` (or a shared `build_claim_graph()` that dossiers call).
 - Run contradiction detection over claims: conflicting `(subject, predicate)` with incompatible objects and attestation metadata.
+- Apply a stable claim-type taxonomy (`chronology`, `theology`, `geography`, `narrative`, `identity`, `textual`) and expose conflict_type + minimal harmonization hints alongside conflict summaries/dossiers.
 - Graph exports become straightforward: nodes = entities; relationships/traits/events = typed claims/edges.
 
 ## Phase C: Storage Abstraction and Indexing
@@ -37,6 +38,13 @@
 - Hook points: BEFORE/AFTER_CHARACTER_LOAD/SAVE, BEFORE/AFTER_EVENT_LOAD/SAVE, BEFORE_VALIDATION/AFTER_VALIDATION, BEFORE_SEARCH/SEARCH_RESULT_FILTER/SEARCH_RESULT_RANK/AFTER_SEARCH, BEFORE_DOSSIER_BUILD/DOSSIER_ENRICH/AFTER_DOSSIER_BUILD, BEFORE_EXPORT/EXPORT_FORMAT_RESOLVE/AFTER_EXPORT.
 - Plugins ride these hooks for storage side-effects (indexing/changelog), validation extensions, search ranking/filters, dossier enrichment, and export format additions.
 - AI lives behind plugins: embedding ranking at `SEARCH_RESULT_RANK`, LLM summaries at `DOSSIER_ENRICH`, validation suggestions via `AFTER_VALIDATION`.
+- Enable hook execution with `BCE_ENABLE_HOOKS=true` and opt-in to specific AI behaviors using `BCE_AI_PLUGINS` (e.g., `search_ranking`, `tag_suggestions`, `role_sanity`).
+
+## Semantic Workflows & Explainers
+
+- `/api/ai/semantic`: returns a compiled `plan` (Scopes, clauses, hints, field weights) plus the top semantic matches so the UI can show why a query hit specific traits/events.
+- `/api/ai/qa`: contrastive question answering that surfaces `answers`, a `contrast_set`, and an `explanation` block with `what_if` toggles; hooks can augment explanations (e.g., role sanity notes).
+- Frontend widgets consume the plan + explanation to render guided workflows, explanation cards, and toggles that trigger broader or tighter plan variants.
 
 ## Stable, Versioned Dossier and Export API
 
@@ -51,3 +59,10 @@
 4) Hooks/plugins: ship hook skeleton, move AI and advanced exports into plugins wired at the integration points.
 
 **Status**: Planning/in design to align core with claim graph + hook architecture. Implementation details live in `AI_FEATURES_PROPOSAL.md`; this page is the quick navigation aid.
+
+## Curation Workflow Automator (New)
+
+- **Review Queue**: `api.build_curation_review_queue(entity_type="character"|"event", limit=10)` blends completeness gaps, conflict density, and semantic uncertainty into a prioritized list.
+- **Cluster Guardian**: `api.run_cluster_guardian(num_clusters=6, support_threshold=0.6)` surfaces cluster-level tag/role inconsistencies with alignment suggestions.
+- **Diff Impact**: `api.summarize_json_edit_impact(before, after, entity_type="character")` explains how JSON edits change completeness and conflict metrics.
+- **CLI**: `python -m bce.curation_cli queue --entity character --limit 5`, `... guardian --clusters 5`, `... diff before.json after.json --entity event`.

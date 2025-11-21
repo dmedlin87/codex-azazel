@@ -570,6 +570,50 @@ def get_validation_suggestions(errors: Optional[List[str]] = None, use_cache: bo
     return validation_assistant.suggest_fixes(errors=errors, use_cache=use_cache)
 
 
+def build_curation_review_queue(
+    entity_type: str = "character",
+    limit: Optional[int] = None,
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Rank review tasks that need human curation attention."""
+    from .ai import completeness
+    return completeness.build_curation_review_queue(
+        entity_type=entity_type,
+        limit=limit,
+        use_cache=use_cache,
+    )
+
+
+def run_cluster_guardian(
+    num_clusters: int = 6,
+    support_threshold: float = 0.6,
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Audit cluster-level tag/role alignment and inconsistencies."""
+    from .ai import completeness
+    return completeness.run_cluster_guardian(
+        num_clusters=num_clusters,
+        support_threshold=support_threshold,
+        use_cache=use_cache,
+    )
+
+
+def summarize_json_edit_impact(
+    before: Dict[str, Any],
+    after: Dict[str, Any],
+    entity_type: str = "character",
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Summarize how JSON edits change completeness and conflict metrics."""
+    from .ai import completeness
+    return completeness.describe_json_edit_impact(
+        before=before,
+        after=after,
+        entity_type=entity_type,
+        use_cache=use_cache,
+    )
+
+
 def semantic_search(
     query: str,
     top_k: int = 10,
@@ -620,6 +664,44 @@ def semantic_search(
     """
     from .ai import semantic_search as ss
     return ss.query(query, top_k=top_k, scope=scope, min_score=min_score, use_cache=use_cache)
+
+
+def compile_semantic_query(
+    query: str,
+    scope: Optional[List[str]] = None,
+) -> Dict[str, Any]:
+    """Compile a natural-language search query into a structured plan.
+
+    This is a thin wrapper around ``bce.ai.semantic_search.compile_semantic_query``
+    and is useful for driving guided UI flows.
+    """
+    from .ai import semantic_search as ss
+
+    compiled = ss.compile_semantic_query(query, scope=scope)
+    return compiled.to_dict()
+
+
+def contrastive_qa(
+    question: str,
+    top_k: int = 3,
+    contrast_k: int = 2,
+    min_score: float = 0.25,
+    use_cache: bool = True,
+) -> Dict[str, Any]:
+    """Run the contrastive QA pipeline on a question.
+
+    Returns structured answers, a contrast set, and traceable plans suitable
+    for UI explanation widgets.
+    """
+    from .ai import qa
+
+    return qa.answer(
+        question,
+        top_k=top_k,
+        contrast_k=contrast_k,
+        min_score=min_score,
+        use_cache=use_cache,
+    )
 
 
 def find_similar_characters(

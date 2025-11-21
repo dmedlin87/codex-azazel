@@ -118,6 +118,41 @@
         </div>
     </section>
 
+    <!-- Guided AI Workflows -->
+    <section class="py-16 bg-gradient-to-br from-slate-50 to-white">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Guided Insights</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 uppercase tracking-wide">Semantic Search Plan</p>
+                            <h4 class="text-2xl font-semibold text-gray-900">Explainable query planning</h4>
+                        </div>
+                        <span class="text-xs text-gray-500">powered by embeddings + hooks</span>
+                    </div>
+                    <div id="semantic-plan" class="min-h-[180px] bg-white border border-slate-200 rounded-lg p-4 shadow-sm text-gray-500">
+                        Submit a query to see how BCE interprets it for traits, relationships, and accounts.
+                    </div>
+                    <div id="semantic-results" class="grid grid-cols-1 gap-4"></div>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 uppercase tracking-wide">Contrastive QA</p>
+                            <h4 class="text-2xl font-semibold text-gray-900">Structured answers + what-if toggles</h4>
+                        </div>
+                        <span class="text-xs text-gray-500">evidence-backed + explainable</span>
+                    </div>
+                    <div id="qa-answers" class="grid grid-cols-1 gap-4">
+                        <p class="text-sm text-gray-500">Meaningful answers appear after you ask a question.</p>
+                    </div>
+                    <div id="qa-explanation"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Quick Links -->
     <section class="py-16 bg-gradient-to-br from-slate-100 to-slate-50">
         <div class="container mx-auto px-6">

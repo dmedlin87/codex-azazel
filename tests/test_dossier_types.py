@@ -4,6 +4,7 @@ from typing import get_args, get_origin, get_type_hints
 
 from bce.dossier_types import (
     CharacterDossier,
+    ClaimGraphBlock,
     EventAccountDossier,
     EventDossier,
     DOSSIER_KEY_ACCOUNTS,
@@ -16,6 +17,8 @@ from bce.dossier_types import (
     DOSSIER_KEY_LABEL,
     DOSSIER_KEY_PARTICIPANTS,
     DOSSIER_KEY_REFERENCES_BY_SOURCE,
+    DOSSIER_KEY_RELATIONSHIPS,
+    DOSSIER_KEY_RELATIONSHIPS_BY_TYPE,
     DOSSIER_KEY_ROLES,
     DOSSIER_KEY_SOURCE_IDS,
     DOSSIER_KEY_SOURCE_METADATA,
@@ -24,8 +27,8 @@ from bce.dossier_types import (
     DOSSIER_KEY_TRAIT_CONFLICTS,
     DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES,
     DOSSIER_KEY_TRAITS_BY_SOURCE,
-    DOSSIER_KEY_RELATIONSHIPS,
     DOSSIER_KEY_PARALLELS,
+    DOSSIER_KEY_CLAIM_GRAPH,
 )
 
 
@@ -44,7 +47,9 @@ def test_character_dossier_typed_dict_keys() -> None:
         DOSSIER_KEY_TRAIT_CONFLICTS,
         DOSSIER_KEY_TRAIT_CONFLICT_SUMMARIES,
         DOSSIER_KEY_RELATIONSHIPS,
+        DOSSIER_KEY_RELATIONSHIPS_BY_TYPE,
         DOSSIER_KEY_PARALLELS,
+        DOSSIER_KEY_CLAIM_GRAPH,
     }
 
     assert set(CharacterDossier.__annotations__.keys()) == expected_keys
@@ -60,6 +65,7 @@ def test_event_dossier_typed_dict_keys() -> None:
         DOSSIER_KEY_ACCOUNT_CONFLICTS,
         DOSSIER_KEY_ACCOUNT_CONFLICT_SUMMARIES,
         DOSSIER_KEY_PARALLELS,
+        DOSSIER_KEY_CLAIM_GRAPH,
     }
 
     assert set(EventDossier.__annotations__.keys()) == expected_keys
@@ -97,6 +103,7 @@ def test_dossier_key_constant_values() -> None:
     assert DOSSIER_KEY_DESCRIPTION == "description"
     assert DOSSIER_KEY_RELATIONSHIPS == "relationships"
     assert DOSSIER_KEY_PARALLELS == "parallels"
+    assert DOSSIER_KEY_CLAIM_GRAPH == "claim_graph"
 
 
 def test_character_dossier_container_types() -> None:
@@ -145,6 +152,7 @@ def test_character_dossier_container_types() -> None:
     assert get_origin(parallels) is list
     parallels_args = get_args(parallels)
     assert parallels_args == (dict,)
+    assert hints["claim_graph"] is ClaimGraphBlock
 
 
 def test_event_dossier_accounts_reference_event_account_dossier() -> None:
@@ -158,6 +166,7 @@ def test_event_dossier_accounts_reference_event_account_dossier() -> None:
     assert conflicts_key is str
     assert get_origin(conflicts_value) is dict
     assert get_args(conflicts_value) == (str, str)
+    assert hints["claim_graph"] is ClaimGraphBlock
 
 
 def test_event_account_dossier_notes_optional() -> None:

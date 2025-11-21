@@ -192,7 +192,8 @@ Fields (keys are stable):
 - `citations_by_source: dict[str, list[str]]` – **NEW**: `source_id -> list[citation_key]`
 - `trait_comparison: dict[str, dict[str, str]]` – full trait comparison across sources (`trait -> source_id -> value`).
 - `trait_conflicts: dict[str, dict[str, str]]` – only traits with differing non-empty values.
-- `trait_conflict_summaries: dict[str, dict]` – normalized conflict metadata per trait (see §3).
+- `trait_conflict_summaries: dict[str, dict]` - normalized conflict metadata per trait (see §3), enriched with claim taxonomy and harmonization hints.
+- `claim_graph: {"claims": list[dict], "conflicts": list[dict]}` - flattened claim records plus detected claim conflicts with `claim_type`, `conflict_type`, `severity`, and suggested harmonization moves.
 - `relationships: list[dict]` – relationship records as stored on the underlying `Character`.
 - `parallels: list[dict]` – reserved for future use; currently an empty list.
 
@@ -207,7 +208,8 @@ Fields:
 - `participants: list[str]` – character IDs.
 - `accounts: list[EventAccountDossier]` – normalized account records (see below).
 - `account_conflicts: dict[str, dict[str, str]]` – differing values across accounts (`field_name -> source_id -> value`).
-- `account_conflict_summaries: dict[str, dict]` – normalized conflict metadata per field (see §3).
+- `account_conflict_summaries: dict[str, dict]` - normalized conflict metadata per field (see §3), enriched with claim taxonomy and harmonization hints.
+- `claim_graph: {"claims": list[dict], "conflicts": list[dict]}` - flattened claim records plus detected account-level claim conflicts with harmonization hints.
 - `parallels: list[dict]` – normalized parallels copied from `Event.parallels`.
 - `citations: list[str]` – **NEW**: Bibliography keys for this event
 - `textual_variants: list[dict]` – **NEW**: Major textual variants (list of dicts)
@@ -239,13 +241,18 @@ Each entry in these mappings has the form:
   "field": "birth_narrative",
   "severity": "low" | "medium" | "high",
   "category": "narrative" | "chronology" | "theology" | "geography" | "other",
+  "claim_type": "chronology" | "theology" | "geography" | "narrative" | "identity" | "textual",
+  "conflict_type": "chronology_sequence" | "chronology_dating" | "narrative_emphasis" | ...,
   "sources": {
     "mark": "none",
     "matthew": "birth in Bethlehem with magi",
     "luke": "census and manger"
   },
   "distinct_values": ["none", "birth in Bethlehem with magi", "census and manger"],
-  "notes": "3 distinct value(s) across 3 source(s)"
+  "harmonization_moves": [{"move": "anchor_by_range", "description": "Use a shared range that covers divergent dates"}],
+  "dominant_value": "birth in Bethlehem with magi",
+  "notes": "3 distinct value(s) across 3 source(s)",
+  "rationale": "3 distinct value(s) across 3 source(s); type=chronology_sequence"
 }
 ```
 

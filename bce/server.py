@@ -185,6 +185,45 @@ if FASTAPI_AVAILABLE:
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
+    @app.get("/api/ai/semantic")
+    async def semantic_guided(
+        q: str = Query(..., description="Semantic search query"),
+        scope: Optional[str] = Query(None, description="Comma-separated semantic scopes"),
+        top_k: int = Query(8, description="Number of results to return"),
+        min_score: float = Query(0.25, description="Minimum similarity score"),
+    ) -> Dict[str, Any]:
+        """Compile a semantic query and return structured results."""
+        try:
+            scope_list = scope.split(",") if scope else None
+            plan = api.compile_semantic_query(q, scope=scope_list)
+            results = api.semantic_search(
+                q,
+                top_k=top_k,
+                scope=scope_list,
+                min_score=min_score,
+            )
+            return {"plan": plan, "results": results}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @app.get("/api/ai/qa")
+    async def contrastive_qa(
+        question: str = Query(..., description="Question to answer"),
+        top_k: int = Query(3, description="Number of primary answers"),
+        contrast_k: int = Query(2, description="Number of contrastive alternatives"),
+        min_score: float = Query(0.25, description="Minimum similarity threshold"),
+    ) -> Dict[str, Any]:
+        """Answer a question with structured evidence and contrastive context."""
+        try:
+            return api.contrastive_qa(
+                question,
+                top_k=top_k,
+                contrast_k=contrast_k,
+                min_score=min_score,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
     @app.get("/api/tags/characters/{tag}")
     async def get_characters_by_tag(tag: str) -> List[str]:
         """Get character IDs with a specific tag."""

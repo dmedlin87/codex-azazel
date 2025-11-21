@@ -59,6 +59,9 @@ pip install -e .[dev]
 
 # Run tests to verify installation
 pytest
+
+# Run full validation (respects BCE_ENABLE_VALIDATION)
+bce validate-data
 ```
 
 ### Requirements
@@ -205,8 +208,8 @@ The web interface will be available at `http://localhost:8000`
 
 The web server also provides interactive API documentation:
 
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+- **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 See [`frontend/README.md`](frontend/README.md) for detailed frontend documentation.
 
@@ -412,12 +415,16 @@ pytest tests/test_api.py
 # Verbose output
 pytest -v
 
+# Run validation pipeline (also available via dev_cli)
+bce validate-data
+
 # Run AI-powered feature tests (requires AI dependencies)
 # First install: pip install -e .[ai]
 pytest tests/test_ai_*.py
 ```
 
 **Note:** AI-powered tests (semantic search, conflict analysis, parallel detection) require the AI optional dependencies:
+
 ```bash
 pip install -e .[ai]
 ```

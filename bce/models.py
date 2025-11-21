@@ -257,6 +257,32 @@ class Relationship:
             "description": self.description,
         }
 
+    def __getitem__(self, key: str) -> Any:
+        """Allow dict-like access for compatibility with legacy callers."""
+        if key in {"target_id", "character_id"}:
+            return self.target_id
+        if key in {"type", "relationship_type"}:
+            return self.type
+        if key == "sources":
+            return [att.source_id for att in self.attestation if att.source_id]
+        if key == "references":
+            refs: List[str] = []
+            for att in self.attestation:
+                refs.extend(att.references)
+            return refs
+        if key == "attestation":
+            return [
+                {"source_id": att.source_id, "references": list(att.references)}
+                for att in self.attestation
+            ]
+        if key == "description":
+            return self.description
+        if key == "notes":
+            return self.notes
+        if key == "strength":
+            return self.strength
+        raise KeyError(key)
+
 
 @dataclass(slots=True)
 class Character:
@@ -268,6 +294,21 @@ class Character:
     relationships: List[Relationship] = field(default_factory=list)
     tags: List[str] = field(default_factory=list)
     citations: List[str] = field(default_factory=list)  # NEW: Bibliography keys
+
+    def __post_init__(self) -> None:
+        """Normalize relationship inputs to Relationship instances."""
+        normalized: List[Relationship] = []
+        for rel in list(self.relationships):
+            if isinstance(rel, Relationship):
+                normalized.append(rel)
+            elif isinstance(rel, dict):
+                normalized.append(Relationship.from_raw(rel, owner_id=self.id))
+            elif rel is None:
+                continue
+            else:
+                normalized.append(rel)
+
+        self.relationships = normalized
 
     def get_source_profile(self, source_id: str) -> Optional[SourceProfile]:
         for profile in self.source_profiles:

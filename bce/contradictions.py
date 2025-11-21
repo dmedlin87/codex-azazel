@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict
 
 from . import queries
+from . import claim_graph
 
 
 def _find_conflicts(field_map: Dict[str, Dict[str, str]]) -> Dict[str, Dict[str, str]]:
@@ -12,6 +13,20 @@ def _find_conflicts(field_map: Dict[str, Dict[str, str]]) -> Dict[str, Dict[str,
         if len(values) > 1:
             conflicts[field_name] = per_source
     return conflicts
+
+
+def _index_claim_conflicts(conflict_block: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    """Index serialized claim conflicts by predicate for quick lookups."""
+
+    conflicts = conflict_block.get("conflicts") if isinstance(conflict_block, dict) else None
+    if not isinstance(conflicts, list):
+        return {}
+
+    result: Dict[str, Dict[str, Any]] = {}
+    for entry in conflicts:
+        if isinstance(entry, dict) and isinstance(entry.get("predicate"), str):
+            result[entry["predicate"]] = entry
+    return result
 
 
 def compare_character_sources(char_id: str) -> Dict[str, Dict[str, str]]:
@@ -113,7 +128,9 @@ def summarize_character_conflicts(char_id: str) -> Dict[str, Dict[str, Any]]:
         - ``notes``: short human-readable summary string
     """
 
+    character = queries.get_character(char_id)
     conflicts = find_trait_conflicts(char_id)
+    claim_conflicts = _index_claim_conflicts(claim_graph.build_claim_graph_for_character(character))
     summary: Dict[str, Dict[str, Any]] = {}
 
     for trait, per_source in conflicts.items():
@@ -121,15 +138,24 @@ def summarize_character_conflicts(char_id: str) -> Dict[str, Dict[str, Any]]:
         num_sources = len(per_source)
         num_distinct = len(values)
         severity = _estimate_severity(num_sources, num_distinct)
-        category = _classify_trait_category(trait)
+        claim_conflict = claim_conflicts.get(trait, {})
+        category = claim_conflict.get("claim_type") or _classify_trait_category(trait)
+        conflict_type = claim_conflict.get("conflict_type") or category
+        harmonization_moves = claim_conflict.get("harmonization_moves") or []
 
         summary[trait] = {
             "field": trait,
             "severity": severity,
             "category": category,
+            "conflict_type": conflict_type,
+            "claim_type": category,
+            "aspect": claim_conflict.get("aspect"),
             "sources": per_source,
             "distinct_values": sorted(values),
+            "harmonization_moves": harmonization_moves,
+            "dominant_value": claim_conflict.get("dominant_value"),
             "notes": f"{num_distinct} distinct value(s) across {num_sources} source(s)",
+            "rationale": claim_conflict.get("rationale"),
         }
 
     return summary
@@ -151,7 +177,9 @@ def summarize_event_conflicts(event_id: str) -> Dict[str, Dict[str, Any]]:
         - ``notes``: short human-readable summary string
     """
 
+    event = queries.get_event(event_id)
     conflicts = find_events_with_conflicting_accounts(event_id)
+    claim_conflicts = _index_claim_conflicts(claim_graph.build_claim_graph_for_event(event))
     summary: Dict[str, Dict[str, Any]] = {}
 
     for field_name, per_source in conflicts.items():
@@ -159,15 +187,24 @@ def summarize_event_conflicts(event_id: str) -> Dict[str, Dict[str, Any]]:
         num_sources = len(per_source)
         num_distinct = len(values)
         severity = _estimate_severity(num_sources, num_distinct)
-        category = _classify_event_field_category(field_name)
+        claim_conflict = claim_conflicts.get(field_name, {})
+        category = claim_conflict.get("claim_type") or _classify_event_field_category(field_name)
+        conflict_type = claim_conflict.get("conflict_type") or category
+        harmonization_moves = claim_conflict.get("harmonization_moves") or []
 
         summary[field_name] = {
             "field": field_name,
             "severity": severity,
             "category": category,
+            "conflict_type": conflict_type,
+            "claim_type": category,
+            "aspect": claim_conflict.get("aspect"),
             "sources": per_source,
             "distinct_values": sorted(values),
+            "harmonization_moves": harmonization_moves,
+            "dominant_value": claim_conflict.get("dominant_value"),
             "notes": f"{num_distinct} distinct value(s) across {num_sources} source(s)",
+            "rationale": claim_conflict.get("rationale"),
         }
 
     return summary

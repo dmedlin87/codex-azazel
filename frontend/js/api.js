@@ -116,6 +116,34 @@ const API = {
     },
 
     /**
+     * Structured semantic search (returns plan + results)
+     */
+    async semanticGuidedSearch(query, { scope = null, topK = 8, minScore = 0.25 } = {}) {
+        const params = new URLSearchParams({
+            q: query,
+            top_k: topK,
+            min_score: minScore,
+        });
+        if (scope) {
+            params.append('scope', Array.isArray(scope) ? scope.join(',') : scope);
+        }
+        return this.fetch(`/ai/semantic?${params}`);
+    },
+
+    /**
+     * Contrastive QA pipeline
+     */
+    async contrastiveQA(question, { topK = 3, contrastK = 2, minScore = 0.25 } = {}) {
+        const params = new URLSearchParams({
+            question,
+            top_k: topK,
+            contrast_k: contrastK,
+            min_score: minScore,
+        });
+        return this.fetch(`/ai/qa?${params}`);
+    },
+
+    /**
      * Get characters by tag
      */
     async getCharactersByTag(tag) {

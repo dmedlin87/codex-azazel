@@ -83,30 +83,6 @@ def validate_character_raw(data: Dict[str, Any], *, path: Optional[Path] = None)
                     f"{ctx.prefix()}: source_profiles[{idx}].references must be a list of strings"
                 )
 
-    relationships = data.get("relationships")
-    if relationships is not None:
-        rels = _expect_list(relationships, "relationships", errors, ctx)
-        if rels is not None:
-            for ridx, rel in enumerate(rels):
-                if not isinstance(rel, dict):
-                    errors.append(f"{ctx.prefix()}: relationships[{ridx}] must be an object")
-                    continue
-                if not (
-                    _expect_str(
-                        rel.get("target_id") or rel.get("character_id") or rel.get("to"),
-                        f"relationships[{ridx}].target_id",
-                        errors,
-                        ctx,
-                    )
-                ):
-                    continue
-                _expect_str(
-                    rel.get("type") or rel.get("relationship_type"),
-                    f"relationships[{ridx}].type",
-                    errors,
-                    ctx,
-                )
-
     if errors:
         raise ValidationError("; ".join(errors))
 

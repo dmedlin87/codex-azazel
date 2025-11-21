@@ -3,6 +3,42 @@ from __future__ import annotations
 from typing import Dict, List, TypedDict
 
 
+class HarmonizationMove(TypedDict):
+    move: str
+    description: str
+    impact: str
+
+
+class ClaimRecord(TypedDict):
+    subject_id: str
+    predicate: str
+    value: str
+    source_id: str
+    claim_type: str
+    aspect: str
+    references: List[str]
+    note: str | None
+
+
+class ClaimConflictRecord(TypedDict):
+    subject_id: str
+    predicate: str
+    claim_type: str
+    conflict_type: str
+    aspect: str
+    severity: str
+    values_by_source: Dict[str, str]
+    distinct_values: List[str]
+    harmonization_moves: List[HarmonizationMove]
+    dominant_value: str | None
+    rationale: str | None
+
+
+class ClaimGraphBlock(TypedDict):
+    claims: List[ClaimRecord]
+    conflicts: List[ClaimConflictRecord]
+
+
 class CharacterDossier(TypedDict):
     id: str
     canonical_name: str
@@ -18,6 +54,7 @@ class CharacterDossier(TypedDict):
     relationships: List[dict]
     relationships_by_type: Dict[str, List[dict]]
     parallels: List[dict]
+    claim_graph: ClaimGraphBlock
 
 
 class EventAccountDossier(TypedDict):
@@ -35,6 +72,7 @@ class EventDossier(TypedDict):
     account_conflicts: Dict[str, Dict[str, str]]
     account_conflict_summaries: Dict[str, Dict[str, object]]
     parallels: List[dict]
+    claim_graph: ClaimGraphBlock
 
 
 DOSSIER_KEY_ID = "id"
@@ -62,3 +100,4 @@ DOSSIER_KEY_RELATIONSHIPS_BY_TYPE = "relationships_by_type"
 DOSSIER_KEY_PARALLELS = "parallels"
 DOSSIER_KEY_CITATIONS = "citations"
 DOSSIER_KEY_TEXTUAL_VARIANTS = "textual_variants"
+DOSSIER_KEY_CLAIM_GRAPH = "claim_graph"
