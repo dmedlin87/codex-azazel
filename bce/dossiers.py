@@ -7,6 +7,7 @@ from . import contradictions
 from . import sources
 from . import claim_graph
 from .models import Character, Event, Relationship
+from .hooks import HookRegistry, HookPoint
 from .dossier_types import (
     CharacterDossier,
     EventDossier,
@@ -153,6 +154,17 @@ def build_character_dossier(char_id: str) -> CharacterDossier:
         "citations_by_source": citations_by_source,  # NEW: Bibliography citations
         DOSSIER_KEY_CLAIM_GRAPH: claim_graph.build_claim_graph_for_character(character),
     }
+
+    # Hook: Dossier Enrich
+    ctx = HookRegistry.trigger(
+        HookPoint.DOSSIER_ENRICH,
+        data=dossier,
+        character=character
+    )
+    
+    if isinstance(ctx.data, dict):
+        # Typing cast safely since hooks might return Any but expected to match dossier shape
+        return ctx.data
     return dossier
 
 

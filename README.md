@@ -37,6 +37,7 @@ All core data lives in JSON format, and the Python API is designed to be simple,
 - **Property graph export**: Build graph snapshots for Neo4j, RDF, or other graph databases
 - **Bible text integration**: Fetch verse text from multiple translations
 - **Tag-based queries**: Organize and query data by theological and narrative themes
+- **Plugin System**: Extensible architecture with hooks for custom logic and integrations
 
 ### Current Dataset
 
@@ -173,9 +174,32 @@ print(f"Graph: {len(graph.nodes)} nodes, {len(graph.edges)} edges")
 translations = api.list_bible_translations()
 verse = api.get_verse_text("John", 3, 16, translation="web")
 parallel = api.get_parallel_verse_text("John", 3, 16, translations=["web", "kjv"])
+
+# Plugins
+bce plugins list
+bce plugins load graph_viz
+bce plugins load quality_scorer
+
+### Plugins
+
+BCE features a powerful plugin system that allows you to extend functionality without modifying the core code.
+
+```bash
+# List available and loaded plugins
+bce plugins list
+
+# Load a plugin (e.g., Graph Visualization)
+bce plugins load graph_viz
+
+# Load the Quality Scorer
+bce plugins load quality_scorer
 ```
 
-For a complete walkthrough, see [`examples/basic_usage.py`](examples/basic_usage.py).
+**Available Plugins:**
+
+- **`graph_viz`**: Adds Mermaid.js relationship and conflict graphs to Markdown exports.
+- **`quality_scorer`**: Calculates data quality scores (completeness, consistency) for characters.
+- **`changelog`**: Automatically tracks changes to characters and events in a JSON changelog.
 
 ### Web Interface
 

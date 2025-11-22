@@ -28,6 +28,7 @@ from .dossier_types import (
     DOSSIER_KEY_CLAIM_GRAPH,
 )
 
+from .hooks import HookRegistry, HookPoint
 
 def dossier_to_markdown(dossier: dict) -> str:
     """Render a single dossier dictionary as a Markdown string."""
@@ -401,6 +402,15 @@ def dossier_to_markdown(dossier: dict) -> str:
             lines.append("## Citations")
             for citation in cleaned_cites:
                 lines.append(f"- {citation.strip()}")
+
+    # Hook: Export Markdown
+    # Allow plugins to append custom sections or modify the output
+    ctx = HookRegistry.trigger(
+        HookPoint.DOSSIER_EXPORT_MARKDOWN,
+        data=lines,
+        dossier=dossier
+    )
+    lines = ctx.data
 
     return "\n".join(lines)
 

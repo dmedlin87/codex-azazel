@@ -10,6 +10,7 @@ from .cache import CacheRegistry
 from .config import BceConfig, get_default_config
 from .exceptions import DataNotFoundError, StorageError, ValidationError
 from .models import Character, Event, EventAccount, SourceProfile, TextualVariant, Relationship
+from .hooks import HookRegistry, HookPoint
 from . import schema
 
 logger = logging.getLogger(__name__)
@@ -154,6 +155,17 @@ class StorageManager:
             DataNotFoundError: If character doesn't exist
             StorageError: If character cannot be loaded
         """
+        # Hook: Before Load
+        ctx = HookRegistry.trigger(
+            HookPoint.BEFORE_CHARACTER_LOAD,
+            data={"char_id": char_id}
+        )
+        if ctx.abort:
+            raise StorageError(f"Operation aborted by hook: BEFORE_CHARACTER_LOAD for '{char_id}'")
+        
+        if isinstance(ctx.data, dict) and "char_id" in ctx.data:
+            char_id = ctx.data["char_id"]
+
         path = self._char_dir / f"{char_id}.json"
         data = self._read_json(path)
         try:
@@ -181,7 +193,7 @@ class StorageManager:
         }
 
         try:
-            return Character(**data)
+            character = Character(**data)
         except TypeError as e:
             # Wrap TypeError with context about which file failed
             raise StorageError(
@@ -191,6 +203,21 @@ class StorageManager:
             ) from e
         except ValueError as e:
             raise StorageError(f"Invalid character data in {path}: {e}") from e
+
+        # Hook: After Load
+        ctx = HookRegistry.trigger(
+            HookPoint.AFTER_CHARACTER_LOAD,
+            data=character,
+            char_id=char_id
+        )
+        
+        if not isinstance(ctx.data, Character):
+             # Fallback if hook returned something else or nothing sensible, though typing says it should be data
+             # But users might return the context or modify data in place.
+             # Trigger returns the context. ctx.data holds the (potentially modified) data.
+             pass
+             
+        return ctx.data
 
     def iter_characters(self) -> Iterator[Character]:
         """Iterate over all characters.
@@ -210,9 +237,19 @@ class StorageManager:
         Raises:
             StorageError: If character cannot be saved
         """
+        # Hook: Before Save
+        ctx = HookRegistry.trigger(HookPoint.BEFORE_CHARACTER_SAVE, data=character)
+        if ctx.abort:
+            raise StorageError(f"Operation aborted by hook: BEFORE_CHARACTER_SAVE for '{character.id}'")
+        
+        character = ctx.data
+
         path = self._char_dir / f"{character.id}.json"
         self._write_json(path, asdict(character))
         CacheRegistry.invalidate_all()
+
+        # Hook: After Save
+        HookRegistry.trigger(HookPoint.AFTER_CHARACTER_SAVE, data=character)
 
     # Event operations
 
@@ -239,6 +276,17 @@ class StorageManager:
             DataNotFoundError: If event doesn't exist
             StorageError: If event cannot be loaded
         """
+        # Hook: Before Load
+        ctx = HookRegistry.trigger(
+            HookPoint.BEFORE_EVENT_LOAD,
+            data={"event_id": event_id}
+        )
+        if ctx.abort:
+            raise StorageError(f"Operation aborted by hook: BEFORE_EVENT_LOAD for '{event_id}'")
+        
+        if isinstance(ctx.data, dict) and "event_id" in ctx.data:
+            event_id = ctx.data["event_id"]
+
         path = self._event_dir / f"{event_id}.json"
         data = self._read_json(path)
         try:
@@ -262,7 +310,7 @@ class StorageManager:
         data = {**data, "accounts": accounts}
 
         try:
-            return Event(**data)
+            event = Event(**data)
         except TypeError as e:
             # Wrap TypeError with context about which file failed
             raise StorageError(
@@ -272,6 +320,15 @@ class StorageManager:
             ) from e
         except ValueError as e:
             raise StorageError(f"Invalid event data in {path}: {e}") from e
+
+        # Hook: After Load
+        ctx = HookRegistry.trigger(
+            HookPoint.AFTER_EVENT_LOAD,
+            data=event,
+            event_id=event_id
+        )
+        
+        return ctx.data
 
     def _normalize_relationships(self, value: Any, char_id: str) -> List[Relationship]:
         """Convert raw relationship records into Relationship objects."""
@@ -329,9 +386,19 @@ class StorageManager:
         Raises:
             StorageError: If event cannot be saved
         """
+        # Hook: Before Save
+        ctx = HookRegistry.trigger(HookPoint.BEFORE_EVENT_SAVE, data=event)
+        if ctx.abort:
+            raise StorageError(f"Operation aborted by hook: BEFORE_EVENT_SAVE for '{event.id}'")
+        
+        event = ctx.data
+
         path = self._event_dir / f"{event.id}.json"
         self._write_json(path, asdict(event))
         CacheRegistry.invalidate_all()
+
+        # Hook: After Save
+        HookRegistry.trigger(HookPoint.AFTER_EVENT_SAVE, data=event)
 
 
 # =============================================================================

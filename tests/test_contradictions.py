@@ -437,7 +437,7 @@ class TestConflictSummaries:
             assert info["field"] == trait
             assert info["sources"] == raw_conflicts[trait]
             assert isinstance(info.get("distinct_values"), list)
-            assert info.get("severity") in {"low", "medium", "high"}
+            assert info.get("severity") in {"low", "medium", "high", "critical"}
             assert isinstance(info.get("category"), str)
             assert isinstance(info.get("notes"), str)
 
@@ -454,6 +454,6 @@ class TestConflictSummaries:
             assert info["field"] == field_name
             assert info["sources"] == raw_conflicts[field_name]
             assert isinstance(info.get("distinct_values"), list)
-            assert info.get("severity") in {"low", "medium", "high"}
+            assert info.get("severity") in {"low", "medium", "high", "critical"}
             assert isinstance(info.get("category"), str)
             assert isinstance(info.get("notes"), str)

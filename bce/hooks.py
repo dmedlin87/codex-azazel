@@ -41,6 +41,7 @@ class HookPoint(Enum):
     BEFORE_DOSSIER_BUILD = "before_dossier_build"
     AFTER_DOSSIER_BUILD = "after_dossier_build"
     DOSSIER_ENRICH = "dossier_enrich"
+    DOSSIER_EXPORT_MARKDOWN = "dossier_export_markdown"
 
     # Search hooks
     BEFORE_SEARCH = "before_search"

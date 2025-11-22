@@ -4,6 +4,7 @@ from typing import Any, Dict
 
 from . import queries
 from . import claim_graph
+from .conflicts_enhanced import EnhancedConflictDetector, ConflictCategory, ConflictSeverity
 
 
 def _find_conflicts(field_map: Dict[str, Dict[str, str]]) -> Dict[str, Dict[str, str]]:
@@ -73,45 +74,6 @@ def find_events_with_conflicting_accounts(event_id: str) -> Dict[str, Dict[str, 
     return _find_conflicts(field_map)
 
 
-def _classify_trait_category(trait_name: str) -> str:
-    """Best-effort classification of a character trait into a conflict category.
-
-    This is intentionally heuristic and conservative; categories are designed
-    to be stable, human-readable labels rather than a strict taxonomy.
-    """
-
-    name = trait_name.lower()
-    if "birth" in name or "narrative" in name or "story" in name:
-        return "narrative"
-    if "chronolog" in name or "date" in name or "timeline" in name or "order" in name:
-        return "chronology"
-    if "christolog" in name or "theolog" in name or "resurrect" in name or "salvation" in name:
-        return "theology"
-    if "location" in name or "place" in name or "region" in name or "city" in name:
-        return "geography"
-    return "other"
-
-
-def _classify_event_field_category(field_name: str) -> str:
-    """Classify an event account field into a conflict category."""
-
-    if field_name == "reference":
-        return "chronology"
-    if field_name in {"summary", "notes"}:
-        return "narrative"
-    return "other"
-
-
-def _estimate_severity(num_sources: int, num_distinct: int) -> str:
-    """Estimate conflict severity from how many sources and values disagree."""
-
-    if num_distinct >= 3 or num_sources >= 4:
-        return "high"
-    if num_distinct == 2 and num_sources >= 3:
-        return "medium"
-    return "low"
-
-
 def summarize_character_conflicts(char_id: str) -> Dict[str, Dict[str, Any]]:
     """Summarize character trait conflicts with basic severity metadata.
 
@@ -134,28 +96,32 @@ def summarize_character_conflicts(char_id: str) -> Dict[str, Dict[str, Any]]:
     summary: Dict[str, Dict[str, Any]] = {}
 
     for trait, per_source in conflicts.items():
-        values = {v for v in per_source.values() if v}
-        num_sources = len(per_source)
-        num_distinct = len(values)
-        severity = _estimate_severity(num_sources, num_distinct)
+        # Use enhanced detector
+        analysis = EnhancedConflictDetector.analyze_conflict(
+            field_name=trait,
+            values_by_source=per_source,
+            entity_type="character"
+        )
+        
         claim_conflict = claim_conflicts.get(trait, {})
-        category = claim_conflict.get("claim_type") or _classify_trait_category(trait)
+        category = claim_conflict.get("claim_type") or analysis.category.value
         conflict_type = claim_conflict.get("conflict_type") or category
         harmonization_moves = claim_conflict.get("harmonization_moves") or []
+        rationale = claim_conflict.get("rationale") or analysis.rationale
 
         summary[trait] = {
             "field": trait,
-            "severity": severity,
+            "severity": analysis.severity.value,
             "category": category,
             "conflict_type": conflict_type,
             "claim_type": category,
             "aspect": claim_conflict.get("aspect"),
             "sources": per_source,
-            "distinct_values": sorted(values),
+            "distinct_values": analysis.distinct_values,
             "harmonization_moves": harmonization_moves,
             "dominant_value": claim_conflict.get("dominant_value"),
-            "notes": f"{num_distinct} distinct value(s) across {num_sources} source(s)",
-            "rationale": claim_conflict.get("rationale"),
+            "notes": analysis.notes,
+            "rationale": rationale,
         }
 
     return summary
@@ -183,28 +149,32 @@ def summarize_event_conflicts(event_id: str) -> Dict[str, Dict[str, Any]]:
     summary: Dict[str, Dict[str, Any]] = {}
 
     for field_name, per_source in conflicts.items():
-        values = {v for v in per_source.values() if v}
-        num_sources = len(per_source)
-        num_distinct = len(values)
-        severity = _estimate_severity(num_sources, num_distinct)
+        # Use enhanced detector
+        analysis = EnhancedConflictDetector.analyze_conflict(
+            field_name=field_name,
+            values_by_source=per_source,
+            entity_type="event"
+        )
+
         claim_conflict = claim_conflicts.get(field_name, {})
-        category = claim_conflict.get("claim_type") or _classify_event_field_category(field_name)
+        category = claim_conflict.get("claim_type") or analysis.category.value
         conflict_type = claim_conflict.get("conflict_type") or category
         harmonization_moves = claim_conflict.get("harmonization_moves") or []
+        rationale = claim_conflict.get("rationale") or analysis.rationale
 
         summary[field_name] = {
             "field": field_name,
-            "severity": severity,
+            "severity": analysis.severity.value,
             "category": category,
             "conflict_type": conflict_type,
             "claim_type": category,
             "aspect": claim_conflict.get("aspect"),
             "sources": per_source,
-            "distinct_values": sorted(values),
+            "distinct_values": analysis.distinct_values,
             "harmonization_moves": harmonization_moves,
             "dominant_value": claim_conflict.get("dominant_value"),
-            "notes": f"{num_distinct} distinct value(s) across {num_sources} source(s)",
-            "rationale": claim_conflict.get("rationale"),
+            "notes": analysis.notes,
+            "rationale": rationale,
         }
 
     return summary
